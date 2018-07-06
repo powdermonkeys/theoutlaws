@@ -1,5 +1,5 @@
 # theoutlaws
 Android Application Repo for:
-  Tink
-  Seeker
+  Tink,
+  Seeker,
   Travel App
