@@ -3,9 +3,6 @@ package Model;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
-import org.parceler.Parcel;
-
-@Parcel
 public class Photo extends ParseObject
 {
     //In the Parse dashboard, the image will be stored in column called image
