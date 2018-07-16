@@ -10,9 +10,6 @@ public class City extends ParseObject
     //the description of the city is stored in a column called description
     private static final String KEY_DESCRIPTION = "description";
 
-    //the list of attractions is stored in a column called attractionlist
-
-
     //getter methods for each of the values
 
     public String getCityName()
