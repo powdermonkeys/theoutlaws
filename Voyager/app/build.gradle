@@ -35,10 +35,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ec9d4f7ba7123919e47ef7337f0bd07d49a1d14
     //Parse dependencies
     implementation 'com.parse.bolts:bolts-android:1.4.0'
     implementation 'com.parse:parse-android:1.17.3'
@@ -58,8 +54,4 @@ dependencies {
     //Parcel dependencies
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ec9d4f7ba7123919e47ef7337f0bd07d49a1d14
 }
