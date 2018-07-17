@@ -1,8 +1,10 @@
 package com.example.roopalk.voyager.Model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
+@ParseClassName("Photo")
 public class Photo extends ParseObject
 {
     //In the Parse dashboard, the image will be stored in column called image

@@ -5,10 +5,10 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @ParseClassName("City")
-public class City extends ParseObject
-{
+public class City extends ParseObject {
     ArrayList<Attraction> attractions;
 
     //in the Parse database, the name of the city is stored in a column called cityname
@@ -17,27 +17,35 @@ public class City extends ParseObject
     //the description of the city is stored in a column called description
     private static final String KEY_DESCRIPTION = "description";
 
+    //the attractions of the city are stored in a column called attractions
+    private static final String ATTRACTIONS = "attractions";
+
     //getter methods for each of the values
 
-    public String getCityName()
-    {
+    public String getCityName() {
         return getString(CITY_NAME);
     }
 
-    public String getKeyDescription()
-    {
+    public String getKeyDescription() {
         return getString(KEY_DESCRIPTION);
+    }
+
+    public List<Attraction> getAttractions() {
+        return getList(ATTRACTIONS);
     }
 
     //setter methods for each of the values
 
-    public void setCityName(String cityName)
-    {
+    public void setCityName(String cityName) {
         put(CITY_NAME, cityName);
     }
 
-    public void setKeyDescription(String keyDescription)
-    {
+    public void setKeyDescription(String keyDescription) {
         put(KEY_DESCRIPTION, keyDescription);
+    }
+
+    public void setAttractions(List attractions)
+    {
+        put(ATTRACTIONS, attractions);
     }
 }
