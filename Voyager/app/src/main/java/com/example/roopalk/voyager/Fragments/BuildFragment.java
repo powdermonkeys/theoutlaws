@@ -1,4 +1,4 @@
-package com.example.roopalk.voyager;
+package com.example.roopalk.voyager.Fragments;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -7,7 +7,7 @@ import android.view.View;
 
 public class  BuildFragment extends Fragment {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 

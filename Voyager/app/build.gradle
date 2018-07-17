@@ -30,16 +30,16 @@ dependencies {
     implementation "com.android.support:appcompat-v7:27.1.1"
     implementation "com.android.support:design:27.1.1"
 
+    implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-<<<<<<< HEAD
-=======
     //Parse dependencies
     implementation 'com.parse.bolts:bolts-android:1.4.0'
     implementation 'com.parse:parse-android:1.17.3'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1' // for logging API calls to LogCat
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    // for logging API calls to LogCat
 
     //Butterknife dependencies
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -54,5 +54,4 @@ dependencies {
     //Parcel dependencies
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
->>>>>>> 807c0c0dd8a47c8ff20d99dcee92c20e1a9e80c6
 }

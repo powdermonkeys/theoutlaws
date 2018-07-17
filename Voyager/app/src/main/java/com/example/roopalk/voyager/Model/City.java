@@ -4,9 +4,13 @@ package com.example.roopalk.voyager.Model;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
+
 @ParseClassName("City")
 public class City extends ParseObject
 {
+    ArrayList<Attraction> attractions;
+
     //in the Parse database, the name of the city is stored in a column called cityname
     private static final String CITY_NAME = "cityname";
 

@@ -1,8 +1,10 @@
 package com.example.roopalk.voyager.Model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
+@ParseClassName("Attraction")
 public class Attraction extends ParseObject {
     //in the Parse database, the name of the attraction is stored in a column called attractionname
     private static final String ATTRACTION_NAME = "name";
