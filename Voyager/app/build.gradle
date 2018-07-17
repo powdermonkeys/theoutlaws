@@ -34,4 +34,25 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+<<<<<<< HEAD
+=======
+    //Parse dependencies
+    implementation 'com.parse.bolts:bolts-android:1.4.0'
+    implementation 'com.parse:parse-android:1.17.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1' // for logging API calls to LogCat
+
+    //Butterknife dependencies
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //Glide dependencies
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    //Parcel dependencies
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+>>>>>>> 807c0c0dd8a47c8ff20d99dcee92c20e1a9e80c6
 }
