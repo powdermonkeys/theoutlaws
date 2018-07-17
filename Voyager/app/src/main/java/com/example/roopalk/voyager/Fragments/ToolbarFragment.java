@@ -33,7 +33,7 @@ import com.example.roopalk.voyager.R;
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_build, container, false);
-            TextView textView = (TextView) view;
+            TextView textView = (TextView) view.findViewById(R.id.create);
             textView.setText("Fragment #" + mPage);
             return view;
         }
