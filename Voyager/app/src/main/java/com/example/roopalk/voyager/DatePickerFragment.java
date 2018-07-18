@@ -36,7 +36,6 @@ public  class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Log.d("onDateSet", "reaching onDateSetClass");
-        //arrivalDate.setText(day + "/" + (month + 1) + "/" + year);
     }
 
 }

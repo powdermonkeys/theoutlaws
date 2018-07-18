@@ -30,7 +30,7 @@ import android.widget.TextView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_build, container, false);
+            View view = inflater.inflate(R.layout.viewpager, container, false);
             TextView textView = (TextView) view.findViewById(R.id.create);
             return view;
         }

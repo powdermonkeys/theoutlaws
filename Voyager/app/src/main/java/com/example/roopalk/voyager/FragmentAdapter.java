@@ -20,9 +20,19 @@ public class FragmentAdapter extends FragmentPagerAdapter{
         return PAGE_COUNT;
     }
 
+    // uses a switch to get each fragment display
     @Override
     public Fragment getItem(int position) {
-        return ToolbarFragment.newInstance(position + 1);
+        switch (position) {
+            case 0: // Fragment # 0 - This will show FirstFragment
+                return BlankFragment.newInstance("test", "Page # 1");
+            case 1: // Fragment # 0 - This will show FirstFragment different title
+                return BlankFragment.newInstance("test", "Page # 2");
+            case 2: // Fragment # 1 - This will show SecondFragment
+                return BuildFragment.newInstance(2, "Page # 3");
+            default:
+                return null;
+        }
     }
 
     @Override

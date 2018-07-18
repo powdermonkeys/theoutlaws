@@ -1,9 +1,9 @@
 package com.example.roopalk.voyager;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,63 +15,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BuildFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BuildFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BuildFragment extends Fragment {
     public TextView create;
     public EditText destinationNamed;
     public Button btnArrival;
     public Button btnDeparture;
 
-
     private OnFragmentInteractionListener mListener;
 
     // Required empty public constructor
     public BuildFragment() { }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BuildFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BuildFragment newInstance(String param1, String param2) {
-        BuildFragment fragment = new BuildFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        create = getView().findViewById(R.id.create);
-        destinationNamed = getView().findViewById(R.id.destinationNamed);
-        btnArrival = getView().findViewById(R.id.btnArrival);
-        btnDeparture = getView().findViewById(R.id.btnDeparture);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_build, container, false);
+        View view =  inflater.inflate(R.layout.fragment_build, container, false);
 
+        create = view.findViewById(R.id.create);
+        destinationNamed = view.findViewById(R.id.destinationNamed);
+        btnArrival = view.findViewById(R.id.btnArrival);
+        btnDeparture = view.findViewById(R.id.btnDeparture);
+        return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         btnArrival.setOnClickListener(new View.OnClickListener() {
@@ -90,14 +59,16 @@ public class BuildFragment extends Fragment {
             }
         });
 
-
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    // newInstance constructor for creating fragment with arguments
+    public static BuildFragment newInstance(int page, String title) {
+        BuildFragment fragmentFirst = new BuildFragment();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fragmentFirst.setArguments(args);
+        return fragmentFirst;
     }
 
     @Override
@@ -117,24 +88,15 @@ public class BuildFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
     public void showDatePickerDialog(View v) {
-//        DialogFragment newFragment = new DatePickerFragment();
-//        newFragment.show(getFragmentManager(), "datePicker");
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getActivity().getFragmentManager(), "datePicker");
         Log.d("Date Picker", "Date Picker Success!");
     }
 
