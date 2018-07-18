@@ -30,12 +30,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:27.1.1"
     implementation "com.android.support:design:27.1.1"
 
-<<<<<<< HEAD
     //for cardview
     implementation 'com.android.support:cardview-v7:27.1.1'
-
-=======
->>>>>>> 6985132576e6fe9fc81c3d4f7be2c1e05f0131ec
     implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -1,30 +1,33 @@
 package com.example.roopalk.voyager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
-import com.example.roopalk.voyager.Model.Photo;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.SaveCallback;
 
-import java.io.File;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class FeaturedTripsActivity extends AppCompatActivity
 {
     private final String TAG = "FeaturedTripsActivity";
-    private static final String imagePath = "/storage/emulated/0/Download/Seattle_Space_Needle.jpg";
+    //private static final String imagePath = "/storage/emulated/0/Download/Seattle_Space_Needle.jpg";
+
+    @BindView(R.id.btn) Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_featured_trips);
+
+        ButterKnife.bind(this);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -35,27 +38,13 @@ public class FeaturedTripsActivity extends AppCompatActivity
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-
-        File file = new File(imagePath);
-        ParseFile parseFile = new ParseFile(file);
-
-        final Photo newPhoto = new Photo();
-
-        newPhoto.setImage(parseFile);
-
-        newPhoto.saveInBackground(new SaveCallback()
+        btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void done(ParseException e)
+            public void onClick(View v)
             {
-                if(e == null)
-                {
-                    Log.i(TAG, "works");
-                }
-                else
-                {
-                    Log.e(TAG, "doesn't work");
-                }
+                Intent intent = new Intent(FeaturedTripsActivity.this, TestActivity.class);
+                startActivity(intent);
             }
         });
     }
