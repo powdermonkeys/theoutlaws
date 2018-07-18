@@ -1,4 +1,4 @@
-package com.example.roopalk.voyager;
+package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

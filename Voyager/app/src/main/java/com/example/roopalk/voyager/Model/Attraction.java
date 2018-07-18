@@ -1,8 +1,12 @@
 package com.example.roopalk.voyager.Model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
+import java.util.List;
+
+@ParseClassName("Attraction")
 public class Attraction extends ParseObject {
     //in the Parse database, the name of the attraction is stored in a column called attractionname
     private static final String ATTRACTION_NAME = "name";
@@ -24,6 +28,9 @@ public class Attraction extends ParseObject {
 
     //the city that each attraction is in is stored in a column called city
     private static final String CITY = "city";
+
+    //photos of each attraction are stored in a column called photos
+    private static final String PHOTOS = "photos";
 
     //getter methods for each of these variables
     public String getAttractionName()
@@ -61,6 +68,8 @@ public class Attraction extends ParseObject {
         return getParseObject(CITY);
     }
 
+    public List<Photo> getPhotos() { return getList(PHOTOS);}
+
     //setter methods for each of these variables
     public void setAttractionName(String attractionName)
     {
@@ -95,5 +104,12 @@ public class Attraction extends ParseObject {
     public void setCity(City city)
     {
         put(CITY, city);
+    }
+
+    public void addPhoto(Photo photo)
+    {
+        List<Photo> photos = getPhotos();
+        photos.add(photo);
+        put(PHOTOS, photos);
     }
 }

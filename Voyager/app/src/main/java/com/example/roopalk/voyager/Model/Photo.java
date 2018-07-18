@@ -1,8 +1,13 @@
 package com.example.roopalk.voyager.Model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.io.File;
+
+@ParseClassName("Photo")
 public class Photo extends ParseObject
 {
     //In the Parse dashboard, the image will be stored in column called image
@@ -12,27 +17,31 @@ public class Photo extends ParseObject
     private static final String ATTRACTION = "attraction";
 
     //getter method for the image information
-
     public ParseFile getImage()
     {
         return getParseFile(IMAGE);
     }
 
-    //getter method for the attraction information
-    public ParseObject getAttraction()
-    {
-        return getParseObject("attraction");
-    }
-
     //setter method for the image information
-    public void setImage(ParseFile image)
+    public void setImage(String imagePath)
     {
+        File file = new File(imagePath);
+        ParseFile image = new ParseFile(file);
         put(IMAGE, image);
     }
 
-    //setter method for the attraction information
-    public void setAttraction(ParseObject attraction)
+    public static class Query extends ParseQuery<Photo>
     {
-        put(ATTRACTION, attraction);
+        public Query()
+        {
+            super(Photo.class);
+        }
+
+        public Query getAllImages()
+        {
+            include("image");
+            return this;
+        }
+
     }
 }

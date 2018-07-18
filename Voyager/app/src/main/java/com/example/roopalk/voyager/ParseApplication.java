@@ -1,19 +1,20 @@
 package com.example.roopalk.voyager;
 
 import android.app.Application;
-import android.util.Log;
 
+import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
+import com.example.roopalk.voyager.Model.Photo;
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.SaveCallback;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ParseApplication extends Application
 {
+    private static final String TAG = "ParseApplication.java";
+    private static final String imagePath = "/storage/emulated/0/Download/Seattle_Space_Needle.jpg";
     @Override
     public void onCreate()
     {
@@ -29,31 +30,13 @@ public class ParseApplication extends Application
         // any network interceptors must be added with the Configuration Builder given this syntax
 
         ParseObject.registerSubclass(City.class);
+        ParseObject.registerSubclass(Attraction.class);
+        ParseObject.registerSubclass(Photo.class);
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
                 .applicationId("fbu-voyager-app-id")
                 .clientKey("powdermonkeys")
                 .server("http://fbu-voyager.herokuapp.com/parse")
                 .build();
         Parse.initialize(configuration);
-
-        //testing the ParseApp
-
-        City firstCity = new City();
-        firstCity.setCityName("Tokyo");
-        firstCity.setKeyDescription("a city");
-        firstCity.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null)
-                {
-                    Log.i("ParseApplication.java", "new city added!");
-                }
-                else
-                {
-                    Log.e("whatever",
-                            "fail");
-                }
-            }
-        });
     }
 }
