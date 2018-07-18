@@ -44,8 +44,10 @@ public class City extends ParseObject {
         put(KEY_DESCRIPTION, keyDescription);
     }
 
-    public void setAttractions(List attractions)
+    public void addAttraction(Attraction attraction)
     {
+        List<Attraction> attractions = getAttractions();
+        attractions.add(attraction);
         put(ATTRACTIONS, attractions);
     }
 }
