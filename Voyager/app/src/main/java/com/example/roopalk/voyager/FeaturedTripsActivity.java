@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class FeaturedTripsActivity extends AppCompatActivity implements BuildFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener
 {
     private final String TAG = "FeaturedTripsActivity";
-    //private static final String imagePath = "/storage/emulated/0/Download/Seattle_Space_Needle.jpg";
 
     @BindView(R.id.btn) Button btn;
 
@@ -52,7 +51,8 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(Uri uri)
+    {
 
     }
 }

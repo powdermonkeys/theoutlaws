@@ -40,8 +40,6 @@ public class TestActivity extends AppCompatActivity
                 if(e == null)
                 {
                     photos.add(objects.get(0));
-//                    photos.set(0, objects.get(0));
-//////                    Log.i("Photos: " , ""+photos.size());
 
                     Photo photo = photos.get(0);
 
@@ -53,22 +51,5 @@ public class TestActivity extends AppCompatActivity
                 }
             }
         });
-
-  //      Photo p;
-
-//        if(!photos.isEmpty())
-//        {
-//            p = photos.get(0);
-//            String imagePath = p.getImage().getUrl();
-//
-//            GlideApp.with(this)
-//                    .load(imagePath)
-//                    .into(ivGottenPhoto);
-//        }
-//        else
-//        {
-//            Toast.makeText(this, "Empty", Toast.LENGTH_LONG).show();
-//            Log.i("Photos", "empty");
-//        }
     }
 }

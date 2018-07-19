@@ -3,7 +3,6 @@ package com.example.roopalk.voyager.Model;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.io.File;
 
@@ -28,20 +27,5 @@ public class Photo extends ParseObject
         File file = new File(imagePath);
         ParseFile image = new ParseFile(file);
         put(IMAGE, image);
-    }
-
-    public static class Query extends ParseQuery<Photo>
-    {
-        public Query()
-        {
-            super(Photo.class);
-        }
-
-        public Query getAllImages()
-        {
-            include("image");
-            return this;
-        }
-
     }
 }

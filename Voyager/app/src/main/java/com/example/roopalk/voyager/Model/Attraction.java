@@ -3,8 +3,7 @@ package com.example.roopalk.voyager.Model;
 import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
-
-import java.util.List;
+import com.parse.ParseQuery;
 
 @ParseClassName("Attraction")
 public class Attraction extends ParseObject {
@@ -68,8 +67,6 @@ public class Attraction extends ParseObject {
         return getParseObject(CITY);
     }
 
-    public List<Photo> getPhotos() { return getList(PHOTOS);}
-
     //setter methods for each of these variables
     public void setAttractionName(String attractionName)
     {
@@ -105,11 +102,18 @@ public class Attraction extends ParseObject {
     {
         put(CITY, city);
     }
-
-    public void addPhoto(Photo photo)
+    public static class Query extends ParseQuery<Attraction>
     {
-        List<Photo> photos = getPhotos();
-        photos.add(photo);
-        put(PHOTOS, photos);
+        public Query()
+        {
+            super(Attraction.class);
+        }
+
+        public Query withPhotos()
+        {
+            include(PHOTOS);
+            return this;
+        }
+
     }
 }
