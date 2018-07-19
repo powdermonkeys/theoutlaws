@@ -3,9 +3,9 @@ package com.example.roopalk.voyager.Model;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @ParseClassName("City")
 public class City extends ParseObject {
@@ -30,10 +30,6 @@ public class City extends ParseObject {
         return getString(KEY_DESCRIPTION);
     }
 
-    public List<Attraction> getAttractions() {
-        return getList(ATTRACTIONS);
-    }
-
     //setter methods for each of the values
 
     public void setCityName(String cityName) {
@@ -44,10 +40,18 @@ public class City extends ParseObject {
         put(KEY_DESCRIPTION, keyDescription);
     }
 
-    public void addAttraction(Attraction attraction)
+    public static class Query extends ParseQuery<City>
     {
-        List<Attraction> attractions = getAttractions();
-        attractions.add(attraction);
-        put(ATTRACTIONS, attractions);
+        public Query()
+        {
+            super(City.class);
+        }
+
+        public Query withAttractions()
+        {
+            include(ATTRACTIONS);
+            return this;
+        }
+
     }
 }
