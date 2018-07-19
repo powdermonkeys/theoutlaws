@@ -20,6 +20,20 @@ public class City extends ParseObject {
     //the attractions of the city are stored in a column called attractions
     private static final String ATTRACTIONS = "attractions";
 
+    //the number of guests in the trip
+    private static final String NUM_GUESTS = "guests";
+
+    //the total budget of the trip
+    private static final int BUDGET = 0;
+
+    //the check in  date for the trip
+    private static final int CHECK_IN = 0;
+    //the check out date for the trip
+    private static final int CHECK_OUT = 0;
+
+
+
+
     //getter methods for each of the values
 
     public String getCityName() {
@@ -34,7 +48,16 @@ public class City extends ParseObject {
         return getList(ATTRACTIONS);
     }
 
-    //setter methods for each of the values
+    public static String getNumGuests() { return NUM_GUESTS; }
+
+    public static int getBudget() { return BUDGET; }
+
+    public static int getCheckIn() { return CHECK_IN; }
+
+    public static int getCheckOut() { return CHECK_OUT; }
+
+
+//setter methods for each of the values
 
     public void setCityName(String cityName) {
         put(CITY_NAME, cityName);
@@ -50,4 +73,22 @@ public class City extends ParseObject {
         attractions.add(attraction);
         put(ATTRACTIONS, attractions);
     }
+
+
+    public void setNumGuests(int numGuests) {
+        put(NUM_GUESTS, numGuests);
+    }
+
+    public void setBudget(int budget) {
+        put(String.valueOf(BUDGET), budget);
+    }
+
+    public void setCheckIn(int checkIn) {
+        put(String.valueOf(CHECK_IN), checkIn);
+    }
+    public void setCheckOut(int checkOut) {
+        put(String.valueOf(CHECK_OUT),  checkOut);
+    }
+
+
 }

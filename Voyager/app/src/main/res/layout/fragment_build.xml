@@ -1,60 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/calendarIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/locationIcon"
+        android:layout_alignTop="@+id/departureDate"
+        app:srcCompat="@drawable/calendaricon" />
+
+    <ImageView
+        android:id="@+id/calendarIcon2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/calendarIcon"
+        android:layout_alignTop="@+id/arrivalDate"
+        app:srcCompat="@drawable/calendaricon" />
+
+    <ImageView
+        android:id="@+id/locationIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/destinationNamed"
+        android:layout_toStartOf="@+id/destinationNamed"
+        app:srcCompat="@drawable/location" />
+
+    <!--<ImageView-->
+        <!--android:id="@+id/budgetIcon"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_alignTop="@+id/etBudget"-->
+        <!--android:layout_alignBottom="@+id/etBudget"-->
+        <!--app:srcCompat="@drawable/dollar" />-->
+
+    <ImageView
+        android:id="@+id/personIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@+id/etGuests"
+        android:layout_alignTop="@+id/etGuests"
+        android:layout_toStartOf="@+id/etGuests"
+        app:srcCompat="@drawable/person" />
 
     <TextView
         android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:text="@string/create"
+        android:textAlignment="center"
         android:textSize="20sp"
-        android:textAlignment="center"/>
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/destinationNamed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create"
-        android:padding="5dp"
-        android:hint="@string/destination" />
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/etGuests"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/border"
+        android:hint="@string/destination"
+        android:padding="5dp" />
 
-    <Button
-        android:id="@+id/btnArrival"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/destinationNamed"
-        android:layout_marginTop="110dp"
-        android:hint="@string/arrival" />
 
     <EditText
         android:id="@+id/arrivalDate"
-        android:layout_width="wrap_content"
+        android:layout_width="191dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnArrival"
-        android:layout_alignStart="@+id/departureDate"
-        android:background="@color/colorAccent"
-        android:padding="5dp" />
-
-    <Button
-        android:id="@+id/btnDeparture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="84dp"
-        android:hint="@string/departure" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="218dp"
+        android:background="@drawable/border"
+        android:hint="@string/arrival"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/departureDate"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="182dp"
+        android:background="@drawable/border"
+        android:hint="@string/departure"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/etGuests"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/etBudget"
+        android:layout_marginBottom="147dp"
+        android:layout_marginStart="1dp"
+        android:background="@drawable/border"
+        android:hint="Number of Guests" />
+
+    <EditText
+        android:id="@+id/etBudget"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="67dp"
+        android:background="@drawable/border"
+        android:hint="Total Budget" />
+
+    <Button
+        android:id="@+id/btnDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnDeparture"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="163dp"
-        android:background="@color/colorAccent"
-        android:padding="5dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Done" />
+
 </RelativeLayout>
