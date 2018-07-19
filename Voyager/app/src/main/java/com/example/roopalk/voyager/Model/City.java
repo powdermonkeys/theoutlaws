@@ -51,7 +51,6 @@ public class City extends ParseObject {
         put(COUNTRY, country);
     }
 
-
     public static class Query extends ParseQuery<City>
     {
         public Query()

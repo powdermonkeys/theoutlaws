@@ -26,11 +26,14 @@ public class Trip extends ParseObject
     private static String city = "";
     private static String country = "";
 
-    public Trip(String ct, String tree)
+    public Trip(String ct, String tree, String c, String co, int ng)
     {
         city = ct;
         country = tree;
         setDestination(city, country);
+        setCheckin(c);
+        setCheckout(co);
+        setNumGuests(ng);
     }
 
     //getter methods for each of the values
