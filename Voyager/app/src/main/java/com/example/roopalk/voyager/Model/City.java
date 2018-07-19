@@ -59,7 +59,7 @@ public class City extends ParseObject {
         }
         public Query withName(String city)
         {
-            whereEqualTo(CITY_NAME, city);
+            whereContains(CITY_NAME, city);
             return this;
         }
         public Query withAttractions()
