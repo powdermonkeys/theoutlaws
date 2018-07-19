@@ -78,6 +78,13 @@ public class BuildFragment extends Fragment {
             }
         });
 
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        //        destination
+            }
+        });
+
     }
 
     @Override
