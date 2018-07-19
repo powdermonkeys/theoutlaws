@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
+import com.facebook.stetho.Stetho;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -19,6 +20,7 @@ public class ParseApplication extends Application
     public void onCreate()
     {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

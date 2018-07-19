@@ -20,8 +20,12 @@ import com.example.roopalk.voyager.R;
 public class BuildFragment extends Fragment {
     public TextView create;
     public EditText destinationNamed;
-    public Button btnArrival;
-    public Button btnDeparture;
+    public EditText departureDate;
+    public EditText arrivalDate;
+    public EditText etGuests;
+    public EditText etBudget;
+    public Button btnDone;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,8 +50,11 @@ public class BuildFragment extends Fragment {
 
         create = view.findViewById(R.id.create);
         destinationNamed = view.findViewById(R.id.destinationNamed);
-        btnArrival = view.findViewById(R.id.btnArrival);
-        btnDeparture = view.findViewById(R.id.btnDeparture);
+        departureDate = view.findViewById(R.id.departureDate);
+        arrivalDate = view.findViewById(R.id.arrivalDate);
+        etGuests = view.findViewById(R.id.etGuests);
+        etBudget = view.findViewById(R.id.etBudget);
+        btnDone = view.findViewById(R.id.btnDone);
         return view;
     }
 
@@ -55,7 +62,7 @@ public class BuildFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnArrival.setOnClickListener(new View.OnClickListener() {
+        arrivalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "ArrivalClicked!");
@@ -63,7 +70,7 @@ public class BuildFragment extends Fragment {
             }
         });
 
-        btnDeparture.setOnClickListener(new View.OnClickListener() {
+        departureDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "DepartureClicked!");
