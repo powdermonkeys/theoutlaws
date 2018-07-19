@@ -20,19 +20,8 @@ public class City extends ParseObject {
     //the attractions of the city are stored in a column called attractions
     private static final String ATTRACTIONS = "attractions";
 
-    //the number of guests in the trip
-    private static final String NUM_GUESTS = "guests";
-
-    //the total budget of the trip
-    private static final int BUDGET = 0;
-
-    //the check in  date for the trip
-    private static final int CHECK_IN = 0;
-    //the check out date for the trip
-    private static final int CHECK_OUT = 0;
-
-
-
+    //the country in which the city is
+    private static final String COUNTRY = "Country";
 
     //getter methods for each of the values
 
@@ -44,24 +33,10 @@ public class City extends ParseObject {
         return getString(KEY_DESCRIPTION);
     }
 
-<<<<<<< HEAD
-    //setter methods for each of the values
-=======
-    public List<Attraction> getAttractions() {
-        return getList(ATTRACTIONS);
+    public String getCountry()
+    {
+        return getString(COUNTRY);
     }
-
-    public static String getNumGuests() { return NUM_GUESTS; }
-
-    public static int getBudget() { return BUDGET; }
-
-    public static int getCheckIn() { return CHECK_IN; }
-
-    public static int getCheckOut() { return CHECK_OUT; }
-
-
-//setter methods for each of the values
->>>>>>> 1a1ea6fb91129d8719439545f6e3d30574d82b7c
 
     public void setCityName(String cityName) {
         put(CITY_NAME, cityName);
@@ -71,36 +46,32 @@ public class City extends ParseObject {
         put(KEY_DESCRIPTION, keyDescription);
     }
 
+    public void setCountry(String country)
+    {
+        put(COUNTRY, country);
+    }
+
+
     public static class Query extends ParseQuery<City>
     {
         public Query()
         {
             super(City.class);
         }
-
+        public Query withName(String city)
+        {
+            whereEqualTo(CITY_NAME, city);
+            return this;
+        }
         public Query withAttractions()
         {
             include(ATTRACTIONS);
             return this;
         }
-
+        public Query withCountry(String country)
+        {
+            whereEqualTo(COUNTRY, country);
+            return this;
+        }
     }
-
-
-    public void setNumGuests(int numGuests) {
-        put(NUM_GUESTS, numGuests);
-    }
-
-    public void setBudget(int budget) {
-        put(String.valueOf(BUDGET), budget);
-    }
-
-    public void setCheckIn(int checkIn) {
-        put(String.valueOf(CHECK_IN), checkIn);
-    }
-    public void setCheckOut(int checkOut) {
-        put(String.valueOf(CHECK_OUT),  checkOut);
-    }
-
-
 }
