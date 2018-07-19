@@ -2,7 +2,7 @@ package com.example.roopalk.voyager;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
@@ -13,13 +13,11 @@ import com.parse.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.parse.Parse.getApplicationContext;
-
 public class NetworkUtility
 {
-    private Context context = getApplicationContext();
+    private Context context;
 
-    private static final String TAG = "NetworkUtitlity.java";
+    private static final String TAG = "NetworkUtility.java";
     //setting up query calls for all network fetches
     final City.Query cityQuery = new City.Query();
 
@@ -27,11 +25,24 @@ public class NetworkUtility
 
     final Photo.Query photoQuery = new Photo.Query();
 
-    public void loadImagesFromAttraction(final Attraction attraction, final ImageView imageView)
+    public NetworkUtility(Context context)
     {
-        ArrayList<Photo> images;
+        this.context = context;
+    }
 
-        photoQuery.withAttraction();
+    /*
+        CALL THESE METHODS IN THE ADAPTER WHEN POPULATING THE VIEWS SO THAT THE RIGHT CITIES, IMAGES, AND ATTRACTIONS SHOW UP
+     */
+
+    //When this method is called, a list of images that contain images from the entered attraction will be returned
+
+    public ArrayList<String> getImagesOfAttraction(final Attraction attraction)
+    {
+        final ArrayList<String> imageURLs = new ArrayList<>();
+
+        String attractionID = attraction.getObjectId();
+
+        photoQuery.withAttraction(attractionID);
         photoQuery.findInBackground(new FindCallback<Photo>()
         {
             @Override
@@ -42,21 +53,77 @@ public class NetworkUtility
                    for(int i = 0; i < objects.size(); i++)
                    {
                        Photo currPhoto = objects.get(i);
-                       if(currPhoto.getAttraction().hasSameId(attraction))
-                       {
-                           String imgURL = currPhoto.getImage().getUrl();
-
-                           GlideApp.with(context)
-                                   .load(imgURL)
-                                   .into(imageView);
-                       }
+                       String imgURL = currPhoto.getImage().getUrl();
+                       imageURLs.add(imgURL);
                    }
                }
                else
                {
-                   Log.e(TAG, "Failed to load into imageView");
+                   Toast.makeText(context, "Failed to find any images of that attraction", Toast.LENGTH_LONG).show();
+                   Log.e(TAG, "Failed to find any images of that attraction");
                }
             }
         });
+
+        return imageURLs;
+    }
+
+    //When this method is called, a list of attractions that are in a specific city (entered) will be returned
+    public ArrayList<Attraction> getAttractionsOfCity(final City city)
+    {
+        final ArrayList<Attraction> attractions = new ArrayList<>();
+        String cityID = city.getObjectId();
+
+        attractionQuery.withCity(cityID);
+        attractionQuery.findInBackground(new FindCallback<Attraction>()
+        {
+            @Override
+            public void done(List<Attraction> objects, ParseException e)
+            {
+                if(e == null)
+                {
+                    for(int j = 0; j < objects.size(); j++)
+                    {
+                        attractions.add(objects.get(j));
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "Failed to find any attractions in that city", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Failed to find any attractions in that city");
+                }
+            }
+        });
+
+        return attractions;
+    }
+
+    //When this method is called, a list of cities that match (or contain the name) that is passed in is returned=
+    public ArrayList<City> getCityFromName(final String cityName)
+    {
+        final ArrayList<City> cities = new ArrayList<>();
+
+        cityQuery.withName(cityName);
+        cityQuery.findInBackground(new FindCallback<City>()
+        {
+            @Override
+            public void done(List<City> objects, ParseException e)
+            {
+                if(e == null)
+                {
+                    for(int k = 0; k < objects.size(); k++)
+                    {
+                        cities.add(objects.get(k));
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "Failed to find any cities by that name", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Failed to find any cities by that name");
+                }
+            }
+        });
+
+        return cities;
     }
 }
