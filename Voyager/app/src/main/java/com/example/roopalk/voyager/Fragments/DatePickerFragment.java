@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -35,7 +34,10 @@ public  class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Log.d("onDateSet", "reaching onDateSetClass");
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(year, month, day);
+        //TODO- SEE WHAT THIS PRINTS OUT AS A TEST CASE
+        System.out.print(year + month + day);
     }
 
 }

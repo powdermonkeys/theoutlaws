@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 
@@ -43,8 +44,7 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_build, container, false);
 
@@ -65,7 +65,6 @@ public class BuildFragment extends Fragment {
         arrivalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("onClick", "ArrivalClicked!");
                 showDatePickerDialog(v);
             }
         });
@@ -73,8 +72,24 @@ public class BuildFragment extends Fragment {
         departureDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("onClick", "DepartureClicked!");
                 showDatePickerDialog(v);
+            }
+        });
+
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String strguests = etGuests.getText().toString();
+                int  guests = Integer.parseInt(strguests);
+
+                //TODO- remove later, work on getting this test case to log
+
+                try{
+                    Log.d("onClick", "reached the try catch statement");
+                    new Trip(guests, departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString(), null);
+                    //TODO- make sure test cases returns an object
+
+                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
             }
         });
 
@@ -106,7 +121,8 @@ public class BuildFragment extends Fragment {
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
-        Log.d("Date Picker", "Date Picker Success!");
+
+
     }
 
 }

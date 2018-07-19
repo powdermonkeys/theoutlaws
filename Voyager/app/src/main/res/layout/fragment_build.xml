@@ -78,6 +78,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="218dp"
         android:background="@drawable/border"
+        android:inputType="date"
         android:hint="@string/arrival"
         android:padding="10dp" />
 
@@ -90,6 +91,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="182dp"
         android:background="@drawable/border"
+        android:inputType="date"
         android:hint="@string/departure"
         android:padding="10dp" />
 
@@ -102,6 +104,7 @@
         android:layout_marginBottom="147dp"
         android:layout_marginStart="1dp"
         android:background="@drawable/border"
+        android:inputType="number"
         android:hint="Number of Guests" />
 
     <EditText
@@ -112,6 +115,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="67dp"
         android:background="@drawable/border"
+        android:inputType="number"
         android:hint="Total Budget" />
 
     <Button
