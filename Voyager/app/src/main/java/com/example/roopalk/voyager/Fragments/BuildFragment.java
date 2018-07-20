@@ -86,7 +86,7 @@ public class BuildFragment extends Fragment {
 
                 try{
                     Log.d("onClick", "reached the try catch statement");
-                    new Trip(guests, departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString(), null);
+                    new Trip(guests, departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString());
                     //TODO- make sure test cases returns an object
 
                 }catch (Exception e){ Log.d("onClick", "didnt create object"); }

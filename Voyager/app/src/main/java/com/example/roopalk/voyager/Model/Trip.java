@@ -26,11 +26,10 @@ public class Trip extends ParseObject
     private static String city = "";
     private static String country = "";
 
-    public Trip(String ct, String tree, String c, String co, int ng)
+    public Trip(int ng, String c, String co, String ct)
     {
         city = ct;
-        country = tree;
-        setDestination(city, country);
+        setDestination(city);
         setCheckin(c);
         setCheckout(co);
         setNumGuests(ng);
@@ -71,13 +70,11 @@ public class Trip extends ParseObject
         put(CHECKOUT, checkout);
     }
 
-    private void setDestination(String destination, String country)
+    private void setDestination(final String destination)
     {
         final City.Query cityQuery = new City.Query();
 
-        cityQuery.withName(destination);
-        cityQuery.withCountry(country);
-
+        cityQuery.hasName(destination);
         cityQuery.findInBackground(new FindCallback<City>()
         {
             @Override
@@ -85,8 +82,9 @@ public class Trip extends ParseObject
             {
                 if(e == null)
                 {
+                    if(objects.get(0).getCityName() == destination)
                     //get the first object that is found that is name with this city
-                    put(DESTINATION, objects.get(0)); }
+                        put(DESTINATION, objects.get(0)); }
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager;
 
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 
@@ -20,6 +22,8 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
 {
     private final String TAG = "FeaturedTripsActivity";
 
+    private Fragment attractionDetailsFragment;
+
     @BindView(R.id.btn) Button btn;
 
     @Override
@@ -29,6 +33,7 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
         setContentView(R.layout.activity_featured_trips);
 
         ButterKnife.bind(this);
+        attractionDetailsFragment = new AttractionDetailsFragment();
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -44,8 +49,9 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(FeaturedTripsActivity.this, TestActivity.class);
-                startActivity(intent);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.placeholder, attractionDetailsFragment);
+                ft.commit();
             }
         });
     }
