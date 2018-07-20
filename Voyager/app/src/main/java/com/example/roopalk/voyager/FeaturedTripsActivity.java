@@ -1,18 +1,16 @@
 package com.example.roopalk.voyager;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 
-import butterknife.BindView;
+import java.util.Calendar;
+
 import butterknife.ButterKnife;
 
 
@@ -20,7 +18,6 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
 {
     private final String TAG = "FeaturedTripsActivity";
 
-    @BindView(R.id.btn) Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,15 +36,9 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(FeaturedTripsActivity.this, TestActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
+
     }
 
     @Override

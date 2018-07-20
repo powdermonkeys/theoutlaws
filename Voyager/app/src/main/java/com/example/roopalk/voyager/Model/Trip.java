@@ -1,37 +1,16 @@
 package com.example.roopalk.voyager.Model;
 
 import com.parse.FindCallback;
-<<<<<<< HEAD
-import com.parse.ParseException;
-
-import java.util.List;
-
-public class Trip
-{
-    public static int NUM_GUESTS;
-    public static String CHECK_IN;
-    public static String CHECK_OUT;
-    public static City CITY_DEST;
-
-    public Trip(int num_guests, String check_in, String check_out, String destination, String country)
-    {
-        NUM_GUESTS = num_guests;
-        CHECK_IN = check_in;
-        CHECK_OUT = check_out;
-        getDestination(destination, country);
-    }
-
-    private void getDestination(String destination, String country)
-=======
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.util.List;
 
+//                        arrivalDate.setText(month+1 +"/" + dayOfMonth + "/" + year);
+
 @ParseClassName("Trip")
-public class Trip extends ParseObject
-{
+public class Trip extends ParseObject {
 
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
@@ -57,6 +36,8 @@ public class Trip extends ParseObject
         setCheckout(co);
         setNumGuests(ng);
     }
+
+
 
     //getter methods for each of the values
 
@@ -94,7 +75,6 @@ public class Trip extends ParseObject
     }
 
     private void setDestination(String destination, String country)
->>>>>>> 7afcfaa224544746a42f4b6417e54d2c1e1b4caf
     {
         final City.Query cityQuery = new City.Query();
 
@@ -109,11 +89,7 @@ public class Trip extends ParseObject
                 if(e == null)
                 {
                     //get the first object that is found that is name with this city
-<<<<<<< HEAD
-                    CITY_DEST = objects.get(0);
-=======
                     put(DESTINATION, objects.get(0));
->>>>>>> 7afcfaa224544746a42f4b6417e54d2c1e1b4caf
                 }
             }
         });

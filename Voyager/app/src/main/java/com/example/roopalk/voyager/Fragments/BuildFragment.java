@@ -62,10 +62,13 @@ public class BuildFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         arrivalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
+
+
             }
         });
 
@@ -73,6 +76,7 @@ public class BuildFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
+
             }
         });
 
@@ -83,12 +87,11 @@ public class BuildFragment extends Fragment {
                 int  guests = Integer.parseInt(strguests);
 
                 //TODO- remove later, work on getting this test case to log
-
                 try{
                     Log.d("onClick", "reached the try catch statement");
-                    new Trip(guests, departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString(), null);
-                    //TODO- make sure test cases returns an object
+                    new Trip(destinationNamed.getText().toString(), "test", departureDate.getText().toString(), arrivalDate.getText().toString(), guests);
 
+                    //TODO- make sure test cases returns an object
                 }catch (Exception e){ Log.d("onClick", "didnt create object"); }
             }
         });
