@@ -7,9 +7,10 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
+//                        arrivalDate.setText(month+1 +"/" + dayOfMonth + "/" + year);
+
 @ParseClassName("Trip")
-public class Trip extends ParseObject
-{
+public class Trip extends ParseObject {
 
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
@@ -34,6 +35,8 @@ public class Trip extends ParseObject
         setCheckout(co);
         setNumGuests(ng);
     }
+
+
 
     //getter methods for each of the values
 
@@ -80,11 +83,19 @@ public class Trip extends ParseObject
             @Override
             public void done(List<City> objects, ParseException e)
             {
+<<<<<<< HEAD
                 if(e == null)
                 {
                     if(objects.get(0).getCityName() == destination)
                     //get the first object that is found that is name with this city
                         put(DESTINATION, objects.get(0)); }
+=======
+                if(e == null) {
+                    //get the first object that is found that is name with this city
+                    put(DESTINATION, objects.get(0));
+                }
+                    put(DESTINATION, objects.get(0));
+>>>>>>> 166621738b801526a7f680a7ce94e656bb28ef6e
             }
         });
     }

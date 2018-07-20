@@ -11,15 +11,13 @@ import java.util.Calendar;
 
 public  class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-    EditText arrivalDate;
-    EditText departureDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
+    EditText date;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,9 +33,14 @@ public  class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar newDate = Calendar.getInstance();
-        newDate.set(year, month, day);
+        newDate.set(year, month  , day);
         //TODO- SEE WHAT THIS PRINTS OUT AS A TEST CASE
         System.out.print(year + month + day);
+        populateSetDate(year, month, day);
+    }
+
+    public void populateSetDate(int year, int month, int day) {
+        date.setText(month+"/"+day+"/"+year);
     }
 
 }

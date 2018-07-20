@@ -2,7 +2,6 @@ package com.example.roopalk.voyager.Fragments;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.AddingAttractionFragment;
 import com.example.roopalk.voyager.R;
 
 
@@ -54,7 +53,7 @@ public class BuildFragment extends Fragment {
         arrivalDate = view.findViewById(R.id.arrivalDate);
         etGuests = view.findViewById(R.id.etGuests);
         etBudget = view.findViewById(R.id.etBudget);
-        btnDone = view.findViewById(R.id.btnDone);
+    //    btnDone = view.findViewById(R.id.btnDone);
         return view;
     }
 
@@ -62,10 +61,13 @@ public class BuildFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         arrivalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
+                Log.d("datePicker", "Showed Date picker");
+
             }
         });
 
@@ -73,15 +75,10 @@ public class BuildFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
-            }
-        });
+                Log.d("datePicker", "Showed Date picker");
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String strguests = etGuests.getText().toString();
-                int  guests = Integer.parseInt(strguests);
 
+<<<<<<< HEAD
                 //TODO- remove later, work on getting this test case to log
 
                 try{
@@ -90,8 +87,28 @@ public class BuildFragment extends Fragment {
                     //TODO- make sure test cases returns an object
 
                 }catch (Exception e){ Log.d("onClick", "didnt create object"); }
+=======
+>>>>>>> 166621738b801526a7f680a7ce94e656bb28ef6e
             }
         });
+
+//        btnDone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String strguests = etGuests.getText().toString();
+//                int  guests = Integer.parseInt(strguests);
+//
+//                //TODO- remove later, work on getting this test case to log
+//                try{
+//                    Log.d("onClick", "reached the try catch statement");
+//                    new Trip(destinationNamed.getText().toString(), "test", departureDate.getText().toString(), arrivalDate.getText().toString(), guests);
+//
+//                    //TODO- make sure test cases returns an object
+//                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
+//
+//                showAttractionFragment();
+//            }
+//        });
 
     }
 
@@ -115,7 +132,7 @@ public class BuildFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        public void replaceFragment(Fragment fragment);
     }
 
     public void showDatePickerDialog(View v) {
@@ -123,6 +140,13 @@ public class BuildFragment extends Fragment {
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
 
 
+    }
+
+    public void showAttractionFragment()
+    {
+        Fragment fr =new AddingAttractionFragment();
+        OnFragmentInteractionListener fc = (OnFragmentInteractionListener) getActivity();
+        fc.replaceFragment(fr);
     }
 
 }
