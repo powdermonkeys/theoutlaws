@@ -86,11 +86,11 @@ public class Trip extends ParseObject {
             @Override
             public void done(List<City> objects, ParseException e)
             {
-                if(e == null)
-                {
+                if(e == null) {
                     //get the first object that is found that is name with this city
                     put(DESTINATION, objects.get(0));
                 }
+                    put(DESTINATION, objects.get(0));
             }
         });
     }

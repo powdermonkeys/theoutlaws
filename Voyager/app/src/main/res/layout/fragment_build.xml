@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <ImageView
         android:id="@+id/calendarIcon"
         android:layout_width="40dp"
@@ -92,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="175dp"
+        android:layout_marginBottom="147dp"
         android:background="@drawable/border"
         android:hint="Number of Guests"
         android:inputType="number" />
@@ -103,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="86dp"
         android:background="@drawable/border"
         android:hint="Total Budget"
         android:inputType="number" />

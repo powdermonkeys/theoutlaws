@@ -109,11 +109,15 @@ public class Attraction extends ParseObject {
             super(Attraction.class);
         }
 
-        public Query withPhotos()
+        public Query withCity(String objectId)
         {
-            include(PHOTOS);
+            include(objectId);
             return this;
         }
 
+        public Query withBudget()
+        {
+            return this;
+        }
     }
 }
