@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.AddingAttractionFragment;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 
@@ -78,17 +79,14 @@ public class BuildFragment extends Fragment {
                 Log.d("datePicker", "Showed Date picker");
 
 
-<<<<<<< HEAD
                 //TODO- remove later, work on getting this test case to log
 
                 try{
                     Log.d("onClick", "reached the try catch statement");
-                    new Trip(guests, departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString());
+                    new Trip(Integer.parseInt(etGuests.getText().toString()), departureDate.getText().toString(), arrivalDate.getText().toString(), destinationNamed.getText().toString());
                     //TODO- make sure test cases returns an object
 
                 }catch (Exception e){ Log.d("onClick", "didnt create object"); }
-=======
->>>>>>> 166621738b801526a7f680a7ce94e656bb28ef6e
             }
         });
 

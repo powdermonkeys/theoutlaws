@@ -1,6 +1,6 @@
 package com.example.roopalk.voyager.Fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.relex.circleindicator.CircleIndicator;
 
 public class AttractionDetailsFragment extends Fragment
 {
@@ -29,6 +30,7 @@ public class AttractionDetailsFragment extends Fragment
     ArrayList<City> cities;
 
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
+    @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -63,5 +65,6 @@ public class AttractionDetailsFragment extends Fragment
 
        viewPagerAdapter = new ViewPagerAdapter(getContext(), imageURLs);
        viewPager.setAdapter(viewPagerAdapter);
+       circleIndicator.setViewPager(viewPager);
     }
 }

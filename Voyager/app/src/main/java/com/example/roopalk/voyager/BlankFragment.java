@@ -70,7 +70,7 @@ public class BlankFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-         void replaceFragment(Fragment fragment);
+        void replaceFragment(Fragment fragment);
     }
 
 }
