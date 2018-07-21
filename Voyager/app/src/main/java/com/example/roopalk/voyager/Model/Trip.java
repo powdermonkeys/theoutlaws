@@ -25,7 +25,6 @@ public class Trip extends ParseObject {
     private static final String DESTINATION = "destination";
 
     private static String city = "";
-    private static String country = "";
 
     public Trip(int ng, String c, String co, String ct)
     {
@@ -83,19 +82,16 @@ public class Trip extends ParseObject {
             @Override
             public void done(List<City> objects, ParseException e)
             {
-<<<<<<< HEAD
                 if(e == null)
                 {
                     if(objects.get(0).getCityName() == destination)
                     //get the first object that is found that is name with this city
                         put(DESTINATION, objects.get(0)); }
-=======
                 if(e == null) {
                     //get the first object that is found that is name with this city
                     put(DESTINATION, objects.get(0));
                 }
                     put(DESTINATION, objects.get(0));
->>>>>>> 166621738b801526a7f680a7ce94e656bb28ef6e
             }
         });
     }
