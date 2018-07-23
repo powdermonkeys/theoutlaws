@@ -42,9 +42,15 @@ public class Photo extends ParseObject
             super(Photo.class);
         }
 
-        public Query withAttraction(String objectId)
+        public Query withAttraction(String attractionId)
         {
-            include(objectId);
+            include(attractionId);
+            return this;
+        }
+
+        public Query withCity(String cityId)
+        {
+            include(cityId);
             return this;
         }
     }
