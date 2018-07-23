@@ -35,8 +35,6 @@ public class Trip extends ParseObject {
         setNumGuests(ng);
     }
 
-
-
     //getter methods for each of the values
 
     public int getNumGuests()

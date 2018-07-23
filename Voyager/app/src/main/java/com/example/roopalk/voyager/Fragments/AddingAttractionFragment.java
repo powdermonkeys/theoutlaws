@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.MyAdapter;
+import com.example.roopalk.voyager.Adapters.AttractionAdapter;
 import com.example.roopalk.voyager.R;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class AddingAttractionFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private AttractionAdapter mAdapter;
     ArrayList<Attraction> attractions = new ArrayList<>();
 
 
@@ -55,7 +55,7 @@ public class AddingAttractionFragment extends Fragment {
 
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new MyAdapter(attractions);
+        mAdapter = new AttractionAdapter(attractions);
         mRecyclerView.setAdapter(mAdapter);
 
         Log.i("Adding", "Ok This shOUDL dwiRHE");
