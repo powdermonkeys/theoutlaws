@@ -20,6 +20,7 @@ public class ParseApplication extends Application
     public void onCreate()
     {
         super.onCreate();
+
         Stetho.initializeWithDefaults(this);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();

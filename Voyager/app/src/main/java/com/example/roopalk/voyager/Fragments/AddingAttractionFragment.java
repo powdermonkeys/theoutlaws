@@ -1,4 +1,4 @@
-package com.example.roopalk.voyager;
+package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.R;
 
 import java.util.ArrayList;
 

@@ -2,45 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/calendarIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/locationIcon"
-        android:layout_alignTop="@+id/departureDate"
+        android:layout_alignStart="@id/locationIcon"
+        android:layout_alignTop="@id/departureDate"
         app:srcCompat="@drawable/calendaricon" />
 
     <ImageView
         android:id="@+id/calendarIcon2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignStart="@+id/calendarIcon"
-        android:layout_alignTop="@+id/arrivalDate"
+        android:layout_alignStart="@id/calendarIcon"
+        android:layout_alignTop="@id/arrivalDate"
         app:srcCompat="@drawable/calendaricon" />
 
     <ImageView
         android:id="@+id/locationIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignTop="@+id/destinationNamed"
-        android:layout_toStartOf="@+id/destinationNamed"
+        android:layout_alignTop="@id/destinationNamed"
+        android:layout_toStartOf="@id/destinationNamed"
         app:srcCompat="@drawable/location" />
 
     <ImageView
         android:id="@+id/personIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_toLeftOf="@+id/etGuests"
-        android:layout_alignTop="@+id/etGuests"
-        android:layout_toStartOf="@+id/etGuests"
+        android:layout_toLeftOf="@id/etGuests"
+        android:layout_alignTop="@id/etGuests"
+        android:layout_toStartOf="@id/etGuests"
+        android:layout_below="@id/arrivalDate"
         app:srcCompat="@drawable/person" />
 
     <TextView
@@ -50,7 +45,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
-        android:padding="5dp"
+        android:padding="20dp"
         android:text="@string/create"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -61,55 +56,55 @@
         android:id="@+id/destinationNamed"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_below="@id/create"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/border"
         android:hint="@string/destination"
         android:padding="5dp" />
 
 
     <EditText
-        android:id="@+id/arrivalDate"
-        android:layout_width="191dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="222dp"
-        android:background="@drawable/border"
-        android:hint="@string/arrival"
-        android:padding="10dp" />
-
-    <EditText
         android:id="@+id/departureDate"
-        android:layout_width="191dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
-        android:background="@drawable/border"
+        android:layout_below="@id/destinationNamed"
+        android:layout_marginBottom="20dp"
         android:hint="@string/departure"
         android:padding="10dp" />
 
     <EditText
-        android:id="@+id/etGuests"
-        android:layout_width="191dp"
+        android:id="@+id/arrivalDate"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="147dp"
+        android:layout_below="@id/departureDate"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/arrival"
+        android:padding="10dp" />
+
+
+
+    <EditText
+        android:id="@+id/etGuests"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/arrivalDate"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/border"
         android:hint="Number of Guests"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/etBudget"
-        android:layout_width="185dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/border"
+        android:layout_below="@id/etGuests"
         android:hint="Total Budget"
         android:inputType="number" />
 
@@ -117,6 +112,8 @@
         android:id="@+id/btnDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Done" />

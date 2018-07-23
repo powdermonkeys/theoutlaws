@@ -1,7 +1,9 @@
 package com.example.roopalk.voyager.Fragments;
 
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.roopalk.voyager.AddingAttractionFragment;
 import com.example.roopalk.voyager.R;
+
+import java.util.Calendar;
 
 
 public class BuildFragment extends Fragment {
@@ -26,6 +30,8 @@ public class BuildFragment extends Fragment {
     public EditText etBudget;
     public Button btnDone;
 
+    Calendar mCurrentDate;
+    int day; int month; int year;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,31 +59,53 @@ public class BuildFragment extends Fragment {
         arrivalDate = view.findViewById(R.id.arrivalDate);
         etGuests = view.findViewById(R.id.etGuests);
         etBudget = view.findViewById(R.id.etBudget);
-    //    btnDone = view.findViewById(R.id.btnDone);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mCurrentDate = Calendar.getInstance();
+        day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
+        month = mCurrentDate.get(Calendar.MONTH);
+        year = mCurrentDate.get(Calendar.YEAR);
+
+        month = month+1;
 
 
         arrivalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(v);
-                Log.d("datePicker", "Showed Date picker");
+                DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        arrivalDate.setText(month + "/" + day + "/" + year);
+                    }
+
+                }, year, month, day);
+                datePickerDialog.show();
+                Log.d("DatePicker", "should show???");
 
             }
         });
 
+
         departureDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("datePicker", "Showed Date picker?");
+
+                DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        arrivalDate.setText(month + "/" + day + "/" + year);
+                    }
+                }, year, month, day);
+
                 showDatePickerDialog(v);
-                Log.d("datePicker", "Showed Date picker");
-
-
+                datePickerDialog.show();
+                Log.d("datepicker", "pls works");
             }
         });
 
@@ -95,7 +123,7 @@ public class BuildFragment extends Fragment {
 //                    //TODO- make sure test cases returns an object
 //                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
 //
-//                showAttractionFragment();
+//             //   showAttractionFragment();
 //            }
 //        });
 
@@ -119,23 +147,16 @@ public class BuildFragment extends Fragment {
     }
 
 
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void replaceFragment(Fragment fragment);
+        void onFragmentInteraction(Uri uri);
     }
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
-
-
-    }
-
-    public void showAttractionFragment()
-    {
-        Fragment fr =new AddingAttractionFragment();
-        OnFragmentInteractionListener fc = (OnFragmentInteractionListener) getActivity();
-        fc.replaceFragment(fr);
+        Log.d("Date Picker", "Date Picker Success!");
     }
 
 }
