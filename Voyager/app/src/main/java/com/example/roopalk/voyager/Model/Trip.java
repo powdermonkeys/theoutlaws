@@ -87,7 +87,7 @@ public class Trip extends ParseObject {
                     if(objects.get(0).getCityName() == destination)
                     //get the first object that is found that is name with this city
                         put(DESTINATION, objects.get(0)); }
-                if(e == null) {
+                if(e == null){
                     //get the first object that is found that is name with this city
                     put(DESTINATION, objects.get(0));
                 }
