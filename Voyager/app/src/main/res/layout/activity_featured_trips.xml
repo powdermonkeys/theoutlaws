@@ -17,5 +17,11 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@android:color/white"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"
+        android:text="TEST"/>
+
 
 </LinearLayout>

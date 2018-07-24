@@ -6,35 +6,35 @@
 
     <ImageView
         android:id="@+id/calendarIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignStart="@id/locationIcon"
         android:layout_alignTop="@id/departureDate"
         app:srcCompat="@drawable/calendaricon" />
 
     <ImageView
         android:id="@+id/calendarIcon2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignStart="@id/calendarIcon"
         android:layout_alignTop="@id/arrivalDate"
         app:srcCompat="@drawable/calendaricon" />
 
     <ImageView
         android:id="@+id/locationIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignTop="@id/destinationNamed"
         android:layout_toStartOf="@id/destinationNamed"
         app:srcCompat="@drawable/location" />
 
     <ImageView
         android:id="@+id/personIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_toLeftOf="@id/etGuests"
-        android:layout_alignTop="@id/etGuests"
-        android:layout_toStartOf="@id/etGuests"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toLeftOf="@id/sbGuests"
+        android:layout_alignTop="@id/sbGuests"
+        android:layout_toStartOf="@id/sbGuests"
         android:layout_below="@id/arrivalDate"
         app:srcCompat="@drawable/person" />
 
@@ -59,7 +59,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/create"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/border"
         android:hint="@string/destination"
         android:padding="5dp" />
 
@@ -85,35 +84,27 @@
         android:padding="10dp" />
 
 
-
-    <EditText
-        android:id="@+id/etGuests"
+    <SeekBar
+        android:id="@+id/sbGuests"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/arrivalDate"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/border"
-        android:hint="Number of Guests"
-        android:inputType="number" />
+        android:layout_marginBottom="115dp" />
 
-    <EditText
-        android:id="@+id/etBudget"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/tvGuests"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/border"
-        android:layout_below="@id/etGuests"
-        android:hint="Total Budget"
-        android:inputType="number" />
+        android:layout_below="@id/sbGuests"
+        android:textSize="11sp" />
+
 
     <Button
         android:id="@+id/btnDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Done" />

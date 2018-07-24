@@ -7,8 +7,6 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
-//                        arrivalDate.setText(month+1 +"/" + dayOfMonth + "/" + year);
-
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
 
@@ -25,18 +23,15 @@ public class Trip extends ParseObject {
     private static final String DESTINATION = "destination";
 
     private static String city = "";
-    private static String country = "";
 
-    public Trip(String ct, String tree, String c, String co, int ng)
+    public Trip(int ng, String c, String co, String ct)
     {
         city = ct;
-        country = tree;
-        setDestination(city, country);
+        setDestination(city);
         setCheckin(c);
         setCheckout(co);
         setNumGuests(ng);
     }
-
 
 
     //getter methods for each of the values
@@ -74,18 +69,21 @@ public class Trip extends ParseObject {
         put(CHECKOUT, checkout);
     }
 
-    private void setDestination(String destination, String country)
+    public void setDestination(final String destination)
     {
         final City.Query cityQuery = new City.Query();
 
-        cityQuery.withName(destination);
-        cityQuery.withCountry(country);
-
+        cityQuery.hasName(destination);
         cityQuery.findInBackground(new FindCallback<City>()
         {
             @Override
             public void done(List<City> objects, ParseException e)
             {
+                if(e == null)
+                {
+                    if(objects.get(0).getCityName() == destination)
+                    //get the first object that is found that is name with this city
+                        put(DESTINATION, objects.get(0)); }
                 if(e == null) {
                     //get the first object that is found that is name with this city
                     put(DESTINATION, objects.get(0));

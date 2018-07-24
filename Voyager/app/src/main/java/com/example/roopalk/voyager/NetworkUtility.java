@@ -36,10 +36,8 @@ public class NetworkUtility
 
     //When this method is called, a list of images that contain images from the entered attraction will be returned
 
-    public ArrayList<String> getImagesOfAttraction(final Attraction attraction)
+    public void getImagesOfAttraction(final Attraction attraction, final ArrayList<String> imageURLs)
     {
-        final ArrayList<String> imageURLs = new ArrayList<>();
-
         String attractionID = attraction.getObjectId();
 
         photoQuery.withAttraction(attractionID);
@@ -64,14 +62,11 @@ public class NetworkUtility
                }
             }
         });
-
-        return imageURLs;
     }
 
     //When this method is called, a list of attractions that are in a specific city (entered) will be returned
-    public ArrayList<Attraction> getAttractionsOfCity(final City city)
+    public void getAttractionsOfCity(final City city, final ArrayList<Attraction> attractions)
     {
-        final ArrayList<Attraction> attractions = new ArrayList<>();
         String cityID = city.getObjectId();
 
         attractionQuery.withCity(cityID);
@@ -94,16 +89,12 @@ public class NetworkUtility
                 }
             }
         });
-
-        return attractions;
     }
 
     //When this method is called, a list of cities that match (or contain the name) that is passed in is returned=
-    public ArrayList<City> getCityFromName(final String cityName)
+    public void getCityFromName(final String cityName, final ArrayList<City> cities)
     {
-        final ArrayList<City> cities = new ArrayList<>();
-
-        cityQuery.withName(cityName);
+        cityQuery.hasName(cityName);
         cityQuery.findInBackground(new FindCallback<City>()
         {
             @Override
@@ -113,7 +104,8 @@ public class NetworkUtility
                 {
                     for(int k = 0; k < objects.size(); k++)
                     {
-                        cities.add(objects.get(k));
+                        City currentCity = objects.get(k);
+                        cities.add(currentCity);
                     }
                 }
                 else
@@ -123,7 +115,5 @@ public class NetworkUtility
                 }
             }
         });
-
-        return cities;
     }
 }

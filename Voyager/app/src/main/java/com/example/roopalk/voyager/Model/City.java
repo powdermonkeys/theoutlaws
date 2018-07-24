@@ -57,19 +57,10 @@ public class City extends ParseObject {
         {
             super(City.class);
         }
-        public Query withName(String city)
+
+        public Query hasName(String name)
         {
-            whereContains(CITY_NAME, city);
-            return this;
-        }
-        public Query withAttractions()
-        {
-            include(ATTRACTIONS);
-            return this;
-        }
-        public Query withCountry(String country)
-        {
-            whereEqualTo(COUNTRY, country);
+            whereEqualTo(CITY_NAME, name);
             return this;
         }
     }

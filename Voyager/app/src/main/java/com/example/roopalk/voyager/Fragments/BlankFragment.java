@@ -75,6 +75,7 @@ public class BlankFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
 
+        void replaceFragment(Fragment fragment);
     }
 
 }

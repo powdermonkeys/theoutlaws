@@ -9,16 +9,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 import java.util.Calendar;
+
+import static java.lang.Integer.parseInt;
 
 
 public class BuildFragment extends Fragment {
@@ -26,9 +31,12 @@ public class BuildFragment extends Fragment {
     public EditText destinationNamed;
     public EditText departureDate;
     public EditText arrivalDate;
-    public EditText etGuests;
-    public EditText etBudget;
+    public TextView etGuests;
+  //  public EditText etBudget;
+    public SeekBar sbGuests;
     public Button btnDone;
+
+    int progress = 20;
 
     Calendar mCurrentDate;
     int day; int month; int year;
@@ -57,8 +65,16 @@ public class BuildFragment extends Fragment {
         destinationNamed = view.findViewById(R.id.destinationNamed);
         departureDate = view.findViewById(R.id.departureDate);
         arrivalDate = view.findViewById(R.id.arrivalDate);
-        etGuests = view.findViewById(R.id.etGuests);
-        etBudget = view.findViewById(R.id.etBudget);
+        etGuests = (TextView) view.findViewById(R.id.tvGuests);
+     //   etBudget = view.findViewById(R.id.etBudget);
+        btnDone = view.findViewById(R.id.btnDone);
+        sbGuests = view.findViewById(R.id.sbGuests);
+
+        //seekbar
+        sbGuests.setMax(10);
+        sbGuests.setProgress(progress);
+        etGuests.setText("" + progress);
+        etGuests.setTextSize(progress);
         return view;
     }
 
@@ -74,60 +90,93 @@ public class BuildFragment extends Fragment {
         month = month+1;
 
 
-        arrivalDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        arrivalDate.setText(month + "/" + day + "/" + year);
-                    }
+        System.out.println(month + day + year);
 
-                }, year, month, day);
-                datePickerDialog.show();
-                Log.d("DatePicker", "should show???");
+
+
+        sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress = 1;
+                etGuests.setText("" + progress);
+                etGuests.setTextSize(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
 
 
-        departureDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("datePicker", "Showed Date picker?");
 
+        arrivalDate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
                 DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        arrivalDate.setText(month + "/" + day + "/" + year);
-                    }
-                }, year, month, day);
+                        try{
+                            arrivalDate.setText(month + "/" + day + "/" + year);
 
-                showDatePickerDialog(v);
-                datePickerDialog.show();
-                Log.d("datepicker", "pls works");
+                        }catch(Exception e){
+                            Log.d("DatePicker return", "you messed up");
+                        }
+                    }
+
+                }, year, month, day);
+                showDatePickerDialog();
+                return false;
             }
         });
 
-//        btnDone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String strguests = etGuests.getText().toString();
-//                int  guests = Integer.parseInt(strguests);
-//
-//                //TODO- remove later, work on getting this test case to log
-//                try{
-//                    Log.d("onClick", "reached the try catch statement");
-//                    new Trip(destinationNamed.getText().toString(), "test", departureDate.getText().toString(), arrivalDate.getText().toString(), guests);
-//
-//                    //TODO- make sure test cases returns an object
-//                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
-//
-//             //   showAttractionFragment();
-//            }
-//        });
+      departureDate.setOnTouchListener(new View.OnTouchListener() {
+          @Override
+          public boolean onTouch(View v, MotionEvent event) {
+              DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                  @Override
+                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                      try{
+                          departureDate.setText(month + "/" + day + "/" + year);
+
+                      }catch(Exception e){
+                          Log.d("DatePicker return", "you messed up");
+                      }
+                  }
+
+              }, year, month, day);
+              showDatePickerDialog();
+              return false;
+
+          }
+      });
+
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String DESTINATION = destinationNamed.getText().toString();
+                final String CHECKIN = departureDate.getText().toString();
+                final String CHECKOUT = arrivalDate.getText().toString();
+                final int NUM_GUESTS = parseInt(etGuests.getText().toString());
+
+                try{
+                    Log.d("onClick", "reached the try catch statement");
+                    // a new trip query
+                    final Trip newTrip = new Trip(NUM_GUESTS,CHECKIN,CHECKOUT, DESTINATION);
+
+                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
+
+            }
+        });
 
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -153,10 +202,9 @@ public class BuildFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showDatePickerDialog(View v) {
+    public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
-        Log.d("Date Picker", "Date Picker Success!");
     }
 
 }
