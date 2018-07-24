@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,36 +21,38 @@ import android.widget.TextView;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-<<<<<<< HEAD
 import java.util.Calendar;
 
 import static java.lang.Integer.parseInt;
 
-
-=======
->>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
-public class BuildFragment extends Fragment {
+public class BuildFragment extends Fragment
+{
     public TextView create;
     public EditText destinationNamed;
     public EditText departureDate;
     public EditText arrivalDate;
     public TextView etGuests;
-  //  public EditText etBudget;
+    //  public EditText etBudget;
     public SeekBar sbGuests;
     public Button btnDone;
 
     int progress = 20;
 
     Calendar mCurrentDate;
-    int day; int month; int year;
+    int day;
+    int month;
+    int year;
 
     onFragmentInteractionListener mListener;
 
     // Required empty public constructor
-    public BuildFragment() { }
+    public BuildFragment()
+    {
+    }
 
     // newInstance constructor for creating fragment with arguments
-    public static BuildFragment newInstance(int page, String title) {
+    public static BuildFragment newInstance(int page, String title)
+    {
         BuildFragment fragmentFirst = new BuildFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
@@ -59,16 +62,17 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_build, container, false);
+        View view = inflater.inflate(R.layout.fragment_build, container, false);
 
         create = view.findViewById(R.id.create);
         destinationNamed = view.findViewById(R.id.destinationNamed);
         departureDate = view.findViewById(R.id.departureDate);
         arrivalDate = view.findViewById(R.id.arrivalDate);
         etGuests = (TextView) view.findViewById(R.id.tvGuests);
-     //   etBudget = view.findViewById(R.id.etBudget);
+        //   etBudget = view.findViewById(R.id.etBudget);
         btnDone = view.findViewById(R.id.btnDone);
         sbGuests = view.findViewById(R.id.sbGuests);
 
@@ -81,11 +85,8 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-<<<<<<< HEAD
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-=======
-    public void onViewCreated(View view, Bundle savedInstanceState) {
->>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         mCurrentDate = Calendar.getInstance();
@@ -93,11 +94,10 @@ public class BuildFragment extends Fragment {
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
-        month = month+1;
+        month = month + 1;
 
 
         System.out.println(month + day + year);
-
 
 
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -121,17 +121,16 @@ public class BuildFragment extends Fragment {
         });
 
 
-
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        try{
+                        try {
                             arrivalDate.setText(month + "/" + day + "/" + year);
 
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             Log.d("DatePicker return", "you messed up");
                         }
                     }
@@ -142,26 +141,26 @@ public class BuildFragment extends Fragment {
             }
         });
 
-      departureDate.setOnTouchListener(new View.OnTouchListener() {
-          @Override
-          public boolean onTouch(View v, MotionEvent event) {
-              DatePickerDialog datePickerDialog  = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                  @Override
-                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                      try{
-                          departureDate.setText(month + "/" + day + "/" + year);
+        departureDate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        try {
+                            departureDate.setText(month + "/" + day + "/" + year);
 
-                      }catch(Exception e){
-                          Log.d("DatePicker return", "you messed up");
-                      }
-                  }
+                        } catch (Exception e) {
+                            Log.d("DatePicker return", "you messed up");
+                        }
+                    }
 
-              }, year, month, day);
-              showDatePickerDialog();
-              return false;
+                }, year, month, day);
+                showDatePickerDialog();
+                return false;
 
-          }
-      });
+            }
+        });
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,21 +170,22 @@ public class BuildFragment extends Fragment {
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(etGuests.getText().toString());
 
-                try{
+                try {
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip query
-                    final Trip newTrip = new Trip(NUM_GUESTS,CHECKIN,CHECKOUT, DESTINATION);
+                    final Trip newTrip = new Trip(NUM_GUESTS, CHECKIN, CHECKOUT, DESTINATION);
 
-                }catch (Exception e){ Log.d("onClick", "didnt create object"); }
+                } catch (Exception e) {
+                    Log.d("onClick", "didnt create object");
+                }
 
             }
         });
-
     }
 
-
     @Override
-    public void onAttach(Context context) {
+    public void onAttach (Context context)
+    {
         super.onAttach(context);
         if (context instanceof onFragmentInteractionListener) {
             mListener = (onFragmentInteractionListener) context;
@@ -196,27 +196,21 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach ()
+    {
         super.onDetach();
         mListener = null;
     }
-
-<<<<<<< HEAD
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    public void showDatePickerDialog() {
+    public void showDatePickerDialog ()
+    {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
-=======
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getActivity().getFragmentManager(), "datePicker");
-
 
     }
 
@@ -225,7 +219,5 @@ public class BuildFragment extends Fragment {
         Fragment fr = new AddingAttractionFragment();
         onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
         fc.replaceToolbarFragment(fr);
->>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
     }
-
 }
