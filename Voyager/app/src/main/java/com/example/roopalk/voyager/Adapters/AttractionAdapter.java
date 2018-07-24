@@ -1,87 +1,113 @@
 package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
+import com.example.roopalk.voyager.GlideApp;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.Photo;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 
-public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.ViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private static ArrayList<Attraction> mAttractions = new ArrayList<>();
-    static Context context;
+public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.ViewHolder>
+{
 
+    ArrayList<Attraction> mAttractions;
+    Context context;
+    private onFragmentInteractionListener mListener;
 
-
-    public AttractionAdapter(ArrayList<Attraction> attractions){
+    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener)
+    {
         mAttractions = attractions;
+        mListener = listener;
     }
 
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView picture;
-        public TextView tvName;
-        public TextView tvDescription;
-        public TextView tvTime;
-        public TextView est;
-        public TextView tvPrice;
-        public CardView cardView;
-
-
-        public ViewHolder(CardView v) {
-            super(v);
-
-
-            picture = (ImageView )itemView.findViewById(R.id.picture);
-            tvName = (TextView ) itemView.findViewById(R.id.tvName);
-            tvDescription = (TextView)itemView.findViewById(R.id.tvDescription);
-            tvTime = (TextView)itemView.findViewById(R.id.tvTime);
-            est = (TextView) itemView.findViewById(R.id.est);
-            tvPrice = (TextView) itemView.findViewById(R.id.price);
-            //cardView = itemView.findViewById(R.id.cardView);
-            cardView = (CardView) v;
-
-        }
-    }
-
-    // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-       View tripView = inflater.inflate(R.layout.item_attraction, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder((CardView) tripView);
+        View attractionView = inflater.inflate(R.layout.item_attraction, parent, false);
+        ViewHolder viewHolder = new ViewHolder(attractionView);
         return viewHolder;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Attraction attraction = mAttractions.get(position);
-        //CardView cardView = holder.cardView;
+    public void onBindViewHolder(AttractionAdapter.ViewHolder holder, int position)
+    {
+        Attraction currentAttraction = mAttractions.get(position);
+        Photo p = new Photo();
 
-        holder.tvName.setText(attraction.getAttractionName().toString());
-        holder.tvDescription.setText(attraction.getAttractionDescription().toString());
-        holder.tvPrice.setText(attraction.getEstimatedPrice().toString());
+        NetworkUtility networkUtility = new NetworkUtility(context);
+        try
+        {
+            networkUtility.getImagesFromAttraction(currentAttraction);
+            p = networkUtility.getPhotos().get(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        holder.tvName.setText(currentAttraction.getAttractionName());
+        holder.tvDescription.setText(currentAttraction.getAttractionDescription());
+        holder.tvTime.setText(currentAttraction.getEstimatedTime());
+
+        GlideApp.with(context)
+                .load(p.getImage().getUrl())
+                .into(holder.ivPicture);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mAttractions.size();
     }
 
-    public void clear() {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tvName) TextView tvName;
+        @BindView(R.id.picture) ImageView ivPicture;
+        @BindView(R.id.tvDescription) TextView tvDescription;
+        @BindView(R.id.tvTime) TextView tvTime;
+
+        public ViewHolder(View itemView)
+        {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v)
+        {
+            int position = getAdapterPosition();
+
+            Attraction attraction = mAttractions.get(position);
+
+            if(position != RecyclerView.NO_POSITION)
+            {
+                Log.i("AttractionAdapter", "Moving to Details Page now...");
+                mListener.moveToDetailsPage(attraction);
+            }
+        }
+    }
+
+    public void clear()
+    {
         mAttractions.clear();
         notifyDataSetChanged();
     }

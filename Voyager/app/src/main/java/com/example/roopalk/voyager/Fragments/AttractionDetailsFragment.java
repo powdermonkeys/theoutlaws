@@ -11,14 +11,13 @@ import android.view.ViewGroup;
 
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,19 +29,25 @@ public class AttractionDetailsFragment extends Fragment
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
 
     ViewPagerAdapter viewPagerAdapter;
-    ArrayList<String> imageURLs = new ArrayList<>();
 
     NetworkUtility networkUtility = new NetworkUtility(getContext());
 
-    List<City> cities = new ArrayList<>();
-    List<Attraction> attractions = new ArrayList<>();
-    List<Photo> photos = new ArrayList<>();
-
+    ArrayList<Photo> photos = new ArrayList<>();
+    ArrayList<String> imageURLs = new ArrayList<>();
 
     // Required empty public constructor
 
     public AttractionDetailsFragment()
     {
+    }
+
+    public static AttractionDetailsFragment newInstance(Attraction attraction)
+    {
+        AttractionDetailsFragment attractionDetailsFragment = new AttractionDetailsFragment();
+        Bundle currAttraction = new Bundle();
+        currAttraction.putParcelable("attraction", attraction);
+        attractionDetailsFragment.setArguments(currAttraction);
+        return attractionDetailsFragment;
     }
 
     @Override
@@ -56,7 +61,6 @@ public class AttractionDetailsFragment extends Fragment
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attraction_details, container, false);
-
     }
 
     @Override
@@ -66,7 +70,7 @@ public class AttractionDetailsFragment extends Fragment
 
         try
         {
-            getImages("Tokyo");
+            getImages();
         }
         catch (ParseException e)
         {
@@ -79,26 +83,20 @@ public class AttractionDetailsFragment extends Fragment
     }
 
 
-    public void getImages(String cityname) throws ParseException
+    public void getImages() throws ParseException
     {
-        networkUtility.getCityFromName(cityname);
-        cities = networkUtility.getCities();
+        Attraction attraction = getArguments().getParcelable("attraction");
 
-        City c = cities.get(0);
+        networkUtility.getImagesFromAttraction(attraction);
+        photos = networkUtility.getPhotos();
 
-        networkUtility.getAttractionFromCity(c);
-        attractions = networkUtility.getAttractions();
-
-        for(int i = 0; i < attractions.size(); i++)
+        for(int i = 0; i < photos.size(); i++)
         {
-            networkUtility.getImagesFromAttraction(attractions.get(i));
-            photos.addAll(networkUtility.getPhotos());
-        }
+            Photo p = photos.get(i);
+            ParseFile images = p.getImage();
+            String url = images.getUrl();
 
-        for (int j = 0; j < photos.size(); j++)
-        {
-            String URL = photos.get(j).getImage().getUrl();
-            imageURLs.add(URL);
+            imageURLs.add(url);
         }
     }
 }

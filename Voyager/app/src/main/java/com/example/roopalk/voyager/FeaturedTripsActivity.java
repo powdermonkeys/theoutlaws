@@ -10,20 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
-import com.example.roopalk.voyager.Fragments.BlankFragment;
-import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
+import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
+import com.example.roopalk.voyager.Model.Attraction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class FeaturedTripsActivity extends AppCompatActivity implements BuildFragment.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener
+public class FeaturedTripsActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "FeaturedTripsActivity";
 
-    Fragment attractionDetailsFragment = new AttractionDetailsFragment();
+    //Fragment attractionDetailsFragment = new AttractionDetailsFragment();
+    Fragment addingAttractionFragment = new AddingAttractionFragment();
 
     @BindView(R.id.btn) Button btn;
 
@@ -44,25 +46,31 @@ public class FeaturedTripsActivity extends AppCompatActivity implements BuildFra
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        btn.setOnClickListener(new View.OnClickListener()
-        {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.placeholder, attractionDetailsFragment);
+                ft.replace(R.id.placeholder, addingAttractionFragment);
                 ft.commit();
             }
         });
     }
 
-
-    @Override
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.viewpager, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    //from the interface - move between fragments
+    public void moveToDetailsPage(Attraction attraction)
+    {
+        AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.placeholder, attractionDetailsFragment);
+        ft.commit();
     }
 }

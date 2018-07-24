@@ -8,15 +8,14 @@ import com.example.roopalk.voyager.Model.Photo;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NetworkUtility
 {
     Context context;
 
-    List<City> cities = new ArrayList<>();
-    List<Attraction> attractions = new ArrayList<>();
-    List<Photo> photos = new ArrayList<>();
+    ArrayList<City> cities = new ArrayList<>();
+    ArrayList<Attraction> attractions = new ArrayList<>();
+    ArrayList<Photo> photos = new ArrayList<>();
 
     final City.Query cityQuery = new City.Query();
     final Attraction.Query attractionQuery = new Attraction.Query();
@@ -30,10 +29,10 @@ public class NetworkUtility
     public void getCityFromName(String name) throws ParseException
     {
         cityQuery.hasName(name);
-        cities = cityQuery.find();
+        cities = (ArrayList) cityQuery.find();
     }
 
-    public List<City> getCities()
+    public ArrayList<City> getCities()
     {
         return cities;
     }
@@ -41,10 +40,10 @@ public class NetworkUtility
     public void getAttractionFromCity(City city) throws ParseException
     {
         attractionQuery.withCity(city.getObjectId());
-        attractions = attractionQuery.find();
+        attractions = (ArrayList) attractionQuery.find();
     }
 
-    public List<Attraction> getAttractions()
+    public ArrayList<Attraction> getAttractions()
     {
         return attractions;
     }
@@ -52,10 +51,10 @@ public class NetworkUtility
     public void getImagesFromAttraction(Attraction attraction) throws ParseException
     {
         photoQuery.withAttraction(attraction.getObjectId());
-        photos = photoQuery.find();
+        photos = (ArrayList) photoQuery.find();
     }
 
-    public List<Photo> getPhotos()
+    public ArrayList<Photo> getPhotos()
     {
         return photos;
     }
