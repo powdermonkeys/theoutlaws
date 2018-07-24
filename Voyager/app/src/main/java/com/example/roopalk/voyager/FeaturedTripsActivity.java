@@ -56,13 +56,6 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         });
     }
 
-    public void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.viewpager, fragment, fragment.toString());
-        fragmentTransaction.addToBackStack(fragment.toString());
-        fragmentTransaction.commit();
-    }
 
     @Override
     //from the interface - move between fragments
@@ -72,5 +65,15 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeholder, attractionDetailsFragment);
         ft.commit();
+    }
+
+    @Override
+    public void replaceToolbarFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.viewpager, fragment, fragment.toString());
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.commit();
     }
 }

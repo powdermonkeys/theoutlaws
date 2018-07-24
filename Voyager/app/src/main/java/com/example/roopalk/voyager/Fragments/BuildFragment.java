@@ -3,7 +3,6 @@ package com.example.roopalk.voyager.Fragments;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-
 public class BuildFragment extends Fragment {
     public TextView create;
     public EditText destinationNamed;
@@ -27,7 +25,7 @@ public class BuildFragment extends Fragment {
     public Button btnDone;
 
 
-    private OnFragmentInteractionListener mListener;
+    onFragmentInteractionListener mListener;
 
     // Required empty public constructor
     public BuildFragment() { }
@@ -58,7 +56,7 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
@@ -112,11 +110,11 @@ public class BuildFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof onFragmentInteractionListener) {
+            mListener = (onFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement onFragmentInteractionListener");
         }
     }
 
@@ -124,12 +122,6 @@ public class BuildFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void replaceFragment(Fragment fragment);
     }
 
     public void showDatePickerDialog(View v) {
@@ -141,9 +133,9 @@ public class BuildFragment extends Fragment {
 
     public void showAttractionFragment()
     {
-        Fragment fr =new AddingAttractionFragment();
-        OnFragmentInteractionListener fc = (OnFragmentInteractionListener) getActivity();
-        fc.replaceFragment(fr);
+        Fragment fr = new AddingAttractionFragment();
+        onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
+        fc.replaceToolbarFragment(fr);
     }
 
 }
