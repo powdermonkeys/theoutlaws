@@ -44,6 +44,7 @@ public class Photo extends ParseObject
 
         public Query withAttraction(String attractionId)
         {
+            whereMatches("attraction", attractionId);
             return this;
         }
 
