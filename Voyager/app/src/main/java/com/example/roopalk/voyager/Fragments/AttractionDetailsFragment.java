@@ -22,12 +22,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.relex.circleindicator.CircleIndicator;
+//import me.relex.circleindicator.CircleIndicator;
 
 public class AttractionDetailsFragment extends Fragment
 {
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
-    @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
+//    @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -82,7 +82,7 @@ public class AttractionDetailsFragment extends Fragment
 
        viewPagerAdapter = new ViewPagerAdapter(getContext(), imageURLs);
        viewPager.setAdapter(viewPagerAdapter);
-       circleIndicator.setViewPager(viewPager);
+//       circleIndicator.setViewPager(viewPager);
     }
 
 

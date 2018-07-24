@@ -7,8 +7,6 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
-//                        arrivalDate.setText(month+1 +"/" + dayOfMonth + "/" + year);
-
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
 
@@ -35,6 +33,10 @@ public class Trip extends ParseObject {
         setNumGuests(ng);
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
     //getter methods for each of the values
 
     public int getNumGuests()
@@ -70,7 +72,7 @@ public class Trip extends ParseObject {
         put(CHECKOUT, checkout);
     }
 
-    private void setDestination(final String destination)
+    public void setDestination(final String destination)
     {
         final City.Query cityQuery = new City.Query();
 

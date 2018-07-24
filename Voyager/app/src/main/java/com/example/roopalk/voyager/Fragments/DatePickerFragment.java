@@ -34,7 +34,6 @@ public  class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar newDate = Calendar.getInstance();
         newDate.set(year, month  , day);
-        //TODO- SEE WHAT THIS PRINTS OUT AS A TEST CASE
         System.out.print(year + month + day);
         populateSetDate(year, month, day);
     }
