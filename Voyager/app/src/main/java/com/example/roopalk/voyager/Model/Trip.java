@@ -33,7 +33,10 @@ public class Trip extends ParseObject {
         setNumGuests(ng);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
     //getter methods for each of the values
 
     public int getNumGuests()
@@ -84,7 +87,7 @@ public class Trip extends ParseObject {
                     if(objects.get(0).getCityName() == destination)
                     //get the first object that is found that is name with this city
                         put(DESTINATION, objects.get(0)); }
-                if(e == null) {
+                if(e == null){
                     //get the first object that is found that is name with this city
                     put(DESTINATION, objects.get(0));
                 }

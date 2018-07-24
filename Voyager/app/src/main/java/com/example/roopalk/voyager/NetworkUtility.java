@@ -1,28 +1,24 @@
 package com.example.roopalk.voyager;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NetworkUtility
 {
-    private Context context;
+    Context context;
 
-    private static final String TAG = "NetworkUtility.java";
-    //setting up query calls for all network fetches
+    ArrayList<City> cities = new ArrayList<>();
+    ArrayList<Attraction> attractions = new ArrayList<>();
+    ArrayList<Photo> photos = new ArrayList<>();
+
     final City.Query cityQuery = new City.Query();
-
     final Attraction.Query attractionQuery = new Attraction.Query();
-
     final Photo.Query photoQuery = new Photo.Query();
 
     public NetworkUtility(Context context)
@@ -30,90 +26,36 @@ public class NetworkUtility
         this.context = context;
     }
 
-    /*
-        CALL THESE METHODS IN THE ADAPTER WHEN POPULATING THE VIEWS SO THAT THE RIGHT CITIES, IMAGES, AND ATTRACTIONS SHOW UP
-     */
-
-    //When this method is called, a list of images that contain images from the entered attraction will be returned
-
-    public void getImagesOfAttraction(final Attraction attraction, final ArrayList<String> imageURLs)
+    public void getCityFromName(String name) throws ParseException
     {
-        String attractionID = attraction.getObjectId();
-
-        photoQuery.withAttraction(attractionID);
-        photoQuery.findInBackground(new FindCallback<Photo>()
-        {
-            @Override
-            public void done(List<Photo> objects, ParseException e)
-            {
-               if(e == null)
-               {
-                   for(int i = 0; i < objects.size(); i++)
-                   {
-                       Photo currPhoto = objects.get(i);
-                       String imgURL = currPhoto.getImage().getUrl();
-                       imageURLs.add(imgURL);
-                   }
-               }
-               else
-               {
-                   Toast.makeText(context, "Failed to find any images of that attraction", Toast.LENGTH_LONG).show();
-                   Log.e(TAG, "Failed to find any images of that attraction");
-               }
-            }
-        });
+        cityQuery.hasName(name);
+        cities = (ArrayList) cityQuery.find();
     }
 
-    //When this method is called, a list of attractions that are in a specific city (entered) will be returned
-    public void getAttractionsOfCity(final City city, final ArrayList<Attraction> attractions)
+    public ArrayList<City> getCities()
     {
-        String cityID = city.getObjectId();
-
-        attractionQuery.withCity(cityID);
-        attractionQuery.findInBackground(new FindCallback<Attraction>()
-        {
-            @Override
-            public void done(List<Attraction> objects, ParseException e)
-            {
-                if(e == null)
-                {
-                    for(int j = 0; j < objects.size(); j++)
-                    {
-                        attractions.add(objects.get(j));
-                    }
-                }
-                else
-                {
-                    Toast.makeText(context, "Failed to find any attractions in that city", Toast.LENGTH_LONG).show();
-                    Log.e(TAG, "Failed to find any attractions in that city");
-                }
-            }
-        });
+        return cities;
     }
 
-    //When this method is called, a list of cities that match (or contain the name) that is passed in is returned=
-    public void getCityFromName(final String cityName, final ArrayList<City> cities)
+    public void getAttractionFromCity(City city) throws ParseException
     {
-        cityQuery.hasName(cityName);
-        cityQuery.findInBackground(new FindCallback<City>()
-        {
-            @Override
-            public void done(List<City> objects, ParseException e)
-            {
-                if(e == null)
-                {
-                    for(int k = 0; k < objects.size(); k++)
-                    {
-                        City currentCity = objects.get(k);
-                        cities.add(currentCity);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(context, "Failed to find any cities by that name", Toast.LENGTH_LONG).show();
-                    Log.e(TAG, "Failed to find any cities by that name");
-                }
-            }
-        });
+        attractionQuery.withCity(city.getObjectId());
+        attractions = (ArrayList) attractionQuery.find();
+    }
+
+    public ArrayList<Attraction> getAttractions()
+    {
+        return attractions;
+    }
+
+    public void getImagesFromAttraction(Attraction attraction) throws ParseException
+    {
+        photoQuery.withAttraction(attraction.getObjectId());
+        photos = (ArrayList) photoQuery.find();
+    }
+
+    public ArrayList<Photo> getPhotos()
+    {
+        return photos;
     }
 }

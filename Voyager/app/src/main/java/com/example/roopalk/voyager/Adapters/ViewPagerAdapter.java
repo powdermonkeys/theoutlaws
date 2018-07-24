@@ -8,17 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.roopalk.voyager.GlideApp;
 import com.example.roopalk.voyager.R;
 
 import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter
 {
-    List<Integer> images;
+    List<String> images;
     Context context;
     LayoutInflater inflater;
 
-    public ViewPagerAdapter(Context context, List<Integer> images)
+    public ViewPagerAdapter(Context context, List<String> images)
     {
         this.images = images;
         this.context = context;
@@ -44,7 +45,9 @@ public class ViewPagerAdapter extends PagerAdapter
         View view = inflater.inflate(R.layout.viewpager_item, container, false);
 
         ImageView ivAttractionPhoto = view.findViewById(R.id.ivAttractionPhoto);
-        ivAttractionPhoto.setImageResource(images.get(position));
+        GlideApp.with(context)
+                .load(images.get(position))
+                .into(ivAttractionPhoto);
 
         container.addView(view);
 

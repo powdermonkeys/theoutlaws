@@ -1,7 +1,10 @@
 package com.example.roopalk.voyager.Fragments;
 
+<<<<<<< HEAD:Voyager/app/src/main/java/com/example/roopalk/voyager/Fragments/BlankFragment.java
 import android.content.Context;
 import android.net.Uri;
+=======
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61:Voyager/app/src/main/java/com/example/roopalk/voyager/Fragments/BlankFragment.java
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,8 +23,6 @@ public class BlankFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public BlankFragment() {
         // Required empty public constructor
@@ -52,6 +53,7 @@ public class BlankFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
+<<<<<<< HEAD:Voyager/app/src/main/java/com/example/roopalk/voyager/Fragments/BlankFragment.java
 
 
     @Override
@@ -78,4 +80,6 @@ public class BlankFragment extends Fragment {
         void replaceFragment(Fragment fragment);
     }
 
+=======
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61:Voyager/app/src/main/java/com/example/roopalk/voyager/Fragments/BlankFragment.java
 }

@@ -5,7 +5,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +20,14 @@ import android.widget.TextView;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
+<<<<<<< HEAD
 import java.util.Calendar;
 
 import static java.lang.Integer.parseInt;
 
 
+=======
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
 public class BuildFragment extends Fragment {
     public TextView create;
     public EditText destinationNamed;
@@ -41,7 +43,7 @@ public class BuildFragment extends Fragment {
     Calendar mCurrentDate;
     int day; int month; int year;
 
-    private OnFragmentInteractionListener mListener;
+    onFragmentInteractionListener mListener;
 
     // Required empty public constructor
     public BuildFragment() { }
@@ -79,7 +81,11 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+=======
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
         super.onViewCreated(view, savedInstanceState);
 
         mCurrentDate = Calendar.getInstance();
@@ -181,11 +187,11 @@ public class BuildFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof onFragmentInteractionListener) {
+            mListener = (onFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement onFragmentInteractionListener");
         }
     }
 
@@ -195,6 +201,7 @@ public class BuildFragment extends Fragment {
         mListener = null;
     }
 
+<<<<<<< HEAD
 
 
     public interface OnFragmentInteractionListener {
@@ -205,6 +212,20 @@ public class BuildFragment extends Fragment {
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
+=======
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getActivity().getFragmentManager(), "datePicker");
+
+
+    }
+
+    public void showAttractionFragment()
+    {
+        Fragment fr = new AddingAttractionFragment();
+        onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
+        fc.replaceToolbarFragment(fr);
+>>>>>>> 29fbc752247ff66a97fba7c3cf965315dd2bae61
     }
 
 }
