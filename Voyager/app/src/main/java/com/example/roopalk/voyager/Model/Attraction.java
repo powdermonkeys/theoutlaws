@@ -111,7 +111,6 @@ public class Attraction extends ParseObject {
 
         public Query withCity(String objectId)
         {
-            include(objectId);
             return this;
         }
 

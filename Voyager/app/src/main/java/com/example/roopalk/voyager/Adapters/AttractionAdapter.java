@@ -57,7 +57,9 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         {
             networkUtility.getImagesFromAttraction(currentAttraction);
             p = networkUtility.getPhotos().get(0);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
 
