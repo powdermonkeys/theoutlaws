@@ -7,27 +7,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FeaturedTripsActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "FeaturedTripsActivity";
-
-    //Fragment attractionDetailsFragment = new AttractionDetailsFragment();
-    Fragment addingAttractionFragment = new AddingAttractionFragment();
-
-    @BindView(R.id.btn) Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,17 +36,6 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.placeholder, addingAttractionFragment);
-                ft.commit();
-            }
-        });
     }
 
 
