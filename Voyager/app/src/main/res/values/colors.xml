@@ -10,6 +10,9 @@
     <color name="eggshellWhite">#F9EAE1</color>
     <color name="mutedForestGreen">#B1AE91</color>
     <color name="khaki">#D1BE9C</color>
-    <color name="iconBlue">#296066</color>
+    <color name="iconBackgroundBlue">#264653</color>
     <color name="translucent">#33D3D3D3</color>
+    <color name="iconSailBlue">#CBF5E3</color>
+    <color name="hintColor">#ADADAD</color>
+    <color name="signInBlue">#bcf2e0</color>
 </resources>
