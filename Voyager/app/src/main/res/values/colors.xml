@@ -5,4 +5,5 @@
     <color name="colorAccent">#AABBCC</color>
     <color name="seaBlue">#00BCD4</color>
     <color name="black">#000000</color>
+    <color name="divider_color">#80000000</color>
 </resources>

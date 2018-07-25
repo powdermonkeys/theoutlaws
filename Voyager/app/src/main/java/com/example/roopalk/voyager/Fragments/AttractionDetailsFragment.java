@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class AttractionDetailsFragment extends Fragment
 
     ArrayList<Photo> photos = new ArrayList<>();
     ArrayList<String> imageURLs = new ArrayList<>();
+
+    private static final String TAG = "DetailsFragment";
 
     // Required empty public constructor
 
@@ -86,6 +89,7 @@ public class AttractionDetailsFragment extends Fragment
     public void getImages() throws ParseException
     {
         Attraction attraction = getArguments().getParcelable("attraction");
+        Log.i(TAG, "Attraction name: " + attraction.getAttractionName());
 
         networkUtility.getImagesFromAttraction(attraction);
         photos = networkUtility.getPhotos();

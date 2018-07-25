@@ -12,13 +12,13 @@ import com.example.roopalk.voyager.R;
 
 public class BlankFragment extends Fragment {
 
-    public BlankFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public BlankFragment() { }
 
     onFragmentInteractionListener mListener;
 
-    public static BlankFragment newInstance(String arg1, String arg2) {
+    public static BlankFragment newInstance(String arg1, String arg2)
+    {
         Bundle args = new Bundle();
 
         BlankFragment fragment = new BlankFragment();
@@ -27,7 +27,8 @@ public class BlankFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
@@ -44,14 +45,18 @@ public class BlankFragment extends Fragment {
         if (context instanceof onFragmentInteractionListener) {
             mListener = (onFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement onFragmentInteractionListener");
+            if (context instanceof onFragmentInteractionListener) {
+                mListener = (onFragmentInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement onFragmentInteractionListener");
+            }
         }
     }
-
     @Override
-    public void onDetach() {
+    public void onDetach () {
         super.onDetach();
         mListener = null;
     }
+
 }

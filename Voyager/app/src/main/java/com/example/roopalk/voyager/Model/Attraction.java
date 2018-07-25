@@ -102,6 +102,7 @@ public class Attraction extends ParseObject {
     {
         put(CITY, city);
     }
+
     public static class Query extends ParseQuery<Attraction>
     {
         public Query()
@@ -111,7 +112,7 @@ public class Attraction extends ParseObject {
 
         public Query withCity(String objectId)
         {
-            include(objectId);
+            whereMatches("city", objectId);
             return this;
         }
 
