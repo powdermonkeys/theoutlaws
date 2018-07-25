@@ -14,152 +14,258 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color"
-                />
+            <TextView
+                android:id="@+id/tv6am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am6" />
 
             <View
+                android:id="@+id/am6"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv7am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am7" />
+
             <View
+                android:id="@+id/am7"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv8am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am8" />
+
             <View
+                android:id="@+id/am8"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv9am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am9" />
+
             <View
+                android:id="@+id/am9"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hour_divider_height"
+                android:layout_marginTop="@dimen/hour_divider_margin_top"
+                android:background="@color/divider_color" />
+
+            <TextView
+                android:id="@+id/tv10am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am10" />
+
+            <View
+                android:id="@+id/am10"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv11am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am11" />
+
+
             <View
+                android:id="@+id/am11"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv12pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm12" />
+
             <View
+                android:id="@+id/pm12"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv1pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm1" />
+
             <View
+                android:id="@+id/pm1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv2pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm2" />
+
             <View
+                android:id="@+id/pm2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv3pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm3" />
+
             <View
+                android:id="@+id/pm3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv4pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm4" />
+
             <View
+                android:id="@+id/pm4"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv5pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm5" />
+
             <View
+                android:id="@+id/pm5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv6pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm6" />
+
+
             <View
+                android:id="@+id/pm6"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv7pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm7" />
+
+
             <View
+                android:id="@+id/pm7"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv8pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm8" />
+
             <View
+                android:id="@+id/pm8"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv9pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm9" />
+
             <View
+                android:id="@+id/pm9"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv10pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm10" />
+
             <View
+                android:id="@+id/pm10"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+            <TextView
+                android:id="@+id/tv11pm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm11" />
+
             <View
+                android:id="@+id/pm11"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
+
+            <TextView
+                android:id="@+id/tv12am"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/am12" />
+
             <View
+                android:id="@+id/am12"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hour_divider_height"
                 android:layout_marginTop="@dimen/hour_divider_margin_top"
                 android:background="@color/divider_color" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hour_divider_height"
-                android:layout_marginTop="@dimen/hour_divider_margin_top"
-                android:background="@color/divider_color" />
 
         </LinearLayout>
     </RelativeLayout>
-
 </ScrollView>

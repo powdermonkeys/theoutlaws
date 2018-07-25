@@ -22,4 +22,25 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="am6"> 6 AM </string>
+    <string name="am7"> 7 AM </string>
+    <string name="am8"> 8 AM </string>
+    <string name="am9"> 9 AM </string>
+    <string name="am10"> 10 AM </string>
+    <string name="am11"> 11 AM </string>
+    <string name="pm12"> 12 PM </string>
+    <string name="pm1"> 1 PM </string>
+    <string name="pm2"> 2 PM </string>
+    <string name="pm3"> 3 PM </string>
+    <string name="pm4"> 4 PM </string>
+    <string name="pm5"> 5 PM </string>
+    <string name="pm6"> 6 PM </string>
+    <string name="pm7"> 7 PM </string>
+    <string name="pm8"> 8 PM </string>
+    <string name="pm9"> 9 PM </string>
+    <string name="pm10"> 10 PM </string>
+    <string name="pm11"> 11 PM </string>
+    <string name="am12"> 12 AM </string>
+
+
 </resources>
