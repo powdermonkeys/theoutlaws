@@ -43,10 +43,10 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
     //from the interface - move between fragments
     public void moveToDetailsPage(Attraction attraction)
     {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeholder, attractionDetailsFragment);
-        ft.commit();
+        attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
     }
 
     @Override

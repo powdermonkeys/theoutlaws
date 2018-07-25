@@ -3,11 +3,12 @@ package com.example.roopalk.voyager.Fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
@@ -23,9 +24,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.relex.circleindicator.CircleIndicator;
-//import me.relex.circleindicator.CircleIndicator;
 
-public class AttractionDetailsFragment extends Fragment
+public class AttractionDetailsFragment extends DialogFragment
 {
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
@@ -33,7 +33,7 @@ public class AttractionDetailsFragment extends Fragment
     @BindView(R.id.tvAttractionTime) TextView tvAttractionTime;
     @BindView(R.id.tvAttractionDescription) TextView tvAttractionDescription;
     @BindView(R.id.tvAttractionPrice) TextView tvAttractionPrice;
-
+    @BindView(R.id.leaveDialog) ImageView leaveDialog;
     ViewPagerAdapter viewPagerAdapter;
 
     NetworkUtility networkUtility = new NetworkUtility(getContext());
@@ -92,6 +92,15 @@ public class AttractionDetailsFragment extends Fragment
        viewPagerAdapter = new ViewPagerAdapter(getContext(), imageURLs);
        viewPager.setAdapter(viewPagerAdapter);
        circleIndicator.setViewPager(viewPager);
+
+       leaveDialog.setOnClickListener(new View.OnClickListener()
+       {
+           @Override
+           public void onClick(View v)
+           {
+               dismiss();
+           }
+       });
     }
 
 
