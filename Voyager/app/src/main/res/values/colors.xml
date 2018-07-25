@@ -5,4 +5,11 @@
     <color name="colorAccent">#AABBCC</color>
     <color name="seaBlue">#00BCD4</color>
     <color name="black">#000000</color>
+    <color name="millenialPink">#CC8B86</color>
+    <color name="seaFoam">#4D6A6D</color>
+    <color name="eggshellWhite">#F9EAE1</color>
+    <color name="mutedForestGreen">#B1AE91</color>
+    <color name="khaki">#D1BE9C</color>
+    <color name="iconBlue">#296066</color>
+    <color name="translucent">#33D3D3D3</color>
 </resources>
