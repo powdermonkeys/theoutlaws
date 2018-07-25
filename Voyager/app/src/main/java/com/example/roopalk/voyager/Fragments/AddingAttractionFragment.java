@@ -50,7 +50,7 @@ public class AddingAttractionFragment extends Fragment {
 
         try
         {
-            networkUtility.getCityFromName("Tokyo");
+            networkUtility.getCityFromName("Seattle");
             cities = networkUtility.getCities();
 
             networkUtility.getAttractionFromCity(cities.get(0));

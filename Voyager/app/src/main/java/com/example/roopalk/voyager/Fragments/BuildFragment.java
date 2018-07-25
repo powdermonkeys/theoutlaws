@@ -133,7 +133,8 @@ public class BuildFragment extends Fragment {
                 }
             });
 
-        departureDate.setOnTouchListener(new View.OnTouchListener() {
+        departureDate.setOnTouchListener(new View.OnTouchListener()
+        {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {

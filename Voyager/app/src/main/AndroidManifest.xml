@@ -1,26 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.roopalk.voyager">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <application
-        android:name=".ParseApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".FeaturedTripsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!-- To auto-complete the email text field in the login form with the user's emails -->
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<uses-permission android:name="android.permission.READ_PROFILE" />
+<uses-permission android:name="android.permission.READ_CONTACTS" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+<application
+    android:name=".ParseApplication"
+    android:allowBackup="true"
+    android:icon="@drawable/voyager_logo"
+    android:label="@string/app_name"
+    android:roundIcon="@drawable/voyager_logo_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <activity android:name=".Activities.SplashActivity"
+        android:theme="@style/SplashTheme"
+        tools:ignore="InnerclassSeparator">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".Activities.FeaturedTripsActivity"
+        tools:ignore="InnerclassSeparator" />
+    <activity android:name=".Activities.LoginActivity"
+        tools:ignore="InnerclassSeparator" />
 
+</application>
 </manifest>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LoginActivity"
+    android:background="@color/iconBackgroundBlue">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="username"
+        android:textColorHint="@color/hintColor"
+        android:paddingLeft="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        android:id="@+id/etUsername"
+        android:background="@drawable/edittextborder"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="password"
+        android:textColorHint="@color/hintColor"
+        android:paddingLeft="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etUsername"
+        android:layout_marginTop="20dp"
+        android:id="@+id/etPassword"
+        android:background="@drawable/edittextborder"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Sign In"
+        android:layout_centerHorizontal="true"
+        android:background="@color/signInBlue"
+        android:layout_alignStart="@id/etUsername"
+        android:textAllCaps="false"
+        android:layout_below="@id/etPassword"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnLogin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+    </Button>
+
+</RelativeLayout>

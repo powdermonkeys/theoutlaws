@@ -6,4 +6,14 @@
     <color name="seaBlue">#00BCD4</color>
     <color name="black">#000000</color>
     <color name="divider_color">#80000000</color>
+    <color name="millenialPink">#CC8B86</color>
+    <color name="seaFoam">#4D6A6D</color>
+    <color name="eggshellWhite">#F9EAE1</color>
+    <color name="mutedForestGreen">#B1AE91</color>
+    <color name="khaki">#D1BE9C</color>
+    <color name="iconBackgroundBlue">#264653</color>
+    <color name="translucent">#33D3D3D3</color>
+    <color name="iconSailBlue">#CBF5E3</color>
+    <color name="hintColor">#ADADAD</color>
+    <color name="signInBlue">#bcf2e0</color>
 </resources>
