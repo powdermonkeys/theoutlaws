@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LoginActivity">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="Username"
+        android:paddingLeft="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:id="@+id/etUsername"
+        android:background="@color/translucent"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="Password"
+        android:paddingLeft="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etUsername"
+        android:layout_marginTop="15dp"
+        android:id="@+id/etPassword"
+        android:background="@color/translucent"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Sign In"
+        android:layout_alignStart="@id/etUsername"
+        android:textAllCaps="false"
+        android:layout_below="@id/etPassword"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnLogin">
+
+    </Button>
+
+</RelativeLayout>
