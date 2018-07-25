@@ -2,7 +2,6 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +99,6 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             if(position != RecyclerView.NO_POSITION)
             {
-                Log.i("AttractionAdapter", "Moving to Details Page now...");
                 mListener.moveToDetailsPage(attraction);
             }
         }

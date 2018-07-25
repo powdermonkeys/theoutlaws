@@ -1,9 +1,9 @@
 package com.example.roopalk.voyager.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -84,6 +84,7 @@ public class BuildFragment extends Fragment
         return view;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState)
     {
@@ -141,7 +142,8 @@ public class BuildFragment extends Fragment
             }
         });
 
-        departureDate.setOnTouchListener(new View.OnTouchListener() {
+        departureDate.setOnTouchListener(new View.OnTouchListener()
+        {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
@@ -202,22 +204,10 @@ public class BuildFragment extends Fragment
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
     public void showDatePickerDialog ()
     {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getActivity().getFragmentManager(), "datePicker");
 
-    }
-
-    public void showAttractionFragment()
-    {
-        Fragment fr = new AddingAttractionFragment();
-        onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
-        fc.replaceToolbarFragment(fr);
     }
 }
