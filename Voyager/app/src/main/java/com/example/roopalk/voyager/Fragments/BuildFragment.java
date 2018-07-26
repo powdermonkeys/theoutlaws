@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,8 +19,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import static java.lang.Integer.parseInt;
@@ -27,7 +34,7 @@ import static java.lang.Integer.parseInt;
 public class BuildFragment extends Fragment {
 
     public TextView create;
-    public EditText destination;
+    public AutoCompleteTextView destination;
     public EditText departureDate;
     public EditText arrivalDate;
     public TextView tvGuests;
@@ -84,6 +91,21 @@ public class BuildFragment extends Fragment {
         sbBudget.setMax(40);
         sbGuests.setProgress(guests);
         sbBudget.setProgress(budget);
+
+        //getting autocomplete textview
+
+        NetworkUtility networkUtility = new NetworkUtility(getContext());
+
+        try
+        {
+            ArrayList<String> cityNames = networkUtility.getCityNames();
+            ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, cityNames);
+            destination.setAdapter(cityAdapter);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -180,37 +202,41 @@ public class BuildFragment extends Fragment {
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 try {
                     Log.d("onClick", "reached the try catch statement");
-                    // a new trip query
-                    final Trip newTrip = new Trip(NUM_GUESTS, CHECKIN, CHECKOUT, DESTINATION);
-                    } catch (Exception e) {
-                        Log.d("onClick", "didnt create object");
-                    }
+                    // a new trip object being created
+                    final Trip newTrip = ParseObject.create(Trip.class);
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS);
+
+                    newTrip.saveInBackground(new SaveCallback() {
+
+                        @Override
+                        public void done(ParseException e) {
+                            mListener.moveToAttractionsPage(newTrip);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.d("onClick", "didnt create object");
                 }
-            });
-
-        }
-
-        @Override
-        public void onAttach (Context context){
-            super.onAttach(context);
-            if (context instanceof onFragmentInteractionListener) {
-                mListener = (onFragmentInteractionListener) context;
-            } else {
-                throw new RuntimeException(context.toString()
-                        + " must implement onFragmentInteractionListener");
             }
-        }
-
-        @Override
-        public void onDetach () {
-            super.onDetach();
-            mListener = null;
-        }
-
-        public void showAttractionFragment() {
-            Fragment fr = new AddingAttractionFragment();
-            onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
-            fc.replaceToolbarFragment(fr);
-            }
-
+        });
     }
+
+    @Override
+    public void onAttach (Context context){
+        super.onAttach(context);
+        if (context instanceof onFragmentInteractionListener) {
+            mListener = (onFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement onFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach ()
+    {
+        super.onDetach();
+        mListener = null;
+    }
+
+}

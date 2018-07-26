@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
+import com.example.roopalk.voyager.Model.Trip;
 import com.facebook.stetho.Stetho;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -35,6 +36,8 @@ public class ParseApplication extends Application
         ParseObject.registerSubclass(City.class);
         ParseObject.registerSubclass(Attraction.class);
         ParseObject.registerSubclass(Photo.class);
+        ParseObject.registerSubclass(Trip.class);
+
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
                 .applicationId("fbu-voyager-app-id")
                 .clientKey("powdermonkeys")

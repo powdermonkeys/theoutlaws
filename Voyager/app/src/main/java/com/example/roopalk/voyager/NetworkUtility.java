@@ -26,6 +26,25 @@ public class NetworkUtility
         this.context = context;
     }
 
+    public void getAllCities() throws ParseException
+    {
+        cityQuery.withName();
+        cities = (ArrayList) cityQuery.find();
+    }
+
+    public ArrayList<String> getCityNames() throws ParseException
+    {
+        getAllCities();
+        ArrayList<String> names = new ArrayList<>();
+
+        for(int i = 0; i < cities.size(); i++)
+        {
+            names.add(cities.get(i).getCityName());
+        }
+
+        return names;
+    }
+
     public void getCityFromName(String name) throws ParseException
     {
         cityQuery.hasName(name);
@@ -58,4 +77,5 @@ public class NetworkUtility
     {
         return photos;
     }
+
 }

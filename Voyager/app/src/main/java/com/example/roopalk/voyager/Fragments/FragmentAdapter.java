@@ -25,7 +25,7 @@ public class FragmentAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return new AddingAttractionFragment();
+                return new BlankFragment();
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return CalendarFragment.newInstance("STARTDATE", "ENDDATE");
             case 2: // Fragment # 1 - This will show SecondFragment
@@ -36,7 +36,8 @@ public class FragmentAdapter extends FragmentPagerAdapter{
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
+    public CharSequence getPageTitle(int position)
+    {
         // Generate title based on item position
         return tabTitles[position];
     }
