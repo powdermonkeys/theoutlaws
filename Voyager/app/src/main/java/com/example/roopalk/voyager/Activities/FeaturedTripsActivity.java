@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
@@ -20,14 +21,10 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
 {
     private final String TAG = "FeaturedTripsActivity";
 
-<<<<<<< HEAD:Voyager/app/src/main/java/com/example/roopalk/voyager/FeaturedTripsActivity.java
     Fragment attractionDetailsFragment = new AttractionDetailsFragment();
     Fragment addingAttractionFragment = new AddingAttractionFragment();
 
-    @BindView(R.id.btn) Button btn;
 
-=======
->>>>>>> ee8d381756a9d914a4f5d36e02bffababdc87e9f:Voyager/app/src/main/java/com/example/roopalk/voyager/Activities/FeaturedTripsActivity.java
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,23 +41,20 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-<<<<<<< HEAD:Voyager/app/src/main/java/com/example/roopalk/voyager/FeaturedTripsActivity.java
 
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.viewpager, attractionDetailsFragment);
-                ft.replace(R.id.viewpager, addingAttractionFragment);
-                ft.replace(R.id.placeholder, addingAttractionFragment);
-                ft.commit();
-                Log.i(TAG, "Moving to Adding Attraction Page now");
-            }
-        });
-=======
->>>>>>> ee8d381756a9d914a4f5d36e02bffababdc87e9f:Voyager/app/src/main/java/com/example/roopalk/voyager/Activities/FeaturedTripsActivity.java
+//        btn.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.viewpager, attractionDetailsFragment);
+//                ft.replace(R.id.viewpager, addingAttractionFragment);
+//                ft.replace(R.id.placeholder, addingAttractionFragment);
+//                ft.commit();
+//                Log.i(TAG, "Moving to Adding Attraction Page now");
+//            }
+//        });
     }
 
 
