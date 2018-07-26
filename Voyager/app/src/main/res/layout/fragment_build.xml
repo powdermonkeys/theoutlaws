@@ -2,7 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvGuests2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/personIcon"
+
+        android:layout_toEndOf="@+id/create"
+        android:background="@color/colorAccent"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/calendarIcon"
@@ -10,6 +20,7 @@
         android:layout_height="30dp"
         android:layout_alignBottom="@id/departureDate"
         android:layout_alignStart="@id/locationIcon"
+        android:paddingRight="5dp"
         app:srcCompat="@drawable/planetaking" />
 
     <ImageView
@@ -18,6 +29,8 @@
         android:layout_height="30dp"
         android:layout_alignBottom="@id/arrivalDate"
         android:layout_alignStart="@id/calendarIcon"
+        android:paddingRight="5dp"
+
         app:srcCompat="@drawable/planelanding" />
 
     <ImageView
@@ -26,6 +39,8 @@
         android:layout_height="30dp"
         android:layout_alignBottom="@id/destinationNamed"
         android:layout_toStartOf="@id/destinationNamed"
+        android:paddingRight="5dp"
+
         app:srcCompat="@drawable/location" />
 
     <ImageView
@@ -36,16 +51,20 @@
         android:layout_below="@id/arrivalDate"
         android:layout_toLeftOf="@id/sbGuests"
         android:layout_toStartOf="@id/sbGuests"
+        android:paddingRight="5dp"
+
         app:srcCompat="@drawable/person" />
 
     <ImageView
         android:id="@+id/budgetIcon"
         android:layout_width="30dp"
-        android:layout_height="25dp"
+        android:layout_height="39dp"
         android:layout_alignBottom="@id/sbBudget"
         android:layout_below="@id/personIcon"
+        android:layout_marginTop="29dp"
         android:layout_toLeftOf="@id/sbBudget"
         android:layout_toStartOf="@id/sbBudget"
+        android:paddingRight="5dp"
         app:srcCompat="@drawable/wallet" />
 
     <TextView
@@ -54,7 +73,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
         android:padding="20dp"
         android:text="@string/create"
         android:textAlignment="center"
@@ -68,6 +86,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="107dp"
         android:hint="@string/destination"
         android:paddingBottom="10dp" />
@@ -79,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/destinationNamed"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/departure"
         android:paddingBottom="10dp" />
 
@@ -89,43 +108,54 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/calendarIcon"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:hint="@string/arrival"
         android:paddingBottom="10dp" />
 
 
     <SeekBar
         android:id="@+id/sbGuests"
-        android:layout_width="200dp"
+        android:layout_width="207dp"
         android:layout_height="40dp"
         android:layout_below="@id/arrivalDate"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="115dp"
-        android:paddingBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:id="@+id/tvGuests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sbGuests"
-        android:textSize="11sp" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/personIcon"
+
+        android:layout_toEndOf="@+id/create"
+        android:background="@color/colorAccent"
+        android:textSize="12sp" />
 
 
     <SeekBar
         android:id="@+id/sbBudget"
-        android:layout_width="200dp"
+        android:layout_width="202dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/personIcon"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"/>
+        android:layout_marginBottom="147dp" />
 
+    <TextView
+        android:id="@+id/tvBudget"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/sbBudget"
+        android:layout_toEndOf="@+id/create"
+        android:background="@color/colorAccent"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/btnDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvGuests"
-        android:layout_marginStart="130dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         android:text="Done" />
 
 </RelativeLayout>

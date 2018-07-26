@@ -32,11 +32,12 @@ public class BuildFragment extends Fragment {
     public EditText departureDate;
     public EditText arrivalDate;
     public TextView tvGuests;
-    public EditText etBudget;
+    public TextView tvBudget;
     public SeekBar sbGuests;
+    public SeekBar sbBudget;
     public Button btnDone;
 
-    int progress = 20;
+    int progress = 0;
 
     Calendar mCurrentDate;
     int day;
@@ -70,16 +71,17 @@ public class BuildFragment extends Fragment {
         destination = view.findViewById(R.id.destinationNamed);
         departureDate = view.findViewById(R.id.departureDate);
         arrivalDate = view.findViewById(R.id.arrivalDate);
-        tvGuests = (TextView) view.findViewById(R.id.tvGuests);
-        //   etBudget = view.findViewById(R.id.etBudget);
-        btnDone = view.findViewById(R.id.btnDone);
         sbGuests = view.findViewById(R.id.sbGuests);
+        tvGuests = (TextView) view.findViewById(R.id.tvGuests);
+        tvBudget = view.findViewById(R.id.tvBudget);
+        sbGuests = view.findViewById(R.id.sbBudget);
+
+        btnDone = view.findViewById(R.id.btnDone);
+
 
         //seekbar
         sbGuests.setMax(10);
         sbGuests.setProgress(progress);
-        tvGuests.setText("" + progress);
-        tvGuests.setTextSize(progress);
         return view;
     }
 
@@ -112,6 +114,9 @@ public class BuildFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
             });
+
+
+
 
         //listener for calendar pop up
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
