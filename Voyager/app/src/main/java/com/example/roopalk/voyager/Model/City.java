@@ -8,7 +8,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 
 @ParseClassName("City")
-public class City extends ParseObject {
+public class City extends ParseObject
+{
     ArrayList<Attraction> attractions;
 
     //in the Parse database, the name of the city is stored in a column called cityname
