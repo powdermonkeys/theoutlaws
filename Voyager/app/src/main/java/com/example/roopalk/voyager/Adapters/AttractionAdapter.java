@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
-import com.example.roopalk.voyager.GlideApp;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -65,7 +65,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         holder.tvDescription.setText(currentAttraction.getAttractionDescription());
         holder.tvTime.setText(currentAttraction.getEstimatedTime());
 
-        GlideApp.with(context)
+        Glide.with(context)
                 .load(p.getImage().getUrl())
                 .into(holder.ivPicture);
     }

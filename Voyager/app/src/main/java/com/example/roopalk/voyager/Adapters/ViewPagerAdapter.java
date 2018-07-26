@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.roopalk.voyager.GlideApp;
+import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.R;
 
 import java.util.List;
+
+//import com.example.roopalk.voyager.GlideApp;
 
 public class ViewPagerAdapter extends PagerAdapter
 {
@@ -45,7 +47,7 @@ public class ViewPagerAdapter extends PagerAdapter
         View view = inflater.inflate(R.layout.viewpager_item, container, false);
 
         ImageView ivAttractionPhoto = view.findViewById(R.id.ivAttractionPhoto);
-        GlideApp.with(context)
+        Glide.with(context)
                 .load(images.get(position))
                 .into(ivAttractionPhoto);
 
