@@ -37,7 +37,8 @@ public class BuildFragment extends Fragment {
     public SeekBar sbBudget;
     public Button btnDone;
 
-    int progress = 0;
+    int guests = 0;
+    int budget = 100;
 
     Calendar mCurrentDate;
     int day;
@@ -74,14 +75,18 @@ public class BuildFragment extends Fragment {
         sbGuests = view.findViewById(R.id.sbGuests);
         tvGuests = (TextView) view.findViewById(R.id.tvGuests);
         tvBudget = view.findViewById(R.id.tvBudget);
-        sbGuests = view.findViewById(R.id.sbBudget);
-
+        sbBudget = view.findViewById(R.id.sbBudget);
         btnDone = view.findViewById(R.id.btnDone);
+
+        tvGuests.setText("" + guests);
+        tvBudget.setText("" + budget);
 
 
         //seekbar
         sbGuests.setMax(10);
-        sbGuests.setProgress(progress);
+        sbBudget.setMax(2000);
+        sbGuests.setProgress(guests);
+        sbBudget.setProgress(budget);
         return view;
     }
 
@@ -97,25 +102,40 @@ public class BuildFragment extends Fragment {
 
         month = month + 1;
 
-        //seekbar
-        sbGuests.setMax(10);
 
         // listener for guest drag bar
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = 1;
-                tvGuests.setText("" + progress);
-                tvGuests.setTextSize(progress);
+                guests = progress;
+                tvGuests.setText("" + guests);
+                tvGuests.setTextSize(20);
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
-            });
+        });
 
+        sbBudget.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                budget = progress;
+                tvBudget.setText("" + budget);
+                tvGuests.setTextSize(20);
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         //listener for calendar pop up

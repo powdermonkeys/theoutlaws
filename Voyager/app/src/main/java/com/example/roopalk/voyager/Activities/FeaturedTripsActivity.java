@@ -65,13 +65,10 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction);
-<<<<<<< HEAD
         attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
-=======
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.viewpager, attractionDetailsFragment);
         ft.commit();
->>>>>>> d93140a076f30fb67ed770bbd63cc18825b8dd0a
     }
 
     @Override
