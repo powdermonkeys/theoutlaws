@@ -1,11 +1,8 @@
 package com.example.roopalk.voyager.Model;
 
-import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-
-import java.util.List;
 
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
@@ -22,16 +19,7 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called destination
     private static final String DESTINATION = "destination";
 
-    private static String city = "";
-
-    public Trip(int ng, String c, String co, String ct)
-    {
-        city = ct;
-        setDestination(city);
-        setCheckin(c);
-        setCheckout(co);
-        setNumGuests(ng);
-    }
+    public Trip() {}
 
     //getter methods for each of the values
 
@@ -68,28 +56,17 @@ public class Trip extends ParseObject {
         put(CHECKOUT, checkout);
     }
 
-    public void setDestination(final String destination)
+    public void setDestination(final String destination) throws ParseException
     {
-        final City.Query cityQuery = new City.Query();
+        put(DESTINATION, destination);
 
-        cityQuery.hasName(destination);
-        cityQuery.findInBackground(new FindCallback<City>()
-        {
-            @Override
-            public void done(List<City> objects, ParseException e)
-            {
-                if(e == null)
-                {
-                    if(objects.get(0).getCityName() == destination)
-                    //get the first object that is found that is name with this city
-                        put(DESTINATION, objects.get(0)); }
-                if(e == null){
-                    //get the first object that is found that is name with this city
-                    put(DESTINATION, objects.get(0));
-                }
-                    put(DESTINATION, objects.get(0));
-            }
-        });
+    }
+
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests) throws ParseException {
+        setDestination(destination);
+        setCheckout(checkout);
+        setCheckin(checkin);
+        setNumGuests(numguests);
     }
 
 }

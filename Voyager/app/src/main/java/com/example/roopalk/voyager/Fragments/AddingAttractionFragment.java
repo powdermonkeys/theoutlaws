@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.roopalk.voyager.Adapters.AttractionAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
@@ -33,6 +34,16 @@ public class AddingAttractionFragment extends Fragment {
 
     }
 
+    public static AddingAttractionFragment newInstance(Trip trip)
+    {
+
+        Bundle args = new Bundle();
+        args.putParcelable("trip", trip);
+
+        AddingAttractionFragment fragment = new AddingAttractionFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -41,22 +52,22 @@ public class AddingAttractionFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_adding_attraction, container, false);
     }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
+        Trip trip = getArguments().getParcelable("trip");
+        String dest = trip.getDestination();
 
         try
         {
-            networkUtility.getCityFromName("Seattle");
+            networkUtility.getCityFromName(dest);
             cities = networkUtility.getCities();
 
             networkUtility.getAttractionFromCity(cities.get(0));
             attractions = networkUtility.getAttractions();
-
 
             //  the recycler view for the attractions list
             mRecyclerView = (RecyclerView) view.findViewById(R.id.rvAttractions);

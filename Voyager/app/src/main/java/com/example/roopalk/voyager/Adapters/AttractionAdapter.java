@@ -2,6 +2,7 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         public void onClick(View v)
         {
             int position = getAdapterPosition();
-
+            Log.i("List", "works");
             Attraction attraction = mAttractions.get(position);
 
             if(position != RecyclerView.NO_POSITION)

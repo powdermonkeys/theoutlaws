@@ -13,6 +13,7 @@ import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 import butterknife.ButterKnife;
@@ -20,10 +21,6 @@ import butterknife.ButterKnife;
 public class FeaturedTripsActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "FeaturedTripsActivity";
-
-    Fragment attractionDetailsFragment = new AttractionDetailsFragment();
-    Fragment addingAttractionFragment = new AddingAttractionFragment();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,20 +38,6 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-//        btn.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.viewpager, attractionDetailsFragment);
-//                ft.replace(R.id.viewpager, addingAttractionFragment);
-//                ft.replace(R.id.placeholder, addingAttractionFragment);
-//                ft.commit();
-//                Log.i(TAG, "Moving to Adding Attraction Page now");
-//            }
-//        });
     }
 
 
@@ -66,9 +49,6 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction);
         attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.viewpager, attractionDetailsFragment);
-        ft.commit();
     }
 
     @Override
@@ -78,6 +58,16 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.viewpager, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void moveToAttractionsPage(Trip trip)
+    {
+        AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);
         fragmentTransaction.commit();
     }
 }
