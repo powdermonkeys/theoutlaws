@@ -2,7 +2,6 @@ package com.example.roopalk.voyager.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,9 +40,7 @@ public class BuildFragment extends Fragment {
     int budget = 100;
 
     Calendar mCurrentDate;
-    int day;
-    int month;
-    int year;
+    int day; int month; int year;
 
 
     onFragmentInteractionListener mListener;
@@ -100,7 +97,6 @@ public class BuildFragment extends Fragment {
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
-        month = month + 1;
 
 
         // listener for guest drag bar
@@ -118,6 +114,7 @@ public class BuildFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        //listener for budget drag bar
         sbBudget.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -138,42 +135,38 @@ public class BuildFragment extends Fragment {
         });
 
 
-        //listener for calendar pop up
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        try {
-                            arrivalDate.setText(month + "/" + day + "/" + year);
-                        } catch (Exception e) {
-                            Log.d("DatePicker return", "you messed up");
+                if (event.getActionMasked() == 0){
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            month = month +1;
+                            arrivalDate.setText(month + "/" + dayOfMonth + "/" + year);
                         }
-                    }
-
                     }, year, month, day);
-                    showDatePickerDialog();
-                    return false;
+                    datePickerDialog.show();
                 }
-            });
+                return false;
+            }
+        });
 
-        departureDate.setOnTouchListener(new View.OnTouchListener()
-        {
+
+        // listener that sets text of departure date
+        departureDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        try {
-                            departureDate.setText(month + "/" + day + "/" + year);
-                        } catch (Exception e) {
-                            Log.d("DatePicker return", "you messed up");
+                if (event.getActionMasked() == 0) {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            month = month + 1;
+                            departureDate.setText(month + "/" + dayOfMonth + "/" + year);
                         }
-                    }
-
-                }, year, month, day);
-                showDatePickerDialog();
+                    }, year, month, day);
+                    datePickerDialog.show();
+                }
                 return false;
             }
         });
@@ -214,12 +207,6 @@ public class BuildFragment extends Fragment {
             mListener = null;
         }
 
-        public void showDatePickerDialog () {
-            DialogFragment newFragment = new DatePickerFragment();
-            newFragment.show(getActivity().getFragmentManager(), "datePicker");
-
-
-        }
         public void showAttractionFragment() {
             Fragment fr = new AddingAttractionFragment();
             onFragmentInteractionListener fc = (onFragmentInteractionListener) getActivity();
