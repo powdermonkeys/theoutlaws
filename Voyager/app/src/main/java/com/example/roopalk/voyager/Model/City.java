@@ -67,7 +67,7 @@ public class City extends ParseObject {
 
         public Query hasName(String name)
         {
-            whereEqualTo("cityname", name);
+            whereMatches("cityname", name);
             return this;
         }
     }
