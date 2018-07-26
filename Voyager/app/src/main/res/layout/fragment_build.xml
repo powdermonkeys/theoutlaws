@@ -116,7 +116,7 @@
         android:layout_toRightOf="@id/sbGuests"
         android:layout_alignBottom="@id/sbGuests"
         android:paddingBottom="10dp"
-        android:paddingLeft="25dp"
+        android:paddingLeft="15dp"
         android:textSize="14sp" />
 
     <SeekBar
@@ -134,7 +134,7 @@
         android:layout_toRightOf="@id/sbBudget"
         android:layout_alignBottom="@id/sbBudget"
         android:paddingBottom="10dp"
-        android:paddingLeft="25dp"
+        android:paddingLeft="15dp"
         android:textSize="14sp" />
 
     <Button
