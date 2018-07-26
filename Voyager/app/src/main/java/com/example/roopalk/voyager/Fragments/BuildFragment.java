@@ -37,7 +37,7 @@ public class BuildFragment extends Fragment {
     public Button btnDone;
 
     int guests = 0;
-    int budget = 100;
+    int budget = 0;
 
     Calendar mCurrentDate;
     int day; int month; int year;
@@ -81,7 +81,7 @@ public class BuildFragment extends Fragment {
 
         //seekbar
         sbGuests.setMax(10);
-        sbBudget.setMax(2000);
+        sbBudget.setMax(40);
         sbGuests.setProgress(guests);
         sbBudget.setProgress(budget);
         return view;
@@ -97,6 +97,8 @@ public class BuildFragment extends Fragment {
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
+        tvGuests.setTextSize(20);
+        tvBudget.setTextSize(20);
 
 
         // listener for guest drag bar
@@ -105,7 +107,6 @@ public class BuildFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 guests = progress;
                 tvGuests.setText("" + guests);
-                tvGuests.setTextSize(20);
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -118,9 +119,8 @@ public class BuildFragment extends Fragment {
         sbBudget.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                budget = progress;
+                budget = progress *50;
                 tvBudget.setText("" + budget);
-                tvGuests.setTextSize(20);
             }
 
             @Override
