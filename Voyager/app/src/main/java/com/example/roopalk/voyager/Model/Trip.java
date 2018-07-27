@@ -1,11 +1,18 @@
 package com.example.roopalk.voyager.Model;
 
+import android.support.annotation.Nullable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
+
+    private int mThumbnailDrawable;
 
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
@@ -23,21 +30,28 @@ public class Trip extends ParseObject {
 
     //getter methods for each of the values
 
-    public int getNumGuests()
+    public @Nullable
+    int getThumbnailDrawable() { return mThumbnailDrawable; }
+
+    public @Nullable
+    int getNumGuests()
     {
         return getInt(NUM_GUESTS);
     }
 
-    public String getCheckin() {
+    public @Nullable
+    String getCheckin() {
         return getString(CHECKIN);
     }
 
-    public String getCheckout()
+    public @Nullable
+    String getCheckout()
     {
         return getString(CHECKOUT);
     }
 
-    public String getDestination()
+    public @Nullable
+    String getDestination()
     {
         return getString(DESTINATION);
     }
@@ -67,6 +81,18 @@ public class Trip extends ParseObject {
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
+    }
+
+
+    // Returns a list of trips, random trips to show cardviews
+    public static List<Trip> getTrips() {
+        List<Trip> trips = new ArrayList<>();
+        trips.add(ParseObject.create(Trip.class));
+        trips.add(ParseObject.create(Trip.class));
+        trips.add(ParseObject.create(Trip.class));
+        trips.add(ParseObject.create(Trip.class));
+        trips.add(ParseObject.create(Trip.class));
+        return trips;
     }
 
 }

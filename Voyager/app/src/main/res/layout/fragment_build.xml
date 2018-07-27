@@ -79,7 +79,10 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="117dp"
-        android:hint="@string/destination" />
+        android:textColor="@color/black"
+        android:hint="@string/destination"
+        android:textColorHint="@color/hintColor"
+        />
 
 
     <EditText
@@ -89,6 +92,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/destinationNamed"
         android:hint="@string/departure"
+        android:textColorHint="@color/hintColor"
+        android:textColor="@color/black"
+
         android:layout_margin="5dp"/>
 
     <EditText
@@ -98,6 +104,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/departureDate"
         android:layout_margin="5dp"
+        android:textColorHint="@color/hintColor"
+        android:textColor="@color/black"
+
         android:hint="@string/arrival" />
 
 
@@ -117,6 +126,8 @@
         android:layout_alignBottom="@id/sbGuests"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
+        android:textColor="@color/black"
+
         android:textSize="14sp" />
 
     <SeekBar
@@ -134,6 +145,8 @@
         android:layout_toRightOf="@id/sbBudget"
         android:layout_alignBottom="@id/sbBudget"
         android:paddingBottom="10dp"
+        android:textColor="@color/black"
+
         android:paddingLeft="15dp"
         android:textSize="14sp" />
 
