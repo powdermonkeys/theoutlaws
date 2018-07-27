@@ -68,33 +68,12 @@
 
                 <TextView
                     android:id="@+id/price"
-<<<<<<< HEAD
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
                     android:textSize="20sp"
-                    tools:text="$" />
-            </LinearLayout>
-=======
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="140dp"
-                    android:layout_toRightOf="@id/tvTime"
-                    android:text="$"
-                    android:textAlignment="textEnd"
-                    android:textSize="20sp" />
-
-                <!--<Button-->
-                    <!--android:id="@+id/add"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="65dp"-->
-                    <!--android:text="add"-->
-                    <!--android:textSize="20sp" />-->
->>>>>>> beb6fc257f85a5cb5c8b75e15bc5dc851297764e
-
+                    android:text="$" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-
 </android.support.v7.widget.CardView>
