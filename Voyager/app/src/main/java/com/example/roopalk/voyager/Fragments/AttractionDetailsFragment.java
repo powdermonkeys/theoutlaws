@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,14 @@ import android.widget.TextView;
 
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Photo;
-import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.relex.circleindicator.CircleIndicator;
 
-public class AttractionDetailsFragment extends DialogFragment implements onFragmentInteractionListener
+public class AttractionDetailsFragment extends DialogFragment
 {
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
@@ -52,15 +53,14 @@ public class AttractionDetailsFragment extends DialogFragment implements onFragm
 
     // Required empty public constructor
 
-    public AttractionDetailsFragment()
-    {
-    }
+    public AttractionDetailsFragment(){}
 
-    public static AttractionDetailsFragment newInstance(Attraction attraction)
+    public static AttractionDetailsFragment newInstance(Attraction attraction, BudgetBar budgetBar)
     {
         AttractionDetailsFragment attractionDetailsFragment = new AttractionDetailsFragment();
         Bundle currAttraction = new Bundle();
         currAttraction.putParcelable("attraction", attraction);
+        currAttraction.putParcelable("budget", Parcels.wrap(budgetBar));
         attractionDetailsFragment.setArguments(currAttraction);
         return attractionDetailsFragment;
     }
@@ -80,10 +80,12 @@ public class AttractionDetailsFragment extends DialogFragment implements onFragm
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    { ButterKnife.bind(this, view);
+    {
+        ButterKnife.bind(this, view);
        super.onViewCreated(view, savedInstanceState);
 
        attraction = getArguments().getParcelable("attraction");
+       final BudgetBar budgetBar = Parcels.unwrap(getArguments().getParcelable("budget"));
 
         try
         {
@@ -112,11 +114,11 @@ public class AttractionDetailsFragment extends DialogFragment implements onFragm
            @Override
            public void onClick(View v)
            {
-
+               budgetBar.setBudgetLevel(attraction.getEstimatedPrice());
+              dismiss();
            }
        });
     }
-
 
     public void getImages() throws ParseException
     {
@@ -136,22 +138,5 @@ public class AttractionDetailsFragment extends DialogFragment implements onFragm
         tvAttractionDescription.setText(attraction.getAttractionDescription());
         tvAttractionTime.setText(attraction.getEstimatedTime());
         tvAttractionPrice.setText(attraction.getEstimatedPrice()+"");
-    }
-
-    @Override
-    public void moveToDetailsPage(Attraction attraction){ }
-
-    @Override
-    public void replaceToolbarFragment(Fragment fragment) { }
-
-    @Override
-    public void moveToAttractionsPage(Trip trip) {
-
-    }
-
-    @Override
-    public void moveToAttractionsPage(int attractionPrice)
-    {
-
     }
 }

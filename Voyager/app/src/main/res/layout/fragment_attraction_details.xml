@@ -52,6 +52,16 @@
             android:clickable="true"
             android:src="@drawable/ic_clear_black"/>
 
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:textSize="20sp"
+            android:text="add"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="60dp"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -72,9 +82,9 @@
             android:id="@+id/ciImageSwiper"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_alignStart="@id/vpImageSlideshow"
             android:layout_below="@id/vpImageSlideshow"
-            app:ci_drawable="@drawable/circleindicator_round"
-            android:layout_alignStart="@id/vpImageSlideshow"/>
+            app:ci_drawable="@drawable/circleindicator_round" />
 
     </RelativeLayout>
 

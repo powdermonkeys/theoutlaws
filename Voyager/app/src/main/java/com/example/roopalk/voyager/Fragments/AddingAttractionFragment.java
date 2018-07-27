@@ -1,13 +1,13 @@
 package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
-import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.example.roopalk.voyager.Adapters.AttractionAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -27,7 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class AddingAttractionFragment extends Fragment {
+public class AddingAttractionFragment extends Fragment
+{
 
     private RecyclerView mRecyclerView;
     private AttractionAdapter mAdapter;
@@ -53,6 +55,15 @@ public class AddingAttractionFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    public static AddingAttractionFragment newInstance(int attractionPrice)
+    {
+        Bundle price = new Bundle();
+        price.putInt("price", attractionPrice);
+        AddingAttractionFragment fragment = new AddingAttractionFragment();
+        fragment.setArguments(price);
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -61,6 +72,7 @@ public class AddingAttractionFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_adding_attraction, container, false);
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
@@ -68,12 +80,11 @@ public class AddingAttractionFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
-  //    trip = getArguments().getParcelable("trip");
-    //  String dest = trip.getDestination();
+        trip = getArguments().getParcelable("trip");
+        String dest = trip.getDestination();
 
         try
         {
-            String dest = "Cape Town";
             networkUtility.getCityFromName(dest);
             cities = networkUtility.getCities();
 
@@ -89,12 +100,12 @@ public class AddingAttractionFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvAttractions);
 
 
+        BudgetBar budgetBar = new BudgetBar(trip, pbBudget);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new AttractionAdapter(attractions, listener);
+        mAdapter = new AttractionAdapter(attractions, listener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
-        // attaching the touch helper to recycler view
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
     }
 
     @Override
@@ -110,22 +121,4 @@ public class AddingAttractionFragment extends Fragment {
             throw new ClassCastException(context.toString() + "must implement onFragmentInteractionListener");
         }
     }
-
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            // Row is swiped from recycler view
-            // remove it from adapter
-        }
-
-        @Override
-        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-            // view the background view
-        }
-    };
 }

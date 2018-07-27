@@ -63,22 +63,11 @@
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="134dp"
-                    android:layout_toRightOf="@id/tvTime"
-                    android:text="$"
                     android:textAlignment="textEnd"
-                    android:textSize="20sp" />
-
-                <!--<Button-->
-                    <!--android:id="@+id/add"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="65dp"-->
-                    <!--android:text="add"-->
-                    <!--android:textSize="20sp" />-->
-
+                    android:textSize="20sp"
+                    android:text="$" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
