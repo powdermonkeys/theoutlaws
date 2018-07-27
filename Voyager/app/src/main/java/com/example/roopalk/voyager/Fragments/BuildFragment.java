@@ -193,6 +193,7 @@ public class BuildFragment extends Fragment {
             }
         });
 
+        //On Click Listener for the button when done designing a trip
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,11 +201,12 @@ public class BuildFragment extends Fragment {
                 final String CHECKIN = departureDate.getText().toString();
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
+                final int BUDGET = parseInt(tvBudget.getText().toString());
                 try {
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
-                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS);
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET);
 
                     newTrip.saveInBackground(new SaveCallback() {
 
