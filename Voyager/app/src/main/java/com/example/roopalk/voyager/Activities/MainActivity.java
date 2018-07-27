@@ -10,14 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
-import com.example.roopalk.voyager.Fragments.FragmentAdapter;
+import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-public class MainActivity extends AppCompatActivity implements onFragmentInteractionListener
+public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "MainActivity";
 

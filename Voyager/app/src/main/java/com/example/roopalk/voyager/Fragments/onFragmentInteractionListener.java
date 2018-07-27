@@ -13,4 +13,7 @@ public interface onFragmentInteractionListener
     public void replaceToolbarFragment(Fragment fragment);
 
     public void moveToAttractionsPage(Trip trip);
+
+    public void moveToAttractionsPage(int attractionPrice); //overridden moveToAttractionsPage method
+
 }

@@ -141,21 +141,15 @@ public class BuildFragment extends Fragment {
         sbBudget.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                budget = progress *50;
-                tvBudget.setText("" + budget);
+                budget = progress * 50;
+                tvBudget.setText("$" + budget);
             }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
-
 
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -213,6 +207,19 @@ public class BuildFragment extends Fragment {
 
                         @Override
                         public void done(ParseException e) {
+
+//                            //TESTING CODE-
+//                            // Create new fragment and transaction
+//                            Fragment newFragment = new AddingAttractionFragment();
+//                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//
+//                            // Replace whatever is in the fragment_container view with this fragment. and add the transaction to the back stack if needed
+//                            transaction.replace(R.id.fragment_adding_attraction, newFragment);
+//                            transaction.addToBackStack(null);
+//                            transaction.commit();
+
+
+                            // WORKING CODE
                             mListener.moveToAttractionsPage(newTrip);
 
                         }

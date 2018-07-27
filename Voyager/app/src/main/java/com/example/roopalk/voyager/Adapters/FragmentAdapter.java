@@ -1,9 +1,13 @@
-package com.example.roopalk.voyager.Fragments;
+package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.roopalk.voyager.Fragments.BuildFragment;
+import com.example.roopalk.voyager.Fragments.CalendarFragment;
+import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter{
     final int PAGE_COUNT = 3;
