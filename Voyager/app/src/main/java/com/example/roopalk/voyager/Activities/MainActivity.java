@@ -69,4 +69,9 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
         fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void moveToAttractionsPage(int attractionPrice) {
+
+    }
 }
