@@ -13,12 +13,16 @@ import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 public class MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "MainActivity";
+
+    AddingAttractionFragment addingAttractionFragment;
+    AttractionDetailsFragment attractionDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,14 +43,13 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
 
     @Override
     //from the interface - move between fragments
-    public void moveToDetailsPage(Attraction attraction)
+    public void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction);
+        attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction, budgetBar);
         attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
     }
-
     @Override
     public void replaceToolbarFragment(Fragment fragment)
     {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
     @Override
     public void moveToAttractionsPage(Trip trip)
     {
-        AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+        addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);

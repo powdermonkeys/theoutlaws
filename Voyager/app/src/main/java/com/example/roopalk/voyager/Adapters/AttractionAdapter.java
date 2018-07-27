@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -28,11 +29,14 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     ArrayList<Attraction> mAttractions;
     Context context;
     private onFragmentInteractionListener mListener;
+    BudgetBar budgetBar;
 
-    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener)
+
+    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener, BudgetBar budgetBar)
     {
         mAttractions = attractions;
         mListener = listener;
+        this.budgetBar = budgetBar;
     }
 
     @Override
@@ -100,7 +104,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             if(position != RecyclerView.NO_POSITION)
             {
-                mListener.moveToDetailsPage(attraction);
+                mListener.moveToDetailsPage(attraction, budgetBar);
             }
         }
     }
