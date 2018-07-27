@@ -29,7 +29,7 @@ public class NetworkUtility
     public void getAllCities() throws ParseException
     {
         cityQuery.withName();
-        cities = (ArrayList) cityQuery.find();
+        cities = (ArrayList<City>) cityQuery.find();
     }
 
     public ArrayList<String> getCityNames() throws ParseException
@@ -48,7 +48,7 @@ public class NetworkUtility
     public void getCityFromName(String name) throws ParseException
     {
         cityQuery.hasName(name);
-        cities = (ArrayList) cityQuery.find();
+        cities = (ArrayList<City>) cityQuery.find();
     }
 
     public ArrayList<City> getCities()
@@ -59,7 +59,7 @@ public class NetworkUtility
     public void getAttractionFromCity(City city) throws ParseException
     {
         attractionQuery.withCity(city.getObjectId());
-        attractions = (ArrayList) attractionQuery.find();
+        attractions = (ArrayList<Attraction>) attractionQuery.find();
     }
 
     public ArrayList<Attraction> getAttractions()
@@ -70,7 +70,7 @@ public class NetworkUtility
     public void getImagesFromAttraction(Attraction attraction) throws ParseException
     {
         photoQuery.withAttraction(attraction.getObjectId());
-        photos = (ArrayList) photoQuery.find();
+        photos = (ArrayList<Photo>) photoQuery.find();
     }
 
     public ArrayList<Photo> getPhotos()
