@@ -16,9 +16,8 @@ import com.example.roopalk.voyager.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class CalendarFragment extends Fragment
+{
 
     private static final String START_DATE = "";
     private static final String END_DATE = "";
@@ -30,7 +29,8 @@ public class CalendarFragment extends Fragment {
     private static final int MINUTES_IN_A_DAY = 24 * 60;
 
 
-    public CalendarFragment() {
+    public CalendarFragment()
+    {
         // Required empty public constructor
     }
 
@@ -43,10 +43,9 @@ public class CalendarFragment extends Fragment {
         return fragment;
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
         rlCalendarRoot = v.findViewById(R.id.rl_calendar);
         rlCalendarRoot.post(new Runnable() {
@@ -58,12 +57,15 @@ public class CalendarFragment extends Fragment {
         return v;
     }
 
-    public void drawEvents(List<Event> events) {
-        if (events != null && !events.isEmpty()) {
+    public void drawEvents(List<Event> events)
+    {
+        if (events != null && !events.isEmpty())
+        {
             int screenWidth = rlCalendarRoot.getWidth();
             int screenHeight = (int) ((23f * getResources().getDimension(R.dimen.hour_divider_height) + (24f * getResources().getDimension(R.dimen.hour_divider_margin_top))));
 
-            for (Event e : events) {
+            for (Event e : events)
+            {
                 int eventWidth = screenWidth;
                 int leftMargin = (int) (screenWidth/1.25);
                 int eventHeight = minutesToPixels(screenHeight, e.getEndTimeInMinutes() + 1) - minutesToPixels(screenHeight, e.getStartTimeInMinutes());
@@ -81,27 +83,28 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-    private int minutesToPixels(int screenHeight, int minutes){
+    private int minutesToPixels(int screenHeight, int minutes)
+    {
         return (screenHeight * minutes) / MINUTES_IN_A_DAY;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof onFragmentInteractionListener) {
+        if (context instanceof onFragmentInteractionListener)
+        {
             mListener = (onFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        }
+        else
+        {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
-
-
-
 }
