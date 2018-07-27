@@ -202,7 +202,8 @@ public class BuildFragment extends Fragment {
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 final int BUDGET = parseInt(tvBudget.getText().toString());
-                try {
+                try
+                {
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);

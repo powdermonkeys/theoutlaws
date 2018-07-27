@@ -70,14 +70,13 @@
                     android:layout_height="wrap_content"
                     tools:text="3 hrs" />
 
-                <Button
-                    android:id="@+id/add"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
+                    android:textAlignment="textEnd"
                     android:textSize="20sp"
-                    android:text="add" />
-
+                    tools:text="$" />
             </LinearLayout>
 
         </LinearLayout>
