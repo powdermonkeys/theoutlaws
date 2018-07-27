@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null)
         {
-            Intent intent = new Intent(LoginActivity.this, FeaturedTripsActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity
                 if(e == null)
                 {
                     Log.d(TAG, "Login successful!");
-                    Intent intent = new Intent(LoginActivity.this, FeaturedTripsActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -16,24 +16,20 @@ import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-import butterknife.ButterKnife;
-
-public class FeaturedTripsActivity extends AppCompatActivity implements onFragmentInteractionListener
+public class MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
-    private final String TAG = "FeaturedTripsActivity";
+    private final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_featured_trips);
-
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_main);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),
-                FeaturedTripsActivity.this));
+                MainActivity.this));
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
@@ -69,5 +65,10 @@ public class FeaturedTripsActivity extends AppCompatActivity implements onFragme
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void moveToAttractionsPage(int attractionPrice) {
+
     }
 }

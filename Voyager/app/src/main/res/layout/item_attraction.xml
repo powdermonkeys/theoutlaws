@@ -19,10 +19,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:id="@+id/linear1">
-
+        android:padding="3dp">
 
         <ImageView
             android:id="@+id/picture"
@@ -31,27 +31,27 @@
             app:srcCompat="@drawable/pikeplace" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_margin="4dp"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/est"
@@ -70,11 +70,19 @@
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    android:layout_toRightOf="@id/tvTime"
-                    android:textSize="20sp"
                     android:layout_marginLeft="140dp"
-                    android:text="$" />
+                    android:layout_toRightOf="@id/tvTime"
+                    android:text="$"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
+
+                <!--<Button-->
+                    <!--android:id="@+id/add"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="65dp"-->
+                    <!--android:text="add"-->
+                    <!--android:textSize="20sp" />-->
 
             </RelativeLayout>
         </LinearLayout>
