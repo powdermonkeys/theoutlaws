@@ -43,18 +43,12 @@ public class CalendarFragment extends Fragment {
         return fragment;
     }
 
-    static {
-        events.add(new Event("Tester 1", 3f, 2f, 10, 30));
-        events.add(new Event("Tester 2", 4f, 9f, 20, 60));
-        events.add(new Event("Tester 3", 7f, 4f, 30, 90));
-
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
-        rlCalendarRoot = (RelativeLayout)v.findViewById(R.id.rl_calendar_root);
+        rlCalendarRoot = v.findViewById(R.id.rl_calendar);
         rlCalendarRoot.post(new Runnable() {
             @Override
             public void run() {

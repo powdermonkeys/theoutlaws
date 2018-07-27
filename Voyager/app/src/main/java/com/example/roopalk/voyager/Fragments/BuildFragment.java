@@ -43,7 +43,7 @@ public class BuildFragment extends Fragment {
     public SeekBar sbBudget;
     public Button btnDone;
 
-    int guests = 0;
+    int guests = 1;
     int budget = 0;
 
     Calendar mCurrentDate;
