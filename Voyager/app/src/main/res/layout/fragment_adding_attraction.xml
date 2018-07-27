@@ -7,10 +7,27 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvAttractions"
-        android:scrollbars="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAttractions"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
+
+        <ProgressBar
+            android:id="@+id/pbBudget"
+            android:layout_width="350dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:scaleY="7"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:max="100"
+            android:layout_below="@+id/rvAttractions"/>
+    </RelativeLayout>
 
 </FrameLayout>

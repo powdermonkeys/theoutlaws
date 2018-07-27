@@ -26,35 +26,31 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called destination
     private static final String DESTINATION = "destination";
 
+    private static final String BUDGET = "budget";
+
     public Trip() {}
 
     //getter methods for each of the values
 
-    public @Nullable
-    int getThumbnailDrawable() { return mThumbnailDrawable; }
+    public @Nullable int getThumbnailDrawable() { return mThumbnailDrawable; }
 
-    public @Nullable
-    int getNumGuests()
-    {
-        return getInt(NUM_GUESTS);
-    }
+    public @Nullable int getNumGuests() { return getInt(NUM_GUESTS); }
 
-    public @Nullable
-    String getCheckin() {
+    public @Nullable String getCheckin() {
         return getString(CHECKIN);
     }
 
-    public @Nullable
-    String getCheckout()
+    public @Nullable String getCheckout()
     {
         return getString(CHECKOUT);
     }
 
-    public @Nullable
-    String getDestination()
+    public @Nullable String getDestination()
     {
         return getString(DESTINATION);
     }
+
+    public int getBudget() { return getInt(BUDGET); }
 
     public void setNumGuests(int numguests)
     {
@@ -70,17 +66,17 @@ public class Trip extends ParseObject {
         put(CHECKOUT, checkout);
     }
 
-    public void setDestination(final String destination) throws ParseException
-    {
-        put(DESTINATION, destination);
+    public void setDestination(final String destination) { put(DESTINATION, destination); }
 
-    }
+    public void setBudget(int budget) { put(BUDGET, budget); }
 
-    public void setTripInfo(String destination, String checkin, String checkout, int numguests) throws ParseException {
+
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget) throws ParseException {
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
+        setBudget(budget);
     }
 
 
