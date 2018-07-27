@@ -21,8 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.FeaturedTripsActivity"
-            android:theme="@style/SplashTheme"
+            android:name=".Activities.MainActivity"
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
