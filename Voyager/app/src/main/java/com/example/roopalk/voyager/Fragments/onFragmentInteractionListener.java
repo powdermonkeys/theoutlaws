@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
+import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.Model.Trip;
 
 public interface onFragmentInteractionListener
@@ -14,6 +15,9 @@ public interface onFragmentInteractionListener
 
     public void moveToAttractionsPage(Trip trip);
 
-    public void moveToAttractionsPage(int attractionPrice); //overridden moveToAttractionsPage method
+    public void moveToAddEventPage(Attraction attraction);
 
+    public void moveToCalendarPage();
+
+    public void moveToCalendarPage(Event event);
 }

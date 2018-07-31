@@ -6,6 +6,7 @@ import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ public class NetworkUtility
     ArrayList<City> cities = new ArrayList<>();
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<Photo> photos = new ArrayList<>();
+
+    ArrayList<String> imageURLs = new ArrayList<>();
 
     final City.Query cityQuery = new City.Query();
     final Attraction.Query attractionQuery = new Attraction.Query();
@@ -78,4 +81,23 @@ public class NetworkUtility
         return photos;
     }
 
+
+    public void getImages(Attraction attraction) throws ParseException
+    {
+        getImagesFromAttraction(attraction);
+        photos = getPhotos();
+
+        for(int i = 0; i < photos.size(); i++)
+        {
+            Photo p = photos.get(i);
+            ParseFile images = p.getImage();
+            String url = images.getUrl();
+
+            imageURLs.add(url);
+        }
+    }
+    public ArrayList<String> getImageURLs()
+    {
+        return imageURLs;
+    }
 }

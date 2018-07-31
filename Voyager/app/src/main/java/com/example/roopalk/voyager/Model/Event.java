@@ -1,5 +1,8 @@
 package com.example.roopalk.voyager.Model;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Event {
 
     private String evtName;
@@ -8,7 +11,9 @@ public class Event {
     private int startTimeMinutes;
     private int endTimeMinutes;
 
-    public Event( String evtName, float mStartTime, float mEndTime, int startTimeMinutes, int endTimeMinutes) {
+    public Event(){}
+
+    public Event(String evtName, float mStartTime, float mEndTime) {
         this.evtName = evtName;
         this.evtStartTime = mStartTime;
         this.evtEndTime = mEndTime;
@@ -16,7 +21,8 @@ public class Event {
         this.endTimeMinutes = (int)(mEndTime * 60f);
     }
 
-    public String getName() {
+    public String getName()
+    {
         return evtName;
     }
 
