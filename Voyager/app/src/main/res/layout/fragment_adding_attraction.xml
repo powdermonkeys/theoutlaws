@@ -28,6 +28,12 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:max="100"
             android:layout_below="@+id/rvAttractions"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:id="@+id/btnDone"/>
     </RelativeLayout>
 
 </FrameLayout>

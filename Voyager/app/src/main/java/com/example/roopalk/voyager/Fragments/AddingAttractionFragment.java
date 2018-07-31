@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.roopalk.voyager.Adapters.AttractionAdapter;
@@ -36,10 +37,10 @@ public class AddingAttractionFragment extends Fragment
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<City> cities = new ArrayList<>();
     public onFragmentInteractionListener listener;
-
     Trip trip;
 
     @BindView(R.id.pbBudget) ProgressBar pbBudget;
+    @BindView(R.id.btnDone) Button done;
 
     public AddingAttractionFragment()
     {
@@ -105,6 +106,15 @@ public class AddingAttractionFragment extends Fragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new AttractionAdapter(attractions, listener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
+
+        done.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                listener.moveToCalendarPage();
+            }
+        });
 
     }
 
