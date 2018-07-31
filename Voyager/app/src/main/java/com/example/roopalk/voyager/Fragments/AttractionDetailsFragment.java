@@ -19,7 +19,6 @@ import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
@@ -46,6 +45,7 @@ public class AttractionDetailsFragment extends DialogFragment
 
     ArrayList<Photo> photos = new ArrayList<>();
     ArrayList<String> imageURLs = new ArrayList<>();
+    static ArrayList<Attraction> chosen_attractions = new ArrayList<>();
 
     private static final String TAG = "DetailsFragment";
 
@@ -85,11 +85,17 @@ public class AttractionDetailsFragment extends DialogFragment
        super.onViewCreated(view, savedInstanceState);
 
        attraction = getArguments().getParcelable("attraction");
+
        final BudgetBar budgetBar = Parcels.unwrap(getArguments().getParcelable("budget"));
 
         try
         {
-            getImages();
+            networkUtility.getImages(attraction);
+            imageURLs = networkUtility.getImageURLs();
+            tvAttractionName.setText(attraction.getAttractionName());
+            tvAttractionDescription.setText(attraction.getAttractionDescription());
+            tvAttractionTime.setText(attraction.getEstimatedTime());
+            tvAttractionPrice.setText(attraction.getEstimatedPrice()+"");
         }
         catch (ParseException e)
         {
@@ -115,28 +121,15 @@ public class AttractionDetailsFragment extends DialogFragment
            public void onClick(View v)
            {
                budgetBar.setBudgetLevel(attraction.getEstimatedPrice());
-              dismiss();
+               chosen_attractions.add(attraction);
+               dismiss();
            }
        });
     }
 
-    public void getImages() throws ParseException
+
+    public static ArrayList<Attraction> getChosenAttractions()
     {
-        networkUtility.getImagesFromAttraction(attraction);
-        photos = networkUtility.getPhotos();
-
-        for(int i = 0; i < photos.size(); i++)
-        {
-            Photo p = photos.get(i);
-            ParseFile images = p.getImage();
-            String url = images.getUrl();
-
-            imageURLs.add(url);
-        }
-
-        tvAttractionName.setText(attraction.getAttractionName());
-        tvAttractionDescription.setText(attraction.getAttractionDescription());
-        tvAttractionTime.setText(attraction.getEstimatedTime());
-        tvAttractionPrice.setText(attraction.getEstimatedPrice()+"");
+        return chosen_attractions;
     }
 }
