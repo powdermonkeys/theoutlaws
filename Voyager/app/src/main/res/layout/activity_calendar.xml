@@ -1,28 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CalendarActivity">
 
-    <!-- If you want the calendar scrollable -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/dateHeader"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:background="#AABBCC"
+            android:orientation="horizontal">
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/previous_day"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left"
+                android:padding="5dp"
+                android:src="@drawable/left_arrow" />
+
+            <TextView
+                android:id="@+id/display_current_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="July 27, 2018"
+                android:textSize="18sp"
+                android:textColor="#fafafa"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/next_day"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/right_arrow" />
+        </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dateHeader">
+
         <com.framgia.library.calendardayview.CalendarDayView
             android:id="@+id/dayView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:dayHeight="@dimen/dayHeight">
-
+            android:layout_marginRight="35dp"
+            app:dayHeight="35dp"
+            app:eventMarginLeft="10dp">
         </com.framgia.library.calendardayview.CalendarDayView>
     </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/seaFoam">
+    </FrameLayout>
 
 </RelativeLayout>
