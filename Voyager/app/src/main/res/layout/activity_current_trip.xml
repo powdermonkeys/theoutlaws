@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.CurrentTripActivity">
+
+    <Button
+        android:id="@+id/btnBudget"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="BUDGET"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="516dp" />
+
+    <Button
+        android:id="@+id/btnCalendar"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="VIEW CALENDAR"
+        tools:layout_editor_absoluteX="194dp"
+        tools:layout_editor_absoluteY="516dp" />
+
+    <TextView
+        android:id="@+id/tvGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvDestination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="219dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvTemp"
+        android:layout_width="135dp"
+        android:layout_height="117dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="88dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvWeather"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="TextView" />
+</RelativeLayout>

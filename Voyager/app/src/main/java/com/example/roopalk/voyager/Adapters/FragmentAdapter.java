@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.roopalk.voyager.Fragments.BuildFragment;
-import com.example.roopalk.voyager.Fragments.CalendarFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter{
@@ -31,7 +30,7 @@ public class FragmentAdapter extends FragmentPagerAdapter{
             case 0: // Fragment # 0 - This will show FirstFragment
                 return new FeaturedTripsFragment();
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return CalendarFragment.newInstance("STARTDATE", "ENDDATE");
+                return new BuildFragment();
             case 2: // Fragment # 1 - This will show SecondFragment
                 return BuildFragment.newInstance(2, "Page # 3");
             default:

@@ -3,6 +3,7 @@ package com.example.roopalk.voyager.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Activities.CalendarActivity;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -42,6 +44,7 @@ public class BuildFragment extends Fragment {
     public SeekBar sbGuests;
     public SeekBar sbBudget;
     public Button btnDone;
+    public Button button;
 
     int guests = 1;
     int budget = 0;
@@ -81,6 +84,7 @@ public class BuildFragment extends Fragment {
         tvBudget = view.findViewById(R.id.tvBudget);
         sbBudget = view.findViewById(R.id.sbBudget);
         btnDone = view.findViewById(R.id.btnDone);
+        button = view.findViewById(R.id.calendar);
 
         tvGuests.setText("" + guests);
         tvBudget.setText("" + budget);
@@ -229,6 +233,16 @@ public class BuildFragment extends Fragment {
                 }
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CalendarActivity.class);
+                Log.d("intent", "reached intent");
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

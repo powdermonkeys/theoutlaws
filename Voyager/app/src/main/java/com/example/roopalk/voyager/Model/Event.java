@@ -1,6 +1,10 @@
 package com.example.roopalk.voyager.Model;
 
-public class Event {
+import com.framgia.library.calendardayview.data.IEvent;
+
+import java.util.Calendar;
+
+public class Event implements IEvent {
 
     private String evtName;
     private float evtStartTime;
@@ -20,13 +24,18 @@ public class Event {
         return evtName;
     }
 
-    public float getStartTime() {
-        return evtStartTime;
+    @Override
+    public int getColor() {
+        return 0;
     }
 
-    public float getEndTime() {
-        return evtEndTime;
-    }
+//    public float getStartTime() {
+//        return evtStartTime;
+//    }
+//
+//    public float getEndTime() {
+//        return evtEndTime;
+//    }
 
     public int getStartTimeInMinutes() {
         return startTimeMinutes;
@@ -36,4 +45,13 @@ public class Event {
         return endTimeMinutes;
     }
 
+    @Override
+    public Calendar getStartTime() {
+        return null;
+    }
+
+    @Override
+    public Calendar getEndTime() {
+        return null;
+    }
 }
