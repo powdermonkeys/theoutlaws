@@ -107,14 +107,14 @@ public class AddingAttractionFragment extends Fragment
         mAdapter = new AttractionAdapter(attractions, listener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
-        done.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                listener.moveToCalendarPage();
-            }
-        });
+//        done.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                listener.moveToCalendarPage();
+//            }
+//        });
 
     }
 

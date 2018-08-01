@@ -16,7 +16,6 @@ import android.widget.TimePicker;
 
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
@@ -127,16 +126,16 @@ public class AddingEventFragment extends DialogFragment
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Event event = new Event(chosenAttraction.getAttractionName(), hour, minute);
-                mListener.moveToCalendarPage(event);
-                dismiss();
-            }
-        });
+//        add.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                Event event = new Event(chosenAttraction.getAttractionName(), hour, minute);
+//                mListener.moveToCalendarPage(event);
+//                dismiss();
+//            }
+//        });
     }
 
     @Override

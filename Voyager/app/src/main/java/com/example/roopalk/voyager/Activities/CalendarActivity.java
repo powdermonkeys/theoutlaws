@@ -27,11 +27,10 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         ButterKnife.bind(this);
-     //   dayView =  findViewById(R.id.dayView);
+        dayView =  findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
         events = new ArrayList<>();{
-
             int eventColor = ContextCompat.getColor(this, R.color.eventColor);
             Calendar timeStart = Calendar.getInstance();
             timeStart.set(Calendar.HOUR_OF_DAY, 7);
@@ -42,7 +41,6 @@ public class CalendarActivity extends AppCompatActivity {
             Event event = new Event( timeStart, timeEnd, "Event",  eventColor);
             events.add(event);
         }
-
         {
             int eventColor = ContextCompat.getColor(this, R.color.millenialPink);
             Calendar timeStart = Calendar.getInstance();

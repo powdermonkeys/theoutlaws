@@ -9,14 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.roopalk.voyager.Adapters.FragmentAdapter;
-import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
+import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
-import com.example.roopalk.voyager.Fragments.CalendarFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
-import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
@@ -27,7 +25,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     AddingAttractionFragment addingAttractionFragment;
     AttractionDetailsFragment attractionDetailsFragment;
     AddingEventFragment addingEventFragment;
-    CalendarFragment calendarFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,21 +80,4 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-    @Override
-    public void moveToCalendarPage()
-    {
-        calendarFragment = new CalendarFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeholder, calendarFragment);
-        ft.commit();
-    }
-
-    @Override
-    public void moveToCalendarPage(Event event)
-    {
-        calendarFragment = CalendarFragment.newInstance(event);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeholder, calendarFragment);
-        ft.commit();
-    }
 }

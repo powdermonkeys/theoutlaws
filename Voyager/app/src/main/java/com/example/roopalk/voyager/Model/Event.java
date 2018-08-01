@@ -18,9 +18,7 @@ public class Event implements IEvent {
         this.mColor = mColor;
     }
 
-    public Event(String attractionName, int hour, int minute) {
-        
-    }
+
 
 
     public Calendar getStartTime() {

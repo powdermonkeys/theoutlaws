@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.Activities.CalendarActivity;
+import com.example.roopalk.voyager.Activities.CurrentTripActivity;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -45,13 +46,13 @@ public class BuildFragment extends Fragment {
     public SeekBar sbBudget;
     public Button btnDone;
     public Button button;
+    public Button landing;
 
     int guests = 1;
     int budget = 0;
 
     Calendar mCurrentDate;
     int day; int month; int year;
-
 
     onFragmentInteractionListener mListener;
 
@@ -85,10 +86,10 @@ public class BuildFragment extends Fragment {
         sbBudget = view.findViewById(R.id.sbBudget);
         btnDone = view.findViewById(R.id.btnDone);
         button = view.findViewById(R.id.calendar);
+        landing = view.findViewById(R.id.landing);
 
         tvGuests.setText("" + guests);
         tvBudget.setText("" + budget);
-
 
         //seekbar
         sbGuests.setMax(10);
@@ -231,6 +232,14 @@ public class BuildFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        landing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CurrentTripActivity.class);
                 Log.d("intent", "reached intent");
                 startActivity(intent);
             }
