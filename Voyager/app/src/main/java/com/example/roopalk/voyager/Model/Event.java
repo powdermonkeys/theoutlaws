@@ -18,11 +18,6 @@ public class Event implements IEvent {
         this.mColor = mColor;
     }
 
-    public Event(String attractionName, int hour, int minute) {
-        
-    }
-
-
     public Calendar getStartTime() {
         return mStartTime;
     }
@@ -55,6 +50,13 @@ public class Event implements IEvent {
         this.mColor = color;
     }
 
+    //get all the information of an event in integers
 
+    public int getStartIntHour() { return mStartTime.HOUR_OF_DAY; }
 
+    public int getStartIntMin() { return mStartTime.MINUTE; }
+
+    public int getEndIntHour() { return mEndTime.HOUR_OF_DAY; }
+
+    public int getEndIntMin() { return mEndTime.MINUTE; }
 }

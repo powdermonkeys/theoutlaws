@@ -1,7 +1,6 @@
 package com.example.roopalk.voyager.Fragments;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 
+import com.example.roopalk.voyager.Activities.CalendarActivity;
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
@@ -29,8 +29,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class AddingEventFragment extends DialogFragment
 {
-    onFragmentInteractionListener mListener;
-
+    @BindView(R.id.leaveDialog) ImageView leaveDialog;
     @BindView(R.id.add) Button add;
     @BindView(R.id.etStartTime) EditText etStartTime;
     @BindView(R.id.etEndTime) EditText etEndtime;
@@ -42,7 +41,7 @@ public class AddingEventFragment extends DialogFragment
 
     NetworkUtility networkUtility = new NetworkUtility(getContext());
 
-    int hour, minute;
+    int startHour, startMin, endHour, endMin;
 
     public static AddingEventFragment newInstance(Attraction chosenAttraction)
     {
@@ -102,8 +101,10 @@ public class AddingEventFragment extends DialogFragment
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
                     {
                         etStartTime.setText(hourOfDay + ":" + minute);
+                        startHour = hourOfDay;
+                        startMin = minute;
                     }
-                }, hour, minute, false);
+                }, startHour, startMin, false);
 
                 timePickerDialog.show();
             }
@@ -119,11 +120,22 @@ public class AddingEventFragment extends DialogFragment
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
                     {
-                        etStartTime.setText(hourOfDay + ":" + minute);
+                        etEndtime.setText(hourOfDay + ":" + minute);
+                        endHour = hourOfDay;
+                        endMin = minute;
                     }
-                }, hour, minute, false);
+                }, endHour, endMin, false);
 
                 timePickerDialog.show();
+            }
+        });
+
+        leaveDialog.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
             }
         });
 
@@ -132,21 +144,9 @@ public class AddingEventFragment extends DialogFragment
             @Override
             public void onClick(View v)
             {
-                Event event = new Event(chosenAttraction.getAttractionName(), hour, minute);
-                mListener.moveToCalendarPage(event);
+                ((CalendarActivity)getActivity()).setTime(startHour, startMin, endHour, endMin);
                 dismiss();
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onFragmentInteractionListener) {
-            mListener = (onFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement onFragmentInteractionListener");
-        }
     }
 }
