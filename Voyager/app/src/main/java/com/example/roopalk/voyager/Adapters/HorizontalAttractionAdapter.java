@@ -1,6 +1,8 @@
 package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
+import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -21,22 +23,16 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<HorizontalAttractionAdapter.ViewHolder>
-{
+public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<HorizontalAttractionAdapter.ViewHolder> {
 
     ArrayList<Attraction> chosenAttractions;
     Context context;
 
-    onFragmentInteractionListener listener;
-
-    public HorizontalAttractionAdapter(ArrayList<Attraction> chosenAttractions, onFragmentInteractionListener listener)
-    {
+    public HorizontalAttractionAdapter(ArrayList<Attraction> chosenAttractions) {
         this.chosenAttractions = chosenAttractions;
-        this.listener = listener;
     }
 
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -47,43 +43,38 @@ public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<Horizonta
     }
 
     @Override
-    public void onBindViewHolder(HorizontalAttractionAdapter.ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(HorizontalAttractionAdapter.ViewHolder holder, int position) {
         Attraction attraction = chosenAttractions.get(position);
         Photo photo = new Photo();
 
         NetworkUtility networkUtility = new NetworkUtility(context);
 
-        try
-        {
+        try {
             networkUtility.getImagesFromAttraction(attraction);
             photo = networkUtility.getPhotos().get(0);
-        }
-        catch (ParseException e)
-        {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
         holder.tvAttractionName.setText(attraction.getAttractionName());
 
         Glide.with(context)
-             .load(photo.getImage().getUrl())
-             .into(holder.ivAttractionPhoto);
+                .load(photo.getImage().getUrl())
+                .into(holder.ivAttractionPhoto);
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return chosenAttractions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
-        @BindView(R.id.ivAttractionPhoto) ImageView ivAttractionPhoto;
-        @BindView(R.id.tvAttractionName) TextView tvAttractionName;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.ivAttractionPhoto)
+        ImageView ivAttractionPhoto;
+        @BindView(R.id.tvAttractionName)
+        TextView tvAttractionName;
 
-        public ViewHolder(View itemView)
-        {
+        public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -91,12 +82,18 @@ public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<Horizonta
         }
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             int position = getAdapterPosition();
 
             Attraction attraction = chosenAttractions.get(position);
-            listener.moveToAddEventPage(attraction);
+            moveToAddEventPage(attraction);
         }
+    }
+
+    public void moveToAddEventPage(Attraction attraction)
+    {
+        AddingEventFragment addingEventFragment = AddingEventFragment.newInstance(attraction);
+        FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        addingEventFragment.show(ft, "adding event fragment");
     }
 }

@@ -15,5 +15,6 @@
         android:layout_below="@+id/ivAttractionPhoto"
         android:layout_centerHorizontal="true"
         android:text="AttractionName"
-        android:id="@+id/tvAttractionName"/>
+        android:id="@+id/tvAttractionName"
+        android:textColor="@color/eggshellWhite"/>
 </RelativeLayout>

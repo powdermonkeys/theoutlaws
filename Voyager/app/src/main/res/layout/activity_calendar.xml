@@ -43,18 +43,20 @@
                 android:src="@drawable/right_arrow" />
         </LinearLayout>
 
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/dateHeader">
+        android:layout_below="@id/dateHeader"
+        android:id="@+id/svCalendar">
 
         <com.framgia.library.calendardayview.CalendarDayView
             android:id="@+id/dayView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="35dp"
-            app:dayHeight="35dp"
+            app:dayHeight="@dimen/dayHeight"
             app:eventMarginLeft="10dp">
         </com.framgia.library.calendardayview.CalendarDayView>
     </ScrollView>
@@ -64,6 +66,13 @@
         android:layout_height="130dp"
         android:layout_alignParentBottom="true"
         android:background="@color/seaFoam">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvHorizontal">
+        </android.support.v7.widget.RecyclerView>
+
     </FrameLayout>
 
 </RelativeLayout>
