@@ -56,15 +56,7 @@ public class AddingAttractionFragment extends Fragment
         fragment.setArguments(args);
         return fragment;
     }
-
-    public static AddingAttractionFragment newInstance(int attractionPrice)
-    {
-        Bundle price = new Bundle();
-        price.putInt("price", attractionPrice);
-        AddingAttractionFragment fragment = new AddingAttractionFragment();
-        fragment.setArguments(price);
-        return fragment;
-    }
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -100,22 +92,20 @@ public class AddingAttractionFragment extends Fragment
         //  the recycler view for the attractions list
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvAttractions);
 
-
         BudgetBar budgetBar = new BudgetBar(trip, pbBudget);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new AttractionAdapter(attractions, listener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
-//        done.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                listener.moveToCalendarPage();
-//            }
-//        });
-
+        done.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                listener.moveToCalendarPage();
+            }
+        });
     }
 
     @Override

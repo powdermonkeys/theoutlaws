@@ -15,4 +15,5 @@ public interface onFragmentInteractionListener
     public void moveToAttractionsPage(Trip trip);
 
     public void moveToAddEventPage(Attraction attraction);
+    public void moveToCalendarPage();
 }

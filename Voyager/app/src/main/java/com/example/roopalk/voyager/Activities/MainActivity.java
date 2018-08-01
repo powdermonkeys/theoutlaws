@@ -1,5 +1,6 @@
 package com.example.roopalk.voyager.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -80,4 +81,9 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
+    public void moveToCalendarPage()
+    {
+        Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
+        startActivity(calendarIntent);
+    }
 }
