@@ -9,8 +9,8 @@ import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter{
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Featured", "User Trips", "Your Trips" };
+    final int PAGE_COUNT = 2;
+    private String tabTitles[] = new String[] { "Featured",  "Your Trips" };
     private Context context;
 
     public FragmentAdapter(FragmentManager fm, Context context) {
@@ -31,8 +31,6 @@ public class FragmentAdapter extends FragmentPagerAdapter{
                 return new FeaturedTripsFragment();
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return new BuildFragment();
-            case 2: // Fragment # 1 - This will show SecondFragment
-                return BuildFragment.newInstance(2, "Page # 3");
             default:
                 return null;
         }
