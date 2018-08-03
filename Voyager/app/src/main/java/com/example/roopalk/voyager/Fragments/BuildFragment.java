@@ -240,6 +240,7 @@ public class BuildFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CurrentTripActivity.class);
+                Log.d("intent", "reached intent");
                 startActivity(intent);
             }
         });
