@@ -15,6 +15,7 @@ import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
@@ -31,6 +32,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     AddingAttractionFragment addingAttractionFragment;
 
     AttractionDetailsFragment attractionDetailsFragment;
+    FeaturedTripsFragment featuredTripsFragment;
     AddingEventFragment addingEventFragment;
 
     SimpleDateFormat mdformat;
@@ -71,6 +73,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                moveToFeaturedTrips();
             }
         });
 
@@ -107,6 +110,16 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.commit();
     }
 
+
+    public void moveToFeaturedTrips()
+    {
+        featuredTripsFragment = FeaturedTripsFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void moveToAddEventPage(Attraction attraction)
     {
@@ -120,4 +133,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
         startActivity(calendarIntent);
     }
+
+
 }
