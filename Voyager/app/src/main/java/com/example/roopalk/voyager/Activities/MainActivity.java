@@ -41,7 +41,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         tabLayout.setupWithViewPager(viewPager);
     }
 
-
     @Override
     //from the interface - move between fragments
     public void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar)
