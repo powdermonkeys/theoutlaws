@@ -71,7 +71,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
             }
         });
 

@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,17 @@ public class Trip extends ParseObject {
         return trips;
     }
 
+    public static class Query extends ParseQuery<Trip>
+    {
+        public Query()
+        {
+            super(Trip.class);
+        }
 
-
+        public Query withDate(String date)
+        {
+            whereMatches("checkin", date);
+            return this;
+        }
+    }
 }
