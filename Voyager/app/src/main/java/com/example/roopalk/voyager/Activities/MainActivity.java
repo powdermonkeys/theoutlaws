@@ -29,8 +29,10 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     private final String TAG = "MainActivity";
 
     AddingAttractionFragment addingAttractionFragment;
+
     AttractionDetailsFragment attractionDetailsFragment;
     AddingEventFragment addingEventFragment;
+
     SimpleDateFormat mdformat;
 
     @Override
