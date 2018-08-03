@@ -36,7 +36,7 @@
             android:name=".Activities.LoginActivity"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.CurrentTripActivity" />
-        <activity android:name=".Activities.CalendarActivity"></activity>
+        <activity android:name=".Activities.CalendarActivity" />
     </application>
 
 </manifest>

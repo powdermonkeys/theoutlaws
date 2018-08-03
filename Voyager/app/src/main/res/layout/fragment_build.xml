@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true">
+    android:layout_alignParentTop="true"
+    android:padding="40dp">
 
         <ImageView
             android:id="@+id/logo"
@@ -106,7 +107,6 @@
             android:layout_margin="5dp"
             android:hint="@string/arrival"
             android:textColor="@color/black"
-
             android:textColorHint="@color/hintColor" />
 
 
@@ -127,8 +127,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:textColor="@color/black"
-
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <SeekBar
             android:id="@+id/sbBudget"
@@ -146,9 +145,8 @@
             android:layout_toRightOf="@id/sbBudget"
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
-
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnDone"
@@ -158,13 +156,5 @@
             android:layout_below="@id/sbBudget"
             android:layout_marginBottom="23dp"
             android:text="Done" />
-
-        <Button
-            android:id="@+id/calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:text="CALENDAR" />
 
 </RelativeLayout>

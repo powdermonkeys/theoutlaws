@@ -3,7 +3,6 @@ package com.example.roopalk.voyager.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.roopalk.voyager.Activities.CalendarActivity;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -27,8 +25,11 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Integer.parseInt;
 
@@ -44,14 +45,12 @@ public class BuildFragment extends Fragment {
     public SeekBar sbGuests;
     public SeekBar sbBudget;
     public Button btnDone;
-    public Button button;
 
     int guests = 1;
     int budget = 0;
 
     Calendar mCurrentDate;
     int day; int month; int year;
-
 
     onFragmentInteractionListener mListener;
 
@@ -84,11 +83,9 @@ public class BuildFragment extends Fragment {
         tvBudget = view.findViewById(R.id.tvBudget);
         sbBudget = view.findViewById(R.id.sbBudget);
         btnDone = view.findViewById(R.id.btnDone);
-        button = view.findViewById(R.id.calendar);
 
         tvGuests.setText("" + guests);
         tvBudget.setText("" + budget);
-
 
         //seekbar
         sbGuests.setMax(10);
@@ -189,6 +186,8 @@ public class BuildFragment extends Fragment {
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             month = month + 1;
                             departureDate.setText(month + "/" + dayOfMonth + "/" + year);
+                            SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
+                            //departureDate.setText(myFormat.format(month, dayOfMonth, year));
                         }
                     }, year, month, day);
                     datePickerDialog.show();
@@ -206,12 +205,14 @@ public class BuildFragment extends Fragment {
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 final int BUDGET = parseInt(tvBudget.getText().toString());
+             //   final int LENGTH = tripLength(CHECKIN, CHECKOUT);
                 try
                 {
+
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
-                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET);
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET); //, LENGTH);
 
                     newTrip.saveInBackground(new SaveCallback() {
 
@@ -221,21 +222,25 @@ public class BuildFragment extends Fragment {
 
                         }
                     });
+                    tripLength(CHECKIN, CHECKOUT);
                 } catch (Exception e) {
                     Log.d("onClick", "didnt create object");
                 }
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CalendarActivity.class);
-                Log.d("intent", "reached intent");
-                startActivity(intent);
-            }
-        });
+    }
 
+    public void tripLength(String CHECKIN, String CHECKOUT) throws java.text.ParseException {
+        SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
+        try {
+            Date date1 = myFormat.parse(CHECKIN);
+            Date date2 = myFormat.parse(CHECKOUT);
+            long diff = date2.getTime() - date1.getTime();
+            System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        }catch (Exception e){
+
+        }
     }
 
     @Override

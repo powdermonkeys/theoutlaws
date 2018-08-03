@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/iconBackgroundBlue"
     tools:context=".Activities.CurrentTripActivity">
 
     <Button
@@ -33,30 +34,37 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp"
-        android:text="TextView" />
+        android:text="Welcome to"
+        android:textColor="@color/whitish"
+        android:textSize="50sp"
+      />
 
     <TextView
         android:id="@+id/tvDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="219dp"
-        android:text="TextView" />
+        android:layout_below="@id/tvWeather"
+        android:textColor="@color/whitish"
+        android:textSize="30sp"
+         />
 
     <TextView
         android:id="@+id/tvTemp"
         android:layout_width="135dp"
         android:layout_height="117dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/tvGreeting"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
-        android:text="TextView" />
+        android:textColor="@color/whitish"
+        android:textSize="30sp"
+        />
 
     <TextView
         android:id="@+id/tvWeather"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvTemp"
         android:layout_centerInParent="true"
-        android:text="TextView" />
+         />
 </RelativeLayout>

@@ -130,15 +130,6 @@ public class AddingEventFragment extends DialogFragment
             }
         });
 
-        leaveDialog.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                dismiss();
-            }
-        });
-
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -148,5 +139,16 @@ public class AddingEventFragment extends DialogFragment
                 dismiss();
             }
         });
+
+        leaveDialog.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+            }
+        });
+
+
     }
 }
