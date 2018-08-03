@@ -3,6 +3,7 @@ package com.example.roopalk.voyager.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Activities.CurrentTripActivity;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -231,25 +233,16 @@ public class BuildFragment extends Fragment {
 
     }
 
-<<<<<<< HEAD
-        landing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CurrentTripActivity.class);
-                Log.d("intent", "reached intent");
-                startActivity(intent);
-            }
-        });
-=======
     public void tripLength(String CHECKIN, String CHECKOUT) throws java.text.ParseException {
         SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
-        try {
+        try
+        {
             Date date1 = myFormat.parse(CHECKIN);
             Date date2 = myFormat.parse(CHECKOUT);
             long diff = date2.getTime() - date1.getTime();
             System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-        }catch (Exception e){
->>>>>>> ba8a53f00bdbd5461cad03517d0c97926e743f0b
+        }
+        catch (Exception e){
 
         }
     }
