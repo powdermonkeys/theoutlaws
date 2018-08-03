@@ -15,6 +15,7 @@ import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
@@ -32,6 +33,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
     AttractionDetailsFragment attractionDetailsFragment;
     AddingEventFragment addingEventFragment;
+    FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
 
     SimpleDateFormat mdformat;
 
@@ -55,7 +57,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
         // the alert dialog for trip builder
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
             alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
@@ -70,7 +72,9 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
             alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
+
             }
         });
 
