@@ -3,8 +3,8 @@ package com.example.roopalk.voyager.Model;
 import android.support.annotation.Nullable;
 
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,8 @@ public class Trip extends ParseObject {
 
     private static final String BUDGET = "budget";
 
+  //  private static final String LENGTH = "length";
+
     public Trip() {}
 
     //getter methods for each of the values
@@ -49,6 +51,7 @@ public class Trip extends ParseObject {
     {
         return getString(DESTINATION);
     }
+  //  public @Nullable int getLength () {return getInt(LENGTH);}
 
     public int getBudget() { return getInt(BUDGET); }
 
@@ -68,15 +71,18 @@ public class Trip extends ParseObject {
 
     public void setDestination(final String destination) { put(DESTINATION, destination); }
 
-    public void setBudget(int budget) { put(BUDGET, budget); }
+    public void setBudget(int budget) { put(BUDGET, budget);}
+
+  //  public void setLength (int length) { put(LENGTH, length);}
 
 
-    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget) throws ParseException {
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget){ //int length) throws ParseException {
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
         setBudget(budget);
+      //  setLength(length);
     }
 
 
@@ -91,4 +97,17 @@ public class Trip extends ParseObject {
         return trips;
     }
 
+    public static class Query extends ParseQuery<Trip>
+    {
+        public Query()
+        {
+            super(Trip.class);
+        }
+
+        public Query withDate(String date)
+        {
+            whereMatches("checkin", date);
+            return this;
+        }
+    }
 }

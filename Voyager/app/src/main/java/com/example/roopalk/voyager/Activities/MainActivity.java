@@ -1,5 +1,6 @@
 package com.example.roopalk.voyager.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,25 +8,37 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "MainActivity";
 
     AddingAttractionFragment addingAttractionFragment;
+
     AttractionDetailsFragment attractionDetailsFragment;
     AddingEventFragment addingEventFragment;
+    FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
+
+    SimpleDateFormat mdformat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,11 +51,53 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
+        //gets today's date
+        Date currentDate = new Date();
+        ArrayList<Trip> hasDate = new ArrayList<>();
+        
+        NetworkUtility networkUtility = new NetworkUtility(this);
+        try
+        {
+            hasDate = networkUtility.getTripsByDate(currentDate.toString());
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-    }
 
+        // the alert dialog for trip builder
+        
+        if(!hasDate.isEmpty())
+        {
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
+            alertDialogBuilder.setPositiveButton("yes",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    });
+
+            alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    moveToFeaturedTrips();
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
 
     @Override
     //from the interface - move between fragments
@@ -73,6 +128,16 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.commit();
     }
 
+
+    public void moveToFeaturedTrips()
+    {
+        featuredTripsFragment = FeaturedTripsFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void moveToAddEventPage(Attraction attraction)
     {
@@ -86,4 +151,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
         startActivity(calendarIntent);
     }
+
+
 }

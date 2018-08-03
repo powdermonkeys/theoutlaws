@@ -16,6 +16,6 @@
     <color name="iconSailBlue">#CBF5E3</color>
     <color name="hintColor">#ADADAD</color>
     <color name="signInBlue">#bcf2e0</color>
-
+    <color name="calendarRed"> #CE2F13</color>
     <color name="whitish">#fafafa</color>
 </resources>
