@@ -113,7 +113,6 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             if(position != RecyclerView.NO_POSITION)
             {
-                //mListener.moveToDetailsPage(attraction, budgetBar);
                 moveToDetailsPage(attraction, budgetBar);
             }
         }
