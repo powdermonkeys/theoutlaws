@@ -38,7 +38,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     AddingEventFragment addingEventFragment;
 
     SimpleDateFormat mdformat;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -117,14 +117,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment = AddingEventFragment.newInstance(attraction);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         addingEventFragment.show(ft, "fragment_add_event");
-    }
-
-    @Override
-    public void moveToAttractionsPage(Trip trip)
-    {
-        Intent attractionIntent = new Intent(MainActivity.this, AttractionListActivity.class);
-        attractionIntent.putExtra("trip", Parcels.wrap(trip));
-        startActivity(attractionIntent);
     }
 
     public void moveToCalendarPage(Trip trip)

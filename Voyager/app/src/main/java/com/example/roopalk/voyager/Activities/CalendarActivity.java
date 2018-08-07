@@ -1,18 +1,27 @@
 package com.example.roopalk.voyager.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
+import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,18 +30,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener{
     @BindView(R.id.dayView)
     CalendarDayView dayView;
 
     ArrayList<IEvent> events = new ArrayList<>();
 
-    private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
+    private ArrayList<Attraction> chosenAttractions = AttractionDetailsFragment.getChosenAttractions();
+
+    private Trip trip;
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
-    @BindView(R.id.rvHorizontal)
-    RecyclerView rvHorizontal;
+    @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
+
+    @BindView(R.id.addIcon) FloatingActionButton addicon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +55,15 @@ public class CalendarActivity extends AppCompatActivity {
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+
         events = new ArrayList<>();
         {
 
             //set up the horizontal scroll for attractions
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             rvHorizontal.setLayoutManager(linearLayoutManager);
-            horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
+            horizontalAttractionAdapter = new HorizontalAttractionAdapter(chosenAttractions);
             rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
             dayView.setLimitTime(8, 22);
@@ -80,6 +94,18 @@ public class CalendarActivity extends AppCompatActivity {
 
             dayView.setEvents(events);
         }
+
+        addicon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.rlCalendar, addingAttractionFragment);
+                ft.commit();
+            }
+        });
     }
 
         public void setTime ( int startH, int startMin, int endH, int endMin){
@@ -102,4 +128,12 @@ public class CalendarActivity extends AppCompatActivity {
 
             dayView.refresh();
         }
+
+    @Override
+    public void moveToCalendarPage(Trip trip, Context context)
+    {
+        Intent calendarIntent = new Intent(context, CalendarActivity.class);
+        calendarIntent.putExtra("trip", Parcels.wrap(trip));
+        startActivity(calendarIntent);
     }
+}

@@ -236,7 +236,7 @@ public class BuildFragment extends Fragment
             mListener = (onFragmentInteractionListener) context;
         }
         else
-            {
+        {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
