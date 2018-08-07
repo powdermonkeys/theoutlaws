@@ -24,13 +24,10 @@ import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.parceler.Parcels;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
@@ -42,9 +39,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     AttractionDetailsFragment attractionDetailsFragment;
     FeaturedTripsFragment featuredTripsFragment;
     AddingEventFragment addingEventFragment;
-    FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
-
-    SimpleDateFormat mdformat;
 
     SimpleDateFormat mdformat;
 
@@ -61,7 +55,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
         //gets today's date
         Date currentDate = new Date();
-<<<<<<< HEAD
         ArrayList<Trip> hasDate = new ArrayList<>();
         
         NetworkUtility networkUtility = new NetworkUtility(this);
@@ -73,13 +66,10 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         {
             e.printStackTrace();
         }
-=======
->>>>>>> roopals-major-fixes
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-<<<<<<< HEAD
 
         // the alert dialog for trip builder
         
@@ -109,7 +99,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
-=======
 
         // the alert dialog for trip builder
 
@@ -144,7 +133,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
         fragmentTransaction.commit();
->>>>>>> roopals-major-fixes
     }
 
     @Override
@@ -164,37 +152,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.replace(R.id.viewpager, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
-    }
-
-    @Override
-<<<<<<< HEAD
-    public void moveToAttractionsPage(Trip trip)
-    {
-        addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);
-        fragmentTransaction.commit();
-    }
-
-
-    public void moveToFeaturedTrips()
-    {
-        featuredTripsFragment = FeaturedTripsFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
-        fragmentTransaction.commit();
-    }
-
-    @Override
-=======
->>>>>>> roopals-major-fixes
-    public void moveToAddEventPage(Attraction attraction)
-    {
-        addingEventFragment = AddingEventFragment.newInstance(attraction);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        addingEventFragment.show(ft, "fragment_add_event");
     }
 
     public void moveToCalendarPage(Trip trip)
