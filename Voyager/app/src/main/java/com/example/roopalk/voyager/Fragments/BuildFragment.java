@@ -20,10 +20,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-import com.example.roopalk.voyager.Activities.CurrentTripActivity;
-=======
->>>>>>> roopals-major-fixes
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -53,23 +49,10 @@ public class BuildFragment extends Fragment
     @BindView(R.id.tvGuests) TextView tvGuests;
     @BindView(R.id.tvBudget) TextView tvBudget;
 
-<<<<<<< HEAD
-    public TextView create;
-    public AutoCompleteTextView destination;
-    public EditText departureDate;
-    public EditText arrivalDate;
-    public TextView tvGuests;
-    public TextView tvBudget;
-    public SeekBar sbGuests;
-    public SeekBar sbBudget;
-    public Button btnDone;
-=======
     Calendar mCurrentDate;
     int day;
     int month;
     int year;
->>>>>>> roopals-major-fixes
-
     int guests = 1;
     int budget = 0;
 
@@ -99,20 +82,6 @@ public class BuildFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
-<<<<<<< HEAD
-        View view = inflater.inflate(R.layout.fragment_build, container, false);
-
-        create = view.findViewById(R.id.create);
-        destination = view.findViewById(R.id.destinationNamed);
-        departureDate = view.findViewById(R.id.departureDate);
-        arrivalDate = view.findViewById(R.id.arrivalDate);
-        sbGuests = view.findViewById(R.id.sbGuests);
-        tvGuests = (TextView) view.findViewById(R.id.tvGuests);
-        tvBudget = view.findViewById(R.id.tvBudget);
-        sbBudget = view.findViewById(R.id.sbBudget);
-        btnDone = view.findViewById(R.id.btnDone);
-=======
         return inflater.inflate(R.layout.fragment_build, container, false);
     }
 
@@ -122,7 +91,6 @@ public class BuildFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
->>>>>>> roopals-major-fixes
 
         tvGuests.setText("" + guests);
         tvBudget.setText("" + budget);
@@ -235,22 +203,11 @@ public class BuildFragment extends Fragment
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 final int BUDGET = parseInt(tvBudget.getText().toString());
-<<<<<<< HEAD
-             //   final int LENGTH = tripLength(CHECKIN, CHECKOUT);
-                try
-                {
-
-                    Log.d("onClick", "reached the try catch statement");
-                    // a new trip object being created
-                    final Trip newTrip = ParseObject.create(Trip.class);
-                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET); //, LENGTH);
-=======
                 final int LENGTH = getTripLength(CHECKIN, CHECKOUT);
                 try {
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
->>>>>>> roopals-major-fixes
 
                     newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH);
 
@@ -263,30 +220,11 @@ public class BuildFragment extends Fragment
                             mListener.moveToCalendarPage(newTrip);
                         }
                     });
-                    tripLength(CHECKIN, CHECKOUT);
                 } catch (Exception e) {
                     Log.d("onClick", "didnt create object");
                 }
             }
         });
-<<<<<<< HEAD
-
-    }
-
-    public void tripLength(String CHECKIN, String CHECKOUT) throws java.text.ParseException {
-        SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
-        try
-        {
-            Date date1 = myFormat.parse(CHECKIN);
-            Date date2 = myFormat.parse(CHECKOUT);
-            long diff = date2.getTime() - date1.getTime();
-            System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-        }
-        catch (Exception e){
-
-        }
-=======
->>>>>>> roopals-major-fixes
     }
 
     @Override
