@@ -64,9 +64,9 @@ public class FeaturedTripsFragment extends Fragment
         //give LayoutManager to RecyclerView to position items on the screen
         rvFeatured.setLayoutManager(layout);
 
-        //        // get data
+        // get data
         trips = Trip.getTrips();
-//
+
         // create adapter
         mAdapter = new FeaturedAdapter(getActivity(), trips);
 
