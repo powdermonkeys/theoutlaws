@@ -1,41 +1,24 @@
 package com.example.roopalk.voyager.Activities;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-<<<<<<< HEAD
-=======
-import android.support.v4.app.FragmentTransaction;
->>>>>>> roopals-major-fixes
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-<<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.TextView;
-=======
-import android.view.View;
->>>>>>> roopals-major-fixes
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
-import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
-import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
-=======
-import org.parceler.Parcels;
-
->>>>>>> roopals-major-fixes
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,7 +27,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-<<<<<<< HEAD
 public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.dayView) CalendarDayView dayView;
     @BindView(R.id.display_current_date) TextView currDate;
@@ -53,21 +35,13 @@ public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.previous_day) ImageView previousDay;
     @BindView(R.id.next_day) ImageView nextDay;
 
-=======
-public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener{
-    @BindView(R.id.dayView)
-    CalendarDayView dayView;
->>>>>>> roopals-major-fixes
 
     ArrayList<IEvent> events = new ArrayList<>();
 
-    private ArrayList<Attraction> chosenAttractions = AttractionDetailsFragment.getChosenAttractions();
-
-    private Trip trip;
+    private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
-<<<<<<< HEAD
     public SimpleDateFormat currTime;
     public int hours;
     public int minutes;
@@ -75,11 +49,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     @BindView(R.id.rvHorizontal)
     RecyclerView rvHorizontal;
-=======
-    @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
-
-    @BindView(R.id.addIcon) FloatingActionButton addicon;
->>>>>>> roopals-major-fixes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +72,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
-<<<<<<< HEAD
         //gets the current weather
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
@@ -113,9 +81,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         });
         asyncTask.execute("47.6062", "-122.3321"); //  asyncTask.execute("Latitude", "Longitude")
 
-=======
-        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
->>>>>>> roopals-major-fixes
 
         events = new ArrayList<>();
         {
@@ -123,89 +88,33 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             //set up the horizontal scroll for attractions
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             rvHorizontal.setLayoutManager(linearLayoutManager);
-            horizontalAttractionAdapter = new HorizontalAttractionAdapter(chosenAttractions);
+            horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
             rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
             dayView.setLimitTime(8, 22);
-
-            events = new ArrayList<>();
-            {
-                int eventColor = ContextCompat.getColor(this, R.color.calendarRed);
-                Calendar timeStart = Calendar.getInstance();
-                timeStart.set(Calendar.HOUR_OF_DAY, hours);
-                timeStart.set(Calendar.MINUTE, minutes);
-                Calendar timeEnd = (Calendar) timeStart.clone();
-                timeEnd.set(Calendar.HOUR_OF_DAY, hours);
-                timeEnd.set(Calendar.MINUTE, minutes + 2);
-                Event event = new Event(timeStart, timeEnd, "Event", eventColor);
-                events.add(event);
-            }
-
             dayView.setEvents(events);
         }
 
-<<<<<<< HEAD
-//        nextDay.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Calendar cal = Calendar.getInstance();
-//                cal.setTime(dateInstance);
-//                cal.add(Calendar.DATE, -30);
-//                c.
-//                Intent intent = new Intent(CalendarActivity.this, CalendarActivity.class);
-//                intent.putExtra("currDate", c.getDay())
-//            }
-//        });
-//
-//        previousDay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
-=======
-        addicon.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.rlCalendar, addingAttractionFragment);
-                ft.commit();
-            }
-        });
->>>>>>> roopals-major-fixes
     }
 
-        public void setTime ( int startH, int startMin, int endH, int endMin){
-            int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
-            Calendar timeStart = Calendar.getInstance();
+    public void setTime ( int startH, int startMin, int endH, int endMin){
+        int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
+        Calendar timeStart = Calendar.getInstance();
 
-            //setting the time for the start of the event
+        //setting the time for the start of the event
 
-            timeStart.set(Calendar.HOUR_OF_DAY, startH);
-            timeStart.set(Calendar.MINUTE, startMin);
+        timeStart.set(Calendar.HOUR_OF_DAY, startH);
+        timeStart.set(Calendar.MINUTE, startMin);
 
-            Calendar timeEnd = (Calendar) timeStart.clone();
+        Calendar timeEnd = (Calendar) timeStart.clone();
 
-            //setting the time for the end of the event
-            timeEnd.set(Calendar.HOUR_OF_DAY, endH);
-            timeEnd.set(Calendar.MINUTE, endMin);
+        //setting the time for the end of the event
+        timeEnd.set(Calendar.HOUR_OF_DAY, endH);
+        timeEnd.set(Calendar.MINUTE, endMin);
 
-            Event added = new Event(timeStart, timeEnd, "attraction added", eventColor);
-            events.add(added);
+        Event added = new Event(timeStart, timeEnd, "attraction added", eventColor);
+        events.add(added);
 
-            dayView.refresh();
-        }
-
-    @Override
-    public void moveToCalendarPage(Trip trip, Context context)
-    {
-        Intent calendarIntent = new Intent(context, CalendarActivity.class);
-        calendarIntent.putExtra("trip", Parcels.wrap(trip));
-        startActivity(calendarIntent);
+        dayView.refresh();
     }
 }
