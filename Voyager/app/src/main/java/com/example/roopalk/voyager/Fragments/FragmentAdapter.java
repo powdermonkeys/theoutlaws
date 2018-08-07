@@ -29,7 +29,7 @@ public class FragmentAdapter extends FragmentPagerAdapter{
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return CalendarFragment.newInstance("STARTDATE", "ENDDATE");
             case 2: // Fragment # 1 - This will show SecondFragment
-                return BuildFragment.newInstance(2, "Page # 3");
+                return YourTripsFragment.newInstance("Hiya", "Page # 3");
             default:
                 return null;
         }
@@ -41,4 +41,5 @@ public class FragmentAdapter extends FragmentPagerAdapter{
         // Generate title based on item position
         return tabTitles[position];
     }
+
 }

@@ -16,21 +16,18 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
+import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 import java.util.List;
 
-//import android.support.v4.app.FragmentTransaction;
-
 // Provide the underlying view for an individual list item.
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
+public class YourTripsAdapter extends RecyclerView.Adapter<YourTripsAdapter.VH> {
     private Activity mContext;
     private List<Trip> mTrips;
-    private RecyclerView recyclerView;
 
-    public FeaturedAdapter(Activity context, List<Trip> trips) {
+    public YourTripsAdapter(Activity context, List<Trip> trips) {
         mContext = context;
         if (trips == null) {
             throw new IllegalArgumentException("trips must not be null");
@@ -56,6 +53,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
         SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
             }
         };
 
@@ -69,29 +67,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
                 .centerCrop()
                 .into(target);
 
-//        RecyclerSectionItemDecoration sectionItemDecoration =
-//                new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
-//                        true, // true for sticky, false for not
-//                        new RecyclerSectionItemDecoration.SectionCallback() {
-//                            @Override
-//                            public boolean isSection(int position) {
-//                                return position == 0
-//                                        || people.get(position)
-//                                        .getLastName()
-//                                        .charAt(0) != people.get(position - 1)
-//                                        .getLastName()
-//                                        .charAt(0);
-//                            }
-//
-//                            @Override
-//                            public CharSequence getSectionHeader(int position) {
-//                                return people.get(position)
-//                zz                        .getLastName()
-//                                        .subSequence(0,
-//                                                1);
-//                            }
-//                        });
-//        recyclerView.addItemDecoration(sectionItemDecoration);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -99,7 +74,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
                 Toast.makeText(view.getContext(), "You have clicked " + view.getId(), Toast.LENGTH_SHORT).show(); //you can add data to the tag of your cardview in onBind... and retrieve it here with with.getTag().toString()..
                 //You can change the fragment, something like this, not tested, please correct for your desired output:
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                TripDetailsFragment myFragment = new TripDetailsFragment();
+                BuildFragment myFragment = new BuildFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
@@ -127,5 +102,4 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
 
         }
     }
-
 }

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
@@ -70,5 +71,14 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
     @Override
     public void moveToAttractionsPage(int attractionPrice) {
 
+    }
+
+    private void swapFragment(){
+        FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
