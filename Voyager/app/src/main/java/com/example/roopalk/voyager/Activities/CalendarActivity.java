@@ -1,22 +1,30 @@
 package com.example.roopalk.voyager.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
+import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
+
+import org.parceler.Parcels;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener {
     @BindView(R.id.dayView) CalendarDayView dayView;
     @BindView(R.id.display_current_date) TextView currDate;
     @BindView(R.id.addIcon) FloatingActionButton add;
@@ -35,7 +43,7 @@ public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.previous_day) ImageView previousDay;
     @BindView(R.id.next_day) ImageView nextDay;
 
-
+    Trip trip;
     ArrayList<IEvent> events = new ArrayList<>();
 
     private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
@@ -67,7 +75,7 @@ public class CalendarActivity extends AppCompatActivity {
         hours = Integer.parseInt(tfHours.format(c));
         minutes= Integer.parseInt(tfMinutes.format(c));
 
-
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
 
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
@@ -95,6 +103,17 @@ public class CalendarActivity extends AppCompatActivity {
             dayView.setEvents(events);
         }
 
+        add.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.rlCalendar, addingAttractionFragment);
+                ft.commit();
+            }
+        });
     }
 
     public void setTime ( int startH, int startMin, int endH, int endMin){
@@ -116,5 +135,13 @@ public class CalendarActivity extends AppCompatActivity {
         events.add(added);
 
         dayView.refresh();
+    }
+
+    @Override
+    public void moveToCalendarPage(Trip trip, Context context)
+    {
+        Intent calendarIntent = new Intent(context, CalendarActivity.class);
+        calendarIntent.putExtra("trip", Parcels.wrap(trip));
+        startActivity(calendarIntent);
     }
 }

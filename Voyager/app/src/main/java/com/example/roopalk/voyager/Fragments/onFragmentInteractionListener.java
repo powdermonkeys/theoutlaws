@@ -11,6 +11,6 @@ public interface onFragmentInteractionListener
     public void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar);
 
     public void replaceToolbarFragment(Fragment fragment);
-    
+
     public void moveToCalendarPage(Trip trip);
 }
