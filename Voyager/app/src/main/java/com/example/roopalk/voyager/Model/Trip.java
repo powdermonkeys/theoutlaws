@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager.Model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -26,11 +27,7 @@ public class Trip extends ParseObject {
 
     private static final String BUDGET = "budget";
 
-<<<<<<< HEAD
-  //  private static final String LENGTH = "length";
-=======
     private static final String LENGTH = "length";
->>>>>>> roopals-major-fixes
 
     public Trip() {}
 
@@ -77,25 +74,15 @@ public class Trip extends ParseObject {
 
     public void setBudget(int budget) { put(BUDGET, budget);}
 
-  //  public void setLength (int length) { put(LENGTH, length);}
-
     public void setLength(int length) { put (LENGTH, length); }
 
-<<<<<<< HEAD
-    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget){ //int length) throws ParseException {
-=======
     public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length) throws ParseException {
->>>>>>> roopals-major-fixes
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
         setBudget(budget);
-<<<<<<< HEAD
-      //  setLength(length);
-=======
         setLength(length);
->>>>>>> roopals-major-fixes
     }
 
 
@@ -112,20 +99,16 @@ public class Trip extends ParseObject {
 
     public static class Query extends ParseQuery<Trip>
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> roopals-major-fixes
         public Query()
         {
             super(Trip.class);
         }
 
-<<<<<<< HEAD
         public Query withDate(String date)
         {
             whereMatches("checkin", date);
-=======
+            return this;
+        }
         public Query withCheckinAndCheckout(String checkin, String checkout)
         {
             whereMatches(CHECKIN, checkin);
@@ -136,7 +119,6 @@ public class Trip extends ParseObject {
         public Query withCheckin(String checkin)
         {
             whereMatches(CHECKIN, checkin);
->>>>>>> roopals-major-fixes
             return this;
         }
     }
