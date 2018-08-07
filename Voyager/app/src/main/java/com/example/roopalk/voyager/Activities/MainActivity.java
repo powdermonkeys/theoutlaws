@@ -28,6 +28,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.parceler.Parcels;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
     private final String TAG = "MainActivity";
@@ -35,8 +40,11 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     AddingAttractionFragment addingAttractionFragment;
 
     AttractionDetailsFragment attractionDetailsFragment;
+    FeaturedTripsFragment featuredTripsFragment;
     AddingEventFragment addingEventFragment;
     FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
+
+    SimpleDateFormat mdformat;
 
     SimpleDateFormat mdformat;
 
@@ -53,6 +61,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
         //gets today's date
         Date currentDate = new Date();
+<<<<<<< HEAD
         ArrayList<Trip> hasDate = new ArrayList<>();
         
         NetworkUtility networkUtility = new NetworkUtility(this);
@@ -64,10 +73,13 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         {
             e.printStackTrace();
         }
+=======
+>>>>>>> roopals-major-fixes
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+<<<<<<< HEAD
 
         // the alert dialog for trip builder
         
@@ -97,6 +109,42 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
+=======
+
+        // the alert dialog for trip builder
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                moveToFeaturedTrips();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void moveToFeaturedTrips()
+    {
+        featuredTripsFragment = FeaturedTripsFragment.newInstance(1, "Page 1");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.commit();
+>>>>>>> roopals-major-fixes
     }
 
     @Override
@@ -119,6 +167,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     }
 
     @Override
+<<<<<<< HEAD
     public void moveToAttractionsPage(Trip trip)
     {
         addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
@@ -139,6 +188,8 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     }
 
     @Override
+=======
+>>>>>>> roopals-major-fixes
     public void moveToAddEventPage(Attraction attraction)
     {
         addingEventFragment = AddingEventFragment.newInstance(attraction);
@@ -146,9 +197,10 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-    public void moveToCalendarPage()
+    public void moveToCalendarPage(Trip trip)
     {
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
+        calendarIntent.putExtra("trip", Parcels.wrap(trip));
         startActivity(calendarIntent);
     }
 

@@ -1,24 +1,41 @@
 package com.example.roopalk.voyager.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+<<<<<<< HEAD
+=======
+import android.support.v4.app.FragmentTransaction;
+>>>>>>> roopals-major-fixes
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+<<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.TextView;
+=======
+import android.view.View;
+>>>>>>> roopals-major-fixes
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
+import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
+import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
+=======
+import org.parceler.Parcels;
+
+>>>>>>> roopals-major-fixes
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+<<<<<<< HEAD
 public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.dayView) CalendarDayView dayView;
     @BindView(R.id.display_current_date) TextView currDate;
@@ -35,13 +53,21 @@ public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.previous_day) ImageView previousDay;
     @BindView(R.id.next_day) ImageView nextDay;
 
+=======
+public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener{
+    @BindView(R.id.dayView)
+    CalendarDayView dayView;
+>>>>>>> roopals-major-fixes
 
     ArrayList<IEvent> events = new ArrayList<>();
 
-    private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
+    private ArrayList<Attraction> chosenAttractions = AttractionDetailsFragment.getChosenAttractions();
+
+    private Trip trip;
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
+<<<<<<< HEAD
     public SimpleDateFormat currTime;
     public int hours;
     public int minutes;
@@ -49,6 +75,11 @@ public class CalendarActivity extends AppCompatActivity {
 
     @BindView(R.id.rvHorizontal)
     RecyclerView rvHorizontal;
+=======
+    @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
+
+    @BindView(R.id.addIcon) FloatingActionButton addicon;
+>>>>>>> roopals-major-fixes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +103,7 @@ public class CalendarActivity extends AppCompatActivity {
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
+<<<<<<< HEAD
         //gets the current weather
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
@@ -81,6 +113,9 @@ public class CalendarActivity extends AppCompatActivity {
         });
         asyncTask.execute("47.6062", "-122.3321"); //  asyncTask.execute("Latitude", "Longitude")
 
+=======
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+>>>>>>> roopals-major-fixes
 
         events = new ArrayList<>();
         {
@@ -88,7 +123,7 @@ public class CalendarActivity extends AppCompatActivity {
             //set up the horizontal scroll for attractions
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             rvHorizontal.setLayoutManager(linearLayoutManager);
-            horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
+            horizontalAttractionAdapter = new HorizontalAttractionAdapter(chosenAttractions);
             rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
             dayView.setLimitTime(8, 22);
@@ -109,6 +144,7 @@ public class CalendarActivity extends AppCompatActivity {
             dayView.setEvents(events);
         }
 
+<<<<<<< HEAD
 //        nextDay.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override
@@ -129,6 +165,19 @@ public class CalendarActivity extends AppCompatActivity {
 //            }
 //        });
 
+=======
+        addicon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.rlCalendar, addingAttractionFragment);
+                ft.commit();
+            }
+        });
+>>>>>>> roopals-major-fixes
     }
 
         public void setTime ( int startH, int startMin, int endH, int endMin){
@@ -151,4 +200,12 @@ public class CalendarActivity extends AppCompatActivity {
 
             dayView.refresh();
         }
+
+    @Override
+    public void moveToCalendarPage(Trip trip, Context context)
+    {
+        Intent calendarIntent = new Intent(context, CalendarActivity.class);
+        calendarIntent.putExtra("trip", Parcels.wrap(trip));
+        startActivity(calendarIntent);
     }
+}

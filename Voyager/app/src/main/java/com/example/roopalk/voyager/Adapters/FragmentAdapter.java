@@ -7,13 +7,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
+import com.example.roopalk.voyager.Fragments.ProfileFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter{
+<<<<<<< HEAD
     final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[] { "Featured",  "Your Trips" };
     private Context context;
 
     public FragmentAdapter(FragmentManager fm, Context context) {
+=======
+    final int PAGE_COUNT = 3;
+    private String tabTitles[] = new String[] { "Featured", "My Trips", "My Profile"};
+    Context context;
+    public FragmentAdapter(FragmentManager fm, Context context)
+    {
+>>>>>>> roopals-major-fixes
         super(fm);
         this.context = context;
     }
@@ -28,9 +37,17 @@ public class FragmentAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
+<<<<<<< HEAD
                 return new FeaturedTripsFragment();
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return new BuildFragment();
+=======
+                return FeaturedTripsFragment.newInstance(0, "Page 1");
+            case 1:
+                return BuildFragment.newInstance(1, "Page 2");
+            case 2:
+                return ProfileFragment.newInstance(2, "Page 3");
+>>>>>>> roopals-major-fixes
             default:
                 return null;
         }

@@ -1,7 +1,5 @@
 package com.example.roopalk.voyager.Model;
 
-import android.support.annotation.Nullable;
-
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -28,32 +26,38 @@ public class Trip extends ParseObject {
 
     private static final String BUDGET = "budget";
 
+<<<<<<< HEAD
   //  private static final String LENGTH = "length";
+=======
+    private static final String LENGTH = "length";
+>>>>>>> roopals-major-fixes
 
     public Trip() {}
 
     //getter methods for each of the values
 
-    public @Nullable int getThumbnailDrawable() { return mThumbnailDrawable; }
+    public int getThumbnailDrawable() { return mThumbnailDrawable; }
 
-    public @Nullable int getNumGuests() { return getInt(NUM_GUESTS); }
+    public int getNumGuests() { return getInt(NUM_GUESTS); }
 
-    public @Nullable String getCheckin() {
+    public String getCheckin() {
         return getString(CHECKIN);
     }
 
-    public @Nullable String getCheckout()
+    public String getCheckout()
     {
         return getString(CHECKOUT);
     }
 
-    public @Nullable String getDestination()
+    public String getDestination()
     {
         return getString(DESTINATION);
     }
   //  public @Nullable int getLength () {return getInt(LENGTH);}
 
     public int getBudget() { return getInt(BUDGET); }
+
+    public int getLength() { return getInt(LENGTH); }
 
     public void setNumGuests(int numguests)
     {
@@ -75,14 +79,23 @@ public class Trip extends ParseObject {
 
   //  public void setLength (int length) { put(LENGTH, length);}
 
+    public void setLength(int length) { put (LENGTH, length); }
 
+<<<<<<< HEAD
     public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget){ //int length) throws ParseException {
+=======
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length) throws ParseException {
+>>>>>>> roopals-major-fixes
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
         setBudget(budget);
+<<<<<<< HEAD
       //  setLength(length);
+=======
+        setLength(length);
+>>>>>>> roopals-major-fixes
     }
 
 
@@ -99,14 +112,31 @@ public class Trip extends ParseObject {
 
     public static class Query extends ParseQuery<Trip>
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> roopals-major-fixes
         public Query()
         {
             super(Trip.class);
         }
 
+<<<<<<< HEAD
         public Query withDate(String date)
         {
             whereMatches("checkin", date);
+=======
+        public Query withCheckinAndCheckout(String checkin, String checkout)
+        {
+            whereMatches(CHECKIN, checkin);
+            whereMatches(CHECKOUT, checkout);
+            return this;
+        }
+
+        public Query withCheckin(String checkin)
+        {
+            whereMatches(CHECKIN, checkin);
+>>>>>>> roopals-major-fixes
             return this;
         }
     }

@@ -3,8 +3,9 @@ package com.example.roopalk.voyager.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.example.roopalk.voyager.Activities.CurrentTripActivity;
+=======
+>>>>>>> roopals-major-fixes
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
@@ -33,11 +37,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static java.lang.Integer.parseInt;
 
+public class BuildFragment extends Fragment
+{
+    @BindView(R.id.destinationNamed) AutoCompleteTextView destination;
+    @BindView(R.id.departureDate) EditText departureDate;
+    @BindView(R.id.arrivalDate) EditText arrivalDate;
+    @BindView(R.id.sbBudget) SeekBar sbBudget;
+    @BindView(R.id.sbGuests) SeekBar sbGuests;
+    @BindView(R.id.btnDone) Button btnDone;
+    @BindView(R.id.tvGuests) TextView tvGuests;
+    @BindView(R.id.tvBudget) TextView tvBudget;
 
-public class BuildFragment extends Fragment {
-
+<<<<<<< HEAD
     public TextView create;
     public AutoCompleteTextView destination;
     public EditText departureDate;
@@ -47,33 +63,44 @@ public class BuildFragment extends Fragment {
     public SeekBar sbGuests;
     public SeekBar sbBudget;
     public Button btnDone;
+=======
+    Calendar mCurrentDate;
+    int day;
+    int month;
+    int year;
+>>>>>>> roopals-major-fixes
 
     int guests = 1;
     int budget = 0;
 
-    Calendar mCurrentDate;
-    int day; int month; int year;
+    private onFragmentInteractionListener mListener;
 
-    onFragmentInteractionListener mListener;
+    public BuildFragment()
+    {
+        // Required empty public constructor
+    }
 
-    // Required empty public constructor
-    public BuildFragment() { }
-
-    // newInstance constructor for creating fragment with arguments
     public static BuildFragment newInstance(int page, String title)
     {
-        BuildFragment fragmentFirst = new BuildFragment();
+        BuildFragment fragment = new BuildFragment();
         Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentFirst.setArguments(args);
-        return fragmentFirst;
+        args.putInt("page", page);
+        args.putString("title", title);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    { // Inflate the layout for this fragment
+    {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         View view = inflater.inflate(R.layout.fragment_build, container, false);
 
         create = view.findViewById(R.id.create);
@@ -85,17 +112,24 @@ public class BuildFragment extends Fragment {
         tvBudget = view.findViewById(R.id.tvBudget);
         sbBudget = view.findViewById(R.id.sbBudget);
         btnDone = view.findViewById(R.id.btnDone);
+=======
+        return inflater.inflate(R.layout.fragment_build, container, false);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+>>>>>>> roopals-major-fixes
 
         tvGuests.setText("" + guests);
         tvBudget.setText("" + budget);
-
-        //seekbar
         sbGuests.setMax(10);
         sbBudget.setMax(40);
         sbGuests.setProgress(guests);
         sbBudget.setProgress(budget);
-
-        //getting autocomplete textview
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
 
@@ -109,13 +143,6 @@ public class BuildFragment extends Fragment {
         {
             e.printStackTrace();
         }
-        return view;
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public void onViewCreated(final View view,  Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         mCurrentDate = Calendar.getInstance();
         day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
@@ -125,7 +152,6 @@ public class BuildFragment extends Fragment {
         tvGuests.setTextSize(20);
         tvBudget.setTextSize(20);
 
-
         // listener for guest drag bar
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -133,18 +159,21 @@ public class BuildFragment extends Fragment {
                 guests = progress;
                 tvGuests.setText("" + guests);
             }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         //listener for budget drag bar
         sbBudget.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                budget = progress *50;
+                budget = progress * 50;
                 tvBudget.setText("" + budget);
             }
 
@@ -159,15 +188,14 @@ public class BuildFragment extends Fragment {
             }
         });
 
-
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == 0){
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                if (event.getActionMasked() == 0) {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            month = month +1;
+                            month = month + 1;
                             arrivalDate.setText(month + "/" + dayOfMonth + "/" + year);
                         }
                     }, year, month, day);
@@ -183,7 +211,7 @@ public class BuildFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getActionMasked() == 0) {
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             month = month + 1;
@@ -207,6 +235,7 @@ public class BuildFragment extends Fragment {
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 final int BUDGET = parseInt(tvBudget.getText().toString());
+<<<<<<< HEAD
              //   final int LENGTH = tripLength(CHECKIN, CHECKOUT);
                 try
                 {
@@ -215,13 +244,23 @@ public class BuildFragment extends Fragment {
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
                     newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET); //, LENGTH);
+=======
+                final int LENGTH = getTripLength(CHECKIN, CHECKOUT);
+                try {
+                    Log.d("onClick", "reached the try catch statement");
+                    // a new trip object being created
+                    final Trip newTrip = ParseObject.create(Trip.class);
+>>>>>>> roopals-major-fixes
 
-                    newTrip.saveInBackground(new SaveCallback() {
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH);
+
+                    newTrip.saveInBackground(new SaveCallback()
+                    {
 
                         @Override
-                        public void done(ParseException e) {
-                            mListener.moveToAttractionsPage(newTrip);
-
+                        public void done(ParseException e)
+                        {
+                            mListener.moveToCalendarPage(newTrip);
                         }
                     });
                     tripLength(CHECKIN, CHECKOUT);
@@ -230,6 +269,7 @@ public class BuildFragment extends Fragment {
                 }
             }
         });
+<<<<<<< HEAD
 
     }
 
@@ -245,24 +285,47 @@ public class BuildFragment extends Fragment {
         catch (Exception e){
 
         }
+=======
+>>>>>>> roopals-major-fixes
     }
 
     @Override
-    public void onAttach (Context context){
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
-        if (context instanceof onFragmentInteractionListener) {
+        if (context instanceof onFragmentInteractionListener)
+        {
             mListener = (onFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement onFragmentInteractionListener");
+        }
+        else
+        {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach ()
-    {
+    public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    public int getTripLength(String checkin, String checkout)
+    {
+        int length = 0;
+        try
+        {
+            SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
+            Date date1 = myFormat.parse(checkin);
+            Date date2 = myFormat.parse(checkout);
+            long diff = date2.getTime() - date1.getTime();
+            System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            length = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        }
+        catch (java.text.ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return length;
+    }
 }
