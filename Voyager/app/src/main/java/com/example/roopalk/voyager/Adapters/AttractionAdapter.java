@@ -1,6 +1,8 @@
 package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
@@ -31,11 +34,17 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     private onFragmentInteractionListener mListener;
     BudgetBar budgetBar;
 
+    ArrayList<Attraction> chosenAttractions;
 
-    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener, BudgetBar budgetBar)
-    {
+    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener, BudgetBar budgetBar) {
         mAttractions = attractions;
         mListener = listener;
+        this.budgetBar = budgetBar;
+    }
+
+    public AttractionAdapter(ArrayList<Attraction> attractions, BudgetBar budgetBar)
+    {
+        mAttractions = attractions;
         this.budgetBar = budgetBar;
     }
 
@@ -104,7 +113,8 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             if(position != RecyclerView.NO_POSITION)
             {
-                mListener.moveToDetailsPage(attraction, budgetBar);
+                //mListener.moveToDetailsPage(attraction, budgetBar);
+                moveToDetailsPage(attraction, budgetBar);
             }
         }
     }
@@ -113,5 +123,13 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     {
         mAttractions.clear();
         notifyDataSetChanged();
+    }
+
+    private void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar)
+    {
+        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction, budgetBar);
+        attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
     }
 }
