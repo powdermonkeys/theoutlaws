@@ -89,7 +89,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
                 alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        moveToFeaturedTrips();
+                        closeOptionsMenu();
                     }
                 });
 
@@ -161,5 +161,13 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         startActivity(calendarIntent);
     }
 
+    private void swapFragment(){
+        FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
 }

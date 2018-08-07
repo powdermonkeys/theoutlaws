@@ -3,6 +3,7 @@ package com.example.roopalk.voyager.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,8 +30,7 @@ public class FeaturedTripsFragment extends Fragment
         // Required empty public constructor
     }
 
-    public static FeaturedTripsFragment newInstance(int page, String title)
-    {
+    public static FeaturedTripsFragment newInstance(int page, String title) {
         Bundle args = new Bundle();
         args.putInt("page", page);
         args.putString("title", title);
@@ -95,4 +95,14 @@ public class FeaturedTripsFragment extends Fragment
         super.onDetach();
         mListener = null;
     }
+
+    //
+    private void swapFragment(){
+        TripDetailsFragment tripDetailsFragment = new TripDetailsFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, tripDetailsFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
 }

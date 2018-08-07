@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/llFeaturedTrips"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,15 +15,18 @@
         android:layout_weight="1"
         android:background="@android:color/white"/>
 
-    <include layout="@layout/recommended_section"/>
+    <include layout="@layout/past_trips_section"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvFeatured"
+        android:id="@+id/rvMyTrips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <include layout="@layout/hot_right_now"/>
+    <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/placeholder">-->
+    <!--</FrameLayout>-->
 
-    <include layout="@layout/budget_section"/>
 
 </LinearLayout>

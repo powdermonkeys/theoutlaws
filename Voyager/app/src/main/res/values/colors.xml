@@ -18,4 +18,5 @@
     <color name="signInBlue">#bcf2e0</color>
     <color name="calendarRed"> #CE2F13</color>
     <color name="whitish">#fafafa</color>
+    <color name="featured_background">#777777</color>
 </resources>
