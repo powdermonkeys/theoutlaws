@@ -8,6 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+<!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--<item name="android:navigationBarColor">@color/colorPrimaryDark</item>-->
+
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorAccent</item>-->
+
+<!--</style>-->
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_drawable</item>
     </style>

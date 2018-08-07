@@ -1,20 +1,22 @@
 package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
-import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.roopalk.voyager.Adapters.AttractionAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -27,17 +29,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class AddingAttractionFragment extends Fragment {
+public class AddingAttractionFragment extends Fragment
+{
 
     private RecyclerView mRecyclerView;
     private AttractionAdapter mAdapter;
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<City> cities = new ArrayList<>();
-    public onFragmentInteractionListener listener;
-
+    public calendarListener listener;
+    public onFragmentInteractionListener mListener;
     Trip trip;
 
+    ArrayList<Attraction> chosen_attractions = new ArrayList<>();
+
     @BindView(R.id.pbBudget) ProgressBar pbBudget;
+    @BindView(R.id.btnDone) Button done;
 
     public AddingAttractionFragment()
     {
@@ -48,11 +54,11 @@ public class AddingAttractionFragment extends Fragment {
     {
         Bundle args = new Bundle();
         args.putParcelable("trip", trip);
-
         AddingAttractionFragment fragment = new AddingAttractionFragment();
         fragment.setArguments(args);
         return fragment;
     }
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -61,6 +67,7 @@ public class AddingAttractionFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_adding_attraction, container, false);
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
@@ -68,12 +75,11 @@ public class AddingAttractionFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
-  //    trip = getArguments().getParcelable("trip");
-    //  String dest = trip.getDestination();
+        trip = getArguments().getParcelable("trip");
+        final String dest = trip.getDestination();
 
         try
         {
-            String dest = "Cape Town";
             networkUtility.getCityFromName(dest);
             cities = networkUtility.getCities();
 
@@ -88,44 +94,39 @@ public class AddingAttractionFragment extends Fragment {
         //  the recycler view for the attractions list
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvAttractions);
 
+        BudgetBar budgetBar = new BudgetBar(trip, pbBudget);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new AttractionAdapter(attractions, listener);
+        mAdapter = new AttractionAdapter(attractions, mListener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
-        // attaching the touch helper to recycler view
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+        done.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) { listener.moveToCalendarPage(trip, getContext()); }
+        });
     }
 
     @Override
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        if(context instanceof onFragmentInteractionListener)
+        if(context instanceof calendarListener)
         {
-            listener = (onFragmentInteractionListener) context;
+            listener = (calendarListener) context;
+        }
+        else if(context instanceof onFragmentInteractionListener)
+        {
+            mListener = (onFragmentInteractionListener) context;
         }
         else
         {
-            throw new ClassCastException(context.toString() + "must implement onFragmentInteractionListener");
+            throw new ClassCastException(context.toString() + "must implement calendarListener");
         }
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            // Row is swiped from recycler view
-            // remove it from adapter
-        }
-
-        @Override
-        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-            // view the background view
-        }
-    };
+    public interface calendarListener
+    {
+        public void moveToCalendarPage(Trip trip, Context context);
+    }
 }

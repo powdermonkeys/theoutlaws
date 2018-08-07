@@ -97,7 +97,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
                 Toast.makeText(view.getContext(), "You have clicked " + view.getId(), Toast.LENGTH_SHORT).show(); //you can add data to the tag of your cardview in onBind... and retrieve it here with with.getTag().toString()..
-                //You can change the fragment, something like this, not tested, please correct for your desired output:
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:

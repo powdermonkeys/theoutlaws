@@ -27,7 +27,7 @@ public class YourTripsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static YourTripsFragment newInstance(String param1, String param2) {
+    public static YourTripsFragment newInstance(int page, String title) {
         Bundle args = new Bundle();
 
         YourTripsFragment fragment = new YourTripsFragment();

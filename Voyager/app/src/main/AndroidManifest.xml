@@ -36,6 +36,10 @@
             android:name=".Activities.LoginActivity"
             tools:ignore="InnerclassSeparator" />
 
+        <activity android:name=".Activities.CurrentTripActivity" />
+        <activity android:name=".Activities.CalendarActivity" />
+        <activity android:name=".Activities.AttractionListActivity"></activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

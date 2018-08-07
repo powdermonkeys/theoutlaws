@@ -24,6 +24,10 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    //for calendar
+    implementation 'com.github.khacpv:Calendar-Day-View:master-SNAPSHOT'
+
     // for sliding tab view
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'

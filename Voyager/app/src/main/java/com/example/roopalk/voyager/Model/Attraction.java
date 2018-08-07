@@ -57,9 +57,9 @@ public class Attraction extends ParseObject {
         return getInt(RATING);
     }
 
-    public String getEstimatedPrice()
+    public int getEstimatedPrice()
     {
-        return getString(ESTIMATED_PRICE);
+        return getInt(ESTIMATED_PRICE);
     }
 
     public ParseObject getCity()

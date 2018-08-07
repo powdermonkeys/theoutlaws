@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
@@ -67,7 +69,7 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
             public void onClick(View view) {
 //                Intent intent = new Intent(DetailsActivity.this, FeaturedActivity.class);
 //                startActivity(intent);
-                Toast.makeText(getActivity(), "Added to your trips",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Go to trip building form",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -92,7 +94,6 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
         mListener = null;
     }
 
-    @Override
     public void moveToDetailsPage(Attraction attraction){ }
 
     @Override
@@ -103,11 +104,28 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
 
     }
 
-    @Override
     public void moveToAttractionsPage(int attractionPrice)
     {
 
     }
 
+    @Override
+    public void moveToFeaturedTrips() {
 
+    }
+
+    @Override
+    public void moveToAddEventPage(Attraction attraction) {
+
+    }
+
+    @Override
+    public void moveToCalendarPage(Trip trip) {
+
+    }
+
+    @Override
+    public void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar) {
+
+    }
 }
