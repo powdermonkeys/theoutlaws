@@ -37,6 +37,9 @@
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.CurrentTripActivity" />
         <activity android:name=".Activities.CalendarActivity" />
+        <activity android:name=".Activities.Profile" />
+        <activity android:name=".Activities.BuildActivity" />
+        <activity android:name=".Activities.AttractionListActivity"></activity>
     </application>
 
 </manifest>
