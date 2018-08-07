@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
@@ -117,6 +118,17 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
     }
+
+    OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(CalendarActivity.this) {
+        @Override
+        public void onSwipeLeft() {
+            Toast.makeText(CalendarActivity.this, "left", Toast.LENGTH_SHORT).show();
+        }
+        public void onSwipeRight() {
+            Toast.makeText(CalendarActivity.this, "right", Toast.LENGTH_SHORT).show();
+        }
+    };
+
 
     public void setTime ( int startH, int startMin, int endH, int endMin){
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);

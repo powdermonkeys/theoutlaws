@@ -78,17 +78,15 @@ public class BuildFragment extends Fragment
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState)
+//    {
+//        super.onCreate(savedInstanceState);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
-
         return inflater.inflate(R.layout.fragment_build, container, false);
 
     }
@@ -100,8 +98,7 @@ public class BuildFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        tvGuests.setText("" + guests);
-        tvBudget.setText("" + budget);
+
         sbGuests.setMax(10);
         sbBudget.setMax(40);
         sbGuests.setProgress(guests);
@@ -126,8 +123,11 @@ public class BuildFragment extends Fragment
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
+        tvGuests.setText("# of Voyagers");
+        tvBudget.setText("Your budget");
         tvGuests.setTextSize(12);
         tvBudget.setTextSize(12);
+
 
         // listener for guest drag bar
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
