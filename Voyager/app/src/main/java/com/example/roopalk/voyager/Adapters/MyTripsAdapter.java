@@ -23,11 +23,11 @@ import com.example.roopalk.voyager.R;
 import java.util.List;
 
 // Provide the underlying view for an individual list item.
-public class YourTripsAdapter extends RecyclerView.Adapter<YourTripsAdapter.VH> {
+public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
     private Activity mContext;
     private List<Trip> mTrips;
 
-    public YourTripsAdapter(Activity context, List<Trip> trips) {
+    public MyTripsAdapter(Activity context, List<Trip> trips) {
         mContext = context;
         if (trips == null) {
             throw new IllegalArgumentException("trips must not be null");

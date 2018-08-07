@@ -9,28 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.roopalk.voyager.Adapters.YourTripsAdapter;
+import com.example.roopalk.voyager.Adapters.MyTripsAdapter;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
 import java.util.List;
 
-public class YourTripsFragment extends Fragment {
+public class MyTripsFragment extends Fragment {
 
-    private RecyclerView rvYourTrips;
+    private RecyclerView rvMyTrips;
     private List<Trip> trips; // we can change this to get a different set of trips? (the user's)
-    private YourTripsAdapter mAdapter;
+    private MyTripsAdapter mAdapter;
 
     onFragmentInteractionListener mListener;
 
-    public YourTripsFragment() {
+    public MyTripsFragment() {
         // Required empty public constructor
     }
 
-    public static YourTripsFragment newInstance(int page, String title) {
+    public static MyTripsFragment newInstance(int page, String title) {
         Bundle args = new Bundle();
 
-        YourTripsFragment fragment = new YourTripsFragment();
+        MyTripsFragment fragment = new MyTripsFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,25 +45,25 @@ public class YourTripsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_your_trips, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_trips, container, false);
 
         // bind adapter to recycler view
-        rvYourTrips = (RecyclerView) view.findViewById(R.id.rvYourTrips);
+        rvMyTrips = (RecyclerView) view.findViewById(R.id.rvMyTrips);
 
-        rvYourTrips.setHasFixedSize(true);
+        rvMyTrips.setHasFixedSize(true);
 
         final GridLayoutManager layout = new GridLayoutManager(getActivity(), 1);
 
-        rvYourTrips.setLayoutManager(layout);
+        rvMyTrips.setLayoutManager(layout);
 
         // get data
         trips = Trip.getTrips();
 
         // create adapter
-        mAdapter = new YourTripsAdapter(getActivity(), trips);
+        mAdapter = new MyTripsAdapter(getActivity(), trips);
 
         // bind adapter to list
-        rvYourTrips.setAdapter(mAdapter);
+        rvMyTrips.setAdapter(mAdapter);
         return view;
     }
 

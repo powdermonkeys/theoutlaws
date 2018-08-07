@@ -18,7 +18,7 @@
     <include layout="@layout/past_trips_section"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvYourTrips"
+        android:id="@+id/rvMyTrips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

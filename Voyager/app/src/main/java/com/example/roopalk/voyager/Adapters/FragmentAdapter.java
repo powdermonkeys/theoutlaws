@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.ProfileFragment;
-import com.example.roopalk.voyager.Fragments.YourTripsFragment;
+import com.example.roopalk.voyager.Fragments.MyTripsFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
@@ -32,7 +32,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
             case 0: // Fragment # 0 - This will show FirstFragment
                 return FeaturedTripsFragment.newInstance(0, "Page 1");
             case 1:
-                return YourTripsFragment.newInstance(1, "Page 2");
+                return MyTripsFragment.newInstance(1, "Page 2");
             case 2:
                 return ProfileFragment.newInstance(2, "Page 3");
             default:
