@@ -58,6 +58,10 @@ public class Weather {
         void processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
     }
 
+
+
+
+
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
 
         public AsyncResponse delegate = null;//Call back interface
@@ -75,6 +79,8 @@ public class Weather {
             } catch (Exception e) {
                 Log.d("Error", "Cannot process JSON results", e);
             }
+
+
             return jsonWeather;
         }
 
@@ -89,7 +95,7 @@ public class Weather {
                     String city = json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country");
                     String description = details.getString("description").toUpperCase(Locale.US);
                     String temperature = String.format("%.2f", (main.getDouble("temp")* 9/5 + 32))+ "°F";
-                    //  temperature.find
+                  //  temperature.find
                     String updatedOn = df.format(new Date(json.getLong("dt")*1000));
                     String iconText = setWeatherIcon(details.getInt("id"),
                             json.getJSONObject("sys").getLong("sunrise") * 1000,
@@ -101,6 +107,7 @@ public class Weather {
             } catch (JSONException e) {
                 //Log.e(LOG_TAG, "Cannot process JSON results", e);
             }
+
         }
     }
 
@@ -135,5 +142,8 @@ public class Weather {
             return null;
         }
     }
+
+
+
 
 }

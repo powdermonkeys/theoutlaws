@@ -69,10 +69,8 @@ public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<Horizonta
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.ivAttractionPhoto)
-        ImageView ivAttractionPhoto;
-        @BindView(R.id.tvAttractionName)
-        TextView tvAttractionName;
+        @BindView(R.id.ivAttractionPhoto) ImageView ivAttractionPhoto;
+        @BindView(R.id.tvAttractionName) TextView tvAttractionName;
 
         public ViewHolder(View itemView) {
             super(itemView);

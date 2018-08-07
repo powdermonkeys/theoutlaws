@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.CalendarActivity">
+    tools:context=".Activities.CalendarActivity"
+    android:id="@+id/rlCalendar">
 
     <RelativeLayout
         android:id="@+id/dateHeader"

@@ -87,69 +87,69 @@
         android:textColorHint="@color/hintColor" />
 
 
-        <EditText
-            android:id="@+id/departureDate"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/destinationNamed"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:padding="8dp"
-            android:hint="@string/departure"
-            android:inputType="none"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hintColor" />
+    <EditText
+        android:id="@+id/departureDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/destinationNamed"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:padding="8dp"
+        android:hint="@string/departure"
+        android:inputType="none"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hintColor" />
 
-        <EditText
-            android:id="@+id/arrivalDate"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/departureDate"
-            android:layout_centerHorizontal="true"
-            android:padding="8dp"
-            android:layout_margin="5dp"
-            android:hint="@string/arrival"
-            android:inputType="none"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hintColor" />
+    <EditText
+        android:id="@+id/arrivalDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/departureDate"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:layout_margin="5dp"
+        android:hint="@string/arrival"
+        android:inputType="none"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hintColor" />
 
 
-        <SeekBar
-            android:id="@+id/sbGuests"
-            android:layout_width="207dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/arrivalDate"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+    <SeekBar
+        android:id="@+id/sbGuests"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/arrivalDate"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp" />
 
-        <TextView
-            android:id="@+id/dollarSign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/sbBudget"
-            android:paddingBottom="10dp"
-            android:paddingTop="15dp"
-            android:layout_toRightOf="@id/sbBudget"
-            android:textSize="11sp"
-            android:text="$" />
+    <TextView
+        android:id="@+id/dollarSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/sbBudget"
+        android:paddingBottom="10dp"
+        android:paddingTop="15dp"
+        android:layout_toRightOf="@id/sbBudget"
+        android:textSize="11sp"
+        android:text="$" />
 
-        <TextView
-            android:id="@+id/tvGuests"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/sbGuests"
-            android:layout_toRightOf="@id/sbGuests"
-            android:paddingBottom="10dp"
-            android:paddingLeft="3dp"
-            android:textSize="11sp"/>
+    <TextView
+        android:id="@+id/tvGuests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sbGuests"
+        android:layout_toRightOf="@id/sbGuests"
+        android:paddingBottom="10dp"
+        android:paddingLeft="3dp"
+        android:textSize="11sp"/>
 
-        <SeekBar
-            android:id="@+id/sbBudget"
-            android:layout_width="207dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/sbGuests"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+    <SeekBar
+        android:id="@+id/sbBudget"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/sbGuests"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/tvBudget"

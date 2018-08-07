@@ -36,6 +36,6 @@ public class CurrentTripActivity extends AppCompatActivity {
                 temp.setText(weather_temperature);
             }
         });
-        asyncTask.execute("47.6062", "-122.3321"); //  asyncTask.execute("Latitude", "Longitude")
+        asyncTask.execute("47.6062", "122.3321"); //  asyncTask.execute("Latitude", "Longitude")
     }
 }

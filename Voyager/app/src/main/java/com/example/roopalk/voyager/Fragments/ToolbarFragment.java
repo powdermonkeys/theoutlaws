@@ -33,7 +33,7 @@ public class ToolbarFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_build, container, false);
+        View view = inflater.inflate(R.layout.fragment_featured_trips, container, false);
         TextView textView = (TextView) view.findViewById(R.id.create);
         textView.setText("Fragment #" + mPage);
         return view;

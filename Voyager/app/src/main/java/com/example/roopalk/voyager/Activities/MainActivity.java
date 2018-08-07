@@ -24,6 +24,8 @@ import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
 
+import org.parceler.Parcels;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +66,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         currDateSTF = sdf.format(currentDate).toString();
         System.out.print(currDateSTF);
 
+
         //compares todays date with trips in parse
         try {
             trips = networkUtility.getTripsByDate(currDateSTF);
@@ -97,11 +100,19 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
         // the alert dialog for trip builder
+    }
 
 
+
+
+    public void moveToFeaturedTrips()
+    {
+        featuredTripsFragment = FeaturedTripsFragment.newInstance(1, "Page 1");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -133,15 +144,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void moveToFeaturedTrips()
-    {
-        featuredTripsFragment = FeaturedTripsFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
-        fragmentTransaction.commit();
-    }
 
     @Override
     public void moveToAddEventPage(Attraction attraction)
@@ -151,10 +153,11 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-    public void moveToCalendarPage(String city)
+
+    public void moveToCalendarPage(Trip trip)
     {
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
-        calendarIntent.putExtra("city", city);
+        calendarIntent.putExtra("trip", Parcels.wrap(trip));
         startActivity(calendarIntent);
     }
 

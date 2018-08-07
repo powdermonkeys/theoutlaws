@@ -36,8 +36,11 @@ public class AddingAttractionFragment extends Fragment
     private AttractionAdapter mAdapter;
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<City> cities = new ArrayList<>();
-    public onFragmentInteractionListener listener;
+    public calendarListener listener;
+    public onFragmentInteractionListener mListener;
     Trip trip;
+
+    ArrayList<Attraction> chosen_attractions = new ArrayList<>();
 
     @BindView(R.id.pbBudget) ProgressBar pbBudget;
     @BindView(R.id.btnDone) Button done;
@@ -51,7 +54,6 @@ public class AddingAttractionFragment extends Fragment
     {
         Bundle args = new Bundle();
         args.putParcelable("trip", trip);
-
         AddingAttractionFragment fragment = new AddingAttractionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -95,18 +97,13 @@ public class AddingAttractionFragment extends Fragment
         BudgetBar budgetBar = new BudgetBar(trip, pbBudget);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new AttractionAdapter(attractions, listener, budgetBar);
+        mAdapter = new AttractionAdapter(attractions, mListener, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
         done.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
-            {
-                listener.moveToCalendarPage(dest);
-
-
-            }
+            public void onClick(View v) { listener.moveToCalendarPage(trip, getContext()); }
         });
     }
 
@@ -114,13 +111,22 @@ public class AddingAttractionFragment extends Fragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        if(context instanceof onFragmentInteractionListener)
+        if(context instanceof calendarListener)
         {
-            listener = (onFragmentInteractionListener) context;
+            listener = (calendarListener) context;
+        }
+        else if(context instanceof onFragmentInteractionListener)
+        {
+            mListener = (onFragmentInteractionListener) context;
         }
         else
         {
-            throw new ClassCastException(context.toString() + "must implement onFragmentInteractionListener");
+            throw new ClassCastException(context.toString() + "must implement calendarListener");
         }
+    }
+
+    public interface calendarListener
+    {
+        public void moveToCalendarPage(Trip trip, Context context);
     }
 }

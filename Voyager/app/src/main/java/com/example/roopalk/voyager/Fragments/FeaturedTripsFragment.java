@@ -29,10 +29,11 @@ public class FeaturedTripsFragment extends Fragment
         // Required empty public constructor
     }
 
-    public static FeaturedTripsFragment newInstance()
+    public static FeaturedTripsFragment newInstance(int page, String title)
     {
         Bundle args = new Bundle();
-
+        args.putInt("page", page);
+        args.putString("title", title);
         FeaturedTripsFragment fragment = new FeaturedTripsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -63,9 +64,9 @@ public class FeaturedTripsFragment extends Fragment
         //give LayoutManager to RecyclerView to position items on the screen
         rvFeatured.setLayoutManager(layout);
 
-        //        // get data
+        // get data
         trips = Trip.getTrips();
-//
+
         // create adapter
         mAdapter = new FeaturedAdapter(getActivity(), trips);
 
