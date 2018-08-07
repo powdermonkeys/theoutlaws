@@ -20,9 +20,13 @@ import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
@@ -30,12 +34,14 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     private final String TAG = "MainActivity";
 
     AddingAttractionFragment addingAttractionFragment;
-
     AttractionDetailsFragment attractionDetailsFragment;
     FeaturedTripsFragment featuredTripsFragment;
     AddingEventFragment addingEventFragment;
 
-    SimpleDateFormat mdformat;
+    NetworkUtility networkUtility = new NetworkUtility(this);
+
+    String currDateSTF;
+    ArrayList<Trip> trips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,37 +54,54 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
-        //gets today's date
-        Date currentDate = new Date();
-
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // the alert dialog for trip builder
+        //gets today's date
+        Date currentDate = new Date();
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        currDateSTF = sdf.format(currentDate).toString();
+        System.out.print(currDateSTF);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
-            alertDialogBuilder.setPositiveButton("yes",
+        //compares todays date with trips in parse
+        try {
+            trips = networkUtility.getTripsByDate(currDateSTF);
+            if (trips.size() > 0){
+                final String city = trips.get(0).getDestination().toString();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
+                alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                                intent.putExtra("city", city);
                                 startActivity(intent);
                                 finish();
 
                             }
                         });
 
-            alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                moveToFeaturedTrips();
-            }
-        });
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        moveToFeaturedTrips();
+                    }
+                });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        // the alert dialog for trip builder
+
+
     }
 
     @Override
@@ -110,7 +133,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.commit();
     }
 
-
+    @Override
     public void moveToFeaturedTrips()
     {
         featuredTripsFragment = FeaturedTripsFragment.newInstance();
@@ -128,9 +151,10 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-    public void moveToCalendarPage()
+    public void moveToCalendarPage(String city)
     {
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
+        calendarIntent.putExtra("city", city);
         startActivity(calendarIntent);
     }
 

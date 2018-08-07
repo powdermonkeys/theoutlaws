@@ -11,8 +11,7 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:background="@color/iconBackgroundBlue"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="@dimen/card_elevation" >
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"

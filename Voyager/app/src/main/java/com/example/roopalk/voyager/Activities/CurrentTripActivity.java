@@ -13,9 +13,6 @@ import butterknife.ButterKnife;
 
 public class CurrentTripActivity extends AppCompatActivity {
 
-    private static final String OPEN_WEATHER_MAP_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric";
-    private static final String OPEN_WEATHER_MAP_API = "bfbc87d937264d7683636f41f52b854d";
-
     @BindView(R.id.btnBudget) Button budget;
     @BindView(R.id.btnCalendar) Button calendar;
     @BindView(R.id.tvGreeting) TextView greeting;

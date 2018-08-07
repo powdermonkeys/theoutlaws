@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -58,12 +59,9 @@ public class BuildFragment extends Fragment {
     public BuildFragment() { }
 
     // newInstance constructor for creating fragment with arguments
-    public static BuildFragment newInstance(int page, String title)
-    {
+    public static BuildFragment newInstance() {
         BuildFragment fragmentFirst = new BuildFragment();
         Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
         fragmentFirst.setArguments(args);
         return fragmentFirst;
     }
@@ -94,12 +92,13 @@ public class BuildFragment extends Fragment {
         sbBudget.setProgress(budget);
 
         //getting autocomplete textview
-
         NetworkUtility networkUtility = new NetworkUtility(getContext());
 
         try
         {
             ArrayList<String> cityNames = networkUtility.getCityNames();
+//            cityNames.add(String.valueOf(Arrays.asList("Santa Fe, USA", "St. Petersburg, USA", "Nashville, USA", " North Port, USA", "New Orleans, USA", "Minneapolis, USA","Boulder, USA","Detroit, USA","Cape Coral, USA"," Portland, USA", "San Jose, USA", "Santa Clara, USA", "San Francisco, USA", "Sacramento, USA", "Greenville, USA", "Olympia, USA", "Dallas, USA", "Austin, USA"
+//            )));
             ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, cityNames);
             destination.setAdapter(cityAdapter);
         }
@@ -120,8 +119,8 @@ public class BuildFragment extends Fragment {
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
-        tvGuests.setTextSize(20);
-        tvBudget.setTextSize(20);
+        tvGuests.setTextSize(12);
+        tvBudget.setTextSize(12);
 
 
         // listener for guest drag bar
@@ -130,9 +129,12 @@ public class BuildFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 guests = progress;
                 tvGuests.setText("" + guests);
+
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
+
+
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -161,12 +163,18 @@ public class BuildFragment extends Fragment {
         arrivalDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                arrivalDate.setInputType(InputType.TYPE_NULL);
                 if (event.getActionMasked() == 0){
                     DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            month = month +1;
-                            arrivalDate.setText(month + "/" + dayOfMonth + "/" + year);
+                            month = month + 1;
+                            String strmonth = String.valueOf(month);
+                            String strDay = String.valueOf(dayOfMonth);
+
+                            if (month < 10) { strmonth = "0" + month; }
+                            if (dayOfMonth < 10){ strDay = "0" + dayOfMonth; }
+                            arrivalDate.setText(strmonth + "/" + strDay + "/" + year);
                         }
                     }, year, month, day);
                     datePickerDialog.show();
@@ -180,14 +188,18 @@ public class BuildFragment extends Fragment {
         departureDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                departureDate.setInputType(InputType.TYPE_NULL);
                 if (event.getActionMasked() == 0) {
                     DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             month = month + 1;
-                            departureDate.setText(month + "/" + dayOfMonth + "/" + year);
-                            SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
-                            //departureDate.setText(myFormat.format(month, dayOfMonth, year));
+                            String strmonth = String.valueOf(month);
+                            String strDay = String.valueOf(dayOfMonth);
+
+                            if (month < 10) { strmonth = "0" + month; }
+                            if (dayOfMonth < 10){ strDay = "0" + dayOfMonth; }
+                            departureDate.setText(strmonth + "/" + strDay + "/" + year);
                         }
                     }, year, month, day);
                     datePickerDialog.show();
@@ -205,24 +217,30 @@ public class BuildFragment extends Fragment {
                 final String CHECKOUT = arrivalDate.getText().toString();
                 final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
                 final int BUDGET = parseInt(tvBudget.getText().toString());
-             //   final int LENGTH = tripLength(CHECKIN, CHECKOUT);
-                try
-                {
+                int LENGTH;
 
+                //converting strings to simple date format
+                try {
+                    Date cinDate = new SimpleDateFormat("MM/dd/yyyy").parse(CHECKIN);
+                    Date coutDate = new SimpleDateFormat("MM/dd/yyyy").parse(CHECKOUT);
+                    long diff = coutDate.getTime() - cinDate.getTime();
+                    LENGTH = (int) (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                    LENGTH = 0;
+                }
+
+                try {
                     Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
-                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET); //, LENGTH);
-
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH);
                     newTrip.saveInBackground(new SaveCallback() {
-
                         @Override
                         public void done(ParseException e) {
                             mListener.moveToAttractionsPage(newTrip);
-
                         }
                     });
-                    tripLength(CHECKIN, CHECKOUT);
                 } catch (Exception e) {
                     Log.d("onClick", "didnt create object");
                 }
@@ -231,17 +249,6 @@ public class BuildFragment extends Fragment {
 
     }
 
-    public void tripLength(String CHECKIN, String CHECKOUT) throws java.text.ParseException {
-        SimpleDateFormat myFormat = new SimpleDateFormat(" MM dd yyyy");
-        try {
-            Date date1 = myFormat.parse(CHECKIN);
-            Date date2 = myFormat.parse(CHECKOUT);
-            long diff = date2.getTime() - date1.getTime();
-            System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-        }catch (Exception e){
-
-        }
-    }
 
     @Override
     public void onAttach (Context context){
@@ -255,10 +262,10 @@ public class BuildFragment extends Fragment {
     }
 
     @Override
-    public void onDetach ()
-    {
+    public void onDetach () {
         super.onDetach();
         mListener = null;
     }
 
 }
+

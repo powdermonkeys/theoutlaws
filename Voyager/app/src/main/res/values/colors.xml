@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#264653</color>
+    <color name="colorPrimaryDark">#1E3842</color>
     <color name="colorAccent">#AABBCC</color>
-    <color name="seaBlue">#00BCD4</color>
+    <color name="seaBlue">#AFDBDE</color>
     <color name="black">#000000</color>
     <color name="divider_color">#80000000</color>
     <color name="millenialPink">#CC8B86</color>

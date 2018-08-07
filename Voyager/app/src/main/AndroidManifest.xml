@@ -37,6 +37,10 @@
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.CurrentTripActivity" />
         <activity android:name=".Activities.CalendarActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

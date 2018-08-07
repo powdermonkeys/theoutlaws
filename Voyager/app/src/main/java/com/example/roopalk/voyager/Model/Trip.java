@@ -26,9 +26,11 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called destination
     private static final String DESTINATION = "destination";
 
+    //the destination of the trip is stored in a column called budget
     private static final String BUDGET = "budget";
 
-  //  private static final String LENGTH = "length";
+    //the destination of the trip is stored in a column called length
+    private static final String LENGTH = "length";
 
     public Trip() {}
 
@@ -51,7 +53,8 @@ public class Trip extends ParseObject {
     {
         return getString(DESTINATION);
     }
-  //  public @Nullable int getLength () {return getInt(LENGTH);}
+
+    public @Nullable int getLength () {return getInt(LENGTH);}
 
     public int getBudget() { return getInt(BUDGET); }
 
@@ -73,16 +76,16 @@ public class Trip extends ParseObject {
 
     public void setBudget(int budget) { put(BUDGET, budget);}
 
-  //  public void setLength (int length) { put(LENGTH, length);}
+    public void setLength (int length) { put(LENGTH, length); }
 
 
-    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget){ //int length) throws ParseException {
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length) {
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
         setBudget(budget);
-      //  setLength(length);
+        setLength(length);
     }
 
 

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Voyager</string>
-    <string name="create">Create a Trip</string>
+    <string name="create">Where are you headed?</string>
     <string name="destination">Destination Name</string>
-    <string name="arrival">Arrival Date</string>
+    <string name="arrival">Return Date</string>
     <string name="departure">Departure Date</string>
     <string name="event_name_format">%s</string>
 

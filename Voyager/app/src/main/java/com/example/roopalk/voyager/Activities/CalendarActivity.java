@@ -46,6 +46,7 @@ public class CalendarActivity extends AppCompatActivity {
     public int hours;
     public int minutes;
     public Date c;
+    public String city;
 
     @BindView(R.id.rvHorizontal)
     RecyclerView rvHorizontal;
@@ -57,6 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        city = getIntent().getExtras().toString();
 
         // gets the current date in simple format
         c = Calendar.getInstance().getTime();
@@ -79,7 +81,7 @@ public class CalendarActivity extends AppCompatActivity {
 
             }
         });
-        asyncTask.execute("47.6062", "-122.3321"); //  asyncTask.execute("Latitude", "Longitude")
+        asyncTask.execute(city); //  asyncTask.execute("Latitude", "Longitude")
 
 
         events = new ArrayList<>();

@@ -74,7 +74,7 @@ public class AddingAttractionFragment extends Fragment
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
         trip = getArguments().getParcelable("trip");
-        String dest = trip.getDestination();
+        final String dest = trip.getDestination();
 
         try
         {
@@ -103,7 +103,9 @@ public class AddingAttractionFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                listener.moveToCalendarPage();
+                listener.moveToCalendarPage(dest);
+
+
             }
         });
     }
