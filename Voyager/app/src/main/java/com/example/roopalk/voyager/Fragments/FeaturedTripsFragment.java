@@ -29,10 +29,11 @@ public class FeaturedTripsFragment extends Fragment
         // Required empty public constructor
     }
 
-    public static FeaturedTripsFragment newInstance(String arg1, String arg2)
+    public static FeaturedTripsFragment newInstance(int page, String title)
     {
         Bundle args = new Bundle();
-
+        args.putInt("page", page);
+        args.putString("title", title);
         FeaturedTripsFragment fragment = new FeaturedTripsFragment();
         fragment.setArguments(args);
         return fragment;

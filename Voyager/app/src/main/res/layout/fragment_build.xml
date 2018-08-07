@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true">
+    tools:context=".Fragments.BuildFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="55dp">
 
         <ImageView
             android:id="@+id/logo"
@@ -60,7 +67,8 @@
             android:layout_alignStart="@+id/departureIcon"
             android:layout_alignTop="@+id/sbBudget"
             android:paddingRight="5dp"
-            app:srcCompat="@drawable/wallet" />
+            app:srcCompat="@drawable/wallet"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/create"
@@ -83,7 +91,7 @@
             android:layout_marginTop="117dp"
             android:hint="@string/destination"
             android:textColor="@color/black"
-            android:textColorHint="@color/hintColor" />
+            android:textColorHint="@color/hintColor"/>
 
 
         <EditText
@@ -106,7 +114,6 @@
             android:layout_margin="5dp"
             android:hint="@string/arrival"
             android:textColor="@color/black"
-
             android:textColorHint="@color/hintColor" />
 
 
@@ -116,7 +123,8 @@
             android:layout_height="40dp"
             android:layout_below="@id/arrivalDate"
             android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:id="@+id/tvGuests"
@@ -127,8 +135,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:textColor="@color/black"
-
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <SeekBar
             android:id="@+id/sbBudget"
@@ -136,7 +143,8 @@
             android:layout_height="40dp"
             android:layout_below="@id/sbGuests"
             android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tvBudget"
@@ -146,9 +154,8 @@
             android:layout_toRightOf="@id/sbBudget"
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
-
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <Button
             android:id="@+id/btnDone"
@@ -157,22 +164,7 @@
             android:layout_alignEnd="@+id/logo"
             android:layout_below="@id/sbBudget"
             android:layout_marginBottom="23dp"
-            android:text="Done" />
-
-        <Button
-            android:id="@+id/calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:text="CALENDAR" />
-
-        <Button
-            android:id="@+id/landing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:text="Button" />
-
-</RelativeLayout>
+            android:text="Done"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.CalendarActivity">
 
-        <LinearLayout
+<FrameLayout android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.CalendarActivity"
+        android:id="@+id/rlCalendar">
+
+        <RelativeLayout
             android:id="@+id/dateHeader"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:layout_alignParentTop="true"
             android:background="#AABBCC"
             android:orientation="horizontal">
@@ -41,38 +46,50 @@
                 android:layout_gravity="right"
                 android:padding="5dp"
                 android:src="@drawable/right_arrow" />
-        </LinearLayout>
 
+        </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/dateHeader"
-        android:id="@+id/svCalendar">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/dateHeader"
+            android:id="@+id/svCalendar">
 
-        <com.framgia.library.calendardayview.CalendarDayView
-            android:id="@+id/dayView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="35dp"
-            app:dayHeight="@dimen/dayHeight"
-            app:eventMarginLeft="10dp">
-        </com.framgia.library.calendardayview.CalendarDayView>
-    </ScrollView>
+            <com.framgia.library.calendardayview.CalendarDayView
+                android:id="@+id/dayView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                app:dayHeight="@dimen/dayHeight"
+                app:eventMarginLeft="10dp">
+            </com.framgia.library.calendardayview.CalendarDayView>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/seaFoam">
+        </ScrollView>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rvHorizontal">
-        </android.support.v7.widget.RecyclerView>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/whitish">
 
-    </FrameLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rvHorizontal">
 
-</RelativeLayout>
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/addIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:background="@color/whitish"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add_green"
+                app:layout_anchorGravity="bottom|right|end" />
+
+        </FrameLayout>
+    </RelativeLayout>
+</FrameLayout>

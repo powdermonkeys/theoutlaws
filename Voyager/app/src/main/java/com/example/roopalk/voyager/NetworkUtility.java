@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
+import com.example.roopalk.voyager.Model.Trip;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 
@@ -17,12 +18,14 @@ public class NetworkUtility
     ArrayList<City> cities = new ArrayList<>();
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<Photo> photos = new ArrayList<>();
+    ArrayList<Trip> trips = new ArrayList<>();
 
     ArrayList<String> imageURLs = new ArrayList<>();
 
     final City.Query cityQuery = new City.Query();
     final Attraction.Query attractionQuery = new Attraction.Query();
     final Photo.Query photoQuery = new Photo.Query();
+    final Trip.Query tripQuery = new Trip.Query();
 
     public NetworkUtility(Context context)
     {
