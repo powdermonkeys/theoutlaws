@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
@@ -32,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
+import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 
 public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener {
@@ -117,9 +119,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
 
 
-
-
-
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -129,6 +128,24 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.rlCalendar, addingAttractionFragment);
                 ft.commit();
+            }
+        });
+
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+            @Override
+            public void onDateSelected(Calendar date, int position) {
+                Toast.makeText(getApplicationContext(), "You selected a date!", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCalendarScroll(HorizontalCalendarView calendarView,
+                                         int dx, int dy) {
+            }
+
+            @Override
+            public boolean onDateLongClicked(Calendar date, int position) {
+                return true;
             }
         });
     }
