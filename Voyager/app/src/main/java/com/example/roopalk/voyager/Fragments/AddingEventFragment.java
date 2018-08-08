@@ -135,7 +135,7 @@ public class AddingEventFragment extends DialogFragment
             @Override
             public void onClick(View v)
             {
-                ((CalendarActivity)getActivity()).setTime(startHour, startMin, endHour, endMin);
+                ((CalendarActivity)getActivity()).setTime(startHour, startMin, endHour, endMin, chosenAttraction);
                 dismiss();
             }
         });

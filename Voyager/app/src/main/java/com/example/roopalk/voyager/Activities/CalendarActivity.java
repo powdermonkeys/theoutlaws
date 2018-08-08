@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
-import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.Model.Trip;
@@ -47,7 +46,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     ArrayList<IEvent> events = new ArrayList<>();
 
-    private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
+    private ArrayList<Attraction> attractions = AddingAttractionFragment.getChosenAttractions();
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
@@ -149,9 +148,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
     }
+    
+    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
 
-
-    public void setTime ( int startH, int startMin, int endH, int endMin){
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
 
@@ -166,8 +165,11 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         timeEnd.set(Calendar.HOUR_OF_DAY, endH);
         timeEnd.set(Calendar.MINUTE, endMin);
 
-        Event added = new Event(timeStart, timeEnd, "attraction added", eventColor);
+        Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), eventColor);
         events.add(added);
+
+        attractions.remove(attraction);
+        horizontalAttractionAdapter.notifyDataSetChanged();
 
         dayView.refresh();
     }
