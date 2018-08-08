@@ -74,13 +74,13 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
             e.printStackTrace();
         }
 
-        holder.tvName.setText(currentAttraction.getAttractionName());
         holder.tvDescription.setText(currentAttraction.getAttractionDescription());
         holder.tvTime.setText(currentAttraction.getEstimatedTime());
 
         Glide.with(context)
                 .load(p.getImage().getUrl())
                 .into(holder.ivPicture);
+
     }
 
     @Override
@@ -102,7 +102,6 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View v)

@@ -1,5 +1,7 @@
 package com.example.roopalk.voyager.Model;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.widget.ProgressBar;
 
 import org.parceler.Parcel;
@@ -19,11 +21,20 @@ public class BudgetBar {
         setBudgetMax();
     }
 
-    public void setBudgetLevel(int attractionPrice)
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void fillBudget(int attractionPrice)
     {
         int pastProgress = progressBar.getProgress();
         int currProgress = pastProgress + attractionPrice;
-        progressBar.setProgress(currProgress);
+        progressBar.setProgress(currProgress, true);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void deleteFromBudget(int attractionPrice)
+    {
+        int pastProgress = progressBar.getProgress();
+        int currProgress = pastProgress - attractionPrice;
+        progressBar.setProgress(currProgress, true);
     }
 
     private void setBudgetMax()

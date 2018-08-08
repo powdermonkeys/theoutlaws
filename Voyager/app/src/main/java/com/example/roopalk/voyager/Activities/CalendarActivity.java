@@ -46,7 +46,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     Trip trip;
     ArrayList<IEvent> events = new ArrayList<>();
 
-    private ArrayList<Attraction> attractions = AttractionDetailsFragment.getChosenAttractions();
+    private ArrayList<Attraction> attractions = AddingAttractionFragment.getChosenAttractions();
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
@@ -118,7 +118,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         });
     }
 
-    public void setTime ( int startH, int startMin, int endH, int endMin){
+    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
 
@@ -133,8 +133,11 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         timeEnd.set(Calendar.HOUR_OF_DAY, endH);
         timeEnd.set(Calendar.MINUTE, endMin);
 
-        Event added = new Event(timeStart, timeEnd, "attraction added", eventColor);
+        Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), eventColor);
         events.add(added);
+
+        attractions.remove(attraction);
+        horizontalAttractionAdapter.notifyDataSetChanged();
 
         dayView.refresh();
     }
