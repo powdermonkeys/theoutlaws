@@ -187,9 +187,9 @@ public class SwipeController extends Callback
         Paint p = new Paint();
 
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-        p.setColor(R.color.signInBlue);
+        p.setColor(Color.parseColor("#96CDCA"));
         c.drawRoundRect(rightButton, corners, corners, p);
-        drawText("DELETE", c, rightButton, p);
+        drawText("ADD", c, rightButton, p);
 
         buttonInstance = null;
         if (buttonShowedState == ButtonsState.RIGHT_VISIBLE)
@@ -200,7 +200,7 @@ public class SwipeController extends Callback
 
     private void drawText(String text, Canvas c, RectF button, Paint p)
     {
-        float textSize = 60;
+        float textSize = 40;
         p.setColor(Color.WHITE);
         p.setAntiAlias(true);
         p.setTextSize(textSize);
