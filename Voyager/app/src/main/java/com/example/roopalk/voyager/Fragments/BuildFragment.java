@@ -217,6 +217,7 @@ public class BuildFragment extends Fragment
                 final int BUDGET = parseInt(tvBudget.getText().toString());
                 int LENGTH=0;
 
+
                 //converting strings to simple date format
                 try {
                     Date cinDate = new SimpleDateFormat("MM/dd/yyyy").parse(CHECKIN);
@@ -228,7 +229,6 @@ public class BuildFragment extends Fragment
                 }
 
                 try {
-                    Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
 

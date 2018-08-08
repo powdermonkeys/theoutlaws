@@ -14,12 +14,24 @@
         android:layout_width="match_parent"
         android:id="@+id/appbar">
 
-       <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:textColorSelected="#FFFF"/>
+            app:textColorSelected="#FFFF">
+
+        </devs.mulham.horizontalcalendar.HorizontalCalendarView>
+
+        <TextView
+            android:id="@+id/tvweather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="60dp"
+            android:textColor="@color/whitish"
+            android:text="It is currently 78℉ and  sunny in Seattle"
+            android:textStyle="bold" />
 
     </android.support.design.widget.AppBarLayout>
 

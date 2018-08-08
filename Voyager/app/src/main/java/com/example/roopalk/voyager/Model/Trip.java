@@ -31,6 +31,10 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called length
     private static final String LENGTH = "length";
 
+    //list of attractions stored in a column called attrations
+    private static final ArrayList<Attraction> attractions = new ArrayList<Attraction> ();
+
+
     public Trip() {}
 
     //getter methods for each of the values
@@ -56,6 +60,10 @@ public class Trip extends ParseObject {
     public int getBudget() { return getInt(BUDGET); }
 
     public int getLength() { return getInt(LENGTH); }
+
+    public ArrayList<Attraction> getAttractions(Trip trip) {
+        return trip.attractions;
+    }
 
     public void setNumGuests(int numguests)
     {
@@ -123,5 +131,7 @@ public class Trip extends ParseObject {
             whereMatches(CHECKIN, checkin);
             return this;
         }
+
+
     }
 }

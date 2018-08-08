@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
@@ -40,9 +41,15 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     @BindView(R.id.calendarView) HorizontalCalendarView horizontalCalendar;
     @BindView(R.id.addIcon) FloatingActionButton add;
     @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
-
+    @BindView(R.id.tvweather) TextView tvweather;
 
     Trip trip;
+
+    public int hours;
+
+    public int minutes;
+
+    public String city;
 
     ArrayList<IEvent> events = new ArrayList<>();
 
@@ -50,49 +57,42 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
-    public int hours;
-
-    public int minutes;
-
-    public String city;
-//    String currDate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-
         ButterKnife.bind(this);
 
         city = getIntent().getExtras().toString();
+        String city = getIntent().getStringExtra("city");
+        ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
+
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("MMMM, dd yyyy");
         SimpleDateFormat tfHours = new SimpleDateFormat("hh");
         SimpleDateFormat tfMinutes = new SimpleDateFormat("mm");
         hours = Integer.parseInt(tfHours.format(c));
         minutes= Integer.parseInt(tfMinutes.format(c));
 
-        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
-
+        //params for dayview
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.MONTH, -1);
+        startDate.add(Calendar.WEEK_OF_MONTH, -1);
 
-        /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.MONTH, 1);
+        endDate.add(Calendar.WEEK_OF_MONTH, 1);
+
 
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
                 .range(startDate, endDate)
                 .datesNumberOnScreen(5)
                 .build();
-
-
 
             //set up the horizontal scroll for attractions
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -100,23 +100,24 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
             rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
+
+
+
+
         events = new ArrayList<>();
         {
-            int eventColor = ContextCompat.getColor(this, R.color.iconBackgroundBlue);
+            int eventColor = ContextCompat.getColor(this, R.color.eventColor);
             Calendar timeStart = Calendar.getInstance();
-            timeStart.set(Calendar.HOUR_OF_DAY, 11);
-            timeStart.set(Calendar.MINUTE, minutes);
+            timeStart.set(Calendar.HOUR_OF_DAY, 8);
+            timeStart.set(Calendar.MINUTE, 30);
             Calendar timeEnd = (Calendar) timeStart.clone();
-            timeEnd.set(Calendar.HOUR_OF_DAY, 14);
-            timeEnd.set(Calendar.MINUTE, minutes + 2);
-            Event event = new Event(timeStart, timeEnd, "Event", eventColor);
+            timeEnd.set(Calendar.HOUR_OF_DAY, 12);
+            timeEnd.set(Calendar.MINUTE, 40);
+            Event event = new Event(timeStart, timeEnd, "attraction name placeholder", eventColor);
             events.add(event);
         }
 
-
         dayView.setEvents(events);
-
-
 
         add.setOnClickListener(new View.OnClickListener()
         {
@@ -148,14 +149,12 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
     }
-    
-    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
 
+    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
 
         //setting the time for the start of the event
-
         timeStart.set(Calendar.HOUR_OF_DAY, startH);
         timeStart.set(Calendar.MINUTE, startMin);
 
@@ -185,4 +184,17 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
 
+
 }
+
+//        //gets the current weather
+//        Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
+//            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
+//                System.out.print(weather_city);
+//                tvweather.setText("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" +  city);
+//            }
+//        });
+//        asyncTask.execute(city);
+//        System.out.print(tvweather);
+
+

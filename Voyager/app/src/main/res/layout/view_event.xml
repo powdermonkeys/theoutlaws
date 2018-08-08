@@ -26,7 +26,6 @@
                 android:id="@+id/item_event_header_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ff6378"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -60,8 +59,8 @@
                 android:textSize="16sp"/>
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:src="@drawable/editpencil"
                 android:layout_marginLeft="350dp"/>

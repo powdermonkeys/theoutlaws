@@ -72,6 +72,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             trips = networkUtility.getTripsByDate(currDateSTF);
             if (trips.size() > 0){
                 final String city = trips.get(0).getDestination().toString();
+                final ArrayList<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
                 alertDialogBuilder.setPositiveButton("yes",
@@ -80,6 +81,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                                 intent.putExtra("city", city);
+                                intent.putExtra("attractions", attractions);
                                 startActivity(intent);
                                 finish();
 

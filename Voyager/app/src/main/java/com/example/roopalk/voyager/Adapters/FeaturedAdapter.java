@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -69,34 +68,10 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
                 .centerCrop()
                 .into(target);
 
-//        RecyclerSectionItemDecoration sectionItemDecoration =
-//                new RecyclerSectionItemDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_section_header_height),
-//                        true, // true for sticky, false for not
-//                        new RecyclerSectionItemDecoration.SectionCallback() {
-//                            @Override
-//                            public boolean isSection(int position) {
-//                                return position == 0
-//                                        || people.get(position)
-//                                        .getLastName()
-//                                        .charAt(0) != people.get(position - 1)
-//                                        .getLastName()
-//                                        .charAt(0);
-//                            }
-//
-//                            @Override
-//                            public CharSequence getSectionHeader(int position) {
-//                                return people.get(position)
-//                zz                        .getLastName()
-//                                        .subSequence(0,
-//                                                1);
-//                            }
-//                        });
-//        recyclerView.addItemDecoration(sectionItemDecoration);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
-                Toast.makeText(view.getContext(), "You have clicked " + view.getId(), Toast.LENGTH_SHORT).show(); //you can add data to the tag of your cardview in onBind... and retrieve it here with with.getTag().toString()..
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
