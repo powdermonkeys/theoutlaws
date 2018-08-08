@@ -8,79 +8,50 @@
     tools:context=".Activities.CalendarActivity"
     android:id="@+id/rlCalendar">
 
-    <RelativeLayout
-        android:id="@+id/dateHeader"
+    <!-- header with calendar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/iconBackgroundBlue"
-        android:orientation="horizontal">
+        android:id="@+id/appbar">
 
-        <ImageView
-            android:id="@+id/previous_day"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:layout_gravity="left"
-            android:padding="5dp"
-            android:src="@drawable/left_arrow" />
-
-        <TextView
-            android:id="@+id/display_current_date"
-            android:layout_width="wrap_content"
+       <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="July 27, 2018"
-            android:layout_toRightOf="@id/previous_day"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="110dp"
-            android:paddingRight="110dp"
-            android:textColor="#fafafa"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:background="@color/colorPrimary"
+            app:textColorSelected="#FFFF"/>
 
-        <ImageView
-            android:id="@+id/next_day"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:padding="5dp"
-            android:paddingLeft="110dp"
-            android:src="@drawable/right_arrow" />
+    </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:id="@+id/tvWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/display_current_date"
-            android:paddingLeft="60dp"
-            android:textSize="14sp"
-            android:textColor="@color/whitish"
-            android:text="TextView" />
-
-    </RelativeLayout>
-
+    <!-- day view w hours for calendar-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="430dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/dateHeader"
+        android:layout_below="@id/appbar"
         android:id="@+id/svCalendar">
 
         <com.framgia.library.calendardayview.CalendarDayView
             android:id="@+id/dayView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="35dp"
+            android:paddingRight="30dp"
+            android:scrollbars="vertical"
             app:dayHeight="@dimen/dayHeight"
             app:eventMarginLeft="10dp">
         </com.framgia.library.calendardayview.CalendarDayView>
+
     </ScrollView>
 
 
+    <View
+        android:id="@+id/divider"
+        android:layout_below="@id/svCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
 
-
+<!-- bottom attaction list view & floating icon-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="130dp"
@@ -102,6 +73,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/add_white"
             app:layout_anchorGravity="bottom|right|end" />
+
     </FrameLayout>
 
 </RelativeLayout>

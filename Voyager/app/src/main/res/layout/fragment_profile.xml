@@ -1,18 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment">
+    tools:context=".Fragments.ProfileFragment"
+    android:padding="20dp">
+
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="89dp"
+        android:layout_height="83dp"
+        android:layout_alignEnd="@id/ivProfile"
+        android:src="@drawable/voyager_logo_round" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivProfile"
+        android:layout_toEndOf="@+id/tv7"
+        android:text=" justin b." />
+
+    <TextView
+        android:id="@+id/tvHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvName"
+        android:layout_below="@+id/tvName"
+        android:text=" @justinb" />
+
+
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvHandle"
+        android:layout_alignStart="@id/tvHandle"
+        android:layout_marginEnd="10dp"
+        android:text="Edit Profile" />
+
+    <ImageView
+        android:id="@+id/ivFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ivProfile"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:src="@drawable/prson" />
+
+    <TextView
+        android:id="@+id/tv7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFollowers"
+        android:layout_toEndOf="@+id/ivFollowers"
+        android:text="  7 "
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/tvFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFollowers"
+        android:layout_toStartOf="@+id/tv10"
+        android:src="@drawable/followers" />
+
+    <TextView
+        android:id="@+id/followes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFollowers"
+        android:layout_toEndOf="@+id/tv7"
+        android:text="Followers" />
+
+    <TextView
+        android:id="@+id/tv10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFollowers"
+        android:layout_toStartOf="@+id/following"
+        android:text="   10 "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFollowers"
+        android:layout_toEndOf="@+id/btnSignout"
+        android:text="Following" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:background="?android:attr/listDivider" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="229dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="182dp"
+        android:text="View Travel Details     >" />
+
+    <ImageView
+        android:id="@+id/favDestIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/tvName"
+        android:src="@drawable/locationdp" />
+
+    <TextView
+        android:id="@+id/favDest"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancun"
+        android:layout_alignEnd="@+id/button"
+        android:text="Favorite Destination:"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/cancun"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/favDestIcon"
+        android:layout_alignEnd="@+id/button"
+        android:text="Cancun, Mexico"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivLastVoyage"
+        android:layout_centerHorizontal="true"
+        android:text=" Seattle, Washington"
+        android:textAllCaps="false" />
+
 
     <Button
         android:id="@+id/btnSignout"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="500dp"
-        android:background="@color/signInBlue"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Sign out"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/rounded_button"
+        android:text="Sign Out"
         android:textAllCaps="false" />
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/tvLastVoyage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView8"
+        android:layout_alignStart="@+id/favDest"
+        android:text="Last Voyage"
+        android:textAllCaps="true" />
+
+    <ImageView
+        android:id="@+id/ivLastVoyage"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="209dp"
+        android:layout_toStartOf="@+id/tvName"
+        android:src="@drawable/locationdp" />
+
+
+</RelativeLayout>
