@@ -15,8 +15,9 @@
     <color name="translucent">#33D3D3D3</color>
     <color name="iconSailBlue">#CBF5E3</color>
     <color name="hintColor">#ADADAD</color>
-    <color name="signInBlue">#bcf2e0</color>
+    <color name="signInBlue">#BCF2E0</color>
     <color name="calendarRed"> #CE2F13</color>
-    <color name="whitish">#fafafa</color>
+    <color name="whitish">#FAFAFA</color>
     <color name="featured_background">#777777</color>
+    <color name="addButton">#96CDCA</color>
 </resources>
