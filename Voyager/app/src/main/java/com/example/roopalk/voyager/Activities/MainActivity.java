@@ -15,6 +15,7 @@ import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
@@ -73,7 +74,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             if (trips.size() > 0){
                 final String city = trips.get(0).getDestination().toString();
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
+                alertDialogBuilder.setMessage("We noticed that you are currently on a trip. Would you like to be redirected to your calendar?");
                 alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -153,7 +154,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-
     public void moveToCalendarPage(Trip trip)
     {
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
@@ -161,7 +161,17 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         startActivity(calendarIntent);
     }
 
-    private void swapFragment(){
+    @Override
+    public void moveToCreateTripPage()
+    {
+        BuildFragment buildFragment = new BuildFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main_activity, buildFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void swapFragment()
+    {
         FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -169,5 +179,4 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
 }
