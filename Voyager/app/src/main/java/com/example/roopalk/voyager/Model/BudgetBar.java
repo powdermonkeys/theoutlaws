@@ -1,11 +1,8 @@
 package com.example.roopalk.voyager.Model;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.ProgressBar;
-
-import com.example.roopalk.voyager.R;
 
 import org.parceler.Parcel;
 
@@ -22,7 +19,6 @@ public class BudgetBar {
         progressBar = pb;
 
         setBudgetMax();
-        //setBarColor();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -44,11 +40,5 @@ public class BudgetBar {
     private void setBudgetMax()
     {
         progressBar.setMax(budget);
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private void setBarColor()
-    {
-        progressBar.setBackgroundColor(R.color.moneyGreen);
     }
 }
