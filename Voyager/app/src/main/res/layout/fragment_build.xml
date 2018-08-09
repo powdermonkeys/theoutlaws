@@ -96,7 +96,7 @@
         android:layout_margin="5dp"
         android:padding="8dp"
         android:hint="@string/departure"
-        android:inputType="none"
+        android:inputType="date"
         android:textColor="@color/black"
         android:textColorHint="@color/hintColor" />
 

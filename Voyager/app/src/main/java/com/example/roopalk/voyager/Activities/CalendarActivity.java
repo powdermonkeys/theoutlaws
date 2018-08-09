@@ -66,11 +66,11 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         city = getIntent().getExtras().toString();
         String city = getIntent().getStringExtra("city");
-        ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
-
+//        ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
+//
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
-        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
-
+//        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
+//
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
@@ -92,6 +92,22 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
 
+
+
+        events = new ArrayList<>();
+        {
+            int eventColor = ContextCompat.getColor(this, R.color.calendarRed);
+            Calendar timeStart = Calendar.getInstance();
+            timeStart.set(Calendar.HOUR_OF_DAY, hours);
+            timeStart.set(Calendar.MINUTE, minutes);
+            Calendar timeEnd = (Calendar) timeStart.clone();
+            Event event = new Event(timeStart, timeEnd, "Event", eventColor);
+            events.add(event);
+        }
+
+
+        dayView.setEvents(events);
+
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -99,7 +115,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             {
                 AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.rlCalendar, addingAttractionFragment);
+                ft.add(R.id.calendarplaceholder, addingAttractionFragment);
+                ft.addToBackStack("Adding Attraction fragment");;
                 ft.commit();
             }
         });
@@ -171,8 +188,4 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
 }
-
-
-
-
 

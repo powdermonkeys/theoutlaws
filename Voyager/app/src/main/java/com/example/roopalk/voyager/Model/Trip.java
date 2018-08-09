@@ -31,12 +31,6 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called length
     private static final String LENGTH = "length";
 
-    //list of attractions stored in a column called attrations
-    private static  final String ATTRACTIONS = "attractions";
-
-    private static final List<Attraction> attractions = new ArrayList<Attraction> ();
-
-
     public Trip() {}
 
     //getter methods for each of the values
@@ -63,10 +57,6 @@ public class Trip extends ParseObject {
 
     public int getLength() { return getInt(LENGTH); }
 
-    public List<Attraction> getAttractions(Trip trip) {
-        return getList("attractions");
-    }
-
     public void setNumGuests(int numguests)
     {
         put(NUM_GUESTS, numguests);
@@ -87,11 +77,6 @@ public class Trip extends ParseObject {
 
     public void setLength (int length) { put(LENGTH, length); }
 
-    public void setAttractions (Attraction attraction){
-       attractions.add(attraction);
-       put(ATTRACTIONS, attractions);
-
-    }
 
     public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length) throws ParseException {
         setDestination(destination);
@@ -138,7 +123,16 @@ public class Trip extends ParseObject {
             whereMatches(CHECKIN, checkin);
             return this;
         }
-
-
     }
 }
+
+
+//public void setAttractions (Attraction attraction){
+//       attractions.add(attraction);
+//       put(ATTRACTIONS, attractions);
+//
+//    }
+// public List<Attraction> getAttractions(Trip trip) {
+//        return getList("attractions");
+//    }
+

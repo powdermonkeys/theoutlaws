@@ -22,7 +22,8 @@ import com.example.roopalk.voyager.R;
 import java.util.List;
 
 // Provide the underlying view for an individual list item.
-public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
+public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
+{
     private Activity mContext;
     private List<Trip> mTrips;
 
@@ -66,7 +67,8 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
                 .centerCrop()
                 .into(target);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
@@ -91,13 +93,13 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
         final TextView tvName;
         final FrameLayout flGradient;
 
-        public VH(View itemView, final Context context) {
+        public VH(View itemView, final Context context)
+        {
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
             flGradient = (FrameLayout) itemView.findViewById(R.id.flGradient);
             tvName = (TextView)itemView.findViewById(R.id.tvName);
-
         }
     }
 }
