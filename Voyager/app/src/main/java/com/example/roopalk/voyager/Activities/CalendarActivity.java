@@ -69,6 +69,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
 
 
         // gets the current date in simple format

@@ -30,6 +30,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
 {
@@ -72,7 +73,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             trips = networkUtility.getTripsByDate(currDateSTF);
             if (trips.size() > 0){
                 final String city = trips.get(0).getDestination().toString();
-                final ArrayList<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));
+                final List<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
                 alertDialogBuilder.setPositiveButton("yes",
@@ -81,7 +82,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                                 intent.putExtra("city", city);
-                                intent.putExtra("attractions", attractions);
+                                intent.putExtra("attractions", Parcels.wrap(attractions));
                                 startActivity(intent);
                                 finish();
 
