@@ -7,5 +7,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ivAttractionPhoto"/>
+        android:id="@+id/ivAttractionPhoto"
+        android:layout_margin="10dp"/>
 </FrameLayout>

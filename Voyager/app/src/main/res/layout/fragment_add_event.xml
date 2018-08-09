@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rlTime">
 
         <TextView
             android:id="@+id/attractionName"
@@ -36,6 +37,7 @@
             android:layout_alignParentStart="true"
             android:text="Pick a time to add event to your calendar"
             android:padding="10dp"
+            android:inputType="none"
             android:layout_below="@id/attractionName"
             android:textSize="12dp"/>
 
@@ -43,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="70dp"
+            android:paddingLeft="20dp"
             android:layout_below="@id/tvTimePicker">
 
             <TextView
@@ -57,6 +59,7 @@
             <EditText
                 android:id="@+id/etStartTime"
                 android:layout_width="60dp"
+                android:inputType="none"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTimePicker"
                 android:layout_toRightOf="@id/tvStartTime"
@@ -64,6 +67,7 @@
 
             <TextView
                 android:id="@+id/tvUntil"
+                android:inputType="none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/etStartTime"
@@ -71,12 +75,13 @@
                 android:layout_alignTop="@id/etStartTime"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text=" to " />
+                android:text="To: " />
 
 
             <EditText
                 android:id="@+id/etEndTime"
                 android:layout_width="60dp"
+                android:inputType="none"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvUntil" />
 
@@ -86,37 +91,37 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"
-            android:layout_width="200dp"
-            android:layout_height="120dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="150dp" />
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true" />
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/ciImageSwiper"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_alignStart="@id/vpImageSlideshow"
             android:layout_below="@id/vpImageSlideshow"
+            android:layout_centerHorizontal="true"
             app:ci_drawable="@drawable/circleindicator_round" />
 
         <Button
             android:id="@+id/add"
             android:layout_width="170dp"
             android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/ciImageSwiper"
             android:layout_centerHorizontal="true"
             android:textSize="14sp"
             android:text="Add Attraction"
             android:background="@drawable/rounded_button"/>
-
-
 
     </RelativeLayout>
 </FrameLayout>
