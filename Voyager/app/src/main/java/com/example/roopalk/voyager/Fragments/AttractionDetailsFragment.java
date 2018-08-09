@@ -88,7 +88,6 @@ public class AttractionDetailsFragment extends DialogFragment
             tvAttractionName.setText(attraction.getAttractionName());
             tvAttractionDescription.setText(attraction.getAttractionDescription());
             tvAttractionTime.setText(attraction.getEstimatedTime());
-            //tvAttractionPrice.setText(attraction.getEstimatedPrice());
         }
         catch (ParseException e)
         {
