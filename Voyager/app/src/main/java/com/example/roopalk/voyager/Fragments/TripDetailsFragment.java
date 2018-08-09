@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-public class TripDetailsFragment extends Fragment implements onFragmentInteractionListener {
+public class TripDetailsFragment extends Fragment {
 
     public static final String EXTRA_TRIP = "EXTRA_TRIP";
     private Trip mTrip;
@@ -92,40 +89,5 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public void moveToDetailsPage(Attraction attraction){ }
-
-    @Override
-    public void replaceToolbarFragment(Fragment fragment) { }
-
-    @Override
-    public void moveToAttractionsPage(Trip trip) {
-
-    }
-
-    public void moveToAttractionsPage(int attractionPrice)
-    {
-
-    }
-
-    @Override
-    public void moveToFeaturedTrips() {
-
-    }
-
-    @Override
-    public void moveToAddEventPage(Attraction attraction) {
-
-    }
-
-    @Override
-    public void moveToCalendarPage(Trip trip) {
-
-    }
-
-    @Override
-    public void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar) {
-
     }
 }
