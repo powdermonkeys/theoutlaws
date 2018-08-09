@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_event_container"
     android:orientation="vertical"
     android:background="@drawable/roundedcorners"
@@ -12,12 +13,12 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="@drawable/roundedcorners">
-
         <RelativeLayout
             android:id="@+id/item_event_header"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            tools:ignore="Suspicious0dp">
             <TextView
                 android:id="@+id/item_event_header_text1"
                 android:layout_width="wrap_content"
@@ -57,19 +58,17 @@
                 android:textColor="@color/whitish"
                 android:layout_marginBottom="10dp"
                 android:textSize="16sp"/>
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:src="@drawable/editpencil"
-                android:layout_marginLeft="350dp"/>
-
         </FrameLayout>
-
     </LinearLayout>
-
 </LinearLayout>
 
+
+<!--<ImageView-->
+<!--android:id="@+id/imageView"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_gravity="bottom"-->
+<!--android:src="@drawable/editpencil"-->
+<!--android:layout_marginLeft="350dp"/>-->
 
 
