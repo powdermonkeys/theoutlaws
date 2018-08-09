@@ -36,20 +36,20 @@ import butterknife.ButterKnife;
 
 public class AddingAttractionFragment extends Fragment
 {
-
-    private RecyclerView mRecyclerView;
     private AttractionAdapter mAdapter;
     ArrayList<Attraction> attractions = new ArrayList<>();
     ArrayList<City> cities = new ArrayList<>();
     public calendarListener listener;
     public onFragmentInteractionListener mListener;
+
     Trip trip;
     BudgetBar budgetBar;
 
     static ArrayList<Attraction> chosen_attractions = new ArrayList<>();
 
     @BindView(R.id.pbBudget) ProgressBar pbBudget;
-    @BindView(R.id.btnDone) Button done;
+    @BindView(R.id.rvAttractions) RecyclerView mRecyclerView;
+    @BindView(R.id.done) Button done;
 
     public AddingAttractionFragment()
     {
@@ -66,8 +66,7 @@ public class AddingAttractionFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adding_attraction, container, false);
@@ -95,9 +94,6 @@ public class AddingAttractionFragment extends Fragment
         {
             e.printStackTrace();
         }
-
-        //  the recycler view for the attractions list
-        mRecyclerView = view.findViewById(R.id.rvAttractions);
 
         budgetBar = new BudgetBar(trip, pbBudget);
 
@@ -151,7 +147,10 @@ public class AddingAttractionFragment extends Fragment
                 final Attraction currentAttraction = attractions.get(position);
                 chosen_attractions.add(currentAttraction);
 
-                budgetBar.fillBudget(currentAttraction.getEstimatedPrice());
+                int numGuests = trip.getNumGuests();
+                int totalPrice = currentAttraction.getEstimatedPrice() * numGuests;
+
+                budgetBar.fillBudget(totalPrice);
 
                 Snackbar snackbar = Snackbar.make(view, "Attraction added!", Snackbar.LENGTH_LONG);
                 snackbar.setAction("UNDO", new View.OnClickListener() {

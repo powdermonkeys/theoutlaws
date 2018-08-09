@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AddingAttractionFragment">
+    tools:context=".Fragments.AddingAttractionFragment"
+    android:background="@color/seaFoam">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,29 +12,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <ProgressBar
+            android:id="@+id/pbBudget"
+            android:layout_width="350dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressTint="@color/moneyGreen"
+            android:scaleY="7"
+            style="?android:attr/progressBarStyleHorizontal" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvAttractions"
             android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="500dp"/>
-
-        <ProgressBar
-            android:id="@+id/pbBudget"
-            android:layout_width="350dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
-            android:scaleY="7"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:max="100"
-            android:layout_below="@+id/rvAttractions"/>
+            android:layout_below="@+id/pbBudget"
+            android:layout_margin="5dp"
+            android:layout_above="@id/done"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DONE"
-            android:id="@+id/btnDone"/>
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:id="@+id/done"
+            android:text="VIEW CALENDAR     >"
+            android:background="@color/featured_background"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
 </FrameLayout>
