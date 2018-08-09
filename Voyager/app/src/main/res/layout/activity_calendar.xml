@@ -1,79 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.CalendarActivity"
-    android:id="@+id/rlCalendar">
-
-    <!-- header with calendar-->
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendarplaceholder">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:id="@+id/appbar">
+        android:layout_height="match_parent"
+        tools:context=".Activities.CalendarActivity"
+        android:id="@+id/rlCalendar">
 
-       <devs.mulham.horizontalcalendar.HorizontalCalendarView
-            android:id="@+id/calendarView"
+        <!-- header with calendar-->
+        <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:textColorSelected="#FFFF"/>
+            android:id="@+id/appbar">
 
-    </android.support.design.widget.AppBarLayout>
+           <devs.mulham.horizontalcalendar.HorizontalCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:textColorSelected="#FFFF"/>
 
-    <!-- day view w hours for calendar-->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="430dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/appbar"
-        android:id="@+id/svCalendar">
+        </android.support.design.widget.AppBarLayout>
 
-        <com.framgia.library.calendardayview.CalendarDayView
-            android:id="@+id/dayView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="30dp"
-            android:scrollbars="vertical"
-            app:dayHeight="@dimen/dayHeight"
-            app:eventMarginLeft="10dp">
-        </com.framgia.library.calendardayview.CalendarDayView>
+        <!-- day view w hours for calendar-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/appbar"
+            android:id="@+id/svCalendar">
 
-    </ScrollView>
+            <com.framgia.library.calendardayview.CalendarDayView
+                android:id="@+id/dayView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:scrollbars="vertical"
+                app:dayHeight="@dimen/dayHeight"
+                app:eventMarginLeft="10dp">
+            </com.framgia.library.calendardayview.CalendarDayView>
 
+        </ScrollView>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_below="@id/svCalendar"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="?android:attr/listDivider" />
+        <View
+            android:id="@+id/divider"
+            android:layout_below="@id/svCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
 
-<!-- bottom attaction list view & floating icon-->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/whitish">
+        <!-- bottom attaction list view & floating icon-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rvHorizontal">
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rvHorizontal">
+            </android.support.v7.widget.RecyclerView>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addIcon"
-            app:backgroundTint="@color/iconBackgroundBlue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:src="@drawable/add_white"
-            app:layout_anchorGravity="bottom|right|end" />
-
-    </FrameLayout>
-
-</RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/addIcon"
+                app:backgroundTint="@color/iconBackgroundBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/add_white"
+                app:layout_anchorGravity="bottom|right|end" />
+        </FrameLayout>
+    </RelativeLayout>
+</FrameLayout>

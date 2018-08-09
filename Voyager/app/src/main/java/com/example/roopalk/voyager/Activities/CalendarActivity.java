@@ -41,7 +41,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     @BindView(R.id.addIcon) FloatingActionButton add;
     @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
 
-
     Trip trip;
 
     ArrayList<IEvent> events = new ArrayList<>();
@@ -94,11 +93,11 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
 
 
-            //set up the horizontal scroll for attractions
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-            rvHorizontal.setLayoutManager(linearLayoutManager);
-            horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
-            rvHorizontal.setAdapter(horizontalAttractionAdapter);
+        //set up the horizontal scroll for attractions
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvHorizontal.setLayoutManager(linearLayoutManager);
+        horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
+        rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
         events = new ArrayList<>();
         {
@@ -116,8 +115,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         dayView.setEvents(events);
 
-
-
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -125,7 +122,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             {
                 AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.rlCalendar, addingAttractionFragment);
+                ft.add(R.id.calendarplaceholder, addingAttractionFragment);
+                ft.addToBackStack("Adding Attraction fragment");;
                 ft.commit();
             }
         });
@@ -175,7 +173,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
 
-
     @Override
     public void moveToCalendarPage(Trip trip, Context context)
     {
@@ -183,6 +180,4 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         calendarIntent.putExtra("trip", Parcels.wrap(trip));
         startActivity(calendarIntent);
     }
-
-
 }
