@@ -19,6 +19,7 @@ import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
+import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
 
@@ -49,7 +50,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     public int minutes;
 
-    public String city;
+    public  String city;
 
     ArrayList<IEvent> events = new ArrayList<>();
 
@@ -81,43 +82,14 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
 
-        /* starts before 1 month from now */
-        Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.WEEK_OF_MONTH, -1);
+        setHorizontalCalendar();
 
-        Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.WEEK_OF_MONTH, 1);
+        //set up the horizontal scroll for attractions
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvHorizontal.setLayoutManager(linearLayoutManager);
+        horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
+        rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
-
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
-                .range(startDate, endDate)
-                .datesNumberOnScreen(5)
-                .build();
-
-            //set up the horizontal scroll for attractions
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-            rvHorizontal.setLayoutManager(linearLayoutManager);
-            horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
-            rvHorizontal.setAdapter(horizontalAttractionAdapter);
-
-
-
-
-
-        events = new ArrayList<>();
-        {
-            int eventColor = ContextCompat.getColor(this, R.color.eventColor);
-            Calendar timeStart = Calendar.getInstance();
-            timeStart.set(Calendar.HOUR_OF_DAY, 8);
-            timeStart.set(Calendar.MINUTE, 30);
-            Calendar timeEnd = (Calendar) timeStart.clone();
-            timeEnd.set(Calendar.HOUR_OF_DAY, 12);
-            timeEnd.set(Calendar.MINUTE, 40);
-            Event event = new Event(timeStart, timeEnd, "attraction name placeholder", eventColor);
-            events.add(event);
-        }
-
-        dayView.setEvents(events);
 
         add.setOnClickListener(new View.OnClickListener()
         {
@@ -131,23 +103,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
 
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                Toast.makeText(getApplicationContext(), "You selected a date!", Toast.LENGTH_SHORT).show();
 
-            }
-
-            @Override
-            public void onCalendarScroll(HorizontalCalendarView calendarView,
-                                         int dx, int dy) {
-            }
-
-            @Override
-            public boolean onDateLongClicked(Calendar date, int position) {
-                return true;
-            }
-        });
     }
 
     public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
@@ -173,8 +129,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView.refresh();
     }
 
-
-
     @Override
     public void moveToCalendarPage(Trip trip, Context context)
     {
@@ -183,18 +137,41 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         startActivity(calendarIntent);
     }
 
+    public void getWeather (final String city){
+        //gets the current weather
+        Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
+                System.out.print(weather_city);
+                tvweather.setText("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" +  weather_city);
+            }
+        });
+        asyncTask.execute(city);
 
+        System.out.print(tvweather);
+    }
+
+    public void setHorizontalCalendar(){
+        //gets the bounds for the cal view
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.WEEK_OF_MONTH, -1);
+
+        Calendar endDate = Calendar.getInstance();
+        endDate.add(Calendar.WEEK_OF_MONTH, 1);
+
+        // sets up the horizontal date calendar view
+        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView) .range(startDate, endDate).datesNumberOnScreen(5).build();
+
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+            @Override
+            public void onDateSelected(Calendar date, int position) { Toast.makeText(getApplicationContext(), "You selected a date!", Toast.LENGTH_SHORT).show(); }
+        });
+
+
+    }
 
 }
 
-//        //gets the current weather
-//        Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
-//            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
-//                System.out.print(weather_city);
-//                tvweather.setText("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" +  city);
-//            }
-//        });
-//        asyncTask.execute(city);
-//        System.out.print(tvweather);
+
+
 
 

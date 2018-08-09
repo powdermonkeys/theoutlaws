@@ -102,11 +102,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // the alert dialog for trip builder
     }
-
-
-
 
     public void moveToFeaturedTrips()
     {

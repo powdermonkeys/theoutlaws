@@ -55,7 +55,6 @@
 
     </ScrollView>
 
-
     <View
         android:id="@+id/divider"
         android:layout_below="@id/svCalendar"

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.roopalk.voyager.Activities.CalendarActivity;
@@ -35,6 +36,7 @@ public class AddingEventFragment extends DialogFragment
     @BindView(R.id.etEndTime) EditText etEndtime;
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
+    @BindView(R.id.attractionName) TextView attractioName;
 
     ViewPagerAdapter viewPagerAdapter;
     ArrayList<String> imageURLs = new ArrayList<>();
@@ -76,6 +78,8 @@ public class AddingEventFragment extends DialogFragment
         ButterKnife.bind(this, view);
 
         final Attraction chosenAttraction = getArguments().getParcelable("chosenAttraction");
+        attractioName.setText(chosenAttraction.getAttractionName().toString());
+
         try
         {
             networkUtility.getImages(chosenAttraction);
