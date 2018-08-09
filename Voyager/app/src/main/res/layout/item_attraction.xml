@@ -9,8 +9,8 @@
     android:id="@+id/cardView"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:background="@color/iconBackgroundBlue" >
-
+    android:background="@color/iconBackgroundBlue"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/picture"
-            android:layout_width="110dp"
-            android:layout_height="70dp"
+            android:layout_width="125dp"
+            android:layout_height="80dp"
             android:layout_marginRight="10dp"/>
 
         <LinearLayout
