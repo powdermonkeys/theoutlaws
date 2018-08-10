@@ -8,8 +8,8 @@ import org.parceler.Parcel;
 
 @Parcel
 public class BudgetBar {
-    private static int budget;
-    private static ProgressBar progressBar;
+    public int budget;
+    public static ProgressBar progressBar;
 
     public BudgetBar(){}
 
@@ -17,7 +17,6 @@ public class BudgetBar {
     {
         budget = trip.getBudget();
         progressBar = pb;
-
         setBudgetMax();
     }
 
@@ -40,5 +39,15 @@ public class BudgetBar {
     private void setBudgetMax()
     {
         progressBar.setMax(budget);
+    }
+
+    public int getCurrFill()
+    {
+        return progressBar.getProgress();
+    }
+
+    public void setCurrFill(int price)
+    {
+        progressBar.setProgress(price);
     }
 }

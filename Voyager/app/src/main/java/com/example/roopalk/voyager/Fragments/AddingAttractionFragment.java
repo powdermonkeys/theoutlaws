@@ -43,7 +43,10 @@ public class AddingAttractionFragment extends Fragment
     public onFragmentInteractionListener mListener;
 
     Trip trip;
+
     BudgetBar budgetBar;
+
+    int currFill;
 
     static ArrayList<Attraction> chosen_attractions = new ArrayList<>();
 
@@ -56,10 +59,11 @@ public class AddingAttractionFragment extends Fragment
 
     }
 
-    public static AddingAttractionFragment newInstance(Trip trip)
+    public static AddingAttractionFragment newInstance(Trip trip, int currFill)
     {
         Bundle args = new Bundle();
         args.putParcelable("trip", trip);
+        args.putInt("currFill", currFill);
         AddingAttractionFragment fragment = new AddingAttractionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -96,6 +100,8 @@ public class AddingAttractionFragment extends Fragment
         }
 
         budgetBar = new BudgetBar(trip, pbBudget);
+        currFill = getArguments().getInt("currFill");
+        budgetBar.setCurrFill(currFill);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new AttractionAdapter(attractions, mListener, budgetBar);
@@ -108,7 +114,7 @@ public class AddingAttractionFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                listener.moveToCalendarPage(trip, getContext());
+                listener.moveToCalendarPage(trip, getContext(), budgetBar.getCurrFill());
             }
         });
     }
@@ -131,11 +137,6 @@ public class AddingAttractionFragment extends Fragment
         }
     }
 
-    public interface calendarListener
-    {
-        void moveToCalendarPage(Trip trip, Context context);
-    }
-
     public void setUpSwipeController(final View view)
     {
         final SwipeController swipeController = new SwipeController(new SwipeControllerActions()
@@ -145,22 +146,25 @@ public class AddingAttractionFragment extends Fragment
             public void onRightClicked(int position)
             {
                 final Attraction currentAttraction = attractions.get(position);
-                chosen_attractions.add(currentAttraction);
+
+                if(!chosen_attractions.contains(currentAttraction))
+                {
+                    chosen_attractions.add(currentAttraction);
+                    Snackbar snackbar = Snackbar.make(view, "Attraction added!", Snackbar.LENGTH_LONG);
+                    snackbar.setAction("UNDO", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            chosen_attractions.remove(currentAttraction);
+                            budgetBar.deleteFromBudget(currentAttraction.getEstimatedPrice());
+                        }
+                    });
+                    snackbar.show();
+                }
 
                 int numGuests = trip.getNumGuests();
                 int totalPrice = currentAttraction.getEstimatedPrice() * numGuests;
 
                 budgetBar.fillBudget(totalPrice);
-
-                Snackbar snackbar = Snackbar.make(view, "Attraction added!", Snackbar.LENGTH_LONG);
-                snackbar.setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        chosen_attractions.remove(currentAttraction);
-                        budgetBar.deleteFromBudget(currentAttraction.getEstimatedPrice());
-                    }
-                });
-                snackbar.show();
             }
         });
 
@@ -178,5 +182,10 @@ public class AddingAttractionFragment extends Fragment
     public static ArrayList<Attraction> getChosenAttractions()
     {
         return chosen_attractions;
+    }
+
+    public interface calendarListener
+    {
+        void moveToCalendarPage(Trip trip, Context context, int currBudget);
     }
 }

@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.roopalk.voyager.Adapters.HorizontalAttractionAdapter;
@@ -34,12 +36,16 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 
 public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener {
     @BindView(R.id.dayView) CalendarDayView dayView;
     @BindView(R.id.calendarView) HorizontalCalendarView horizontalCalendar;
     @BindView(R.id.addIcon) FloatingActionButton add;
     @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
+    @BindView(R.id.rlHorizontal) RelativeLayout rlHorizontal;
 
     Trip trip;
 
@@ -54,26 +60,29 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     public int minutes;
 
     public String city;
-//    String currDate;
+
+    int currentPriceInBudgetBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-
         ButterKnife.bind(this);
+
+        setHorizontalCalendarVisibility();
 
         city = getIntent().getExtras().toString();
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("MMMM, dd yyyy");
         SimpleDateFormat tfHours = new SimpleDateFormat("hh");
         SimpleDateFormat tfMinutes = new SimpleDateFormat("mm");
         hours = Integer.parseInt(tfHours.format(c));
         minutes= Integer.parseInt(tfMinutes.format(c));
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+        currentPriceInBudgetBar = getIntent().getIntExtra("currFill", 0);
 
         dayView = findViewById(R.id.dayView);
         dayView.setLimitTime(8, 22);
@@ -90,8 +99,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
                 .range(startDate, endDate)
                 .datesNumberOnScreen(5)
                 .build();
-
-
 
         //set up the horizontal scroll for attractions
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -120,7 +127,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             @Override
             public void onClick(View v)
             {
-                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip, currentPriceInBudgetBar);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.calendarplaceholder, addingAttractionFragment);
                 ft.addToBackStack("Adding Attraction fragment");;
@@ -147,7 +154,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         });
     }
     
-    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
+    public void setTime(int startH, int startMin, int endH, int endMin, Attraction attraction){
 
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
@@ -164,6 +171,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         timeEnd.set(Calendar.MINUTE, endMin);
 
         Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), eventColor);
+        added.setName(attraction.getAttractionName());
+
         events.add(added);
 
         attractions.remove(attraction);
@@ -172,12 +181,28 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView.refresh();
     }
 
+    private void setHorizontalCalendarVisibility()
+    {
+        if(attractions.size() == 0)
+        {
+            rlHorizontal.setVisibility(GONE);
+            rvHorizontal.setVisibility(GONE);
+            dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+        else
+        {
+            rlHorizontal.setVisibility(VISIBLE);
+            rvHorizontal.setVisibility(VISIBLE);
+            dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 140));
+        }
+    }
 
     @Override
-    public void moveToCalendarPage(Trip trip, Context context)
+    public void moveToCalendarPage(Trip trip, Context context, int currFill)
     {
         Intent calendarIntent = new Intent(context, CalendarActivity.class);
         calendarIntent.putExtra("trip", Parcels.wrap(trip));
+        calendarIntent.putExtra("currFill", currFill);
         startActivity(calendarIntent);
     }
 }
