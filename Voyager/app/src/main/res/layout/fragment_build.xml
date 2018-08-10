@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
     android:paddingTop="50dp"
-    android:paddingRight="10dp"
-    android:paddingLeft="10dp">
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp">
 
     <ImageView
         android:id="@+id/logo"
@@ -96,7 +96,7 @@
         android:layout_margin="5dp"
         android:padding="8dp"
         android:hint="@string/departure"
-        android:inputType="none"
+        android:inputType="date"
         android:textColor="@color/black"
         android:textColorHint="@color/hintColor" />
 

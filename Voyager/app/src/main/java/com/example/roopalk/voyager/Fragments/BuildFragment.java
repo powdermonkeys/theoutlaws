@@ -37,8 +37,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static java.lang.Integer.parseInt;
-
 public class BuildFragment extends Fragment
 {
     @BindView(R.id.destinationNamed) AutoCompleteTextView destination;
@@ -78,17 +76,15 @@ public class BuildFragment extends Fragment
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState)
+//    {
+//        super.onCreate(savedInstanceState);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
-
         return inflater.inflate(R.layout.fragment_build, container, false);
 
     }
@@ -100,8 +96,7 @@ public class BuildFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        tvGuests.setText("" + guests);
-        tvBudget.setText("" + budget);
+
         sbGuests.setMax(10);
         sbBudget.setMax(40);
         sbGuests.setProgress(guests);
@@ -126,8 +121,11 @@ public class BuildFragment extends Fragment
         month = mCurrentDate.get(Calendar.MONTH);
         year = mCurrentDate.get(Calendar.YEAR);
 
+        tvGuests.setText("# of Voyagers");
+        tvBudget.setText("Your budget");
         tvGuests.setTextSize(12);
         tvBudget.setTextSize(12);
+
 
         // listener for guest drag bar
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -135,6 +133,9 @@ public class BuildFragment extends Fragment
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 guests = progress;
                 tvGuests.setText("" + guests);
+                if (tvGuests.length() > 10){
+                    tvGuests.setText("" + guests);
+                }
             }
 
             @Override
@@ -213,9 +214,10 @@ public class BuildFragment extends Fragment
                 final String DESTINATION = destination.getText().toString();
                 final String CHECKIN = departureDate.getText().toString();
                 final String CHECKOUT = arrivalDate.getText().toString();
-                final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
-                final int BUDGET = parseInt(tvBudget.getText().toString());
+                final int NUM_GUESTS = guests;
+                final int BUDGET = budget;
                 int LENGTH=0;
+
 
                 //converting strings to simple date format
                 try {
@@ -228,7 +230,6 @@ public class BuildFragment extends Fragment
                 }
 
                 try {
-                    Log.d("onClick", "reached the try catch statement");
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
 

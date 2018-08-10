@@ -15,9 +15,13 @@
     <color name="translucent">#33D3D3D3</color>
     <color name="iconSailBlue">#CBF5E3</color>
     <color name="hintColor">#ADADAD</color>
-    <color name="signInBlue">#bcf2e0</color>
+    <color name="signInBlue">#BCF2E0</color>
     <color name="calendarRed"> #CE2F13</color>
-    <color name="whitish">#fafafa</color>
+    <color name="whitish">#FAFAFA</color>
     <color name="featured_background">#777777</color>
     <color name="elevated_gray">#555555</color>
+    <color name="addButton">#96CDCA</color>
+    <color name="moneyGreen">#478E26</color>
+    <color name="blueGray">#85ADAD</color>
+    <color name="gray">#CCCCCC</color>
 </resources>

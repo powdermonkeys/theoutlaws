@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/contact_detail_image_height"
         android:contentDescription="@string/trip_detail_image"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/greece_one" />
 
     <!--Trip Description Section-->
     <RelativeLayout
@@ -33,7 +35,7 @@
             android:background="@color/black"/>
 
         <!--THE REST OF THE TRIP'S INFORMATION CAN GO HERE-->
-        <include layout="@layout/trip_details_description"/>
+        <include layout="@layout/trip_details_description" />
 
     </RelativeLayout>
 

@@ -8,14 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.roopalk.voyager.Adapters.ViewPagerAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
-import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
@@ -37,15 +35,12 @@ public class AttractionDetailsFragment extends DialogFragment
     @BindView(R.id.tvAttractionDescription) TextView tvAttractionDescription;
     @BindView(R.id.tvAttractionPrice) TextView tvAttractionPrice;
     @BindView(R.id.leaveDialog) ImageView leaveDialog;
-    @BindView(R.id.add) Button add;
 
     ViewPagerAdapter viewPagerAdapter;
 
     NetworkUtility networkUtility = new NetworkUtility(getContext());
 
-    ArrayList<Photo> photos = new ArrayList<>();
     ArrayList<String> imageURLs = new ArrayList<>();
-    static ArrayList<Attraction> chosen_attractions = new ArrayList<>();
 
     private static final String TAG = "DetailsFragment";
 
@@ -82,11 +77,9 @@ public class AttractionDetailsFragment extends DialogFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         ButterKnife.bind(this, view);
-       super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
 
-       attraction = getArguments().getParcelable("attraction");
-
-       final BudgetBar budgetBar = Parcels.unwrap(getArguments().getParcelable("budget"));
+        attraction = getArguments().getParcelable("attraction");
 
         try
         {
@@ -94,42 +87,23 @@ public class AttractionDetailsFragment extends DialogFragment
             imageURLs = networkUtility.getImageURLs();
             tvAttractionName.setText(attraction.getAttractionName());
             tvAttractionDescription.setText(attraction.getAttractionDescription());
-            tvAttractionTime.setText(attraction.getEstimatedTime());
-            tvAttractionPrice.setText(attraction.getEstimatedPrice()+"");
+            tvAttractionTime.setText("Estimated Time: " +attraction.getEstimatedTime());
+            tvAttractionPrice.setText("Estimated Price" + attraction.getEstimatedPrice());
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
 
-       viewPagerAdapter = new ViewPagerAdapter(getContext(), imageURLs);
-       viewPager.setAdapter(viewPagerAdapter);
-       circleIndicator.setViewPager(viewPager);
+        viewPagerAdapter = new ViewPagerAdapter(getContext(), imageURLs);
+        viewPager.setAdapter(viewPagerAdapter);
+        circleIndicator.setViewPager(viewPager);
 
-       leaveDialog.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               dismiss();
-           }
-       });
-
-       add.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               budgetBar.setBudgetLevel(attraction.getEstimatedPrice());
-               chosen_attractions.add(attraction);
-               dismiss();
-           }
-       });
-    }
-
-
-    public static ArrayList<Attraction> getChosenAttractions()
-    {
-        return chosen_attractions;
+        leaveDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 }

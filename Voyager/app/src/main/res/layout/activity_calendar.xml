@@ -1,104 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.CalendarActivity"
-    android:id="@+id/rlCalendar">
-
+    android:id="@+id/calendarplaceholder">
     <RelativeLayout
-        android:id="@+id/dateHeader"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/iconBackgroundBlue"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        tools:context=".Activities.CalendarActivity"
+        android:id="@+id/rlCalendar">
 
-        <ImageView
-            android:id="@+id/previous_day"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:layout_gravity="left"
-            android:padding="5dp"
-            android:src="@drawable/left_arrow" />
-
-        <TextView
-            android:id="@+id/display_current_date"
-            android:layout_width="wrap_content"
+        <!-- header with calendar-->
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="July 27, 2018"
-            android:layout_toRightOf="@id/previous_day"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="110dp"
-            android:paddingRight="110dp"
-            android:textColor="#fafafa"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:id="@+id/appbar">
+           <devs.mulham.horizontalcalendar.HorizontalCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:textColorSelected="#FFFF"/>
 
-        <ImageView
-            android:id="@+id/next_day"
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:padding="5dp"
-            android:paddingLeft="110dp"
-            android:src="@drawable/right_arrow" />
+            <TextView
+                android:id="@+id/tvweather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="60dp"
+                android:textColor="@color/whitish"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/display_current_date"
-            android:paddingLeft="60dp"
-            android:textSize="14sp"
-            android:textColor="@color/whitish"
-            android:text="TextView" />
+        </android.support.design.widget.AppBarLayout>
+
+        <!-- day view w hours for calendar-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/appbar"
+            android:id="@+id/svCalendar">
+
+            <com.framgia.library.calendardayview.CalendarDayView
+                android:id="@+id/dayView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:scrollbars="vertical"
+                app:dayHeight="@dimen/dayHeight"
+                app:eventMarginLeft="10dp">
+            </com.framgia.library.calendardayview.CalendarDayView>
+        </ScrollView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_below="@id/svCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <!-- bottom attraction list view & floating icon-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/dateHeader"
-        android:id="@+id/svCalendar">
-
-        <com.framgia.library.calendardayview.CalendarDayView
-            android:id="@+id/dayView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="35dp"
-            app:dayHeight="@dimen/dayHeight"
-            app:eventMarginLeft="10dp">
-        </com.framgia.library.calendardayview.CalendarDayView>
-    </ScrollView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/whitish">
-
+        android:layout_height="115dp"
+        android:layout_gravity="bottom"
+        android:background="@color/gray"
+        android:id="@+id/rlHorizontal">
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rvHorizontal">
+            android:id="@+id/rvHorizontal"
+            android:layout_below="@id/svCalendar"
+            tools:ignore="NotSibling">
         </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addIcon"
-            app:backgroundTint="@color/iconBackgroundBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
+            android:background="@color/iconBackgroundBlue"
             android:src="@drawable/add_white"
-            app:layout_anchorGravity="bottom|right|end" />
-    </FrameLayout>
-
-</RelativeLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/iconBackgroundBlue"
+            app:rippleColor="@color/seaBlue" />
+    </RelativeLayout>
+</FrameLayout>

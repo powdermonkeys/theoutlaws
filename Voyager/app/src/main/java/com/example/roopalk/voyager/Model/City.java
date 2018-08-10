@@ -24,6 +24,11 @@ public class City extends ParseObject
     //the country in which the city is
     private static final String COUNTRY = "Country";
 
+    private static final String LATITUDE = "latitude";
+
+    private static final String LONGITUDE = "longitude";
+
+
     //getter methods for each of the values
 
     public String getCityName() {
@@ -39,6 +44,10 @@ public class City extends ParseObject
         return getString(COUNTRY);
     }
 
+    public static String getLATITUDE() { return LATITUDE; }
+
+    public static String getLongitude(){ return LONGITUDE;}
+
     public void setCityName(String cityName) {
         put(CITY_NAME, cityName);
     }
@@ -51,6 +60,15 @@ public class City extends ParseObject
     {
         put(COUNTRY, country);
     }
+
+    public void setLatitude(double latitude){
+        put(LATITUDE, latitude);
+    }
+
+    public void setLongitude(double longitude){
+        put(LONGITUDE, longitude);
+    }
+
 
     public static class Query extends ParseQuery<City>
     {

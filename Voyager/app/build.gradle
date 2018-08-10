@@ -27,6 +27,7 @@ dependencies {
 
     //for calendar
     implementation 'com.github.khacpv:Calendar-Day-View:master-SNAPSHOT'
+    implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
 
     // for sliding tab view
     implementation 'com.android.support:appcompat-v7:27.1.1'

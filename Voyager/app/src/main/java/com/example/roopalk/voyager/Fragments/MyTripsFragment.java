@@ -2,6 +2,8 @@ package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +21,15 @@ import com.parse.ParseException;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+
 public class MyTripsFragment extends Fragment {
 
     private RecyclerView rvMyTrips;
     private MyTripsAdapter mAdapter;
     private FloatingActionButton btnAddTrip;
+
+//    @BindView(R.id.addATrip) FloatingActionButton btnAddTrip;
 
     onFragmentInteractionListener mListener;
 
@@ -94,20 +100,40 @@ public class MyTripsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        btnAddTrip.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mListener.moveToCreateTripPage();
+            }
+        });
+    }
+
+    @Override
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
-        if (context instanceof onFragmentInteractionListener) {
+        if (context instanceof onFragmentInteractionListener)
+        {
             mListener = (onFragmentInteractionListener) context;
-        } else {
+        }
+        else
+        {
             throw new RuntimeException(context.toString()
                     + " must implement onFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
-
 }

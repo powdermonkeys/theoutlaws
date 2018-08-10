@@ -67,6 +67,8 @@ public class Attraction extends ParseObject {
         return getParseObject(CITY);
     }
 
+
+
     //setter methods for each of these variables
     public void setAttractionName(String attractionName)
     {

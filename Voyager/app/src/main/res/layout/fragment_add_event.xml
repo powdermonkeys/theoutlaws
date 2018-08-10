@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,40 +9,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rlTime">
 
         <TextView
-            android:id="@+id/tvStartTime"
-            android:layout_width="wrap_content"
+            android:id="@+id/attractionName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvAttractionName"
-            android:layout_marginTop="30dp"
-            android:text="Start Time: " />
-
-        <EditText
-            android:id="@+id/etStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvAttractionName"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/tvStartTime"/>
-
-        <TextView
-            android:id="@+id/tvEndTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvStartTime"
-            android:text="End Time: "
-            android:layout_marginTop="40dp"/>
-
-        <EditText
-            android:id="@+id/etEndTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="70dp"
-            android:layout_toRightOf="@id/tvEndTime"/>
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:text="attraction name placeholder"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -49,38 +29,99 @@
             android:id="@+id/leaveDialog"
             android:layout_alignParentEnd="true"
             android:clickable="true"
-            android:src="@drawable/ic_clear_black"/>
+            android:src="@drawable/ic_clear_black" />
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvTimePicker"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="add"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="60dp"/>
+            android:layout_alignParentStart="true"
+            android:text="Pick a time to add event to your calendar"
+            android:padding="10dp"
+            android:inputType="none"
+            android:layout_below="@id/attractionName"
+            android:textSize="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:layout_below="@id/tvTimePicker">
+
+            <TextView
+                android:id="@+id/tvStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTimePicker"
+                android:padding="5dp"
+                android:text=" From: "  />
+
+            <EditText
+                android:id="@+id/etStartTime"
+                android:layout_width="60dp"
+                android:inputType="none"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTimePicker"
+                android:layout_toRightOf="@id/tvStartTime"
+                android:layout_alignBottom="@id/tvStartTime"/>
+
+            <TextView
+                android:id="@+id/tvUntil"
+                android:inputType="none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/etStartTime"
+                android:layout_toLeftOf="@id/etStartTime"
+                android:layout_alignTop="@id/etStartTime"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="To: " />
+
+
+            <EditText
+                android:id="@+id/etEndTime"
+                android:layout_width="60dp"
+                android:inputType="none"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvUntil" />
+
+        </LinearLayout>
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="150dp" />
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true" />
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/ciImageSwiper"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_alignStart="@id/vpImageSlideshow"
             android:layout_below="@id/vpImageSlideshow"
+            android:layout_centerHorizontal="true"
             app:ci_drawable="@drawable/circleindicator_round" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="170dp"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ciImageSwiper"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"
+            android:text="Schedule Attraction"
+            android:background="@drawable/rounded_button"/>
 
     </RelativeLayout>
 </FrameLayout>

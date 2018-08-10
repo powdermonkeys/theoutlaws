@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,14 +9,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rlinfo">
 
         <TextView
             android:id="@+id/tvAttractionName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Attraction Name" />
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:text="attraction name placeholder"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvAttractionTime"
@@ -30,19 +34,21 @@
             android:id="@+id/tvAttractionPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvAttractionName"
-            android:layout_marginLeft="15dp"
+            android:layout_below="@id/tvAttractionTime"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@id/tvAttractionTime"
             android:text="Estimated Price: " />
 
         <TextView
             android:id="@+id/tvAttractionDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvAttractionTime"
-            android:layout_marginTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_below="@id/tvAttractionPrice"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Attraction Description" />
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -52,29 +58,19 @@
             android:clickable="true"
             android:src="@drawable/ic_clear_black"/>
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
-            android:textSize="20sp"
-            android:text="add"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="60dp"/>
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rlImages"
+        android:layout_below="@id/rlinfo">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="105dp" />
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true" />
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/ciImageSwiper"
@@ -82,8 +78,10 @@
             android:layout_height="40dp"
             android:layout_alignStart="@id/vpImageSlideshow"
             android:layout_below="@id/vpImageSlideshow"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="110dp"
             app:ci_drawable="@drawable/circleindicator_round" />
 
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

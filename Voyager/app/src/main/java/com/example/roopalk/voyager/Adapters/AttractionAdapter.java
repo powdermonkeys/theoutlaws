@@ -16,7 +16,6 @@ import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
-import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
@@ -60,27 +59,26 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(AttractionAdapter.ViewHolder holder, int position)
+    public void onBindViewHolder(final AttractionAdapter.ViewHolder holder, int position)
     {
         Attraction currentAttraction = mAttractions.get(position);
-        Photo p = new Photo();
-
-        NetworkUtility networkUtility = new NetworkUtility(context);
-        try
-        {
-            networkUtility.getImagesFromAttraction(currentAttraction);
-            p = networkUtility.getPhotos().get(0);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         holder.tvName.setText(currentAttraction.getAttractionName());
         holder.tvDescription.setText(currentAttraction.getAttractionDescription());
         holder.tvTime.setText(currentAttraction.getEstimatedTime());
 
+        NetworkUtility networkUtility = new NetworkUtility(context);
+        try
+        {
+            networkUtility.getImages(currentAttraction);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Glide.with(context)
-                .load(p.getImage().getUrl())
+                .load(networkUtility.getImageURLs().get(0))
                 .into(holder.ivPicture);
+
     }
 
     @Override
@@ -102,7 +100,6 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View v)

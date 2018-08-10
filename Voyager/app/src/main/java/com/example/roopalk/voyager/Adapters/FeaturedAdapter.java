@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
@@ -88,20 +87,16 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
         }
 
 
-//        Similar to how it was done in AttractionAdapter
-
-
-
 
 //        Log.e("FeaturedAdapter",trip.getThumbnailDrawable());
 
 
 //        recyclerView.addItemDecoration(sectionItemDecoration);
+
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
-                Toast.makeText(view.getContext(), "You have clicked " + view.getId(), Toast.LENGTH_SHORT).show(); //you can add data to the tag of your cardview in onBind... and retrieve it here with with.getTag().toString()..
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:

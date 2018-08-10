@@ -15,6 +15,7 @@ import com.example.roopalk.voyager.Adapters.FragmentAdapter;
 import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
+import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
@@ -72,14 +73,16 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
             trips = networkUtility.getTripsByDate(currDateSTF);
             if (trips.size() > 0){
                 final String city = trips.get(0).getDestination().toString();
+             //   final List<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("We noticed that you are currently on a trip, would you like to be redirected to your calendar?");
+                alertDialogBuilder.setMessage("We noticed that you are currently on a trip. Would you like to be redirected to your calendar?");
                 alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                                 intent.putExtra("city", city);
+                        //        intent.putExtra("attractions", Parcels.wrap(attractions));
                                 startActivity(intent);
                                 finish();
 
@@ -100,11 +103,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // the alert dialog for trip builder
     }
-
-
-
 
     public void moveToFeaturedTrips()
     {
@@ -137,7 +136,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     @Override
     public void moveToAttractionsPage(Trip trip)
     {
-        addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+        addingAttractionFragment = AddingAttractionFragment.newInstance(trip, 0);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_activity, addingAttractionFragment);
@@ -153,7 +152,6 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingEventFragment.show(ft, "fragment_add_event");
     }
 
-
     public void moveToCalendarPage(Trip trip)
     {
         Intent calendarIntent = new Intent(MainActivity.this, CalendarActivity.class);
@@ -161,7 +159,17 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         startActivity(calendarIntent);
     }
 
-    private void swapFragment(){
+    @Override
+    public void moveToCreateTripPage()
+    {
+        BuildFragment buildFragment = new BuildFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main_activity, buildFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void swapFragment()
+    {
         FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -169,5 +177,4 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
 }

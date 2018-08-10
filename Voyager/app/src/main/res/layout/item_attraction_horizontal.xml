@@ -4,17 +4,27 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="125dp"
+        android:layout_height="80dp"
         android:id="@+id/ivAttractionPhoto"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivAttractionPhoto"
         android:layout_centerHorizontal="true"
-        android:text="AttractionName"
+        android:layout_centerInParent="true"
+        android:text="Attraction Name"
         android:id="@+id/tvAttractionName"
-        android:textColor="@color/eggshellWhite"/>
+        android:textSize="12sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/montserrat"
+        android:textStyle="bold"
+        android:textColor="@color/seaFoam"/>
 </RelativeLayout>

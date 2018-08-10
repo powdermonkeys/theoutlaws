@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Model.Trip;
@@ -19,7 +18,8 @@ import com.example.roopalk.voyager.R;
 import java.util.ArrayList;
 
 // Provide the underlying view for an individual list item.
-public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
+public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
+{
     private Activity mContext;
     private ArrayList<Trip> mTrips;
 
@@ -57,11 +57,11 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
 //                .centerCrop()
 //                .into(target);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
-                Toast.makeText(view.getContext(), "You have clicked " + view.getId(), Toast.LENGTH_SHORT).show(); //you can add data to the tag of your cardview in onBind... and retrieve it here with with.getTag().toString()..
                 //You can change the fragment, something like this, not tested, please correct for your desired output:
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 BuildFragment myFragment = new BuildFragment();
@@ -84,13 +84,13 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
         final TextView tvName;
         final FrameLayout flGradient;
 
-        public VH(View itemView, final Context context) {
+        public VH(View itemView, final Context context)
+        {
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
             flGradient = (FrameLayout) itemView.findViewById(R.id.flGradient);
             tvName = (TextView)itemView.findViewById(R.id.tvName);
-
         }
     }
 }

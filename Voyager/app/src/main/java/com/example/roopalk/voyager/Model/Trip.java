@@ -6,9 +6,12 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
+
+    private List<Attraction> tripAttractions = new ArrayList<Attraction>();
 
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
@@ -28,6 +31,9 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called length
     private static final String LENGTH = "length";
 
+    //the destination of the trip is stored in a column called length
+    private static final String TRIPATTRACTIONS = "tripAttractions";
+
     public Trip() {}
 
     //getter methods for each of the values
@@ -46,6 +52,13 @@ public class Trip extends ParseObject {
     public String getDestination()
     {
         return getString(DESTINATION);
+    }
+
+    public List<Attraction> getTRIPATTRACTIONS() { return getList(TRIPATTRACTIONS); }
+
+    public void setTripattractions(final Attraction attraction) {
+        tripAttractions.add(attraction);
+        put(TRIPATTRACTIONS, tripAttractions);
     }
 
     public int getBudget() { return getInt(BUDGET); }
@@ -82,15 +95,14 @@ public class Trip extends ParseObject {
         setLength(length);
     }
 
+    public void addAttractionToTrip(String name, int startHr, int startMin, int endHr, int endMin){
+
+    }
+
 
     // Returns a list of trips, random trips to show cardviews
     public static ArrayList<Trip> getTrips() {
         ArrayList<Trip> trips = new ArrayList<>();
-//        trips.add(ParseObject.create(Trip.class));
-//        trips.add(ParseObject.create(Trip.class));
-//        trips.add(ParseObject.create(Trip.class));
-//        trips.add(ParseObject.create(Trip.class));
-//        trips.add(ParseObject.create(Trip.class));
         return trips;
     }
 
@@ -126,3 +138,4 @@ public class Trip extends ParseObject {
         }
     }
 }
+

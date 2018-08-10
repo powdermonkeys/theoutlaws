@@ -30,7 +30,8 @@
                     android:id="@+id/ivProfile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/grid_profile_height"
-                    android:scaleType="centerCrop" />
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"/>
 
                 <View
                     android:id="@+id/vGradient"
