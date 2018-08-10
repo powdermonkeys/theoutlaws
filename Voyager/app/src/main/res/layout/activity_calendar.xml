@@ -3,6 +3,7 @@
 <FrameLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendarplaceholder">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,8 +16,8 @@
 
         <!-- header with calendar-->
         <android.support.design.widget.AppBarLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/appbar">
 
            <devs.mulham.horizontalcalendar.HorizontalCalendarView
@@ -31,7 +32,7 @@
         <!-- day view w hours for calendar-->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="430dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_below="@id/appbar"
             android:id="@+id/svCalendar">
@@ -55,28 +56,38 @@
             android:layout_height="3dp"
             android:background="?android:attr/listDivider" />
 
-        <!-- bottom attaction list view & floating icon-->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
+    </RelativeLayout>
+
+    <!-- bottom attraction list view & floating icon-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_gravity="bottom"
+        android:background="@color/gray"
+        android:id="@+id/rlHorizontal">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvHorizontal"
+            android:layout_below="@id/dayView">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/iconBackgroundBlue"
+            android:src="@drawable/add_white"
             android:layout_alignParentBottom="true"
-            android:background="@color/gray">
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rvHorizontal">
-            </android.support.v7.widget.RecyclerView>
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/addIcon"
-                app:backgroundTint="@color/iconBackgroundBlue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/add_white"
-                app:layout_anchorGravity="bottom|right|end" />
-        </FrameLayout>
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/iconBackgroundBlue"
+            app:rippleColor="@color/seaBlue" />
     </RelativeLayout>
 </FrameLayout>
