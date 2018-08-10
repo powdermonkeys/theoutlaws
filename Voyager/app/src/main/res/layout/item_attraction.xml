@@ -4,13 +4,17 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardView"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:background="@color/iconBackgroundBlue"
-    android:layout_margin="10dp">
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:focusable="true">
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -24,12 +28,18 @@
             android:id="@+id/picture"
             android:layout_width="125dp"
             android:layout_height="80dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/attraction_IMAGE"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
+
+        <!-- aspect fill -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="ExtraText">
 
             <TextView
                 android:id="@+id/tvName"
@@ -37,14 +47,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:text="attraction name placeholder"/>
+                android:text="@string/attraction_name_placeholder"/>
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="description placeholder"/>
+                android:text="@string/description_placeholder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,23 +65,19 @@
                     android:id="@+id/est"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="est time: "
-                    android:layout_alignBottom="@id/tvTime"
-                    android:textSize="11sp"/>
+                    android:text="@string/est_time"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/est"
-                    android:text="3 hrs" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:text="$"
                     android:textAlignment="textEnd"
                     android:textSize="20sp" />

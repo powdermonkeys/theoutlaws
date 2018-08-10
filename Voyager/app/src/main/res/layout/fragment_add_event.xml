@@ -28,7 +28,7 @@
             android:id="@+id/leaveDialog"
             android:layout_alignParentEnd="true"
             android:clickable="true"
-            android:src="@drawable/ic_clear_black"/>
+            android:src="@drawable/ic_clear_black" />
 
         <TextView
             android:id="@+id/tvTimePicker"
@@ -88,7 +88,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,8 +96,8 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"
-            android:layout_width="250dp"
-            android:layout_height="150dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true" />
 
@@ -119,8 +118,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ciImageSwiper"
             android:layout_centerHorizontal="true"
-            android:textSize="14sp"
-            android:text="Add Attraction"
+            android:textSize="12sp"
+            android:text="@string/schedule_attraction"
             android:background="@drawable/rounded_button"/>
 
     </RelativeLayout>
