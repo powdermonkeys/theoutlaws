@@ -126,4 +126,16 @@ public class NetworkUtility
         trips = (ArrayList<Trip>) tripQuery.find();
         return trips;
     }
+
+    public ArrayList<Trip> getTripsWithUser() throws ParseException {
+        tripQuery.withUser();
+        trips = (ArrayList<Trip>) tripQuery.find();
+        return trips;
+    }
+
+    public void getTripImage(Trip trip) throws ParseException
+    {
+        photoQuery.withTrip(trip.getObjectId());
+        photos = (ArrayList<Photo>) photoQuery.find();
+    }
 }

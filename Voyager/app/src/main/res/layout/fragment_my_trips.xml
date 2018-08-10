@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llMyTripsContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/featured_background">
+
+
+
+
+
+
+
+
+    <!--TODO: Figure out if the container is the one with the viewpager-->
+    <!--TODO: Stick-->
+
+    <!--allows you to swipe from right to left, turns views into pages-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +26,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/featured_background">
+
+
+
 
         <!--allows you to swipe from right to left, turns views into pages-->
         <android.support.v4.view.ViewPager
@@ -18,32 +38,61 @@
             android:layout_weight="1"
             android:background="@android:color/white"/>
 
+
+
+
+
         <include layout="@layout/past_trips_section"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMyTrips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/rlFabContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!--<FrameLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/placeholder">-->
-        <!--</FrameLayout>-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMyTrips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"/>
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnAddTrip"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="66dp"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:elevation="44dp"
+                android:focusable="true"
+                android:src="@drawable/plus" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addATrip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/add_white" />
-    </RelativeLayout>
-</FrameLayout>
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end">-->
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/addATrip"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom|end"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:src="@drawable/add_white" />-->
+    <!--</RelativeLayout>-->
+
+
+
+
+</LinearLayout>

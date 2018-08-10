@@ -55,6 +55,19 @@
                 android:text="Insert Cool Description · $"
                 android:textColor="#ffffff" />
 
+            <TextView
+                android:id="@+id/tvBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvDesc"
+                android:layout_marginStart="-10dp"
+                android:layout_toEndOf="@+id/tvDesc"
+                android:gravity="bottom"
+                android:paddingBottom="20dp"
+                android:text="$$$$$$"
+                android:textColor="#ffffff" />
+
+
             <!--arrow forward indicates clicking feature-->
             <ImageView
                 android:id="@+id/trip_details"
