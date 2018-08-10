@@ -2,7 +2,6 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,21 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 // Provide the underlying view for an individual list item.
 public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
     private Activity mContext;
-    private List<Trip> mTrips;
+    private ArrayList<Trip> mTrips;
 
-    public MyTripsAdapter(Activity context, List<Trip> trips) {
+    public MyTripsAdapter(Activity context, ArrayList<Trip> trips) {
         mContext = context;
         if (trips == null) {
             throw new IllegalArgumentException("trips must not be null");
@@ -48,24 +44,18 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
         Trip trip = mTrips.get(position);
         holder.rootView.setTag(trip);
 //        holder.tvName.setText("Insert Your Dream Place Here");
-        Glide.with(mContext).load(trip.getThumbnailDrawable()).centerCrop().into(holder.ivProfile);
+//        Glide.with(mContext).load(trip.getThumbnailDrawable()).centerCrop().into(holder.ivProfile);
+        //        Glide.with(mContext).load(trip.getImage.centerCrop().into(holder.ivProfile);
+        // function from the trip model, gets image of that trip
 
-        SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable() + "");
 
-            }
-        };
 
-        // Store the target into the tag for the profile to ensure target isn't garbage collected prematurely
-//        holder.ivProfile.setTag(target);
-
-        // Instruct Picasso to load the bitmap into the target defined above
-        Glide.with(mContext)
-                .load(trip.getThumbnailDrawable())
-                .asBitmap()
-                .centerCrop()
-                .into(target);
+//        Glide.with(mContext)
+//                .load(trip.getThumbnailDrawable())
+//                .asBitmap()
+//                .centerCrop()
+//                .into(target);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -76,6 +66,7 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 BuildFragment myFragment = new BuildFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
+                // replaces main_activity and not placeholder so the user doesn't try accessing changing the tab
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
         });

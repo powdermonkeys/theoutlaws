@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/svTripDetailsDescription"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!--The name + picture is already filled out-->
+
+        <!--Price-->
+
+        <!--List of Events-->
+
+        <!--Number of possible guests-->
+
+        <!--Length-->
+
+        <!--Check-in/Checkout Dates-->
+
+        <!--Possibly Rating-->
+
+        <TextView
+            android:id="@+id/tv_long"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/long_string" >
+        </TextView>
+
+    </LinearLayout>
+</ScrollView>

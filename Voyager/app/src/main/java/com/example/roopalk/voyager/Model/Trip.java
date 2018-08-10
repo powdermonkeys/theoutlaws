@@ -6,12 +6,9 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @ParseClassName("Trip")
 public class Trip extends ParseObject {
-
-    private int mThumbnailDrawable;
 
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
@@ -34,8 +31,6 @@ public class Trip extends ParseObject {
     public Trip() {}
 
     //getter methods for each of the values
-
-    public int getThumbnailDrawable() { return mThumbnailDrawable; }
 
     public int getNumGuests() { return getInt(NUM_GUESTS); }
 
@@ -89,13 +84,13 @@ public class Trip extends ParseObject {
 
 
     // Returns a list of trips, random trips to show cardviews
-    public static List<Trip> getTrips() {
-        List<Trip> trips = new ArrayList<>();
-        trips.add(ParseObject.create(Trip.class));
-        trips.add(ParseObject.create(Trip.class));
-        trips.add(ParseObject.create(Trip.class));
-        trips.add(ParseObject.create(Trip.class));
-        trips.add(ParseObject.create(Trip.class));
+    public static ArrayList<Trip> getTrips() {
+        ArrayList<Trip> trips = new ArrayList<>();
+//        trips.add(ParseObject.create(Trip.class));
+//        trips.add(ParseObject.create(Trip.class));
+//        trips.add(ParseObject.create(Trip.class));
+//        trips.add(ParseObject.create(Trip.class));
+//        trips.add(ParseObject.create(Trip.class));
         return trips;
     }
 
@@ -121,6 +116,12 @@ public class Trip extends ParseObject {
         public Query withCheckin(String checkin)
         {
             whereMatches(CHECKIN, checkin);
+            return this;
+        }
+
+        public Query withUser()
+        {
+            include("user");
             return this;
         }
     }

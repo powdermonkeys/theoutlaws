@@ -10,45 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/contact_detail_image_height"
         android:contentDescription="@string/trip_detail_image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/greece_one" />
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" >
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btnAddTrip"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="end"
-            android:adjustViewBounds="false"
-            android:baselineAlignBottom="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:elevation="44dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/plus" />
-
-    </android.support.design.widget.CoordinatorLayout>
+        android:scaleType="centerCrop" />
 
     <!--Trip Description Section-->
     <RelativeLayout
         android:id="@+id/rlInfo"
-        android:layout_width="match_parent"
-        android:layout_height="366dp"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/ivProfile"
-        android:layout_marginBottom="1dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivProfile">
 
-
+        <!--NAME OF THE DESTINATION-->
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
@@ -57,69 +28,40 @@
             android:layout_alignParentTop="true"
             android:padding="10dp"
             android:text="@string/destination_name_placeholder"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:background="@color/black"/>
 
-        <ImageView
-            android:id="@+id/attraction1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignStart="@+id/tvName"
-            android:layout_below="@+id/tvName"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/image_filler" />
+        <!--THE REST OF THE TRIP'S INFORMATION CAN GO HERE-->
+        <include layout="@layout/trip_details_description"/>
 
-        <TextView
-            android:id="@+id/tvDesc"
-            android:layout_width="244dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/attraction1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="95dp"
-            android:layout_toRightOf="@+id/attraction1"
-            android:text="placeholder text"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <ImageView
-            android:id="@+id/attraction2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignStart="@+id/attraction1"
-            android:layout_centerVertical="true"
-            android:baselineAlignBottom="false"
-            android:foregroundGravity="bottom"
-            android:src="@drawable/image_filler" />
-
-        <TextView
-            android:id="@+id/tvDesc2"
-            android:layout_width="244dp"
-            android:layout_height="50dp"
-            android:layout_alignStart="@+id/tvDesc"
-            android:layout_alignTop="@+id/attraction2"
-            android:text="placeholder text"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <ImageView
-            android:id="@+id/attraction3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/attraction1"
-            android:layout_marginBottom="58dp"
-            android:src="@drawable/image_filler" />
-
-        <TextView
-            android:id="@+id/tvDesc3"
-            android:layout_width="244dp"
-            android:layout_height="50dp"
-            android:layout_alignStart="@+id/tvDesc"
-            android:layout_alignTop="@+id/attraction3"
-            android:text="placeholder text"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAddTrip"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="end"
+            android:adjustViewBounds="false"
+            android:baselineAlignBottom="true"
+            android:clickable="true"
+            android:elevation="44dp"
+            android:focusable="true"
+            android:src="@drawable/plus" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

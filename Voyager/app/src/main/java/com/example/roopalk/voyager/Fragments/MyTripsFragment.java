@@ -2,7 +2,9 @@ package com.example.roopalk.voyager.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,15 +13,17 @@ import android.view.ViewGroup;
 
 import com.example.roopalk.voyager.Adapters.MyTripsAdapter;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MyTripsFragment extends Fragment {
 
     private RecyclerView rvMyTrips;
-    private List<Trip> trips; // we can change this to get a different set of trips? (the user's)
     private MyTripsAdapter mAdapter;
+    private FloatingActionButton btnAddTrip;
 
     onFragmentInteractionListener mListener;
 
@@ -41,11 +45,21 @@ public class MyTripsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_trips, container, false);
+
+        NetworkUtility networkUtility = new NetworkUtility(getContext());
+
+        // get data
+        ArrayList<Trip> trips = null;
+        try {
+            trips = networkUtility.getTripsWithUser();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // bind adapter to recycler view
         rvMyTrips = (RecyclerView) view.findViewById(R.id.rvMyTrips);
@@ -57,13 +71,25 @@ public class MyTripsFragment extends Fragment {
         rvMyTrips.setLayoutManager(layout);
 
         // get data
-        trips = Trip.getTrips();
+//        trips = Trip.getTrips();
 
         // create adapter
         mAdapter = new MyTripsAdapter(getActivity(), trips);
 
         // bind adapter to list
         rvMyTrips.setAdapter(mAdapter);
+
+        btnAddTrip = (FloatingActionButton) view.findViewById(R.id.btnAddTrip);
+
+        btnAddTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BuildFragment buildFragment = new BuildFragment();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, buildFragment).addToBackStack(null).commit();
+            }
+        });
+
         return view;
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +52,8 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
 
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
         tvName = (TextView) view.findViewById(R.id.tvName);
-        tvDesc = (TextView) view.findViewById(R.id.tvDesc);
-        tvDesc2 = (TextView) view.findViewById(R.id.tvDesc2);
+//        tvDesc = (TextView) view.findViewById(R.id.tvDesc);
+//        tvDesc2 = (TextView) view.findViewById(R.id.tvDesc2);
         btnAddTrip = (FloatingActionButton) view.findViewById(R.id.btnAddTrip);
 
         // attractions = attraction.get(attractions);
@@ -67,9 +66,10 @@ public class TripDetailsFragment extends Fragment implements onFragmentInteracti
         btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(DetailsActivity.this, FeaturedActivity.class);
-//                startActivity(intent);
                 Toast.makeText(getActivity(), "Go to trip building form",Toast.LENGTH_LONG).show();
+//                BuildFragment buildFragment = new BuildFragment();
+//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, buildFragment).addToBackStack(null).commit();
             }
         });
 

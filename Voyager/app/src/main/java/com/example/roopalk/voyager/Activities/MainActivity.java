@@ -111,7 +111,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         featuredTripsFragment = FeaturedTripsFragment.newInstance(1, "Page 1");
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.replace(R.id.main_activity, featuredTripsFragment);
         fragmentTransaction.commit();
     }
 
@@ -140,7 +140,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);
+        fragmentTransaction.replace(R.id.main_activity, addingAttractionFragment);
         fragmentTransaction.commit();
     }
 
@@ -165,7 +165,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder, featuredTripsFragment);
+        fragmentTransaction.replace(R.id.main_activity, featuredTripsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
