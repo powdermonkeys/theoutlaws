@@ -144,6 +144,12 @@ public class Trip extends ParseObject {
             whereMatches(CHECKOUT, checkout);
             return this;
         }
+
+        public Query withUser(String username)
+        {
+            whereMatches(USER, username);
+            return this;
+        }
     }
 }
 
