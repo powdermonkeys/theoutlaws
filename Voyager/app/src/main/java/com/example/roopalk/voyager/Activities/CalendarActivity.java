@@ -18,10 +18,12 @@ import com.example.roopalk.voyager.Fragments.AddingAttractionFragment;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
+import com.parse.ParseException;
 
 import org.parceler.Parcels;
 
@@ -55,6 +57,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     ArrayList<IEvent> events = new ArrayList<>();
 
     private ArrayList<Attraction> attractions = AddingAttractionFragment.getChosenAttractions();
+
+    NetworkUtility networkUtility = new NetworkUtility(this);
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
@@ -92,8 +96,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
 
-
-
         events = new ArrayList<>();
         {
             int eventColor = ContextCompat.getColor(this, R.color.calendarRed);
@@ -107,6 +109,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
 
         dayView.setEvents(events);
+
 
         add.setOnClickListener(new View.OnClickListener()
         {
@@ -122,9 +125,10 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         });
 
 
+
     }
 
-    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction){
+    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction) {
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
 
@@ -138,13 +142,29 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         timeEnd.set(Calendar.HOUR_OF_DAY, endH);
         timeEnd.set(Calendar.MINUTE, endMin);
 
-        Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), eventColor);
-        events.add(added);
+        String url  = null;
 
-        attractions.remove(attraction);
-        horizontalAttractionAdapter.notifyDataSetChanged();
+        try {
+            networkUtility.getImages(attraction);
+            ArrayList<String> imageURLs = networkUtility.getImageURLs();
+            url = imageURLs.get(0).toString();
 
-        dayView.refresh();
+            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url, this);
+
+            events.add(added);
+
+            attractions.remove(attraction);
+            horizontalAttractionAdapter.notifyDataSetChanged();
+
+
+            dayView.refresh();
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
