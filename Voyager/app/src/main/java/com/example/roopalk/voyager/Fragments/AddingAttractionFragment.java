@@ -28,6 +28,8 @@ import com.example.roopalk.voyager.SwipeController;
 import com.example.roopalk.voyager.SwipeControllerActions;
 import com.parse.ParseException;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -69,6 +71,15 @@ public class AddingAttractionFragment extends Fragment
         return fragment;
     }
 
+    public static AddingAttractionFragment newInstance(Attraction attraction)
+    {
+        Bundle args = new Bundle();
+        args.putParcelable("chosenAttraction", attraction);
+        AddingAttractionFragment fragment = new AddingAttractionFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -91,8 +102,7 @@ public class AddingAttractionFragment extends Fragment
             networkUtility.getCityFromName(dest);
             cities = networkUtility.getCities();
 
-            networkUtility.getAttractionFromCity(cities.get(0));
-            attractions = networkUtility.getAttractions();
+            attractions = networkUtility.getAttractionsByBudgetAndCity(trip.getBudget(), cities.get(0));
         }
         catch (ParseException e)
         {
@@ -100,11 +110,18 @@ public class AddingAttractionFragment extends Fragment
         }
 
         budgetBar = new BudgetBar(trip, pbBudget);
+
         currFill = getArguments().getInt("currFill");
+        Attraction attraction = Parcels.unwrap(getArguments().getParcelable("chosenAttraction"));
+
+        if(currFill == 0 && attraction != null)
+        {
+            currFill += attraction.getEstimatedPrice();
+        }
         budgetBar.setCurrFill(currFill);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new AttractionAdapter(attractions, mListener, budgetBar);
+        mAdapter = new AttractionAdapter(attractions, budgetBar);
         mRecyclerView.setAdapter(mAdapter);
 
         setUpSwipeController(view);

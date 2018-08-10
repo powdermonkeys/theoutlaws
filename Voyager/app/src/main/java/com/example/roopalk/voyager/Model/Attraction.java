@@ -114,6 +114,7 @@ public class Attraction extends ParseObject {
         public Query withCity(String objectId)
         {
             whereMatches("city", objectId);
+            orderByAscending(ATTRACTION_NAME);
             return this;
         }
 

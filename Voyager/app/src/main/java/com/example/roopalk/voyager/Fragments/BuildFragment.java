@@ -234,6 +234,10 @@ public class BuildFragment extends Fragment
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
 
+                    if(ParseUser.getCurrentUser() == null)
+                    {
+                        ParseUser.logIn("roopal", "password");
+                    }
                     newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH, ParseUser.getCurrentUser());
                     newTrip.saveInBackground(new SaveCallback() {
                         @Override
@@ -242,7 +246,8 @@ public class BuildFragment extends Fragment
                         }
                     });
                 } catch (Exception e) {
-                    Log.d("onClick", "didnt create object");
+                    e.printStackTrace();
+                    Log.d("onClick", "didn't create object");
                 }
             }
         });

@@ -74,6 +74,14 @@ public class NetworkUtility
         return attractions;
     }
 
+    public ArrayList<Attraction> getAttractionsByBudgetAndCity(int budget, City city) throws ParseException
+    {
+        attractionQuery.withBudget(budget);
+        attractionQuery.withCity(city.getObjectId());
+        attractions = (ArrayList<Attraction>) attractionQuery.find();
+        return attractions;
+    }
+
     public void getImagesFromAttraction(Attraction attraction) throws ParseException
     {
         photoQuery.withAttraction(attraction.getObjectId());

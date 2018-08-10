@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.R;
 import com.framgia.library.calendardayview.data.IEvent;
 
@@ -85,13 +86,10 @@ public class EventView extends FrameLayout {
     }
 
 
-    public void setEvent(IEvent event) {
+    public void setEvent(Event event)
+    {
         this.mEvent = event;
         mEventName.setText(String.valueOf(event.getName()));
-        //mEventContent.setBackgroundResource(e);
-                //setBackgroundColor(event.getColor());
-
-
     }
 
 

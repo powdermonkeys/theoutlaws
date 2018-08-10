@@ -2,8 +2,6 @@ package com.example.roopalk.voyager.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -145,7 +143,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
     public void setTime (int startH, int startMin, int endH, int endMin, final Attraction attraction) {
-        int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
+
         Calendar timeStart = Calendar.getInstance();
 
         //setting the time for the start of the event
@@ -164,9 +162,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-            Bitmap bitmap = BitmapFactory.decodeFile(url);
+            int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
 
-            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), bitmap, this);
+            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url);
 
             events.add(added);
             trip.setTripattractions(attraction);

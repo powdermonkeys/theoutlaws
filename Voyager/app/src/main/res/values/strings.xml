@@ -7,7 +7,6 @@
     <string name="event_name_format">%s</string>
     <string name="trip_detail_image">Trip</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -49,7 +48,7 @@
     <string name="past_trips_section_header"><b>Past Trips</b></string>
     <string name="attraction_name_placeholder">attraction name placeholder</string>
     <string name="description_placeholder">description placeholder</string>
-    <string name="est_time">est time:</string>
+    <string name="est_time">Est time:</string>
     <string name="attraction_IMAGE">picture of attraction</string>
     <string name="schedule_attraction">Schedule Attraction</string>
 </resources>

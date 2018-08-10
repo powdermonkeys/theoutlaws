@@ -168,6 +168,15 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void moveToAttractionsPage(Attraction attraction)
+    {
+        AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(attraction);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.placeholder, addingAttractionFragment);
+        ft.commit();
+    }
+
     private void swapFragment()
     {
         FeaturedTripsFragment featuredTripsFragment = new FeaturedTripsFragment();
