@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +35,6 @@ public class AttractionDetailsFragment extends DialogFragment
     @BindView(R.id.tvAttractionDescription) TextView tvAttractionDescription;
     @BindView(R.id.tvAttractionPrice) TextView tvAttractionPrice;
     @BindView(R.id.leaveDialog) ImageView leaveDialog;
-    @BindView(R.id.btnAdd) Button btnAdd;
 
     ViewPagerAdapter viewPagerAdapter;
 

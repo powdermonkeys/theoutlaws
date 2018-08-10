@@ -82,18 +82,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="110dp"
             app:ci_drawable="@drawable/circleindicator_round" />
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/ciImageSwiper"
-            android:background="@drawable/rounded_button"
-            android:padding="10dp"
-            android:text="Add to Calendar"
-            android:textColor="@color/iconBackgroundBlue" />
     </RelativeLayout>
 
 </RelativeLayout>
