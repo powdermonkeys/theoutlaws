@@ -51,7 +51,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     @BindView(R.id.calendarView) HorizontalCalendarView horizontalCalendar;
     @BindView(R.id.addIcon) FloatingActionButton add;
     @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
-    @BindView(R.id.tvweather) TextView tvweather;
+    @BindView(R.id.tvweather) TextView weather;
     @BindView(R.id.rlHorizontal) RelativeLayout rlHorizontal;
 
     Trip trip;
@@ -81,11 +81,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         setHorizontalCalendarVisibility();
 
-//        ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
-//
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
-//        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
-//
+
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
@@ -100,8 +97,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         setHorizontalCalendar();
 
-
         getWeather(trip);
+
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
         currentPriceInBudgetBar = getIntent().getIntExtra("currFill", 0);
@@ -126,6 +123,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             Event event = new Event(timeStart, timeEnd, "Event", eventColor);
             events.add(event);
         }
+
 
         dayView.setEvents(events);
 
@@ -170,6 +168,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
             events.add(added);
             trip.setTripattractions(attraction);
+            trip.save();
 
             attractions.remove(attraction);
             horizontalAttractionAdapter.notifyDataSetChanged();
@@ -210,17 +209,14 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     public void getWeather (final Trip trip){
 
         final String city = trip.getDestination().toString();
-
         //gets the current weather
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
-
-            public String processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
                 weatherOutput = ("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" + weather_city.toString());
-                return weatherOutput;
             }
         });
         asyncTask.execute(city);
-        tvweather.setText(weatherOutput);
+        weather.setText(weatherOutput);
 
     }
 

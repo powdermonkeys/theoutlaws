@@ -68,6 +68,13 @@ public class Attraction extends ParseObject {
     }
 
 
+//    public Attraction(Calendar startHr, Calendar startMin,Calendar endHr, Calendar endMin, String mName, int mColor) {
+//        this.mStartTime = mStartTime;
+//        this.mEndTime = mEndTime;
+//        this.mName = mName;
+//        this.mColor = mColor;
+//    }
+
 
     //setter methods for each of these variables
     public void setAttractionName(String attractionName)

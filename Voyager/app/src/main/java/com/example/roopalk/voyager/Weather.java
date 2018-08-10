@@ -55,7 +55,7 @@ public class Weather {
 
     public interface AsyncResponse {
 
-        String processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
+        void processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
     }
 
 

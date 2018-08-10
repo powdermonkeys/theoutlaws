@@ -65,6 +65,7 @@ public class Trip extends ParseObject {
         put(TRIPATTRACTIONS, tripAttractions);
     }
 
+
     public int getBudget() { return getInt(BUDGET); }
 
     public int getLength() { return getInt(LENGTH); }
