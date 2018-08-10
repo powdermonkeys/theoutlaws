@@ -136,7 +136,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     @Override
     public void moveToAttractionsPage(Trip trip)
     {
-        addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+        addingAttractionFragment = AddingAttractionFragment.newInstance(trip, 0);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.placeholder, addingAttractionFragment);

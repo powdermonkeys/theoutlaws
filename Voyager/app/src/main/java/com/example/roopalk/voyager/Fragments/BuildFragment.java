@@ -37,8 +37,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static java.lang.Integer.parseInt;
-
 public class BuildFragment extends Fragment
 {
     @BindView(R.id.destinationNamed) AutoCompleteTextView destination;
@@ -135,6 +133,9 @@ public class BuildFragment extends Fragment
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 guests = progress;
                 tvGuests.setText("" + guests);
+                if (tvGuests.length() > 10){
+                    tvGuests.setText("" + guests);
+                }
             }
 
             @Override
@@ -213,8 +214,8 @@ public class BuildFragment extends Fragment
                 final String DESTINATION = destination.getText().toString();
                 final String CHECKIN = departureDate.getText().toString();
                 final String CHECKOUT = arrivalDate.getText().toString();
-                final int NUM_GUESTS = parseInt(tvGuests.getText().toString());
-                final int BUDGET = parseInt(tvBudget.getText().toString());
+                final int NUM_GUESTS = guests;
+                final int BUDGET = budget;
                 int LENGTH=0;
 
 

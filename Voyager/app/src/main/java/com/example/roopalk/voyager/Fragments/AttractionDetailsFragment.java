@@ -87,8 +87,8 @@ public class AttractionDetailsFragment extends DialogFragment
             imageURLs = networkUtility.getImageURLs();
             tvAttractionName.setText(attraction.getAttractionName());
             tvAttractionDescription.setText(attraction.getAttractionDescription());
-            tvAttractionTime.setText(attraction.getEstimatedTime());
-            //tvAttractionPrice.setText(attraction.getEstimatedPrice());
+            tvAttractionTime.setText("Estimated Time: " +attraction.getEstimatedTime());
+            tvAttractionPrice.setText("Estimated Price" + attraction.getEstimatedPrice());
         }
         catch (ParseException e)
         {

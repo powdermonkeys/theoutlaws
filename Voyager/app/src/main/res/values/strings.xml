@@ -47,6 +47,9 @@
     <string name="budget_section_header"><b>Budget Trips</b></string>
     <string name="destination_name_placeholder">Destination Name Placeholder</string>
     <string name="past_trips_section_header"><b>Past Trips</b></string>
-
-
+    <string name="attraction_name_placeholder">attraction name placeholder</string>
+    <string name="description_placeholder">description placeholder</string>
+    <string name="est_time">est time:</string>
+    <string name="attraction_IMAGE">picture of attraction</string>
+    <string name="schedule_attraction">Schedule Attraction</string>
 </resources>

@@ -6,7 +6,8 @@ import com.framgia.library.calendardayview.data.IEvent;
 
 import java.util.Calendar;
 
-public class Event implements IEvent {
+public class Event implements IEvent
+{
 
     private Calendar mStartTime;
     private Calendar mEndTime;

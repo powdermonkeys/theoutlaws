@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
 import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
@@ -38,6 +41,9 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 
 public class CalendarActivity extends AppCompatActivity implements AddingAttractionFragment.calendarListener {
     @BindView(R.id.dayView) CalendarDayView dayView;
@@ -45,14 +51,13 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     @BindView(R.id.addIcon) FloatingActionButton add;
     @BindView(R.id.rvHorizontal) RecyclerView rvHorizontal;
     @BindView(R.id.tvweather) TextView tvweather;
+    @BindView(R.id.rlHorizontal) RelativeLayout rlHorizontal;
 
     Trip trip;
 
     public int hours;
 
     public int minutes;
-
-    public  String city;
 
     ArrayList<IEvent> events = new ArrayList<>();
 
@@ -62,14 +67,19 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     private HorizontalAttractionAdapter horizontalAttractionAdapter;
 
+    int currentPriceInBudgetBar;
+
+    String weatherOutput;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
 
-        city = getIntent().getExtras().toString();
-        String city = getIntent().getStringExtra("city");
+        setHorizontalCalendarVisibility();
+
 //        ArrayList ctAttractions = getIntent().getStringArrayListExtra("attractions");
 //
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
@@ -89,6 +99,15 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         setHorizontalCalendar();
 
+
+        getWeather(trip);
+
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+        currentPriceInBudgetBar = getIntent().getIntExtra("currFill", 0);
+
+        dayView = findViewById(R.id.dayView);
+        dayView.setLimitTime(8, 22);
+
         //set up the horizontal scroll for attractions
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvHorizontal.setLayoutManager(linearLayoutManager);
@@ -107,16 +126,14 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             events.add(event);
         }
 
-
         dayView.setEvents(events);
-
 
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip);
+                AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip, currentPriceInBudgetBar);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.calendarplaceholder, addingAttractionFragment);
                 ft.addToBackStack("Adding Attraction fragment");;
@@ -124,11 +141,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
 
-
-
     }
 
-    public void setTime (int startH, int startMin, int endH, int endMin, Attraction attraction) {
+    public void setTime (int startH, int startMin, int endH, int endMin, final Attraction attraction) {
         int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
         Calendar timeStart = Calendar.getInstance();
 
@@ -142,8 +157,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         timeEnd.set(Calendar.HOUR_OF_DAY, endH);
         timeEnd.set(Calendar.MINUTE, endMin);
 
-        String url  = null;
-
+        String url;
         try {
             networkUtility.getImages(attraction);
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
@@ -152,40 +166,59 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url, this);
 
             events.add(added);
-
+            trip.setTripattractions(attraction);
+                         
             attractions.remove(attraction);
             horizontalAttractionAdapter.notifyDataSetChanged();
 
 
             dayView.refresh();
 
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
 
 
+    private void setHorizontalCalendarVisibility() {
+        if(attractions.size() == 0)
+        {
+            rlHorizontal.setVisibility(GONE);
+            rvHorizontal.setVisibility(GONE);
+            dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+        else
+        {
+            rlHorizontal.setVisibility(VISIBLE);
+            rvHorizontal.setVisibility(VISIBLE);
+            dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 140));
+        }
     }
 
     @Override
-    public void moveToCalendarPage(Trip trip, Context context)
+    public void moveToCalendarPage(Trip trip, Context context, int currFill)
     {
         Intent calendarIntent = new Intent(context, CalendarActivity.class);
         calendarIntent.putExtra("trip", Parcels.wrap(trip));
+        calendarIntent.putExtra("currFill", currFill);
         startActivity(calendarIntent);
     }
 
-    public void getWeather (final String city){
+    public void getWeather (final Trip trip){
+
+        final String city = trip.getDestination().toString();
+
         //gets the current weather
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
-            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
-                System.out.print(weather_city);
-                tvweather.setText("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" +  weather_city);
+
+            public String processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
+                weatherOutput = ("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" + weather_city.toString());
+                return weatherOutput;
             }
         });
         asyncTask.execute(city);
+        tvweather.setText(weatherOutput);
 
-        System.out.print(tvweather);
     }
 
     public void setHorizontalCalendar(){
@@ -208,4 +241,5 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
 }
+
 

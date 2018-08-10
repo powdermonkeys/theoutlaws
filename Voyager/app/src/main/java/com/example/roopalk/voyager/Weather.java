@@ -18,9 +18,9 @@ import java.util.Locale;
 public class Weather {
 
     private static final String OPEN_WEATHER_MAP_URL =
-            "api.openweathermap.org/data/2.5/weather?q=";
+            "api.openweathermap.org/data/2.5/weather?q={city}";
 
-    private static final String OPEN_WEATHER_MAP_API = "bfbc87d937264d7683636f41f52b854d\n";
+    private static final String OPEN_WEATHER_MAP_API = "bfbc87d937264d7683636f41f52b854d";
 
     public static String setWeatherIcon(int actualId, long sunrise, long sunset){
         int id = actualId / 100;
@@ -55,7 +55,7 @@ public class Weather {
 
     public interface AsyncResponse {
 
-        void processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
+        String processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
     }
 
 

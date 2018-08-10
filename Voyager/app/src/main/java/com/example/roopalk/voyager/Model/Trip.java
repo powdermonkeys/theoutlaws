@@ -13,6 +13,8 @@ public class Trip extends ParseObject {
 
     private int mThumbnailDrawable;
 
+    private List<Attraction> tripAttractions = new ArrayList<Attraction>();
+
     //in the Parse database, the number of guests is stored in a column called guests
     private static final String NUM_GUESTS = "guests";
 
@@ -30,6 +32,9 @@ public class Trip extends ParseObject {
 
     //the destination of the trip is stored in a column called length
     private static final String LENGTH = "length";
+
+    //the destination of the trip is stored in a column called length
+    private static final String TRIPATTRACTIONS = "tripAttractions";
 
     public Trip() {}
 
@@ -51,6 +56,13 @@ public class Trip extends ParseObject {
     public String getDestination()
     {
         return getString(DESTINATION);
+    }
+
+    public List<Attraction> getTRIPATTRACTIONS() { return getList(TRIPATTRACTIONS); }
+
+    public void setTripattractions(final Attraction attraction) {
+        tripAttractions.add(attraction);
+        put(TRIPATTRACTIONS, tripAttractions);
     }
 
     public int getBudget() { return getInt(BUDGET); }
@@ -85,6 +97,10 @@ public class Trip extends ParseObject {
         setNumGuests(numguests);
         setBudget(budget);
         setLength(length);
+    }
+
+    public void addAttractionToTrip(String name, int startHr, int startMin, int endHr, int endMin){
+
     }
 
 
@@ -125,14 +141,4 @@ public class Trip extends ParseObject {
         }
     }
 }
-
-
-//public void setAttractions (Attraction attraction){
-//       attractions.add(attraction);
-//       put(ATTRACTIONS, attractions);
-//
-//    }
-// public List<Attraction> getAttractions(Trip trip) {
-//        return getList("attractions");
-//    }
 
