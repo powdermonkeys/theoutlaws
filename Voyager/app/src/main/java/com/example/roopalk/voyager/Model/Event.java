@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager.Model;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.framgia.library.calendardayview.data.IEvent;
 
@@ -15,6 +16,7 @@ public class Event implements IEvent
     private int mColor;
     private  static String image;
     private Context context;
+    private Bitmap map;
 
     public Event(Calendar mStartTime, Calendar mEndTime, String mName, int mColor) {
         this.mStartTime = mStartTime;
@@ -23,11 +25,11 @@ public class Event implements IEvent
         this.mColor = mColor;
     }
 
-    public Event(Calendar mStartTime, Calendar mEndTime, String mName, String image, Context context) {
+    public Event(Calendar mStartTime, Calendar mEndTime, String mName, Bitmap map, Context context) {
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mName = mName;
-        this.image = image;
+        this.map = map;
         this.context = context;
 
     }

@@ -150,7 +150,7 @@ public class AddingAttractionFragment extends Fragment
                 if(!chosen_attractions.contains(currentAttraction))
                 {
                     chosen_attractions.add(currentAttraction);
-                    Snackbar snackbar = Snackbar.make(view, "Attraction added!", Snackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(view, "Attraction added!", Snackbar.LENGTH_SHORT);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

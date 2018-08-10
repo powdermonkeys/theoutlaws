@@ -13,7 +13,7 @@
         android:layout_width="89dp"
         android:layout_height="83dp"
         android:layout_alignEnd="@id/ivProfile"
-        android:src="@drawable/voyager_logo_round" />
+        android:src="@drawable/mark" />
 
     <TextView
         android:id="@+id/tvName"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivProfile"
         android:layout_toEndOf="@+id/tv7"
-        android:text=" justin b." />
+        android:text=" the zuck" />
 
     <TextView
         android:id="@+id/tvHandle"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
-        android:text=" @justinb" />
+        android:text=" @zuck" />
 
 
 
@@ -118,6 +118,7 @@
         android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/tvName"
+        android:layout_marginRight="5dp"
         android:src="@drawable/locationdp" />
 
     <TextView
@@ -175,6 +176,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="209dp"
         android:layout_toStartOf="@+id/tvName"
+        android:layout_marginRight="5dp"
         android:src="@drawable/locationdp" />
 
 

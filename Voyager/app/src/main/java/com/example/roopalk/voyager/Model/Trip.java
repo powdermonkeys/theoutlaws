@@ -4,6 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class Trip extends ParseObject {
 
     //the destination of the trip is stored in a column called length
     private static final String TRIPATTRACTIONS = "tripAttractions";
+
+    //the user that created this trip is stored in a column called user
+    private static final String USER = "user";
 
     public Trip() {}
 
@@ -65,6 +69,11 @@ public class Trip extends ParseObject {
 
     public int getLength() { return getInt(LENGTH); }
 
+    public ParseUser getUser()
+    {
+        return getParseUser(USER);
+    }
+
     public void setNumGuests(int numguests)
     {
         put(NUM_GUESTS, numguests);
@@ -85,20 +94,22 @@ public class Trip extends ParseObject {
 
     public void setLength (int length) { put(LENGTH, length); }
 
+    public void setUser(ParseUser parseUser) { put(USER, parseUser); }
 
-    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length) throws ParseException {
+    public void setTripInfo(String destination, String checkin, String checkout, int numguests, int budget, int length, ParseUser parseUser) throws ParseException {
         setDestination(destination);
         setCheckout(checkout);
         setCheckin(checkin);
         setNumGuests(numguests);
         setBudget(budget);
         setLength(length);
+        setUser(parseUser);
     }
 
-    public void addAttractionToTrip(String name, int startHr, int startMin, int endHr, int endMin){
+    public void addAttractionToTrip(String name, int startHr, int startMin, int endHr, int endMin)
+    {
 
     }
-
 
     // Returns a list of trips, random trips to show cardviews
     public static ArrayList<Trip> getTrips() {
@@ -113,9 +124,9 @@ public class Trip extends ParseObject {
             super(Trip.class);
         }
 
-        public Query withDate(String date)
+        public Query withCheckin(String date)
         {
-            whereMatches("checkin", date);
+            whereMatches(CHECKIN, date);
             return this;
         }
         public Query withCheckinAndCheckout(String checkin, String checkout)
@@ -125,9 +136,9 @@ public class Trip extends ParseObject {
             return this;
         }
 
-        public Query withCheckin(String checkin)
+        public Query withUser(String username)
         {
-            whereMatches(CHECKIN, checkin);
+            whereMatches(USER, username);
             return this;
         }
 

@@ -68,7 +68,6 @@ public class Attraction extends ParseObject {
     }
 
 
-
     //setter methods for each of these variables
     public void setAttractionName(String attractionName)
     {
@@ -118,8 +117,10 @@ public class Attraction extends ParseObject {
             return this;
         }
 
-        public Query withBudget()
+        //query for the budget class; returns the attractions where the estimated price is less than or equal to that budget
+        public Query withBudget(int price)
         {
+            whereLessThanOrEqualTo(ESTIMATED_PRICE, price);
             return this;
         }
     }

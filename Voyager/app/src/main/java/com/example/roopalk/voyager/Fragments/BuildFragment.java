@@ -26,6 +26,7 @@ import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.text.SimpleDateFormat;
@@ -233,7 +234,7 @@ public class BuildFragment extends Fragment
                     // a new trip object being created
                     final Trip newTrip = ParseObject.create(Trip.class);
 
-                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH);
+                    newTrip.setTripInfo(DESTINATION, CHECKIN, CHECKOUT, NUM_GUESTS, BUDGET, LENGTH, ParseUser.getCurrentUser());
                     newTrip.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {

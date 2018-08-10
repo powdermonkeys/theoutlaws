@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.AddingEventFragment">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,17 +20,22 @@
             android:layout_alignParentStart="true"
             android:textAlignment="center"
             android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
             android:text="attraction name placeholder"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/leaveDialog"
-            android:layout_alignParentEnd="true"
             android:clickable="true"
-            android:src="@drawable/ic_clear_black" />
+            android:src="@drawable/ic_clear_black"
+            android:focusable="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"/>
 
         <TextView
             android:id="@+id/tvTimePicker"
@@ -40,60 +46,57 @@
             android:padding="10dp"
             android:inputType="none"
             android:layout_below="@id/attractionName"
-            android:textSize="12dp"/>
+            android:textSize="12sp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:layout_below="@id/tvTimePicker">
+            android:padding="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignStart="@id/tvTimePicker"
+            android:layout_below="@id/tvTimePicker"
+            android:text=" From: "  />
 
-            <TextView
-                android:id="@+id/tvStartTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTimePicker"
-                android:padding="5dp"
-                android:text=" From: "  />
+        <EditText
+            android:id="@+id/etStartTime"
+            android:layout_width="60dp"
+            android:inputType="none"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvStartTime"
+            android:layout_marginStart="5dp"
+            android:layout_alignBottom="@id/tvStartTime"/>
 
-            <EditText
-                android:id="@+id/etStartTime"
-                android:layout_width="60dp"
-                android:inputType="none"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTimePicker"
-                android:layout_toRightOf="@id/tvStartTime"
-                android:layout_alignBottom="@id/tvStartTime"/>
-
-            <TextView
-                android:id="@+id/tvUntil"
-                android:inputType="none"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/etStartTime"
-                android:layout_toLeftOf="@id/etStartTime"
-                android:layout_alignTop="@id/etStartTime"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="To: " />
+        <TextView
+            android:id="@+id/tvUntil"
+            android:inputType="none"
+            android:text="To: "
+            android:padding="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tvStartTime"
+            android:layout_alignStart="@id/tvStartTime"
+            android:layout_marginTop="20dp"/>
 
 
-            <EditText
-                android:id="@+id/etEndTime"
-                android:layout_width="60dp"
-                android:inputType="none"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvUntil" />
-
-        </LinearLayout>
+        <EditText
+            android:id="@+id/etEndTime"
+            android:layout_width="60dp"
+            android:inputType="none"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvUntil"
+            android:layout_alignStart="@id/etStartTime"
+            android:layout_below="@id/etStartTime"/>
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="60dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"
