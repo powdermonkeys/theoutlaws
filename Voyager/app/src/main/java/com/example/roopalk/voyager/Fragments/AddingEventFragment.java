@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -32,8 +31,8 @@ public class AddingEventFragment extends DialogFragment
 {
     @BindView(R.id.leaveDialog) ImageView leaveDialog;
     @BindView(R.id.add) Button add;
-    @BindView(R.id.etStartTime) EditText etStartTime;
-    @BindView(R.id.etEndTime) EditText etEndtime;
+    @BindView(R.id.etStartTime) TextView etStartTime;
+    @BindView(R.id.etEndTime) TextView etEndtime;
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
     @BindView(R.id.attractionName) TextView attractioName;

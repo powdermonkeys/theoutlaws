@@ -84,6 +84,7 @@
                 android:layout_width="60dp"
                 android:inputType="none"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tvTimePicker"
                 android:layout_toRightOf="@id/tvUntil" />
 
         </LinearLayout>
