@@ -2,6 +2,8 @@ package com.example.roopalk.voyager.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -26,7 +28,6 @@ import com.example.roopalk.voyager.Weather;
 import com.framgia.library.calendardayview.CalendarDayView;
 import com.framgia.library.calendardayview.data.IEvent;
 import com.parse.ParseException;
-import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
@@ -163,11 +164,13 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url, this);
+            Bitmap bitmap = BitmapFactory.decodeFile(url);
+
+            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), bitmap, this);
 
             events.add(added);
             trip.setTripattractions(attraction);
-                         
+
             attractions.remove(attraction);
             horizontalAttractionAdapter.notifyDataSetChanged();
 
@@ -236,9 +239,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             @Override
             public void onDateSelected(Calendar date, int position) { Toast.makeText(getApplicationContext(), "You selected a date!", Toast.LENGTH_SHORT).show(); }
         });
-
-
     }
+
 
 }
 

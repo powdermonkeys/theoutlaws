@@ -118,6 +118,7 @@
         android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/tvName"
+        android:layout_marginRight="5dp"
         android:src="@drawable/locationdp" />
 
     <TextView
@@ -175,6 +176,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="209dp"
         android:layout_toStartOf="@+id/tvName"
+        android:layout_marginRight="5dp"
         android:src="@drawable/locationdp" />
 
 

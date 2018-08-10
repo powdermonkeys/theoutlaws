@@ -1,12 +1,15 @@
 package com.example.roopalk.voyager.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -70,6 +73,7 @@ public class AddingEventFragment extends DialogFragment
         return inflater.inflate(R.layout.fragment_add_event, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
@@ -93,43 +97,51 @@ public class AddingEventFragment extends DialogFragment
         viewPager.setAdapter(viewPagerAdapter);
         circleIndicator.setViewPager(viewPager);
 
-        etStartTime.setOnClickListener(new View.OnClickListener()
-        {
+        etStartTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v)
-            {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener()
-                {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+            public boolean onTouch(View v, MotionEvent event) {
+                etStartTime.setInputType(InputType.TYPE_NULL);
+                if (event.getActionMasked() == 0) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener()
                     {
-                        etStartTime.setText(hourOfDay + ":" + minute);
-                        startHour = hourOfDay;
-                        startMin = minute;
-                    }
-                }, startHour, startMin, false);
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+                        {
+                            etStartTime.setText(hourOfDay + ":" + minute);
+                            startHour = hourOfDay;
+                            startMin = minute;
+                        }
+                    }, startHour, startMin, false);
 
-                timePickerDialog.show();
+                    timePickerDialog.show();
+
+                }
+                return false;
             }
         });
 
-        etEndtime.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener()
-                {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-                    {
-                        etEndtime.setText(hourOfDay + ":" + minute);
-                        endHour = hourOfDay;
-                        endMin = minute;
-                    }
-                }, endHour, endMin, false);
 
-                timePickerDialog.show();
+
+        etEndtime.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                etEndtime.setInputType(InputType.TYPE_NULL);
+                if (event.getActionMasked() == 0) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener()
+                    {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+                        {
+                            etEndtime.setText(hourOfDay + ":" + minute);
+                            startHour = hourOfDay;
+                            startMin = minute;
+                        }
+                    }, startHour, startMin, false);
+
+                    timePickerDialog.show();
+
+                }
+                return false;
             }
         });
 
