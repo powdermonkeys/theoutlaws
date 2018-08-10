@@ -17,17 +17,19 @@
         android:layout_marginTop="175dp"
         android:id="@+id/etUsername"
         android:background="@drawable/edittextborder"/>
+
     <EditText
+        android:id="@+id/etPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="password"
-        android:textColorHint="@color/hintColor"
-        android:paddingLeft="15dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/etUsername"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:id="@+id/etPassword"
-        android:background="@drawable/edittextborder"/>
+        android:background="@drawable/edittextborder"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/hintColor" />
 
     <Button
         android:layout_width="300dp"
@@ -42,6 +44,4 @@
         android:id="@+id/btnLogin"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"/>
-
-
 </RelativeLayout>
