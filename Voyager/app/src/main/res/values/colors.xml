@@ -19,6 +19,7 @@
     <color name="calendarRed"> #CE2F13</color>
     <color name="whitish">#FAFAFA</color>
     <color name="featured_background">#777777</color>
+    <color name="elevated_gray">#555555</color>
     <color name="addButton">#96CDCA</color>
     <color name="moneyGreen">#478E26</color>
     <color name="blueGray">#85ADAD</color>

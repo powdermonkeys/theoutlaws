@@ -53,5 +53,10 @@ public class Photo extends ParseObject
             include(cityId);
             return this;
         }
+
+        public Query withTrip(String tripId) {
+            include(tripId);
+            return this;
+        };
     }
 }

@@ -169,7 +169,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             events.add(added);
             trip.setTripattractions(attraction);
             trip.save();
-
             attractions.remove(attraction);
             horizontalAttractionAdapter.notifyDataSetChanged();
 

@@ -5,6 +5,8 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.Calendar;
+
 @ParseClassName("Attraction")
 public class Attraction extends ParseObject {
     //in the Parse database, the name of the attraction is stored in a column called attractionname
@@ -30,6 +32,18 @@ public class Attraction extends ParseObject {
 
     //photos of each attraction are stored in a column called photos
     private static final String PHOTOS = "photos";
+
+    //the estimated price of the attraction is stored in a column called estimatedPrice
+    private static final String STARTHOUR = "startHour";
+
+    //the city that each attraction is in is stored in a column called city
+    private static final String ENDHOUR = "endHour";
+
+    //the estimated price of the attraction is stored in a column called estimatedPrice
+    private static final String STARTMIN = "startMin";
+
+    //the city that each attraction is in is stored in a column called city
+    private static final String ENDMIN = "endMin";
 
     //getter methods for each of these variables
     public String getAttractionName()
@@ -62,55 +76,53 @@ public class Attraction extends ParseObject {
         return getInt(ESTIMATED_PRICE);
     }
 
+    public static String getSTARTHOUR() { return STARTHOUR; }
+
+    public static String getENDHOUR() { return ENDHOUR; }
+
+    public static String getSTARTMIN() { return STARTMIN; }
+
+    public static String getENDMIN() { return ENDMIN; }
+
+
+
     public ParseObject getCity()
     {
         return getParseObject(CITY);
     }
 
 
-//    public Attraction(Calendar startHr, Calendar startMin,Calendar endHr, Calendar endMin, String mName, int mColor) {
-//        this.mStartTime = mStartTime;
+    //setter methods for each of these variables
+    public void setAttractionName(String attractionName) { put(ATTRACTION_NAME, attractionName); }
+
+    public void setAttractionDescription(String attractionDescription) { put(ATTRACTION_DESCRIPTION, attractionDescription); }
+
+    public void setAttractionLocation(ParseGeoPoint attractionLocation) { put(ATTRACTION_LOCATION, attractionLocation); }
+
+    public void setEstimatedTime(String estimatedTime) { put(ESTIMATED_TIME, estimatedTime); }
+
+    public void setEstimatedPrice(double estimatedPrice) { put(ESTIMATED_PRICE, estimatedPrice); }
+
+    public void setRating(int rating) { put(RATING, rating); }
+
+    public void setCity(City city) { put(CITY, city); }
+
+    public void setStarthour(int starthour){ put(STARTHOUR, starthour);}
+
+    public void setEndhour(int endhour){ put(ENDHOUR, endhour);}
+
+    public void setStartmin(int startmin){ put(STARTMIN, startmin);}
+
+    public void setEndmin(int endmin){ put(ENDMIN, endmin);}
+
+//    public setAttraction(Calendar startHr, Calendar startMin, Calendar endHr, Calendar endMin, String mName, int mColor) {
+//        this.sta = mStartTime;
 //        this.mEndTime = mEndTime;
 //        this.mName = mName;
-//        this.mColor = mColor;
-//    }
+////        this.mColor = mColor;
+////    }
 
 
-    //setter methods for each of these variables
-    public void setAttractionName(String attractionName)
-    {
-        put(ATTRACTION_NAME, attractionName);
-    }
-
-    public void setAttractionDescription(String attractionDescription)
-    {
-        put(ATTRACTION_DESCRIPTION, attractionDescription);
-    }
-
-    public void setAttractionLocation(ParseGeoPoint attractionLocation)
-    {
-        put(ATTRACTION_LOCATION, attractionLocation);
-    }
-
-    public void setEstimatedTime(String estimatedTime)
-    {
-        put(ESTIMATED_TIME, estimatedTime);
-    }
-
-    public void setEstimatedPrice(double estimatedPrice)
-    {
-        put(ESTIMATED_PRICE, estimatedPrice);
-    }
-
-    public void setRating(int rating)
-    {
-        put(RATING, rating);
-    }
-
-    public void setCity(City city)
-    {
-        put(CITY, city);
-    }
 
     public static class Query extends ParseQuery<Attraction>
     {
@@ -125,9 +137,13 @@ public class Attraction extends ParseObject {
             return this;
         }
 
-        public Query withBudget()
+        //query for the budget class; returns the attractions where the estimated price is less than or equal to that budget
+        public Query withBudget(int price)
         {
+            whereLessThanOrEqualTo(ESTIMATED_PRICE, price);
             return this;
         }
     }
+
+
 }

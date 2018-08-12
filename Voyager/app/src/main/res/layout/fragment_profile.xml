@@ -116,9 +116,9 @@
         android:id="@+id/favDestIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/tvName"
-        android:layout_marginRight="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginBottom="200dp"
         android:src="@drawable/locationdp" />
 
     <TextView
@@ -174,9 +174,8 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="209dp"
-        android:layout_toStartOf="@+id/tvName"
-        android:layout_marginRight="5dp"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginBottom="148dp"
         android:src="@drawable/locationdp" />
 
 

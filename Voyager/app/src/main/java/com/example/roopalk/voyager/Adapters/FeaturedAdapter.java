@@ -2,9 +2,9 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +13,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
+import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
 
-import java.util.List;
-
-//import android.support.v4.app.FragmentTransaction;
+import java.util.ArrayList;
 
 // Provide the underlying view for an individual list item.
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     private Activity mContext;
-    private List<Trip> mTrips;
-    private RecyclerView recyclerView;
+    private ArrayList<Trip> mTrips;
 
-    public FeaturedAdapter(Activity context, List<Trip> trips) {
+    public FeaturedAdapter(Activity context, ArrayList<Trip> trips) {
         mContext = context;
         if (trips == null) {
             throw new IllegalArgumentException("trips must not be null");
@@ -47,26 +45,53 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     // Display data at the specified position
     @Override
     public void onBindViewHolder(final VH holder, int position) {
+        // current trip
+
+        Log.d("APP_DEBUG", "Bound trips : " + mTrips.size());
         Trip trip = mTrips.get(position);
-        holder.rootView.setTag(trip);
-//        holder.tvName.setText("Insert Your Dream Place Here");
-        Glide.with(mContext).load(trip.getThumbnailDrawable()).centerCrop().into(holder.ivProfile);
+        Photo p = new Photo();
 
-        SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-            }
-        };
+//        holder.rootView.setTag(trip);
+//        Glide.with(mContext).load(trip.getThumbnailDrawable())
+//                .centerCrop()
+//                .into(holder.ivProfile);
 
-        // Store the target into the tag for the profile to ensure target isn't garbage collected prematurely
-//        holder.ivProfile.setTag(target);
+//        holder.tvName.setText(trip.getTripName());
+//        holder.tvDesc.setText(trip.getTripDescription());
+//        holder.tvBudget.setText(trip.getBudget());
 
-        // Instruct Picasso to load the bitmap into the target defined above
-        Glide.with(mContext)
-                .load(trip.getThumbnailDrawable())
-                .asBitmap()
-                .centerCrop()
-                .into(target);
+//        Glide.with(mContext)
+//                .load(trip.getImage().getUrl())
+//                .centerCrop()
+//                .into(holder.ivProfile);
+        // function from the trip model, gets image of that trip (Photo model that points to trip?)
+
+        NetworkUtility networkUtility = new NetworkUtility(mContext);
+        try
+        {
+            //trips here
+            networkUtility.getTripImage(trip);
+            p = networkUtility.getPhotos().get(0);
+
+
+            Log.d("APP_DEBUG", "Loaded photos : " + networkUtility.getPhotos().size());
+
+            Glide.with(mContext)
+                    .load(p.getImage().getUrl())
+                    .into(holder.ivProfile);
+
+            Log.d("APP_DEBUG", "trip : " + mTrips.get(position).getObjectId() + " : " + p.getImage().getName() + ": " + p.getImage().getUrl());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable());
+
+
+//        recyclerView.addItemDecoration(sectionItemDecoration);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,6 +100,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
+                // TODO: Fix fragment staying on top
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
         });
@@ -90,6 +116,8 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
         final View rootView;
         final ImageView ivProfile;
         final TextView tvName;
+        final TextView tvDesc;
+        final TextView tvBudget;
         final FrameLayout flGradient;
 
         public VH(View itemView, final Context context) {
@@ -98,8 +126,8 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
             flGradient = (FrameLayout) itemView.findViewById(R.id.flGradient);
             tvName = (TextView)itemView.findViewById(R.id.tvName);
-
+            tvDesc = (TextView) itemView.findViewById(R.id.tvDesc);
+            tvBudget = (TextView) itemView.findViewById(R.id.tvBudget);
         }
     }
-
 }

@@ -8,6 +8,7 @@ import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -106,8 +107,27 @@ public class NetworkUtility
 
     public ArrayList<Trip> getTripsByDate(String date) throws ParseException
     {
-        tripQuery.withDate(date);
+        tripQuery.withCheckin(date);
         trips = (ArrayList<Trip>) tripQuery.find();
         return trips;
+    }
+
+    public ArrayList<Trip> getTripsByUser(ParseUser user) throws ParseException
+    {
+        tripQuery.withUser(user.getUsername());
+        trips = (ArrayList<Trip>) tripQuery.find();
+        return trips;
+    }
+
+    public ArrayList<Trip> getTripsWithUser() throws ParseException {
+        tripQuery.withUser();
+        trips = (ArrayList<Trip>) tripQuery.find();
+        return trips;
+    }
+
+    public void getTripImage(Trip trip) throws ParseException
+    {
+        photoQuery.withTrip(trip.getObjectId());
+        photos = (ArrayList<Photo>) photoQuery.find();
     }
 }
