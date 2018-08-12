@@ -50,16 +50,8 @@ public class TripDetailsFragment extends Fragment {
 
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
         tvName = (TextView) view.findViewById(R.id.tvName);
-//        tvDesc = (TextView) view.findViewById(R.id.tvDesc);
-//        tvDesc2 = (TextView) view.findViewById(R.id.tvDesc2);
+
         btnAddTrip = (FloatingActionButton) view.findViewById(R.id.btnAddTrip);
-
-        // attractions = attraction.get(attractions);
-
-        // Extract trip from bundle
-//        mTrip = (Trip) getIntent().getExtras().getSerializable(EXTRA_TRIP);
-
-//        tvName.setText(mTrip.getDestination());
 
         btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override

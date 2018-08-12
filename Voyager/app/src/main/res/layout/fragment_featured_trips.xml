@@ -17,11 +17,15 @@
 
     <include layout="@layout/recommended_section"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvFeatured"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvFeatured"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"/>
+    </FrameLayout>
 
     <include layout="@layout/hot_right_now"/>
 

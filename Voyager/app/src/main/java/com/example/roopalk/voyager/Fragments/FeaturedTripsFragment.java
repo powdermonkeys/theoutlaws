@@ -59,6 +59,11 @@ public class FeaturedTripsFragment extends Fragment
 
         // get data
         ArrayList<Trip> trips = null;
+        try {
+            trips = networkUtility.getFeaturedTrips();
+        } catch (ParseException e) {
+            Log.d("FeaturedTripsFragment", "Failed to get trips : " + e);
+        }
 
         try {
             trips = networkUtility.getTripsWithUser();
@@ -71,7 +76,7 @@ public class FeaturedTripsFragment extends Fragment
 
 
         // test the number of trips
-        Log.e("FeaturedTripsFragment",trips.size() + "");
+        Log.d("FeaturedTripsFragment",trips.size() + "");
 
         // bind adapter to recycler view
         rvFeatured = (RecyclerView) view.findViewById(R.id.rvFeatured);
@@ -84,9 +89,6 @@ public class FeaturedTripsFragment extends Fragment
 
         //give LayoutManager to RecyclerView to position items on the screen
         rvFeatured.setLayoutManager(layout);
-
-        // get data
-//        trips = Trip.getTrips();
 
         // create adapter
         mAdapter = new FeaturedAdapter(getActivity(), trips);

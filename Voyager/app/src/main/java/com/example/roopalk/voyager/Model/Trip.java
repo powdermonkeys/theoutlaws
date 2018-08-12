@@ -32,11 +32,14 @@ public class Trip extends ParseObject {
     //the destination of the trip is stored in a column called length
     private static final String LENGTH = "length";
 
-    //the destination of the trip is stored in a column called length
+    //the attractions of the trip is stored in a column called tripAttractions
     private static final String TRIPATTRACTIONS = "tripAttractions";
 
     //the user that created this trip is stored in a column called user
     private static final String USER = "user";
+
+    //the name of the trip is stored in a column called name
+    private static final String NAME = "name";
 
     public Trip() {}
 
@@ -73,6 +76,8 @@ public class Trip extends ParseObject {
     {
         return getParseUser(USER);
     }
+
+    public String getName() { return getString(NAME); }
 
     public void setNumGuests(int numguests)
     {
@@ -111,18 +116,24 @@ public class Trip extends ParseObject {
 
     }
 
-    // Returns a list of trips, random trips to show cardviews
-    public static ArrayList<Trip> getTrips() {
-        ArrayList<Trip> trips = new ArrayList<>();
-        return trips;
-    }
-
     public static class Query extends ParseQuery<Trip>
     {
         public Query()
         {
             super(Trip.class);
         }
+
+        public Query withName() {
+            whereExists(NAME);
+            return this;
+        }
+
+        // Query that gets trips that are common to all users, user == undefined
+        public Query withoutUser() {
+            whereDoesNotExist(USER);
+            return this;
+        }
+
 
         public Query withCheckin(String date)
         {

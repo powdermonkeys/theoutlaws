@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 
 import java.util.ArrayList;
@@ -41,15 +42,13 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
     // Display data at the specified position
     @Override
     public void onBindViewHolder(final VH holder, int position) {
+        NetworkUtility networkUtility = new NetworkUtility(mContext);
+
         Trip trip = mTrips.get(position);
-        holder.rootView.setTag(trip);
-//        holder.tvName.setText("Insert Your Dream Place Here");
-//        Glide.with(mContext).load(trip.getThumbnailDrawable()).centerCrop().into(holder.ivProfile);
-        //        Glide.with(mContext).load(trip.getImage.centerCrop().into(holder.ivProfile);
-        // function from the trip model, gets image of that trip
 
-//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable() + "");
-
+        // get the user we're fetching trips for
+        // get the trips that user has
+        // get the current trip we're binding
 
 //        Glide.with(mContext)
 //                .load(trip.getThumbnailDrawable())

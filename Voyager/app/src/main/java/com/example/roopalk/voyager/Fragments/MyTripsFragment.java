@@ -77,7 +77,7 @@ public class MyTripsFragment extends Fragment {
         rvMyTrips.setLayoutManager(layout);
 
         // get data
-//        trips = Trip.getTrips();
+//        trips = Trip.getFeaturedTrips();
 
         // create adapter
         mAdapter = new MyTripsAdapter(getActivity(), trips);

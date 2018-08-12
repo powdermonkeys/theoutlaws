@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
+import com.example.roopalk.voyager.Model.Attraction;
+import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
 
@@ -45,53 +47,46 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     // Display data at the specified position
     @Override
     public void onBindViewHolder(final VH holder, int position) {
-        // current trip
-
-        Log.d("APP_DEBUG", "Bound trips : " + mTrips.size());
-        Trip trip = mTrips.get(position);
-        Photo p = new Photo();
-
-//        holder.rootView.setTag(trip);
-//        Glide.with(mContext).load(trip.getThumbnailDrawable())
-//                .centerCrop()
-//                .into(holder.ivProfile);
-
-//        holder.tvName.setText(trip.getTripName());
-//        holder.tvDesc.setText(trip.getTripDescription());
-//        holder.tvBudget.setText(trip.getBudget());
-
-//        Glide.with(mContext)
-//                .load(trip.getImage().getUrl())
-//                .centerCrop()
-//                .into(holder.ivProfile);
-        // function from the trip model, gets image of that trip (Photo model that points to trip?)
-
         NetworkUtility networkUtility = new NetworkUtility(mContext);
-        try
-        {
-            //trips here
-            networkUtility.getTripImage(trip);
-            p = networkUtility.getPhotos().get(0);
 
+        // get the current trip that I'm trying to populate the itemView with
+        Trip trip = mTrips.get(position);
 
-            Log.d("APP_DEBUG", "Loaded photos : " + networkUtility.getPhotos().size());
-
-            Glide.with(mContext)
-                    .load(p.getImage().getUrl())
-                    .into(holder.ivProfile);
-
-            Log.d("APP_DEBUG", "trip : " + mTrips.get(position).getObjectId() + " : " + p.getImage().getName() + ": " + p.getImage().getUrl());
-
+        // get what city associated with
+        City city = null;
+        try {
+            city = networkUtility.getCityFromName(trip.getDestination());
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        // get the attractions the city is associated with
+        ArrayList<Attraction> attractions = null;
+        try {
+            attractions = networkUtility.getAttractionFromCity(city);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Attraction attraction = attractions.size() > 0 ? attractions.get(0) : null;
 
+        // get the image associated with the first attraction
+        Photo photo = null;
+        try {
+            photo = networkUtility.getImagesFromAttraction(attraction).get(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable());
+        // turn photo into parsefile
+        ParseFile file = photo.getImage();
 
+        // turn that image parsefile into imageurl and load that image url into the itemView
+        Glide.with(mContext)
+                .load(file.getUrl())
+                .into(holder.ivProfile);
 
-//        recyclerView.addItemDecoration(sectionItemDecoration);
+        // load the name of the Trip into the itemView
+        holder.tvName.setText(trip.getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
