@@ -1,182 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment"
-    android:padding="20dp">
+    android:layout_width="match_parent"
+    android:id="@+id/profileFragment">
 
-
-    <ImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="89dp"
-        android:layout_height="83dp"
-        android:layout_alignEnd="@id/ivProfile"
-        android:src="@drawable/mark" />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivProfile"
-        android:layout_toEndOf="@+id/tv7"
-        android:text=" the zuck" />
-
-    <TextView
-        android:id="@+id/tvHandle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvName"
-        android:layout_below="@+id/tvName"
-        android:text=" @zuck" />
-
-
-
-    <Button
-        android:id="@+id/btnEdit"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvHandle"
-        android:layout_alignStart="@id/tvHandle"
-        android:layout_marginEnd="10dp"
-        android:text="Edit Profile" />
-
-    <ImageView
-        android:id="@+id/ivFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ivProfile"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="110dp"
-        android:src="@drawable/prson" />
-
-    <TextView
-        android:id="@+id/tv7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFollowers"
-        android:layout_toEndOf="@+id/ivFollowers"
-        android:text="  7 "
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/tvFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFollowers"
-        android:layout_toStartOf="@+id/tv10"
-        android:src="@drawable/followers" />
-
-    <TextView
-        android:id="@+id/followes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFollowers"
-        android:layout_toEndOf="@+id/tv7"
-        android:text="Followers" />
-
-    <TextView
-        android:id="@+id/tv10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFollowers"
-        android:layout_toStartOf="@+id/following"
-        android:text="   10 "
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivFollowers"
-        android:layout_toEndOf="@+id/btnSignout"
-        android:text="Following" />
-
-    <View
-        android:id="@+id/divider"
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        tools:context=".Fragments.ProfileFragment">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="229dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="182dp"
-        android:text="View Travel Details     >" />
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="89dp"
+            android:layout_height="83dp"
+            android:layout_alignEnd="@id/ivProfile"
+            android:src="@drawable/mark" />
 
-    <ImageView
-        android:id="@+id/favDestIcon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="200dp"
-        android:src="@drawable/locationdp" />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivProfile"
+            android:layout_toEndOf="@id/ivProfile"
+            android:text=" the zuck" />
 
-    <TextView
-        android:id="@+id/favDest"
-        android:layout_width="176dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cancun"
-        android:layout_alignEnd="@+id/button"
-        android:text="Favorite Destination:"
-        android:textAllCaps="true" />
-
-    <TextView
-        android:id="@+id/cancun"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/favDestIcon"
-        android:layout_alignEnd="@+id/button"
-        android:text="Cancun, Mexico"
-        android:textAllCaps="false" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivLastVoyage"
-        android:layout_centerHorizontal="true"
-        android:text=" Seattle, Washington"
-        android:textAllCaps="false" />
+        <TextView
+            android:id="@+id/tvHandle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvName"
+            android:layout_below="@+id/tvName"
+            android:text=" @zuck" />
 
 
-    <Button
-        android:id="@+id/btnSignout"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
-        android:background="@drawable/rounded_button"
-        android:text="Sign Out"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@id/tvHandle"
+            android:layout_below="@+id/tvHandle"
+            android:layout_marginEnd="10dp"
+            android:text="Edit Profile" />
 
-    <TextView
-        android:id="@+id/tvLastVoyage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView8"
-        android:layout_alignStart="@+id/favDest"
-        android:text="Last Voyage"
-        android:textAllCaps="true" />
+        <ImageView
+            android:id="@+id/ivFollowers"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="110dp"
+            android:src="@drawable/prson" />
 
-    <ImageView
-        android:id="@+id/ivLastVoyage"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="148dp"
-        android:src="@drawable/locationdp" />
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivFollowers"
+            android:layout_toEndOf="@+id/ivFollowers"
+            android:text="  7 "
+            android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/tvFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/cancun"
+            android:layout_alignTop="@+id/ivFollowers"
+            android:src="@drawable/followers" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/followes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivFollowers"
+            android:layout_toEndOf="@+id/tv7"
+            android:text="Followers" />
+
+        <TextView
+            android:id="@+id/tv10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivFollowers"
+            android:layout_toEndOf="@+id/tvFollowing"
+            android:text=" 10 "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivFollowers"
+            android:layout_toEndOf="@+id/tv10"
+            android:text="Following" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="View Travel Details     >" />
+
+        <ImageView
+            android:id="@+id/favDestIcon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignStart="@id/ivProfile"
+            android:layout_below="@id/button"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/locationdp" />
+
+        <TextView
+            android:id="@+id/favDest"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cancun"
+            android:layout_alignStart="@+id/button"
+            android:text="Favorite Destination:"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/cancun"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/favDestIcon"
+            android:layout_alignStart="@id/favDest"
+            android:text="Cancun, Mexico"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivLastVoyage"
+            android:layout_alignStart="@id/tvLastVoyage"
+            android:text="Seattle, Washington"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnSignout"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/rounded_button"
+            android:text="Sign Out"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tvLastVoyage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView8"
+            android:layout_alignStart="@+id/favDest"
+            android:text="Last Voyage"
+            android:textAllCaps="true" />
+
+        <ImageView
+            android:id="@+id/ivLastVoyage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignStart="@id/favDestIcon"
+            android:layout_below="@id/favDest"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/locationdp" />
+
+        <TextView
+            android:id="@+id/tvTravelTipsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivLastVoyage"
+            android:layout_alignStart="@id/favDestIcon"
+            android:layout_marginTop="15dp"
+            android:text="the zuck's Travel Tips"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTravelTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvTravelTipsHeader"
+            android:layout_below="@+id/tvTravelTipsHeader"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp" />
+    </RelativeLayout>
+</FrameLayout>
