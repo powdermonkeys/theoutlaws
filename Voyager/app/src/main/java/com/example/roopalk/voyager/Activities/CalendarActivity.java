@@ -2,8 +2,6 @@ package com.example.roopalk.voyager.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -97,7 +95,12 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         setHorizontalCalendar();
 
-        getWeather(trip);
+        try {
+            getWeather(trip);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
@@ -143,7 +146,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     }
 
     public void setTime (int startH, int startMin, int endH, int endMin, final Attraction attraction) {
-        int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
+
         Calendar timeStart = Calendar.getInstance();
 
         //setting the time for the start of the event
@@ -162,9 +165,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-            Bitmap bitmap = BitmapFactory.decodeFile(url);
+            int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
 
-            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), bitmap, this);
+            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url);
 
             events.add(added);
             trip.setTripattractions(attraction);
@@ -205,17 +208,29 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         startActivity(calendarIntent);
     }
 
-    public void getWeather (final Trip trip){
+    public void getWeather (final Trip trip) throws ParseException {
 
-        final String city = trip.getDestination().toString();
+        String[][] locations = {{ "Seattle", "47.6062","-122.3321"},{ "Cape Town", "-33.9249", "18.4241" },{ "Tokyo", "35.6895", "139.6917"}};
+        String latitude = null;
+        String longitude = null;
+
+        for (int i=0; i< 3; i++){
+            if (trip.getDestination().toString().equals(locations[i][0])){
+                latitude = locations[i][1];
+                longitude = locations[i][2];
+            }
+        }
+
         //gets the current weather
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
-            public void processFinish(String weather_city, String weather_description, String weather_temperature,  String weather_updatedOn, String weather_iconText, String sun_rise) {
-                weatherOutput = ("It is currently " + weather_temperature.substring(0,2) + "℉ and " + weather_description.toLowerCase() + "in" + weather_city.toString());
+            @Override
+            public void processFinish(String output1, String output2, String output3, String output4, String output5, String output6, String output7, String output8) {
+                weatherOutput = ("It is currently " + output3.substring(0,2) + "℉ and " + output2.toLowerCase() + " in " + output1.toLowerCase().toString());
+                weather.setText(weatherOutput);
+
             }
         });
-        asyncTask.execute(city);
-        weather.setText(weatherOutput);
+        asyncTask.execute(latitude, longitude);
 
     }
 

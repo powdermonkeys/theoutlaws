@@ -49,6 +49,15 @@
             android:textSize="12sp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRecommendedTime"
+            android:layout_below="@id/tvTimePicker"
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
             android:id="@+id/tvStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,12 +65,12 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_alignStart="@id/tvTimePicker"
-            android:layout_below="@id/tvTimePicker"
+            android:layout_below="@id/tvRecommendedTime"
             android:text=" From: "  />
 
         <EditText
             android:id="@+id/etStartTime"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:inputType="none"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tvStartTime"
@@ -96,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="100dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpImageSlideshow"

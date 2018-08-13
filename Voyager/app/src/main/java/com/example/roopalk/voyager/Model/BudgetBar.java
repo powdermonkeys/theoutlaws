@@ -41,6 +41,8 @@ public class BudgetBar {
         progressBar.setMax(budget);
     }
 
+    public int getBudgetMax() { return progressBar.getMax(); }
+
     public int getCurrFill()
     {
         return progressBar.getProgress();

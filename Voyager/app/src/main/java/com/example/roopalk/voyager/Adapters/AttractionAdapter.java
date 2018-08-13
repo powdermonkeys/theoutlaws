@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
-import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -28,44 +28,39 @@ import butterknife.ButterKnife;
 public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.ViewHolder>
 {
 
-    ArrayList<Attraction> mAttractions;
-    Context context;
-    private onFragmentInteractionListener mListener;
-    BudgetBar budgetBar;
+    private ArrayList<Attraction> mAttractions;
 
-    ArrayList<Attraction> chosenAttractions;
+    public ArrayList<Attraction> chosenAttractions;
 
-    public AttractionAdapter(ArrayList<Attraction> attractions, onFragmentInteractionListener listener, BudgetBar budgetBar) {
-        mAttractions = attractions;
-        mListener = listener;
-        this.budgetBar = budgetBar;
-    }
+    private Context context;
+    private BudgetBar budgetBar;
 
-    public AttractionAdapter(ArrayList<Attraction> attractions, BudgetBar budgetBar)
-    {
+    public AttractionAdapter(ArrayList<Attraction> attractions, BudgetBar budgetBar) {
         mAttractions = attractions;
         this.budgetBar = budgetBar;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View attractionView = inflater.inflate(R.layout.item_attraction, parent, false);
-        ViewHolder viewHolder = new ViewHolder(attractionView);
-        return viewHolder;
+        return new ViewHolder(attractionView);
     }
 
     @Override
-    public void onBindViewHolder(final AttractionAdapter.ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position)
     {
         Attraction currentAttraction = mAttractions.get(position);
 
         holder.tvName.setText(currentAttraction.getAttractionName());
         holder.tvDescription.setText(currentAttraction.getAttractionDescription());
         holder.tvTime.setText(currentAttraction.getEstimatedTime());
+
+        setPriceOnCardView(holder, position);
 
         NetworkUtility networkUtility = new NetworkUtility(context);
         try
@@ -92,8 +87,9 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         @BindView(R.id.picture) ImageView ivPicture;
         @BindView(R.id.tvDescription) TextView tvDescription;
         @BindView(R.id.tvTime) TextView tvTime;
+        @BindView(R.id.price) TextView price;
 
-        public ViewHolder(View itemView)
+        ViewHolder(View itemView)
         {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -108,17 +104,8 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
             Log.i("List", "works");
             Attraction attraction = mAttractions.get(position);
 
-            if(position != RecyclerView.NO_POSITION)
-            {
-                moveToDetailsPage(attraction, budgetBar);
-            }
+            moveToDetailsPage(attraction, budgetBar);
         }
-    }
-
-    public void clear()
-    {
-        mAttractions.clear();
-        notifyDataSetChanged();
     }
 
     private void moveToDetailsPage(Attraction attraction, BudgetBar budgetBar)
@@ -127,5 +114,24 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AttractionDetailsFragment attractionDetailsFragment = AttractionDetailsFragment.newInstance(attraction, budgetBar);
         attractionDetailsFragment.show(fragmentTransaction, "fragment_attraction_details");
+    }
+
+    private void setPriceOnCardView(ViewHolder viewHolder, int position)
+    {
+        Attraction temp = mAttractions.get(position);
+        int price = temp.getEstimatedPrice();
+
+        if(price > 0 && price < 10)
+        {
+            viewHolder.price.setText("$");
+        }
+        else if(price > 10 && price < 20)
+        {
+            viewHolder.price.setText("$$");
+        }
+        else if(price > 20)
+        {
+            viewHolder.price.setText("$$$");
+        }
     }
 }

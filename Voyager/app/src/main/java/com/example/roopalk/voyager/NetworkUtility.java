@@ -58,6 +58,13 @@ public class NetworkUtility
         cities = (ArrayList<City>) cityQuery.find();
     }
 
+    public City getCityDataFromName(String name) throws ParseException
+    {
+        cityQuery.hasName(name);
+        cities = (ArrayList<City>) cityQuery.find();
+        return cities.get(0);
+    }
+
     public ArrayList<City> getCities()
     {
         return cities;
@@ -71,6 +78,14 @@ public class NetworkUtility
 
     public ArrayList<Attraction> getAttractions()
     {
+        return attractions;
+    }
+
+    public ArrayList<Attraction> getAttractionsByBudgetAndCity(int budget, City city) throws ParseException
+    {
+        attractionQuery.withBudget(budget);
+        attractionQuery.withCity(city.getObjectId());
+        attractions = (ArrayList<Attraction>) attractionQuery.find();
         return attractions;
     }
 

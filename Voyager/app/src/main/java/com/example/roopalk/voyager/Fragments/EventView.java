@@ -11,22 +11,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.roopalk.voyager.Model.Event;
 import com.example.roopalk.voyager.R;
 import com.framgia.library.calendardayview.data.IEvent;
 
 
-/**
- * Created by FRAMGIA\pham.van.khac on 07/07/2016.
- */
+/** * Created by FRAMGIA\pham.van.khac on 07/07/2016.*/
 public class EventView extends FrameLayout {
 
     protected IEvent mEvent;
 
     protected OnEventClickListener mEventClickListener;
 
-
     protected LinearLayout mEventContent;
-
 
     protected TextView mEventName;
 
@@ -49,36 +46,25 @@ public class EventView extends FrameLayout {
 
     protected void init(AttributeSet attrs) {
         LayoutInflater.from(getContext()).inflate(R.layout.view_event, this, true);
-
         mEventContent = (LinearLayout) findViewById(R.id.item_event_content);
         mEventName = (TextView) findViewById(R.id.item_event_name);
         mBackgroundImage = (ImageView) findViewById(R.id.ivProfile);
-
     }
 
 
     @Override
-    public void setOnClickListener(final OnClickListener l) {
-        throw new UnsupportedOperationException("you should use setOnEventClickListener()");
-    }
+    public void setOnClickListener(final OnClickListener l) { throw new UnsupportedOperationException("you should use setOnEventClickListener()"); }
 
-
-    public void setEvent(IEvent event) {
+    public void setEvent(Event event) {
         this.mEvent = event;
         mEventName.setText(String.valueOf(event.getName()));
-
     }
 
 
     public void setPosition(Rect rect, int topMargin, int bottomMargin){
-        FrameLayout.LayoutParams params =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.topMargin = rect.top  + topMargin
-                - getResources().getDimensionPixelSize(R.dimen.cdv_extra_dimen);
-        params.height = rect.height()
-                + bottomMargin
-                + getResources().getDimensionPixelSize(R.dimen.cdv_extra_dimen);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.topMargin = rect.top  + topMargin - getResources().getDimensionPixelSize(R.dimen.cdv_extra_dimen);
+        params.height = rect.height() + bottomMargin + getResources().getDimensionPixelSize(R.dimen.cdv_extra_dimen);
         params.leftMargin = rect.left;
         setLayoutParams(params);
     }

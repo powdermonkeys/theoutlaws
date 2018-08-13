@@ -16,6 +16,7 @@ public class Event implements IEvent {
     private  static String image;
     private Context context;
     private Bitmap bitmap;
+    private String imageURL;
 
     public Event(Calendar mStartTime, Calendar mEndTime, String mName, int mColor) {
         this.mStartTime = mStartTime;
@@ -24,13 +25,12 @@ public class Event implements IEvent {
         this.mColor = mColor;
     }
 
-    public Event(Calendar mStartTime, Calendar mEndTime, String mName, Bitmap map, Context context) {
+    public Event(Calendar mStartTime, Calendar mEndTime, String mName, String imageURL) {
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mName = mName;
-        this.bitmap = map;
         this.context = context;
-
+        this.imageURL = imageURL;
     }
 
 
@@ -63,7 +63,9 @@ public class Event implements IEvent {
         return mColor;
     }
 
-    public static String getImage() { return image; }
+    public String getImage() {
+        return imageURL;
+    }
 
     public void setColor(int color) {
         this.mColor = color;

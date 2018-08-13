@@ -81,8 +81,7 @@ public class AttractionDetailsFragment extends DialogFragment
 
         attraction = getArguments().getParcelable("attraction");
 
-        try
-        {
+        try {
             networkUtility.getImages(attraction);
             imageURLs = networkUtility.getImageURLs();
             tvAttractionName.setText(attraction.getAttractionName());

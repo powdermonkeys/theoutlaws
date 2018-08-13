@@ -39,6 +39,7 @@ public class AddingEventFragment extends DialogFragment
     @BindView(R.id.vpImageSlideshow) ViewPager viewPager;
     @BindView(R.id.ciImageSwiper) CircleIndicator circleIndicator;
     @BindView(R.id.attractionName) TextView attractioName;
+    @BindView(R.id.tvRecommendedTime) TextView tvRecommendedTime;
 
     ViewPagerAdapter viewPagerAdapter;
     ArrayList<String> imageURLs = new ArrayList<>();
@@ -82,6 +83,10 @@ public class AddingEventFragment extends DialogFragment
 
         final Attraction chosenAttraction = getArguments().getParcelable("chosenAttraction");
         attractioName.setText(chosenAttraction.getAttractionName().toString());
+
+        String timeSpent = chosenAttraction.getEstimatedTime();
+
+        tvRecommendedTime.setText("Average time spent here: " + timeSpent);
 
         try
         {

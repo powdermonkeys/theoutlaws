@@ -44,9 +44,9 @@ public class City extends ParseObject
         return getString(COUNTRY);
     }
 
-    public static String getLATITUDE() { return LATITUDE; }
+    public String getLatitude() { return getString(LATITUDE); }
 
-    public static String getLongitude(){ return LONGITUDE;}
+    public String getLongitude(){ return getString(LATITUDE);}
 
     public void setCityName(String cityName) {
         put(CITY_NAME, cityName);
@@ -61,11 +61,11 @@ public class City extends ParseObject
         put(COUNTRY, country);
     }
 
-    public void setLatitude(double latitude){
+    public void setLatitude(String latitude){
         put(LATITUDE, latitude);
     }
 
-    public void setLongitude(double longitude){
+    public void setLongitude(String longitude){
         put(LONGITUDE, longitude);
     }
 
@@ -87,6 +87,8 @@ public class City extends ParseObject
         public Query hasName(String name)
         {
             whereMatches("cityname", name);
+            include("latitude");
+            include("longitude");
             return this;
         }
     }

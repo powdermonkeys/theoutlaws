@@ -44,19 +44,11 @@ public class Trip extends ParseObject {
 
     public int getNumGuests() { return getInt(NUM_GUESTS); }
 
-    public String getCheckin() {
-        return getString(CHECKIN);
-    }
+    public String getCheckin() {return getString(CHECKIN); }
 
-    public String getCheckout()
-    {
-        return getString(CHECKOUT);
-    }
+    public String getCheckout() { return getString(CHECKOUT); }
 
-    public String getDestination()
-    {
-        return getString(DESTINATION);
-    }
+    public String getDestination() { return getString(DESTINATION); }
 
     public List<Attraction> getTRIPATTRACTIONS() { return getList(TRIPATTRACTIONS); }
 
