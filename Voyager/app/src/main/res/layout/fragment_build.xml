@@ -170,6 +170,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:layout_marginTop="15dp"
+        android:textColor="@color/whitish"
         android:text="Done" />
 
 </RelativeLayout>

@@ -3,11 +3,14 @@ package com.example.roopalk.voyager.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -56,6 +59,45 @@ public class BuildFragment extends Fragment
 
     private onFragmentInteractionListener mListener;
 
+    //to check if there has been text added to the text fields
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // check Fields For Empty Values
+            checkFieldsForEmptyValues();
+        }
+    };
+
+    //to check if the seekbar has been moved for guests
+    private SeekBar.OnSeekBarChangeListener mSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+        {
+
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar)
+        {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar)
+        {
+            checkFieldsForEmptyValues();
+        }
+    };
+
     // Required empty public constructor
     public BuildFragment() { }
 
@@ -77,12 +119,6 @@ public class BuildFragment extends Fragment
         return fragment;
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState)
-//    {
-//        super.onCreate(savedInstanceState);
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -90,7 +126,7 @@ public class BuildFragment extends Fragment
 
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "ResourceAsColor"})
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
@@ -102,6 +138,11 @@ public class BuildFragment extends Fragment
         sbBudget.setMax(40);
         sbGuests.setProgress(guests);
         sbBudget.setProgress(budget);
+
+        destination.addTextChangedListener(mTextWatcher);
+        departureDate.addTextChangedListener(mTextWatcher);
+        arrivalDate.addTextChangedListener(mTextWatcher);
+        sbGuests.setOnSeekBarChangeListener(mSeekBarListener);
 
         //getting autocomplete textview
         NetworkUtility networkUtility = new NetworkUtility(getContext());
@@ -127,13 +168,13 @@ public class BuildFragment extends Fragment
         tvGuests.setTextSize(12);
         tvBudget.setTextSize(12);
 
-
         // listener for guest drag bar
         sbGuests.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 guests = progress;
                 tvGuests.setText("" + guests);
+                if(guests != 0)
                 if (tvGuests.length() > 10){
                     tvGuests.setText("" + guests);
                 }
@@ -172,7 +213,6 @@ public class BuildFragment extends Fragment
                             month = month + 1;
                             String strmonth = String.valueOf(month);
                             String strDay = String.valueOf(dayOfMonth);
-
                             if (month < 10) { strmonth = "0" + month; }
                             if (dayOfMonth < 10){ strDay = "0" + dayOfMonth; }
                             arrivalDate.setText(strmonth + "/" + strDay + "/" + year);
@@ -272,6 +312,26 @@ public class BuildFragment extends Fragment
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    void checkFieldsForEmptyValues()
+    {
+        String dest = destination.getText().toString();
+        String departure = departureDate.getText().toString();
+        String returndate = arrivalDate.getText().toString();
+        int numGuests = guests;
+
+        if(dest.equals("") || departure.equals("") || returndate.equals("") || numGuests == 0)
+        {
+            btnDone.setEnabled(false);
+            btnDone.setBackgroundResource(R.drawable.rounded_button);
+        }
+        else
+        {
+            btnDone.setEnabled(true);
+            btnDone.setBackgroundResource(R.drawable.rounded_button_selected);
+            btnDone.setTextColor(Color.parseColor("#FFFFFF"));
+        }
     }
 
 }
