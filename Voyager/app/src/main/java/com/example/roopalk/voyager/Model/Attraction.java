@@ -1,11 +1,10 @@
 package com.example.roopalk.voyager.Model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.Calendar;
 
 @ParseClassName("Attraction")
 public class Attraction extends ParseObject {
@@ -43,13 +42,12 @@ public class Attraction extends ParseObject {
     private static final String STARTMIN = "startMin";
 
     //the city that each attraction is in is stored in a column called city
-    private static final String ENDMIN = "endMin";
+    private static final String ENDMIN = "endMinute";
 
     //getter methods for each of these variables
-    public String getAttractionName()
-    {
-        return getString(ATTRACTION_NAME);
-    }
+    public String getAttractionName() throws ParseException {
+        fetchIfNeeded();
+        return getString(ATTRACTION_NAME); }
 
     public String getAttractionDescription()
     {
@@ -76,15 +74,13 @@ public class Attraction extends ParseObject {
         return getInt(ESTIMATED_PRICE);
     }
 
-    public static String getSTARTHOUR() { return STARTHOUR; }
+    public  int getStarthour() { return getInt(STARTHOUR); }
 
-    public static String getENDHOUR() { return ENDHOUR; }
+    public  int getEndhour() { return getInt(ENDHOUR); }
 
-    public static String getSTARTMIN() { return STARTMIN; }
+    public  int getStartmin() { return getInt(STARTMIN); }
 
-    public static String getENDMIN() { return ENDMIN; }
-
-
+    public  int getEndmin() { return getInt(ENDMIN); }
 
     public ParseObject getCity()
     {
@@ -115,12 +111,13 @@ public class Attraction extends ParseObject {
 
     public void setEndmin(int endmin){ put(ENDMIN, endmin);}
 
-//    public setAttraction(Calendar startHr, Calendar startMin, Calendar endHr, Calendar endMin, String mName, int mColor) {
-//        this.sta = mStartTime;
-//        this.mEndTime = mEndTime;
-//        this.mName = mName;
-////        this.mColor = mColor;
-////    }
+    public void setAttractionInfo(String name, int sthr, int startmin, int endhr, int endmin) {
+        setAttractionName(name);
+        setStarthour(sthr);
+        setStartmin(startmin);
+        setEndhour(endhr);
+        setEndmin(endmin);
+    }
 
 
 

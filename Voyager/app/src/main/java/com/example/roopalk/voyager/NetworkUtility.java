@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
@@ -52,10 +53,11 @@ public class NetworkUtility
         return names;
     }
 
-    public void getCityFromName(String name) throws ParseException
+    public City getCityFromName(String name) throws ParseException
     {
         cityQuery.hasName(name);
         cities = (ArrayList<City>) cityQuery.find();
+        return cities.size() > 0? cities.get(0) : null;
     }
 
     public City getCityDataFromName(String name) throws ParseException
@@ -70,10 +72,11 @@ public class NetworkUtility
         return cities;
     }
 
-    public void getAttractionFromCity(City city) throws ParseException
+    public ArrayList<Attraction> getAttractionFromCity(City city) throws ParseException
     {
         attractionQuery.withCity(city.getObjectId());
         attractions = (ArrayList<Attraction>) attractionQuery.find();
+        return attractions;
     }
 
     public ArrayList<Attraction> getAttractions()
@@ -89,10 +92,11 @@ public class NetworkUtility
         return attractions;
     }
 
-    public void getImagesFromAttraction(Attraction attraction) throws ParseException
+    public ArrayList<Photo> getImagesFromAttraction(Attraction attraction) throws ParseException
     {
         photoQuery.withAttraction(attraction.getObjectId());
         photos = (ArrayList<Photo>) photoQuery.find();
+        return photos;
     }
 
     public ArrayList<Photo> getPhotos()
@@ -100,7 +104,7 @@ public class NetworkUtility
         return photos;
     }
 
-
+    // populates the imageURLs with images as strings given an Attraction
     public void getImages(Attraction attraction) throws ParseException
     {
         getImagesFromAttraction(attraction);
@@ -115,10 +119,55 @@ public class NetworkUtility
             imageURLs.add(url);
         }
     }
+
+    // retrieves photo from first attraction of trip if any
+    public Photo getImageFromTrip(Trip trip) {
+        if (trip.getDestination() == null) {
+            // TODO: add log error
+            return null;
+        }
+
+        // get what city associated with
+        City city = null;
+        try {
+            city = getCityFromName(trip.getDestination());
+        } catch (ParseException e) {
+            Log.e("NetworkUtility", "Failed to get city for trip", e);
+            return null;
+        }
+
+        // get the attractions the city is associated with
+        ArrayList<Attraction> attractions = null;
+        try {
+            attractions = getAttractionFromCity(city);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Attraction attraction = attractions.size() > 0 ? attractions.get(0) : null;
+
+        // get the image associated with the first attraction
+        Photo photo = null;
+        try {
+            photo = getImagesFromAttraction(attraction).get(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        TODO: Write better log statements
+        return photo;
+    }
+
     public ArrayList<String> getImageURLs()
     {
         return imageURLs;
     }
+
+    // Returns a list of trips, random trips to show cardviews
+    public ArrayList<Trip> getFeaturedTrips() throws ParseException {
+        tripQuery.withName();
+        trips = (ArrayList<Trip>) tripQuery.find();
+        return trips;
+    }
+
 
     public ArrayList<Trip> getTripsByDate(String date) throws ParseException
     {
@@ -129,7 +178,7 @@ public class NetworkUtility
 
     public ArrayList<Trip> getTripsByUser(ParseUser user) throws ParseException
     {
-        tripQuery.withUser(user.getUsername());
+        tripQuery.withUser(user.getObjectId());
         trips = (ArrayList<Trip>) tripQuery.find();
         return trips;
     }
@@ -140,9 +189,4 @@ public class NetworkUtility
         return trips;
     }
 
-    public void getTripImage(Trip trip) throws ParseException
-    {
-        photoQuery.withTrip(trip.getObjectId());
-        photos = (ArrayList<Photo>) photoQuery.find();
-    }
 }

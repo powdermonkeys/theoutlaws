@@ -60,4 +60,7 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     //Circle indicator for image slideshow dependencies
     implementation 'me.relex:circleindicator:1.2.2@aar'
+
+    // for sticky headers
+    implementation 'com.brandongogetap:stickyheaders:0.5.1'
 }

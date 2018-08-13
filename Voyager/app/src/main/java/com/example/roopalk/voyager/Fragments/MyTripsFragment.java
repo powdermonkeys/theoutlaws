@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -59,12 +61,18 @@ public class MyTripsFragment extends Fragment {
 
         NetworkUtility networkUtility = new NetworkUtility(getContext());
 
+        // get current user
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Log.d("MyTripsFragment", "Current user : " + ParseUser.getCurrentUser().getObjectId() + " Current Username : " + currentUser.getUsername());
+
+        // get trips by current user
         // get data
         ArrayList<Trip> trips = null;
         try {
-            trips = networkUtility.getTripsWithUser();
+            trips = networkUtility.getTripsByUser(currentUser);
+            Log.d("MyTripsFragment", "Trips by user : " + (trips != null && trips.size() > 0 ? trips.get(0).getObjectId() : null));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.d("MyTripsFragment", "Failed to get trips : " + e);
         }
 
         // bind adapter to recycler view
@@ -75,9 +83,6 @@ public class MyTripsFragment extends Fragment {
         final GridLayoutManager layout = new GridLayoutManager(getActivity(), 1);
 
         rvMyTrips.setLayoutManager(layout);
-
-        // get data
-//        trips = Trip.getTrips();
 
         // create adapter
         mAdapter = new MyTripsAdapter(getActivity(), trips);

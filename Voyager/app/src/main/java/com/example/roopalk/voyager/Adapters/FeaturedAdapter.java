@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
-import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Provide the underlying view for an individual list item.
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
+public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH> implements StickyHeaderHandler {
     private Activity mContext;
     private ArrayList<Trip> mTrips;
 
@@ -45,62 +46,39 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     // Display data at the specified position
     @Override
     public void onBindViewHolder(final VH holder, int position) {
-        // current trip
-
-        Log.d("APP_DEBUG", "Bound trips : " + mTrips.size());
-        Trip trip = mTrips.get(position);
-        Photo p = new Photo();
-
-//        holder.rootView.setTag(trip);
-//        Glide.with(mContext).load(trip.getThumbnailDrawable())
-//                .centerCrop()
-//                .into(holder.ivProfile);
-
-//        holder.tvName.setText(trip.getTripName());
-//        holder.tvDesc.setText(trip.getTripDescription());
-//        holder.tvBudget.setText(trip.getBudget());
-
-//        Glide.with(mContext)
-//                .load(trip.getImage().getUrl())
-//                .centerCrop()
-//                .into(holder.ivProfile);
-        // function from the trip model, gets image of that trip (Photo model that points to trip?)
-
         NetworkUtility networkUtility = new NetworkUtility(mContext);
-        try
-        {
-            //trips here
-            networkUtility.getTripImage(trip);
-            p = networkUtility.getPhotos().get(0);
 
+        // get the current trip that I'm trying to populate the itemView with
+        Trip trip = mTrips.get(position);
 
-            Log.d("APP_DEBUG", "Loaded photos : " + networkUtility.getPhotos().size());
+        Photo photo = networkUtility.getImageFromTrip(trip);
+        if (photo != null) {
+            ParseFile file = photo.getImage();
 
+            // turn that image parsefile into imageurl and load that image url into the itemView
             Glide.with(mContext)
-                    .load(p.getImage().getUrl())
+                    .load(file.getUrl())
                     .into(holder.ivProfile);
-
-            Log.d("APP_DEBUG", "trip : " + mTrips.get(position).getObjectId() + " : " + p.getImage().getName() + ": " + p.getImage().getUrl());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
-
-
-//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable());
-
-
-//        recyclerView.addItemDecoration(sectionItemDecoration);
+        // load the name of the Trip into the itemView
+        holder.tvName.setText(trip.getName());
+        // load the description (Country Name) of the Trip
+        holder.tvDesc.setText(trip.getDestination() + " · ");
+        // load the budget (either in dollar amount or dollar signs)
+        holder.tvBudget.setText("$" + trip.getBudget());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Here goes your desired onClick behaviour. Like:
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                // TODO: Fix fragment staying on top
+//                TODO: Solution to launch activity on top instead of fragment
+                // switch to an activity instead of a Fragment
+//                Intent intent = new Intent(activity, TripDetailsActivity.class);
+//                startActivity(intent);
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
-                // TODO: Fix fragment staying on top
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
         });
@@ -109,6 +87,11 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     @Override
     public int getItemCount() {
         return mTrips.size();
+    }
+
+    @Override
+    public List<Trip> getAdapterData() {
+        return mTrips;
     }
 
     // Provide a reference to the views for each trip item

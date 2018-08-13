@@ -82,7 +82,11 @@ public class AddingEventFragment extends DialogFragment
         ButterKnife.bind(this, view);
 
         final Attraction chosenAttraction = getArguments().getParcelable("chosenAttraction");
-        attractioName.setText(chosenAttraction.getAttractionName().toString());
+        try {
+            attractioName.setText(chosenAttraction.getAttractionName().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         String timeSpent = chosenAttraction.getEstimatedTime();
 

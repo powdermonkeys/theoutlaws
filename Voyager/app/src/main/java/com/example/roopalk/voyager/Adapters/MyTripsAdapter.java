@@ -11,15 +11,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.BuildFragment;
+import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
+import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
 
 // Provide the underlying view for an individual list item.
-public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
-{
+public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
     private Activity mContext;
     private ArrayList<Trip> mTrips;
 
@@ -41,21 +44,33 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
     // Display data at the specified position
     @Override
     public void onBindViewHolder(final VH holder, int position) {
+        NetworkUtility networkUtility = new NetworkUtility(mContext);
+
+        // get current trip that i'm trying to populate itemView with
         Trip trip = mTrips.get(position);
-        holder.rootView.setTag(trip);
-//        holder.tvName.setText("Insert Your Dream Place Here");
-//        Glide.with(mContext).load(trip.getThumbnailDrawable()).centerCrop().into(holder.ivProfile);
-        //        Glide.with(mContext).load(trip.getImage.centerCrop().into(holder.ivProfile);
-        // function from the trip model, gets image of that trip
 
-//        Log.e("FeaturedAdapter",trip.getThumbnailDrawable() + "");
+        // get the DestinationName of the trip
+        holder.tvName.setText(trip.getDestination());
 
+        // get the image and set it as the background of the cardView
+        Photo photo = networkUtility.getImageFromTrip(trip);
 
-//        Glide.with(mContext)
-//                .load(trip.getThumbnailDrawable())
-//                .asBitmap()
-//                .centerCrop()
-//                .into(target);
+        // make sure the photo is not null
+        if(photo != null) {
+            ParseFile file = photo.getImage();
+
+            // turn that image parsefile into imageurl and load that image url into the itemView
+            Glide.with(mContext)
+                    .load(file.getUrl())
+                    .into(holder.ivProfile);
+        }
+
+        // load the name of the Trip's City into the itemView
+        holder.tvName.setText(trip.getDestination());
+        // load the description (Country Name) of the Trip
+        holder.tvDesc.setText(trip.getDestination() + " · ");
+        // load the budget (either in dollar amount or dollar signs)
+        holder.tvBudget.setText("$" + trip.getBudget());
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -82,15 +97,20 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
         final View rootView;
         final ImageView ivProfile;
         final TextView tvName;
+        final TextView tvDesc;
+        final TextView tvBudget;
         final FrameLayout flGradient;
 
         public VH(View itemView, final Context context)
         {
+            // initialize Views
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
             flGradient = (FrameLayout) itemView.findViewById(R.id.flGradient);
             tvName = (TextView)itemView.findViewById(R.id.tvName);
+            tvDesc = (TextView) itemView.findViewById(R.id.tvDesc);
+            tvBudget = (TextView) itemView.findViewById(R.id.tvBudget);
         }
     }
 }

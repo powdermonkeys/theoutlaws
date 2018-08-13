@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
-import com.example.roopalk.voyager.Fragments.ProfileFragment;
 import com.example.roopalk.voyager.Fragments.MyTripsFragment;
+import com.example.roopalk.voyager.Fragments.ProfileFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;

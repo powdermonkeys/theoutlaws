@@ -60,6 +60,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     ArrayList<IEvent> events = new ArrayList<>();
 
+    ArrayList<Attraction> currTripAttractions = new ArrayList<>();
+
     private ArrayList<Attraction> attractions = AddingAttractionFragment.getChosenAttractions();
 
     NetworkUtility networkUtility = new NetworkUtility(this);
@@ -71,8 +73,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     String weatherOutput;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
@@ -80,7 +81,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         setHorizontalCalendarVisibility();
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
-
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
@@ -94,14 +94,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView.setLimitTime(8, 22);
 
         setHorizontalCalendar();
-
-        try {
-            getWeather(trip);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
+        getWeather(trip);
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
         currentPriceInBudgetBar = getIntent().getIntExtra("currFill", 0);
@@ -116,8 +109,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
 
-        events = new ArrayList<>();
-        {
+        events = new ArrayList<>();{
             int eventColor = ContextCompat.getColor(this, R.color.calendarRed);
             Calendar timeStart = Calendar.getInstance();
             timeStart.set(Calendar.HOUR_OF_DAY, hours);
@@ -127,14 +119,12 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             events.add(event);
         }
 
-
         dayView.setEvents(events);
+        dayView.refresh();
 
-        add.setOnClickListener(new View.OnClickListener()
-        {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 AddingAttractionFragment addingAttractionFragment = AddingAttractionFragment.newInstance(trip, currentPriceInBudgetBar);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.calendarplaceholder, addingAttractionFragment);
@@ -143,6 +133,8 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             }
         });
 
+        currTripAttractions = Parcels.unwrap(getIntent().getParcelableExtra("tripAttractions"));
+        if (currTripAttractions != null){ populateCalendarView(); }
     }
 
     public void setTime (int startH, int startMin, int endH, int endMin, final Attraction attraction) {
@@ -165,16 +157,15 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-            int eventColor = ContextCompat.getColor(this, R.color.mutedForestGreen);
 
             Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url);
 
             events.add(added);
-            trip.setTripattractions(attraction);
+            trip.addAttractiontoTrip(attraction);
+            trip.setTripattractions();
             trip.save();
             attractions.remove(attraction);
             horizontalAttractionAdapter.notifyDataSetChanged();
-
 
             dayView.refresh();
 
@@ -185,37 +176,34 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
 
     private void setHorizontalCalendarVisibility() {
-        if(attractions.size() == 0)
-        {
+        if(attractions.size() == 0) {
             rlHorizontal.setVisibility(GONE);
             rvHorizontal.setVisibility(GONE);
             dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        }
-        else
-        {
+        } else {
             rlHorizontal.setVisibility(VISIBLE);
             rvHorizontal.setVisibility(VISIBLE);
             dayView.setLayoutParams(new CalendarDayView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 140));
         }
     }
 
+
+
     @Override
-    public void moveToCalendarPage(Trip trip, Context context, int currFill)
-    {
+    public void moveToCalendarPage(Trip trip, Context context, int currFill) {
         Intent calendarIntent = new Intent(context, CalendarActivity.class);
         calendarIntent.putExtra("trip", Parcels.wrap(trip));
         calendarIntent.putExtra("currFill", currFill);
         startActivity(calendarIntent);
     }
 
-    public void getWeather (final Trip trip) throws ParseException {
-
+    public void getWeather (final Trip trip) {
         String[][] locations = {{ "Seattle", "47.6062","-122.3321"},{ "Cape Town", "-33.9249", "18.4241" },{ "Tokyo", "35.6895", "139.6917"}};
         String latitude = null;
         String longitude = null;
 
         for (int i=0; i< 3; i++){
-            if (trip.getDestination().toString().equals(locations[i][0])){
+            if (trip.getDestination().equals(locations[i][0])){
                 latitude = locations[i][1];
                 longitude = locations[i][2];
             }
@@ -225,33 +213,66 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
             @Override
             public void processFinish(String output1, String output2, String output3, String output4, String output5, String output6, String output7, String output8) {
-                weatherOutput = ("It is currently " + output3.substring(0,2) + "℉ and " + output2.toLowerCase() + " in " + output1.toLowerCase().toString());
+                weatherOutput = ("It is currently " + output3.substring(0,2) + "℉ and " + output2.toLowerCase() + " in " + trip.getDestination());
                 weather.setText(weatherOutput);
-
             }
         });
         asyncTask.execute(latitude, longitude);
-
     }
 
     public void setHorizontalCalendar(){
         //gets the bounds for the cal view
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.WEEK_OF_MONTH, -1);
-
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.WEEK_OF_MONTH, 1);
 
         // sets up the horizontal date calendar view
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView) .range(startDate, endDate).datesNumberOnScreen(5).build();
-
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) { Toast.makeText(getApplicationContext(), "You selected a date!", Toast.LENGTH_SHORT).show(); }
         });
     }
 
+    public void populateCalendarView() {
 
+        events = new ArrayList<>();{
+            int eventColor = ContextCompat.getColor(this, R.color.eventColor);
+            Calendar timeStart = Calendar.getInstance();
+            timeStart.set(Calendar.HOUR_OF_DAY, 9);
+            timeStart.set(Calendar.MINUTE, 0);
+            Calendar timeEnd = (Calendar) timeStart.clone();
+            timeEnd.set(Calendar.HOUR_OF_DAY, 10);
+            timeEnd.set(Calendar.MINUTE, 30);
+            Event event = new Event(timeStart, timeEnd, "Bo-Kaap", eventColor);
+            events.add(event);
+        }
+        {
+            int eventColor = ContextCompat.getColor(this, R.color.millenialPink);
+            Calendar timeStart = Calendar.getInstance();
+            timeStart.set(Calendar.HOUR_OF_DAY, 12);
+            timeStart.set(Calendar.MINUTE, 0);
+            Calendar timeEnd = (Calendar) timeStart.clone();
+            timeEnd.set(Calendar.HOUR_OF_DAY, 14);
+            timeEnd.set(Calendar.MINUTE, 0);
+            Event event = new Event(timeStart, timeEnd, "Cape Point", eventColor);
+            events.add(event);
+        }
+        {
+            int eventColor = ContextCompat.getColor(this, R.color.seaFoam);
+            Calendar timeStart = Calendar.getInstance();
+            timeStart.set(Calendar.HOUR_OF_DAY, 15);
+            timeStart.set(Calendar.MINUTE, 0);
+            Calendar timeEnd = (Calendar) timeStart.clone();
+            timeEnd.set(Calendar.HOUR_OF_DAY, 18);
+            timeEnd.set(Calendar.MINUTE, 0);
+            Event event = new Event(timeStart, timeEnd, "Victoria and Alfred Waterpoint", eventColor);
+            events.add(event);
+        }
+        dayView.setEvents(events);
+        dayView.refresh();
+    }
 }
 
 
