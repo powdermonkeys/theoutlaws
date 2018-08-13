@@ -65,16 +65,6 @@ public class FeaturedTripsFragment extends Fragment
             Log.d("FeaturedTripsFragment", "Failed to get trips : " + e);
         }
 
-        try {
-            trips = networkUtility.getTripsWithUser();
-
-            Log.d("APP_DEBUG", "Loaded trips : " + trips.size());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
         // test the number of trips
         Log.d("FeaturedTripsFragment",trips.size() + "");
 

@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.City;
@@ -111,6 +112,38 @@ public class NetworkUtility
             imageURLs.add(url);
         }
     }
+
+    // retrieves photo from first attraction of trip if any
+    public Photo getImageFromTrip(Trip trip) {
+        // get what city associated with
+        City city = null;
+        try {
+            city = getCityFromName(trip.getDestination());
+        } catch (ParseException e) {
+            Log.e("NetworkUtility", "Failed to get city for trip", e);
+            return null;
+        }
+
+        // get the attractions the city is associated with
+        ArrayList<Attraction> attractions = null;
+        try {
+            attractions = getAttractionFromCity(city);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Attraction attraction = attractions.size() > 0 ? attractions.get(0) : null;
+
+        // get the image associated with the first attraction
+        Photo photo = null;
+        try {
+            photo = getImagesFromAttraction(attraction).get(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        TODO: Write better log statements
+        return photo;
+    }
+
     public ArrayList<String> getImageURLs()
     {
         return imageURLs;
@@ -133,7 +166,7 @@ public class NetworkUtility
 
     public ArrayList<Trip> getTripsByUser(ParseUser user) throws ParseException
     {
-        tripQuery.withUser(user.getUsername());
+        tripQuery.withUser(user.getObjectId());
         trips = (ArrayList<Trip>) tripQuery.find();
         return trips;
     }

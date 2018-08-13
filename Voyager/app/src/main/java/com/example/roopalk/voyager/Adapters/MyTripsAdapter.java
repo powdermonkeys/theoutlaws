@@ -11,16 +11,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.BuildFragment;
+import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
 
 // Provide the underlying view for an individual list item.
-public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
-{
+public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
     private Activity mContext;
     private ArrayList<Trip> mTrips;
 
@@ -44,17 +46,21 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH>
     public void onBindViewHolder(final VH holder, int position) {
         NetworkUtility networkUtility = new NetworkUtility(mContext);
 
+        // get current trip that i'm trying to populate itemView with
         Trip trip = mTrips.get(position);
 
-        // get the user we're fetching trips for
-        // get the trips that user has
-        // get the current trip we're binding
+        // get the DestinationName of the trip
+        holder.tvName.setText(trip.getDestination());
 
-//        Glide.with(mContext)
-//                .load(trip.getThumbnailDrawable())
-//                .asBitmap()
-//                .centerCrop()
-//                .into(target);
+        // get the image and set it as the background of the cardView
+        Photo photo = networkUtility.getImageFromTrip(trip);
+        //        TODO: Make sure photo is not null
+        ParseFile file = photo.getImage();
+
+        // turn that image parsefile into imageurl and load that image url into the itemView
+        Glide.with(mContext)
+                .load(file.getUrl())
+                .into(holder.ivProfile);
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {

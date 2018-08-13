@@ -123,16 +123,17 @@ public class Trip extends ParseObject {
             super(Trip.class);
         }
 
+        // Query that gets trips that are featured therefore have a name in the 'name' column (e.g. Spend 3 days in...)
         public Query withName() {
             whereExists(NAME);
             return this;
         }
 
-        // Query that gets trips that are common to all users, user == undefined
-        public Query withoutUser() {
-            whereDoesNotExist(USER);
-            return this;
-        }
+//        // Query that gets trips that are common to all users, user == undefined
+//        public Query withoutUser() {
+//            whereDoesNotExist(USER);
+//            return this;
+//        }
 
 
         public Query withCheckin(String date)
@@ -147,9 +148,9 @@ public class Trip extends ParseObject {
             return this;
         }
 
-        public Query withUser(String username)
+        public Query withUser(String userObjectId)
         {
-            whereMatches(USER, username);
+            whereMatches(USER, userObjectId);
             return this;
         }
 

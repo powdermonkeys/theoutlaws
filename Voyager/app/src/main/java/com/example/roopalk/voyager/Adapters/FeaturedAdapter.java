@@ -13,13 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
-import com.example.roopalk.voyager.Model.Attraction;
-import com.example.roopalk.voyager.Model.City;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import java.util.ArrayList;
@@ -52,32 +49,8 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
         // get the current trip that I'm trying to populate the itemView with
         Trip trip = mTrips.get(position);
 
-        // get what city associated with
-        City city = null;
-        try {
-            city = networkUtility.getCityFromName(trip.getDestination());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        // get the attractions the city is associated with
-        ArrayList<Attraction> attractions = null;
-        try {
-            attractions = networkUtility.getAttractionFromCity(city);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Attraction attraction = attractions.size() > 0 ? attractions.get(0) : null;
-
-        // get the image associated with the first attraction
-        Photo photo = null;
-        try {
-            photo = networkUtility.getImagesFromAttraction(attraction).get(0);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        // turn photo into parsefile
+        Photo photo = networkUtility.getImageFromTrip(trip);
+        //        TODO: Make sure photo is not null
         ParseFile file = photo.getImage();
 
         // turn that image parsefile into imageurl and load that image url into the itemView
