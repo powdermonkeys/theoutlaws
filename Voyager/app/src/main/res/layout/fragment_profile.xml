@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="25dp"
             android:text="View Travel Details     >" />
 
         <ImageView
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivLastVoyage"
             android:layout_alignStart="@id/tvLastVoyage"
-            android:text=" Seattle, Washington"
+            android:text="Seattle, Washington"
             android:textAllCaps="false" />
 
         <Button
@@ -184,7 +184,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ivLastVoyage"
-            android:layout_margin="20dp"
+            android:layout_alignStart="@id/favDestIcon"
+            android:layout_marginTop="15dp"
             android:text="the zuck's Travel Tips"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -196,6 +197,6 @@
             android:layout_alignStart="@+id/tvTravelTipsHeader"
             android:layout_below="@+id/tvTravelTipsHeader"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-20dp" />
+            android:layout_marginTop="5dp" />
     </RelativeLayout>
 </FrameLayout>
