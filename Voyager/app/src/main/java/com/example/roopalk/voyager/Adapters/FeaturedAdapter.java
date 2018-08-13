@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
 import com.bumptech.glide.Glide;
 import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
 import com.example.roopalk.voyager.Model.Photo;
@@ -20,9 +21,10 @@ import com.example.roopalk.voyager.R;
 import com.parse.ParseFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Provide the underlying view for an individual list item.
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
+public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH> implements StickyHeaderHandler {
     private Activity mContext;
     private ArrayList<Trip> mTrips;
 
@@ -50,25 +52,33 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
         Trip trip = mTrips.get(position);
 
         Photo photo = networkUtility.getImageFromTrip(trip);
-        //        TODO: Make sure photo is not null
-        ParseFile file = photo.getImage();
+        if (photo != null) {
+            ParseFile file = photo.getImage();
 
-        // turn that image parsefile into imageurl and load that image url into the itemView
-        Glide.with(mContext)
-                .load(file.getUrl())
-                .into(holder.ivProfile);
+            // turn that image parsefile into imageurl and load that image url into the itemView
+            Glide.with(mContext)
+                    .load(file.getUrl())
+                    .into(holder.ivProfile);
+        }
 
         // load the name of the Trip into the itemView
         holder.tvName.setText(trip.getName());
+        // load the description (Country Name) of the Trip
+        holder.tvDesc.setText(trip.getDestination() + " · ");
+        // load the budget (either in dollar amount or dollar signs)
+        holder.tvBudget.setText("$" + trip.getBudget());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Here goes your desired onClick behaviour. Like:
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                // TODO: Fix fragment staying on top
+//                TODO: Solution to launch activity on top instead of fragment
+                // switch to an activity instead of a Fragment
+//                Intent intent = new Intent(activity, TripDetailsActivity.class);
+//                startActivity(intent);
                 TripDetailsFragment myFragment = new TripDetailsFragment();
                 //Create a bundle to pass data, add data, set the bundle to your fragment and:
-                // TODO: Fix fragment staying on top
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
         });
@@ -77,6 +87,11 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH>{
     @Override
     public int getItemCount() {
         return mTrips.size();
+    }
+
+    @Override
+    public List<Trip> getAdapterData() {
+        return mTrips;
     }
 
     // Provide a reference to the views for each trip item

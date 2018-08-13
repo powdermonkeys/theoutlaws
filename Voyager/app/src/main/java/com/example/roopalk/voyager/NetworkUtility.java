@@ -115,6 +115,11 @@ public class NetworkUtility
 
     // retrieves photo from first attraction of trip if any
     public Photo getImageFromTrip(Trip trip) {
+        if (trip.getDestination() == null) {
+            // TODO: add log error
+            return null;
+        }
+
         // get what city associated with
         City city = null;
         try {

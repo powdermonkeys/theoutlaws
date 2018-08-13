@@ -18,6 +18,7 @@
     <include layout="@layout/recommended_section"/>
 
     <FrameLayout
+        android:id="@+id/flRecyclerViewContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView

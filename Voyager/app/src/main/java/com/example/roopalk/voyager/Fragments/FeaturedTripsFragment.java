@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.brandongogetap.stickyheaders.StickyLayoutManager;
 import com.example.roopalk.voyager.Adapters.FeaturedAdapter;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -75,13 +75,22 @@ public class FeaturedTripsFragment extends Fragment
         rvFeatured.setHasFixedSize(true);
 
         // Define 1 column grid layout
-        final GridLayoutManager layout = new GridLayoutManager(getActivity(), 1);
+//        final GridLayoutManager layout = new GridLayoutManager(getActivity(), 1);
+
+        //        TODO: figure out what to do when trips.size() == 0
+//        int headerTripIndex = trips.size() / 2;
+//        trips.add(headerTripIndex, ParseObject.create(HeaderTrip.class));
+
+
+        // create adapter
+        mAdapter = new FeaturedAdapter(getActivity(), trips);
+
+        // Define StickyHeader Layout
+        final StickyLayoutManager layout = new StickyLayoutManager(getActivity(), mAdapter);
 
         //give LayoutManager to RecyclerView to position items on the screen
         rvFeatured.setLayoutManager(layout);
 
-        // create adapter
-        mAdapter = new FeaturedAdapter(getActivity(), trips);
 
         // bind adapter to list
         rvFeatured.setAdapter(mAdapter);

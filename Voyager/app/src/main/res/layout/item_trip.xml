@@ -64,7 +64,7 @@
                 android:layout_toEndOf="@+id/tvDesc"
                 android:gravity="bottom"
                 android:paddingBottom="20dp"
-                android:text="$$$$$$"
+                android:text="$$"
                 android:textColor="#ffffff" />
 
 

@@ -54,13 +54,23 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
 
         // get the image and set it as the background of the cardView
         Photo photo = networkUtility.getImageFromTrip(trip);
-        //        TODO: Make sure photo is not null
-        ParseFile file = photo.getImage();
 
-        // turn that image parsefile into imageurl and load that image url into the itemView
-        Glide.with(mContext)
-                .load(file.getUrl())
-                .into(holder.ivProfile);
+        // make sure the photo is not null
+        if(photo != null) {
+            ParseFile file = photo.getImage();
+
+            // turn that image parsefile into imageurl and load that image url into the itemView
+            Glide.with(mContext)
+                    .load(file.getUrl())
+                    .into(holder.ivProfile);
+        }
+
+        // load the name of the Trip's City into the itemView
+        holder.tvName.setText(trip.getDestination());
+        // load the description (Country Name) of the Trip
+        holder.tvDesc.setText(trip.getDestination() + " · ");
+        // load the budget (either in dollar amount or dollar signs)
+        holder.tvBudget.setText("$" + trip.getBudget());
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -87,15 +97,20 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
         final View rootView;
         final ImageView ivProfile;
         final TextView tvName;
+        final TextView tvDesc;
+        final TextView tvBudget;
         final FrameLayout flGradient;
 
         public VH(View itemView, final Context context)
         {
+            // initialize Views
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
             flGradient = (FrameLayout) itemView.findViewById(R.id.flGradient);
             tvName = (TextView)itemView.findViewById(R.id.tvName);
+            tvDesc = (TextView) itemView.findViewById(R.id.tvDesc);
+            tvBudget = (TextView) itemView.findViewById(R.id.tvBudget);
         }
     }
 }
