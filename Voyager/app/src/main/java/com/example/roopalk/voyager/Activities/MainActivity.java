@@ -17,6 +17,7 @@ import com.example.roopalk.voyager.Fragments.AddingEventFragment;
 import com.example.roopalk.voyager.Fragments.AttractionDetailsFragment;
 import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Fragments.FeaturedTripsFragment;
+import com.example.roopalk.voyager.Fragments.ProfileFragment;
 import com.example.roopalk.voyager.Fragments.onFragmentInteractionListener;
 import com.example.roopalk.voyager.Model.Attraction;
 import com.example.roopalk.voyager.Model.BudgetBar;
@@ -33,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener
+public class  MainActivity extends AppCompatActivity implements onFragmentInteractionListener, ProfileFragment.SignoutListener
 {
     private final String TAG = "MainActivity";
 
@@ -189,5 +190,12 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         fragmentTransaction.replace(R.id.main_activity, featuredTripsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void goToLogIn()
+    {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
     }
 }
