@@ -7,14 +7,24 @@
     tools:context=".Activities.LoginActivity"
     android:background="@color/iconBackgroundBlue">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:id="@+id/logo"
+        android:src="@drawable/voyager_logo_round" />
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:hint="username"
         android:textColorHint="@color/hintColor"
         android:paddingLeft="15dp"
+        android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/etUsername"
         android:background="@drawable/edittextborder"/>
 
