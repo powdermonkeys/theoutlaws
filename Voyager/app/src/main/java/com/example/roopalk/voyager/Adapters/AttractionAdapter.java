@@ -56,7 +56,11 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     {
         Attraction currentAttraction = mAttractions.get(position);
 
-        holder.tvName.setText(currentAttraction.getAttractionName());
+        try {
+            holder.tvName.setText(currentAttraction.getAttractionName());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvDescription.setText(currentAttraction.getAttractionDescription());
         holder.tvTime.setText(currentAttraction.getEstimatedTime());
 

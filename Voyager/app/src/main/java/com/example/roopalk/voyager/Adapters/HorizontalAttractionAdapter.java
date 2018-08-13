@@ -56,7 +56,11 @@ public class HorizontalAttractionAdapter  extends RecyclerView.Adapter<Horizonta
             e.printStackTrace();
         }
 
-        holder.tvAttractionName.setText(attraction.getAttractionName());
+        try {
+            holder.tvAttractionName.setText(attraction.getAttractionName());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Glide.with(context)
                 .load(photo.getImage().getUrl())

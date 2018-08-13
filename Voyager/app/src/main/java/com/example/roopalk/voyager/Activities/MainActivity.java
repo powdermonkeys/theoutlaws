@@ -79,14 +79,12 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
         Date currentDate = new Date();
         DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         currDateSTF = sdf.format(currentDate).toString();
-        System.out.print(currDateSTF);
-
 
         //compares todays date with trips in parse
         try {
             trips = networkUtility.getTripsByDate(currDateSTF);
             if (trips.size() > 0){
-                final String city = trips.get(0).getDestination().toString();
+                final Trip trip = trips.get(0);
              //   final List<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("We noticed that you are currently on a trip. Would you like to be redirected to your calendar?");
@@ -95,8 +93,8 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                                intent.putExtra("city", city);
-                        //        intent.putExtra("attractions", Parcels.wrap(attractions));
+                                intent.putExtra("trip", Parcels.wrap(trip));
+                                intent.putExtra("tripAttractions", Parcels.wrap(trip.getTripAttractions()));
                                 startActivity(intent);
                                 finish();
 

@@ -47,27 +47,22 @@ public class Trip extends ParseObject {
 
     public int getNumGuests() { return getInt(NUM_GUESTS); }
 
-    public String getCheckin() {
-        return getString(CHECKIN);
-    }
+    public String getCheckin() {return getString(CHECKIN); }
 
-    public String getCheckout()
-    {
-        return getString(CHECKOUT);
-    }
+    public String getCheckout() { return getString(CHECKOUT); }
 
-    public String getDestination()
-    {
-        return getString(DESTINATION);
-    }
+    public String getDestination() { return getString(DESTINATION); }
 
-    public List<Attraction> getTRIPATTRACTIONS() { return getList(TRIPATTRACTIONS); }
+    public List<Attraction> getTripAttractions() { return getList(TRIPATTRACTIONS); }
 
-    public void setTripattractions(final Attraction attraction) {
-        tripAttractions.add(attraction);
+    public void setTripattractions() {
         put(TRIPATTRACTIONS, tripAttractions);
     }
 
+    public void addAttractiontoTrip(final Attraction attraction){
+        tripAttractions.add(attraction);
+
+    }
     public int getBudget() { return getInt(BUDGET); }
 
     public int getLength() { return getInt(LENGTH); }
@@ -111,10 +106,6 @@ public class Trip extends ParseObject {
         setUser(parseUser);
     }
 
-    public void addAttractionToTrip(String name, int startHr, int startMin, int endHr, int endMin)
-    {
-
-    }
 
     public static class Query extends ParseQuery<Trip>
     {
