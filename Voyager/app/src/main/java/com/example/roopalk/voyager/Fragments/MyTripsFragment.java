@@ -63,7 +63,7 @@ public class MyTripsFragment extends Fragment {
 
         // get current user
         ParseUser currentUser = ParseUser.getCurrentUser();
-        Log.d("MyTripsFragment", "Current user : " + currentUser.getObjectId() + " Current Username : " + currentUser.getUsername());
+        Log.d("MyTripsFragment", "Current user : " + ParseUser.getCurrentUser().getObjectId() + " Current Username : " + currentUser.getUsername());
 
         // get trips by current user
         // get data

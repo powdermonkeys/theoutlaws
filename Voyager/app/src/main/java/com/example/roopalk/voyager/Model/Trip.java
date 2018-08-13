@@ -129,13 +129,6 @@ public class Trip extends ParseObject {
             return this;
         }
 
-//        // Query that gets trips that are common to all users, user == undefined
-//        public Query withoutUser() {
-//            whereDoesNotExist(USER);
-//            return this;
-//        }
-
-
         public Query withCheckin(String date)
         {
             whereMatches(CHECKIN, date);

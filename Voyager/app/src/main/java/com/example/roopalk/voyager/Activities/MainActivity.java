@@ -24,6 +24,7 @@ import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -51,6 +52,18 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(ParseUser.getCurrentUser() == null)
+        {
+            try
+            {
+                ParseUser.logIn("roopal", "password");
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+        }
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
