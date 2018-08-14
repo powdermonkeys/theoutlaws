@@ -81,11 +81,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         setHorizontalCalendarVisibility();
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
-<<<<<<< HEAD
+
 //        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
 
-=======
->>>>>>> 99ffd3aeb753f1069affd54146888d625cc7d11a
 
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
