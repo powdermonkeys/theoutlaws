@@ -273,6 +273,14 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         dayView.setEvents(events);
         dayView.refresh();
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(CalendarActivity.this, MainActivity.class));
+        finish();
+    }
 }
 
 
