@@ -35,14 +35,13 @@
         <activity
             android:name=".Activities.LoginActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activities.CurrentTripActivity" />
         <activity android:name=".Activities.CalendarActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.TripDetailsActivity"></activity>
+        <activity android:name=".Activities.TripDetailsActivity" />
     </application>
 
 </manifest>

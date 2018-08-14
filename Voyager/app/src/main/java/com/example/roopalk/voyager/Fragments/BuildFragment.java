@@ -314,9 +314,6 @@ public class BuildFragment extends Fragment
         mListener = null;
     }
 
-    public interface tripDetailsListener
-    {}
-
     void checkFieldsForEmptyValues()
     {
         String dest = destination.getText().toString();

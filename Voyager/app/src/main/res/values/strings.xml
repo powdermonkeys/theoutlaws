@@ -44,23 +44,7 @@
     <string name="budget_section_header"><b>Budget Trips</b></string>
     <string name="destination_name_placeholder">Destination Name Placeholder</string>
     <string name="past_trips_section_header"><b>Created Trips</b></string>
-    <string name="long_string">The central notion of a UIScrollView object
-        (or, simply, a scroll view) is that it is a view whoseThe central notion of a UIScrollView
-        object (or, simply, a scroll view) is that it is a view whoseThe central notion of a
-        UIScrollView object (or, simply, a scroll view) is that it is a view whoseThe central notion
-        of a UIScrollView object (or, simply, a scroll view) is that it is a view whoseThe central
-        notion of a UIScrollView object (or, simply, a scroll view) is that it is a view whoseThe
-        central notion of a UIScrollView object (or, simply, a scroll view) is that it is a view
-        whose the central notion of a UIScrollView object (or, simply, a scroll view) is that it is
-        a view whoseThe central notion of a UIScrollView object (or, simply, a scroll view) is that
-        it is a view whoseThe central notion of a UIScrollView object (or, simply, a scroll view) is
-        that it is a view whoseThe central notion of a UIScrollView object (or, simply, a scroll
-        view) is that it is a view whose origin is adjustable over the content view. It clips the
-        content to its frame, which generally (but not necessarily) coincides with that of the
-        application’s main window. A scroll view tracks the movements of fingers and adjusts the
-        origin accordingly. The view that is showing its content “through” the scroll view draws
-        that portion of itself based on the new origin, which is pinned to an offset in the content
-        view.</string>
+    <string name="long_string">Make sure to visit Tokyo during March next year to get the full experience of Cherry Blossom season.</string>
     <string name="attraction_name_placeholder">attraction name placeholder</string>
     <string name="description_placeholder">description placeholder</string>
     <string name="est_time">Est time:</string>
