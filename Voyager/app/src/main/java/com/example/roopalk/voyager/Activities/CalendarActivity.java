@@ -74,6 +74,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);

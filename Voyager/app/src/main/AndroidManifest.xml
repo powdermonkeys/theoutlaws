@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/voyager_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/SplashTheme">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
             android:name=".Activities.MainActivity"
             tools:ignore="InnerclassSeparator">
@@ -41,7 +41,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.TripDetailsActivity"></activity>
+        <activity android:name=".Activities.TripDetailsActivity" />
     </application>
 
 </manifest>
