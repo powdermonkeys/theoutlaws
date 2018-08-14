@@ -51,6 +51,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -82,7 +83,7 @@ public class  MainActivity extends AppCompatActivity implements onFragmentIntera
 
         //compares todays date with trips in parse
         try {
-            trips = networkUtility.getTripsByDate(currDateSTF);
+            trips = networkUtility.getTripsByDateAndUser(currDateSTF, ParseUser.getCurrentUser());
             if (trips.size() > 0){
                 final Trip trip = trips.get(0);
              //   final List<Attraction> attractions = trips.get(0).getAttractions(trips.get(0));

@@ -82,9 +82,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
 
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
 
-//        attractions = Parcels.unwrap(getIntent().getParcelableExtra("attractions"));
-
-
         // gets the current date in simple format
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat tfHours = new SimpleDateFormat("hh");
@@ -111,17 +108,6 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         horizontalAttractionAdapter = new HorizontalAttractionAdapter(attractions);
         rvHorizontal.setAdapter(horizontalAttractionAdapter);
 
-
-        events = new ArrayList<>();{
-            int eventColor = ContextCompat.getColor(this, R.color.calendarRed);
-            Calendar timeStart = Calendar.getInstance();
-            timeStart.set(Calendar.HOUR_OF_DAY, hours);
-            timeStart.set(Calendar.MINUTE, minutes);
-            Calendar timeEnd = (Calendar) timeStart.clone();
-            Event event = new Event(timeStart, timeEnd, "Event", eventColor);
-            events.add(event);
-        }
-
         dayView.setEvents(events);
         dayView.refresh();
 
@@ -145,13 +131,13 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
         Calendar timeStart = Calendar.getInstance();
 
         //setting the time for the start of the event
-        timeStart.set(Calendar.HOUR_OF_DAY, startH);
+        timeStart.set(Calendar.HOUR_OF_DAY, 12);
         timeStart.set(Calendar.MINUTE, startMin);
 
         Calendar timeEnd = (Calendar) timeStart.clone();
 
         //setting the time for the end of the event
-        timeEnd.set(Calendar.HOUR_OF_DAY, endH);
+        timeEnd.set(Calendar.HOUR_OF_DAY, 3);
         timeEnd.set(Calendar.MINUTE, endMin);
 
         String url;
@@ -160,10 +146,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url);
-//            Glide.with(this.getApplicationContext())
-//                    .load(url)
-//                    .into(new RelativeLayout(EventView.findViewById(ivProfile)));
+            Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), R.color.millenialPink);
 
             events.add(added);
             trip.addAttractiontoTrip(attraction);
@@ -250,7 +233,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             Calendar timeEnd = (Calendar) timeStart.clone();
             timeEnd.set(Calendar.HOUR_OF_DAY, 10);
             timeEnd.set(Calendar.MINUTE, 30);
-            Event event = new Event(timeStart, timeEnd, "Bo-Kaap", eventColor);
+            Event event = new Event(timeStart, timeEnd, "First Starbucks", eventColor);
             events.add(event);
         }
         {
@@ -261,7 +244,7 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             Calendar timeEnd = (Calendar) timeStart.clone();
             timeEnd.set(Calendar.HOUR_OF_DAY, 14);
             timeEnd.set(Calendar.MINUTE, 0);
-            Event event = new Event(timeStart, timeEnd, "Cape Point", eventColor);
+            Event event = new Event(timeStart, timeEnd, "Pike Place Market", eventColor);
             events.add(event);
         }
         {
@@ -272,9 +255,10 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             Calendar timeEnd = (Calendar) timeStart.clone();
             timeEnd.set(Calendar.HOUR_OF_DAY, 18);
             timeEnd.set(Calendar.MINUTE, 0);
-            Event event = new Event(timeStart, timeEnd, "Victoria and Alfred Waterpoint", eventColor);
+            Event event = new Event(timeStart, timeEnd, "Chihuly Garden and Glass", eventColor);
             events.add(event);
         }
+
         dayView.setEvents(events);
         dayView.refresh();
     }
