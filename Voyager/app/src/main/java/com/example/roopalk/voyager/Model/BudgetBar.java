@@ -3,21 +3,25 @@ package com.example.roopalk.voyager.Model;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.parceler.Parcel;
 
 @Parcel
 public class BudgetBar {
     public int budget;
-    public static ProgressBar progressBar;
+    private static ProgressBar progressBar;
+    private static TextView progressText;
 
     public BudgetBar(){}
 
-    public BudgetBar(Trip trip, ProgressBar pb)
+    public BudgetBar(Trip trip, ProgressBar pb, TextView tvProgress)
     {
         budget = trip.getBudget();
         progressBar = pb;
         setBudgetMax();
+        progressText = tvProgress;
+        setText();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -26,6 +30,7 @@ public class BudgetBar {
         int pastProgress = progressBar.getProgress();
         int currProgress = pastProgress + attractionPrice;
         progressBar.setProgress(currProgress, true);
+        setText();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -34,6 +39,7 @@ public class BudgetBar {
         int pastProgress = progressBar.getProgress();
         int currProgress = pastProgress - attractionPrice;
         progressBar.setProgress(currProgress, true);
+        setText();
     }
 
     private void setBudgetMax()
@@ -51,5 +57,13 @@ public class BudgetBar {
     public void setCurrFill(int price)
     {
         progressBar.setProgress(price);
+    }
+
+    public void setText()
+    {
+        int currProgress = getCurrFill();
+        int maxProgress = getBudgetMax();
+        String progress = currProgress + "/" + maxProgress;
+        progressText.setText(progress);
     }
 }

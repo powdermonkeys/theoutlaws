@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.roopalk.voyager.Adapters.AttractionAdapter;
 import com.example.roopalk.voyager.Model.Attraction;
@@ -55,6 +56,7 @@ public class AddingAttractionFragment extends Fragment
     @BindView(R.id.pbBudget) ProgressBar pbBudget;
     @BindView(R.id.rvAttractions) RecyclerView mRecyclerView;
     @BindView(R.id.done) Button done;
+    @BindView(R.id.tvProgress) TextView tvProgress;
 
     public AddingAttractionFragment()
     {
@@ -109,7 +111,7 @@ public class AddingAttractionFragment extends Fragment
             e.printStackTrace();
         }
 
-        budgetBar = new BudgetBar(trip, pbBudget);
+        budgetBar = new BudgetBar(trip, pbBudget, tvProgress);
 
         currFill = getArguments().getInt("currFill");
         Attraction attraction = Parcels.unwrap(getArguments().getParcelable("chosenAttraction"));
@@ -176,12 +178,11 @@ public class AddingAttractionFragment extends Fragment
                         }
                     });
                     snackbar.show();
+
+                    int numGuests = trip.getNumGuests();
+                    int totalPrice = currentAttraction.getEstimatedPrice() * numGuests;
+                    budgetBar.fillBudget(totalPrice);
                 }
-
-                int numGuests = trip.getNumGuests();
-                int totalPrice = currentAttraction.getEstimatedPrice() * numGuests;
-
-                budgetBar.fillBudget(totalPrice);
             }
         });
 

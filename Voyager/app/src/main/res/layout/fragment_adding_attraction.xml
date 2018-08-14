@@ -28,6 +28,18 @@
             android:scaleY="7"
             style="?android:attr/progressBarStyleHorizontal" />
 
+        <TextView
+
+            android:layout_alignLeft="@id/pbBudget"
+            android:layout_alignTop="@id/pbBudget"
+            android:layout_alignRight="@id/pbBudget"
+            android:layout_alignBottom="@id/pbBudget"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/tvProgress"
+            android:textAlignment="center"
+            android:textColor="@color/whitish"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvAttractions"
             android:scrollbars="vertical"
