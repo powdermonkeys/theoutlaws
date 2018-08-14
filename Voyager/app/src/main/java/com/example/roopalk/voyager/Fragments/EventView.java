@@ -52,8 +52,6 @@ public class EventView extends FrameLayout {
         mEventName = (TextView) findViewById(R.id.item_event_name);
         mBackgroundImage = (ImageView) findViewById(R.id.ivProfile);
 
-
-
         super.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
