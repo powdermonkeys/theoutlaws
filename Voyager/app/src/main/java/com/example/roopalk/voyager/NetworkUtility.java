@@ -60,6 +60,13 @@ public class NetworkUtility
         return cities.size() > 0? cities.get(0) : null;
     }
 
+    public City getCityDataFromName(String name) throws ParseException
+    {
+        cityQuery.hasName(name);
+        cities = (ArrayList<City>) cityQuery.find();
+        return cities.get(0);
+    }
+
     public ArrayList<City> getCities()
     {
         return cities;

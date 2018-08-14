@@ -1,6 +1,7 @@
 package com.example.roopalk.voyager.Model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -31,11 +32,22 @@ public class Attraction extends ParseObject {
     //photos of each attraction are stored in a column called photos
     private static final String PHOTOS = "photos";
 
+    //the estimated price of the attraction is stored in a column called estimatedPrice
+    private static final String STARTHOUR = "startHour";
+
+    //the city that each attraction is in is stored in a column called city
+    private static final String ENDHOUR = "endHour";
+
+    //the estimated price of the attraction is stored in a column called estimatedPrice
+    private static final String STARTMIN = "startMin";
+
+    //the city that each attraction is in is stored in a column called city
+    private static final String ENDMIN = "endMinute";
+
     //getter methods for each of these variables
-    public String getAttractionName()
-    {
-        return getString(ATTRACTION_NAME);
-    }
+    public String getAttractionName() throws ParseException {
+        fetchIfNeeded();
+        return getString(ATTRACTION_NAME); }
 
     public String getAttractionDescription()
     {
@@ -62,6 +74,14 @@ public class Attraction extends ParseObject {
         return getInt(ESTIMATED_PRICE);
     }
 
+    public  int getStarthour() { return getInt(STARTHOUR); }
+
+    public  int getEndhour() { return getInt(ENDHOUR); }
+
+    public  int getStartmin() { return getInt(STARTMIN); }
+
+    public  int getEndmin() { return getInt(ENDMIN); }
+
     public ParseObject getCity()
     {
         return getParseObject(CITY);
@@ -69,40 +89,37 @@ public class Attraction extends ParseObject {
 
 
     //setter methods for each of these variables
-    public void setAttractionName(String attractionName)
-    {
-        put(ATTRACTION_NAME, attractionName);
+    public void setAttractionName(String attractionName) { put(ATTRACTION_NAME, attractionName); }
+
+    public void setAttractionDescription(String attractionDescription) { put(ATTRACTION_DESCRIPTION, attractionDescription); }
+
+    public void setAttractionLocation(ParseGeoPoint attractionLocation) { put(ATTRACTION_LOCATION, attractionLocation); }
+
+    public void setEstimatedTime(String estimatedTime) { put(ESTIMATED_TIME, estimatedTime); }
+
+    public void setEstimatedPrice(double estimatedPrice) { put(ESTIMATED_PRICE, estimatedPrice); }
+
+    public void setRating(int rating) { put(RATING, rating); }
+
+    public void setCity(City city) { put(CITY, city); }
+
+    public void setStarthour(int starthour){ put(STARTHOUR, starthour);}
+
+    public void setEndhour(int endhour){ put(ENDHOUR, endhour);}
+
+    public void setStartmin(int startmin){ put(STARTMIN, startmin);}
+
+    public void setEndmin(int endmin){ put(ENDMIN, endmin);}
+
+    public void setAttractionInfo(String name, int sthr, int startmin, int endhr, int endmin) {
+        setAttractionName(name);
+        setStarthour(sthr);
+        setStartmin(startmin);
+        setEndhour(endhr);
+        setEndmin(endmin);
     }
 
-    public void setAttractionDescription(String attractionDescription)
-    {
-        put(ATTRACTION_DESCRIPTION, attractionDescription);
-    }
 
-    public void setAttractionLocation(ParseGeoPoint attractionLocation)
-    {
-        put(ATTRACTION_LOCATION, attractionLocation);
-    }
-
-    public void setEstimatedTime(String estimatedTime)
-    {
-        put(ESTIMATED_TIME, estimatedTime);
-    }
-
-    public void setEstimatedPrice(double estimatedPrice)
-    {
-        put(ESTIMATED_PRICE, estimatedPrice);
-    }
-
-    public void setRating(int rating)
-    {
-        put(RATING, rating);
-    }
-
-    public void setCity(City city)
-    {
-        put(CITY, city);
-    }
 
     public static class Query extends ParseQuery<Attraction>
     {
@@ -125,4 +142,6 @@ public class Attraction extends ParseObject {
             return this;
         }
     }
+
+
 }

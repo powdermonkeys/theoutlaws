@@ -17,133 +17,128 @@ import java.util.Locale;
 
 public class Weather {
 
-    private static final String OPEN_WEATHER_MAP_URL =
-            "api.openweathermap.org/data/2.5/weather?q={city}";
+        private static final String OPEN_WEATHER_MAP_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric";
 
-    private static final String OPEN_WEATHER_MAP_API = "bfbc87d937264d7683636f41f52b854d";
+        private static final String OPEN_WEATHER_MAP_API = "6348cf7512b50c95f92a403892a0dd23";
 
-    public static String setWeatherIcon(int actualId, long sunrise, long sunset){
-        int id = actualId / 100;
-        String icon = "";
-        if(actualId == 800){
-            long currentTime = new Date().getTime();
-            if(currentTime>=sunrise && currentTime<sunset) {
-                icon = "&#xf00d;";
-            } else {
-                icon = "&#xf02e;";
-            }
-        } else {
-            switch(id) {
-                case 2 : icon = "&#xf01e;";
-                    break;
-                case 3 : icon = "&#xf01c;";
-                    break;
-                case 7 : icon = "&#xf014;";
-                    break;
-                case 8 : icon = "&#xf013;";
-                    break;
-                case 6 : icon = "&#xf01b;";
-                    break;
-                case 5 : icon = "&#xf019;";
-                    break;
-            }
-        }
-        return icon;
-    }
-
-
-
-    public interface AsyncResponse {
-
-        String processFinish(String city, String description, String temp, String updatedOn, String icontxt, String sunrise);
-    }
-
-
-
-
-
-    public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
-
-        public AsyncResponse delegate = null;//Call back interface
-
-        public placeIdTask(AsyncResponse asyncResponse) {
-            delegate = asyncResponse;//Assigning call back interfacethrough constructor
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... params) {
-
-            JSONObject jsonWeather = null;
-            try {
-                jsonWeather = getWeatherJSON(params[0]);
-            } catch (Exception e) {
-                Log.d("Error", "Cannot process JSON results", e);
-            }
-
-
-            return jsonWeather;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            try {
-                if(json != null){
-                    JSONObject details = json.getJSONArray("weather").getJSONObject(0);
-                    JSONObject main = json.getJSONObject("main");
-                    DateFormat df = DateFormat.getDateTimeInstance();
-
-                    String city = json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country");
-                    String description = details.getString("description").toUpperCase(Locale.US);
-                    String temperature = String.format("%.2f", (main.getDouble("temp")* 9/5 + 32))+ "°F";
-                  //  temperature.find
-                    String updatedOn = df.format(new Date(json.getLong("dt")*1000));
-                    String iconText = setWeatherIcon(details.getInt("id"),
-                            json.getJSONObject("sys").getLong("sunrise") * 1000,
-                            json.getJSONObject("sys").getLong("sunset") * 1000);
-
-                    delegate.processFinish(city, description, temperature,  updatedOn, iconText, ""+ (json.getJSONObject("sys").getLong("sunrise") * 1000));
-
+        public static String setWeatherIcon(int actualId, long sunrise, long sunset){
+            int id = actualId / 100;
+            String icon = "";
+            if(actualId == 800){
+                long currentTime = new Date().getTime();
+                if(currentTime>=sunrise && currentTime<sunset) {
+                    icon = "&#xf00d;";
+                } else {
+                    icon = "&#xf02e;";
                 }
-            } catch (JSONException e) {
-                //Log.e(LOG_TAG, "Cannot process JSON results", e);
+            } else {
+                switch(id) {
+                    case 2 : icon = "&#xf01e;";
+                        break;
+                    case 3 : icon = "&#xf01c;";
+                        break;
+                    case 7 : icon = "&#xf014;";
+                        break;
+                    case 8 : icon = "&#xf013;";
+                        break;
+                    case 6 : icon = "&#xf01b;";
+                        break;
+                    case 5 : icon = "&#xf019;";
+                        break;
+                }
+            }
+            return icon;
+        }
+
+
+
+        public interface AsyncResponse {
+
+            void processFinish(String output1, String output2, String output3, String output4, String output5, String output6, String output7, String output8);
+        }
+
+
+
+        public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
+
+            public AsyncResponse delegate = null;//Call back interface
+
+            public placeIdTask(AsyncResponse asyncResponse) {
+                delegate = asyncResponse;//Assigning call back interfacethrough constructor
             }
 
+            @Override
+            protected JSONObject doInBackground(String... params) {
+
+                JSONObject jsonWeather = null;
+                try {
+                    jsonWeather = getWeatherJSON(params[0], params[1]);
+                } catch (Exception e) {
+                    Log.d("Error", "Cannot process JSON results", e);
+                }
+
+
+                return jsonWeather;
+            }
+
+            @Override
+            protected void onPostExecute(JSONObject json) {
+                try {
+                    if(json != null){
+                        JSONObject details = json.getJSONArray("weather").getJSONObject(0);
+                        JSONObject main = json.getJSONObject("main");
+                        DateFormat df = DateFormat.getDateTimeInstance();
+
+
+                        String city = json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country");
+                        String description = details.getString("description").toUpperCase(Locale.US);
+                        String temperature = String.format("%.2f", main.getDouble("temp")* 9/5 + 32)+ "°F";
+                        String humidity = main.getString("humidity") + "%";
+                        String pressure = main.getString("pressure") + " hPa";
+                        String updatedOn = df.format(new Date(json.getLong("dt")*1000));
+                        String iconText = setWeatherIcon(details.getInt("id"),
+                                json.getJSONObject("sys").getLong("sunrise") * 1000,
+                                json.getJSONObject("sys").getLong("sunset") * 1000);
+
+                        delegate.processFinish(city, description, temperature, humidity, pressure, updatedOn, iconText, ""+ (json.getJSONObject("sys").getLong("sunrise") * 1000));
+
+                    }
+                } catch (JSONException e) {
+                    //Log.e(LOG_TAG, "Cannot process JSON results", e);
+                }
+            }
         }
-    }
 
 
-    public static JSONObject getWeatherJSON(String city){
-        try {
-            URL url = new URL(String.format(OPEN_WEATHER_MAP_URL, city));
-            HttpURLConnection connection =
-                    (HttpURLConnection)url.openConnection();
 
-            connection.addRequestProperty("x-api-key", OPEN_WEATHER_MAP_API);
+        public static JSONObject getWeatherJSON(String lat, String lon){
+            try {
+                URL url = new URL(String.format(OPEN_WEATHER_MAP_URL, lat, lon));
+                HttpURLConnection connection =
+                        (HttpURLConnection)url.openConnection();
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
+                connection.addRequestProperty("x-api-key", OPEN_WEATHER_MAP_API);
 
-            StringBuffer json = new StringBuffer(1024);
-            String tmp="";
-            while((tmp=reader.readLine())!=null)
-                json.append(tmp).append("\n");
-            reader.close();
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
 
-            JSONObject data = new JSONObject(json.toString());
+                StringBuffer json = new StringBuffer(1024);
+                String tmp="";
+                while((tmp=reader.readLine())!=null)
+                    json.append(tmp).append("\n");
+                reader.close();
 
-            // This value will be 404 if the request was not
-            // successful
-            if(data.getInt("cod") != 200){
+                JSONObject data = new JSONObject(json.toString());
+
+                // This value will be 404 if the request was not
+                // successful
+                if(data.getInt("cod") != 200){
+                    return null;
+                }
+
+                return data;
+            }catch(Exception e){
                 return null;
             }
-
-            return data;
-        }catch(Exception e){
-            return null;
         }
     }
-
-
-
-
-}
