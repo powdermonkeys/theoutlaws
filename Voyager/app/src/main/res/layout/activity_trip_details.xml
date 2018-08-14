@@ -93,9 +93,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Attractions Section"/>
+                    android:text="Attractions ▼"/>
 
                 <!--Possibly Rating View-->
+
+                <View
+                    android:id="@+id/tipsDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="?android:attr/listDivider" />
 
                 <!--Tips for this trip-->
                 <TextView

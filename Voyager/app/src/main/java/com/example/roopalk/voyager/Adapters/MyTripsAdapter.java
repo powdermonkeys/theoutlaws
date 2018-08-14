@@ -2,7 +2,6 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.roopalk.voyager.Fragments.BuildFragment;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
@@ -78,11 +76,10 @@ public class MyTripsAdapter extends RecyclerView.Adapter<MyTripsAdapter.VH> {
             public void onClick(View view){
                 //Here goes your desired onClick behaviour. Like:
                 //You can change the fragment, something like this, not tested, please correct for your desired output:
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                BuildFragment myFragment = new BuildFragment();
-                //Create a bundle to pass data, add data, set the bundle to your fragment and:
-                // replaces main_activity and not placeholder so the user doesn't try accessing changing the tab
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                BuildFragment myFragment = new BuildFragment();
+//                //Create a bundle to pass data, add data, set the bundle to your fragment and:
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
             }
         });
     }

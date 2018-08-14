@@ -3,6 +3,7 @@ package com.example.roopalk.voyager.Activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +14,11 @@ import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
@@ -26,7 +31,7 @@ public class TripDetailsActivity extends AppCompatActivity {
     TextView tvAttractionName;
     TextView tvGuestNumber;
     TextView tvDates;
-    TextView tvTips;
+//    TextView tvTips;
     TextView tvCheckIn;
     TextView tvCheckOut;
     TextView tvLong;
@@ -45,7 +50,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         tvDates = (TextView) findViewById(R.id.tvDates);
         tvCheckIn = (TextView) findViewById(R.id.tvCheckIn);
         tvCheckOut = (TextView) findViewById(R.id.tvCheckOut);
-        tvTips = (TextView) findViewById(R.id.tvTips);
+//        tvTips = (TextView) findViewById(R.id.tvTips);
         tvAttractionName = (TextView) findViewById(R.id.tvAttractionName);
         tvLong = (TextView) findViewById(R.id.tv_long);
         btnAddTrip = (FloatingActionButton) findViewById(R.id.btnAddTrip);
@@ -76,7 +81,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         tvCheckIn.setText("Checkin : " + mTrip.getCheckin());
         tvCheckOut.setText("Checkout : " + mTrip.getCheckout());
         // set the Tips assigned for this specific trip
-        tvTips.setText("Tips: ");
+
         // could also set tips in the tvLong TextView, not using it for anything else
 
         // set the list of attractions assigned to this trip, currently only one attraction/event
@@ -85,17 +90,38 @@ public class TripDetailsActivity extends AppCompatActivity {
         btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Go to trip building form", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Added to My Trips", Toast.LENGTH_LONG).show();
                 // Pass in the parcelable trip into the bundle
                 //                Bundle args = new Bundle();
                 //                args.putParcelable("featured_trip", Parcels.wrap(mTrip));
-                // Create a build fragment instance
+                // Create a build fragment instance / or just new activity
                 //                BuildFragment buildFragment = new BuildFragment();
                 //                buildFragment.setArguments(args);
                 // launch that instance on top of our details page
                 //                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 //                transaction.replace(R.id.rlTripDetails, buildFragment);
                 //                transaction.commit();
+
+                try {
+                    // a new trip object being created
+                    Trip newTrip = ParseObject.create(Trip.class);
+
+                    if(ParseUser.getCurrentUser() == null)
+                    {
+                        ParseUser.logIn("roopal", "password");
+                    }
+                    newTrip.setTripInfo(mTrip.getDestination(), mTrip.getCheckin(), mTrip.getCheckout(), mTrip.getNumGuests(), mTrip.getBudget(), mTrip.getLength(), ParseUser.getCurrentUser());
+                    newTrip.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            // move to My Trips page
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("onClick", "didn't create object");
+                }
             }
         });
     }
