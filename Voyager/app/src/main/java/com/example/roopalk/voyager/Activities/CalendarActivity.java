@@ -162,8 +162,10 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
             ArrayList<String> imageURLs = networkUtility.getImageURLs();
             url = imageURLs.get(0).toString();
 
-
             Event added = new Event(timeStart, timeEnd, attraction.getAttractionName(), url);
+//            Glide.with(this.getApplicationContext())
+//                    .load(url)
+//                    .into(new RelativeLayout(EventView.findViewById(ivProfile)));
 
             events.add(added);
             trip.addAttractiontoTrip(attraction);
