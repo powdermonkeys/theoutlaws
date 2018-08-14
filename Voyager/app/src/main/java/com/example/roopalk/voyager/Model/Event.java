@@ -1,7 +1,7 @@
 package com.example.roopalk.voyager.Model;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.framgia.library.calendardayview.data.IEvent;
 
@@ -13,10 +13,9 @@ public class Event implements IEvent {
     private Calendar mEndTime;
     private String mName;
     private int mColor;
-    private  static String image;
     private Context context;
-    private Bitmap bitmap;
     private String imageURL;
+    private ImageView ivProfile;
 
     public Event(Calendar mStartTime, Calendar mEndTime, String mName, int mColor) {
         this.mStartTime = mStartTime;
@@ -54,7 +53,6 @@ public class Event implements IEvent {
         return mName;
     }
 
-
     public void setName(String name) {
         this.mName = name;
     }
@@ -63,16 +61,17 @@ public class Event implements IEvent {
         return mColor;
     }
 
-    public String getImage() {
-        return imageURL;
-    }
+//    public void getImage(String imageURL) {
+//        Glide.with(EventView.class)
+//                .load(imageURL)
+//                .into(ivProfile);
+//    }
 
     public void setColor(int color) {
         this.mColor = color;
     }
 
     //get all the information of an event in integers
-
     public int getStartIntHour() { return mStartTime.HOUR_OF_DAY; }
 
     public int getStartIntMin() { return mStartTime.MINUTE; }
@@ -81,7 +80,4 @@ public class Event implements IEvent {
 
     public int getEndIntMin() { return mEndTime.MINUTE; }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
 }

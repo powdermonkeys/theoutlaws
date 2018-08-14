@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="hour_divider_margin_top">40dp</dimen>
+    <dimen name="hour_divider_margin_top">30dp</dimen>
     <dimen name="hour_divider_height">1dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->

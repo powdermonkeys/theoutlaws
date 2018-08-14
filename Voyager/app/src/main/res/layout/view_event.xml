@@ -64,12 +64,3 @@
 </LinearLayout>
 
 
-<!--<ImageView-->
-<!--android:id="@+id/imageView"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:layout_gravity="bottom"-->
-<!--android:src="@drawable/editpencil"-->
-<!--android:layout_marginLeft="350dp"/>-->
-
-
