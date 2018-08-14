@@ -73,7 +73,9 @@ public class CalendarActivity extends AppCompatActivity implements AddingAttract
     String weatherOutput;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        setTheme(R.style.Theme_AppCompat_DayNight_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);

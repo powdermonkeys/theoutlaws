@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/voyager_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/SplashTheme">
         <activity
             android:name=".Activities.MainActivity"
             tools:ignore="InnerclassSeparator">
@@ -30,9 +30,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.SplashActivity"
-            tools:ignore="InnerclassSeparator" />
-        <activity
             android:name=".Activities.LoginActivity"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.CalendarActivity" />
@@ -41,7 +38,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.TripDetailsActivity"/>
+        <activity android:name=".Activities.TripDetailsActivity"></activity>
     </application>
 
 </manifest>
