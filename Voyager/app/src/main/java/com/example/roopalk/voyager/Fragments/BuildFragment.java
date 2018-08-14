@@ -274,5 +274,10 @@ public class BuildFragment extends Fragment
         mListener = null;
     }
 
+    public interface tripDetailsListener
+    {
+
+    }
+
 }
 

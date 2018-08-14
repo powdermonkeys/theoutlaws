@@ -10,24 +10,66 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <!--The name + picture is already filled out-->
+        <!--The name + picture is already filled out in the layout which implements this file-->
+        <!--Name of the Destination-->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:text="@string/destination_name_placeholder"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <!--Price-->
+        <TextView
+            android:id="@+id/tvBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Destination/Trip Name"/>
 
         <!--List of Events-->
+        <TextView
+            android:id="@+id/tvAttractionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Attractions Section"/>
 
         <!--Number of possible guests-->
-
-        <!--Length-->
+        <TextView
+            android:id="@+id/tvGuestNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Number of Guests"/>
 
         <!--Check-in/Checkout Dates-->
+        <TextView
+            android:id="@+id/tvDates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Dates"/>
 
         <!--Possibly Rating-->
+
+        <!--Tips for this trip-->
+        <TextView
+            android:id="@+id/tvTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Tips"/>
 
         <TextView
             android:id="@+id/tv_long"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:text="@string/long_string" >
         </TextView>
 

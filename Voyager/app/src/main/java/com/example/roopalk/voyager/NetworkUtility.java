@@ -116,7 +116,7 @@ public class NetworkUtility
     // retrieves photo from first attraction of trip if any
     public Photo getImageFromTrip(Trip trip) {
         if (trip.getDestination() == null) {
-            // TODO: add log error
+            Log.e("NetworkUtility", "Trip has no destination");
             return null;
         }
 
@@ -125,7 +125,7 @@ public class NetworkUtility
         try {
             city = getCityFromName(trip.getDestination());
         } catch (ParseException e) {
-            Log.e("NetworkUtility", "Failed to get city for trip", e);
+            Log.e("NetworkUtility", "Failed to get city for trip ", e);
             return null;
         }
 
@@ -134,7 +134,7 @@ public class NetworkUtility
         try {
             attractions = getAttractionFromCity(city);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e("NetworkUtility", "Failed to get attraction from city ", e);
         }
         Attraction attraction = attractions.size() > 0 ? attractions.get(0) : null;
 
@@ -143,9 +143,8 @@ public class NetworkUtility
         try {
             photo = getImagesFromAttraction(attraction).get(0);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e("NetworkUtility", "Failed to get image from attraction ", e);
         }
-//        TODO: Write better log statements
         return photo;
     }
 

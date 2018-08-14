@@ -43,7 +43,7 @@
     <string name="hot_right_now_header"><b>Hot Right Now</b></string>
     <string name="budget_section_header"><b>Budget Trips</b></string>
     <string name="destination_name_placeholder">Destination Name Placeholder</string>
-    <string name="past_trips_section_header"><b>Past Trips</b></string>
+    <string name="past_trips_section_header"><b>Created Trips</b></string>
     <string name="long_string">The central notion of a UIScrollView object
         (or, simply, a scroll view) is that it is a view whoseThe central notion of a UIScrollView
         object (or, simply, a scroll view) is that it is a view whoseThe central notion of a

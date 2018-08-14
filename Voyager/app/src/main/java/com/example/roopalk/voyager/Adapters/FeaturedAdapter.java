@@ -2,6 +2,7 @@ package com.example.roopalk.voyager.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,12 +14,14 @@ import android.widget.TextView;
 
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
 import com.bumptech.glide.Glide;
-import com.example.roopalk.voyager.Fragments.TripDetailsFragment;
+import com.example.roopalk.voyager.Activities.TripDetailsActivity;
 import com.example.roopalk.voyager.Model.Photo;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.NetworkUtility;
 import com.example.roopalk.voyager.R;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +52,13 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH> im
         NetworkUtility networkUtility = new NetworkUtility(mContext);
 
         // get the current trip that I'm trying to populate the itemView with
-        Trip trip = mTrips.get(position);
+        final Trip trip = mTrips.get(position);
 
         Photo photo = networkUtility.getImageFromTrip(trip);
         if (photo != null) {
             ParseFile file = photo.getImage();
 
-            // turn that image parsefile into imageurl and load that image url into the itemView
+            // turn that image parse file into image url and load that image url into the itemView
             Glide.with(mContext)
                     .load(file.getUrl())
                     .into(holder.ivProfile);
@@ -72,14 +75,10 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.VH> im
             @Override
             public void onClick(View view){
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                // TODO: Fix fragment staying on top
-//                TODO: Solution to launch activity on top instead of fragment
                 // switch to an activity instead of a Fragment
-//                Intent intent = new Intent(activity, TripDetailsActivity.class);
-//                startActivity(intent);
-                TripDetailsFragment myFragment = new TripDetailsFragment();
-                //Create a bundle to pass data, add data, set the bundle to your fragment and:
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.main_activity, myFragment).addToBackStack(null).commit();
+                Intent intent = new Intent(mContext, TripDetailsActivity.class);
+                intent.putExtra("trip parcel", Parcels.wrap(trip));
+                mContext.startActivity(intent);
             }
         });
     }

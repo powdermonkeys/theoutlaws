@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--TODO Decide if this is what I need to cover up-->
-    <!--Perhaps I need to make the layered fragment taller?-->
-
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"

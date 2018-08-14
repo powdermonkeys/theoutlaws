@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.roopalk.voyager.Model.Trip;
 import com.example.roopalk.voyager.R;
 
+
+// no longer used, see TripDetailsActivity
 public class TripDetailsFragment extends Fragment {
 
     public static final String EXTRA_TRIP = "EXTRA_TRIP";
@@ -50,7 +52,6 @@ public class TripDetailsFragment extends Fragment {
 
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
         tvName = (TextView) view.findViewById(R.id.tvName);
-
         btnAddTrip = (FloatingActionButton) view.findViewById(R.id.btnAddTrip);
 
         btnAddTrip.setOnClickListener(new View.OnClickListener() {
