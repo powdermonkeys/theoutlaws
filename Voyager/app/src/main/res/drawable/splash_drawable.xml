@@ -8,5 +8,4 @@
             android:gravity="center"
             android:src="@drawable/voyager_logo"/>
     </item>
-
 </layer-list>
