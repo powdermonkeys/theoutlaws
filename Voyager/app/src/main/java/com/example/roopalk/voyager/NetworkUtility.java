@@ -168,9 +168,10 @@ public class NetworkUtility
     }
 
 
-    public ArrayList<Trip> getTripsByDate(String date) throws ParseException
+    public ArrayList<Trip> getTripsByDateAndUser(String date, ParseUser parseUser) throws ParseException
     {
-        tripQuery.withCheckin(date);
+        tripQuery.withCheckin(date)
+                .withUser(parseUser.getObjectId());
         trips = (ArrayList<Trip>) tripQuery.find();
         return trips;
     }
